@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 968fd8197e4a91d468b6836ea061d9f0
+guid: 9206a553d3b83dc46b2cf6aae3f69e18
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7118712712803847949
-    second: timer_empty_0
+      213: 3660302362482925096
+    second: timer_full_f_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: timer_empty_0
+      name: timer_full_f_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 12
-        width: 274
-        height: 55
+        x: 18
+        y: 18
+        width: 2290
+        height: 51
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d0f0bb8ee7fbac260800000000000000
-      internalID: 7118712712803847949
+      spriteID: 82e51560b910cc230800000000000000
+      internalID: 3660302362482925096
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      timer_empty_0: 7118712712803847949
+      timer_full_f_0: 3660302362482925096
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
