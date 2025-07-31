@@ -87,19 +87,18 @@ public class Grabbable : MonoBehaviour
         this._prevPos = this.transform.position;
     }
 
-    public Transform HoverInteractable(Vector2 hoverPos)
+    public Interactable HoverInteractable(Vector2 hoverPos)
     {
         ContactFilter2D interactableFilter = new ContactFilter2D();
         interactableFilter.SetLayerMask(interactableLayermask);
         List<Collider2D> touchingInteractables = new List<Collider2D>();
         int numInteractables = this._collider.Overlap(interactableFilter, touchingInteractables);
         Transform targetInteractableTransform = null;
-        //NOTE: This assumes wheels do not overlap, I don't know why they would anyways
-        //Debug.Log("Hey");
+        //TODO: Handle overlapping case (e.g., food drop over two hamsters)
         if (numInteractables > 0)
         {
             targetInteractableTransform = touchingInteractables[0].transform;
-            return targetInteractableTransform;
+            return targetInteractableTransform.GetComponent<Interactable>();
         }
 
         //Vector2 lineEnd = hoverPos + MOUSE_CLICK_RAYCAST_DELTA * Vector2.right;

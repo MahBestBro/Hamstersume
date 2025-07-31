@@ -43,9 +43,10 @@ public class Hamster : Grabbable
     SpriteRenderer bodySpriteRenderer;
     SpriteRenderer meterSpriteRenderer;
     SpriteRenderer meterBackgroundSpriteRenderer;
+    SpriteRenderer meterFrontSpriteRenderer;
     Transform energyMeterTransform;
-    Transform energyMeterBarTransform;
-    float maxEnergyMeterXScale;
+    Transform energyMeterFrontTransform;
+    float maxEnergyFrontXScale;
 
     float idleElapsedTime = 0.0f;
     float idleDuration;
@@ -79,11 +80,12 @@ public class Hamster : Grabbable
         
         energyMeterTransform = transform.Find("EnergyMeter");
         
-        energyMeterBarTransform = energyMeterTransform.Find("Meter");
-        meterSpriteRenderer = energyMeterBarTransform.GetComponent<SpriteRenderer>();
-        maxEnergyMeterXScale = energyMeterBarTransform.localScale.x;
+        energyMeterFrontTransform = energyMeterTransform.Find("Front");
+        meterFrontSpriteRenderer = energyMeterFrontTransform.GetComponent<SpriteRenderer>();
+        maxEnergyFrontXScale = energyMeterFrontTransform.localScale.x;
         
         meterBackgroundSpriteRenderer = energyMeterTransform.Find("Background").GetComponent<SpriteRenderer>();
+        meterSpriteRenderer = energyMeterTransform.Find("Meter").GetComponent<SpriteRenderer>();
 
         energy = maxEnergy;
         EnterState(HamsterState.Waiting);
@@ -92,21 +94,21 @@ public class Hamster : Grabbable
     // Update is called once per frame
     protected void Update()
     {
-
         int screenY = (int)Camera.main.WorldToScreenPoint(transform.position).y; 
         sortingOrder = Screen.height - screenY;
         bodySpriteRenderer.sortingOrder = sortingOrder;
         meterBackgroundSpriteRenderer.sortingOrder = sortingOrder + 1;
         meterSpriteRenderer.sortingOrder = sortingOrder + 2;
+        meterFrontSpriteRenderer.sortingOrder = sortingOrder + 3;
 
         HandleCurrentState(state);
 
-        Vector3 newScale = energyMeterBarTransform.localScale;
-        newScale.x = maxEnergyMeterXScale * energy / maxEnergy;
-        energyMeterBarTransform.localScale = newScale;
+        Vector3 newScale = energyMeterFrontTransform.localScale;
+        newScale.x = maxEnergyFrontXScale * (1.0f - energy / maxEnergy);
+        energyMeterFrontTransform.localScale = newScale;
         
-        Vector3 xOffset = 0.5f * maxEnergyMeterXScale * (1.0f - energy / maxEnergy) * Vector3.left;
-        energyMeterBarTransform.position = energyMeterTransform.position + xOffset;
+        Vector3 xOffset = 0.5f * maxEnergyFrontXScale * energy / maxEnergy * Vector3.right;
+        energyMeterFrontTransform.position = energyMeterTransform.position + xOffset;
     }
 
     void OnDrawGizmos()

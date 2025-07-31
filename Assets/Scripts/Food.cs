@@ -38,10 +38,13 @@ public class Food : Grabbable
 
     override protected void OnDrop(Transform interactable) {
         base.OnDrop(interactable);
-        Hamster hamster = interactable.GetComponent<Hamster>();
-        if (hamster != null)
+        if (interactable != null)
         {
-            hamster.EatFood(this);
+            Hamster hamster = interactable.GetComponent<Hamster>();
+            if (hamster != null)
+            {
+                hamster.EatFood(this);
+            }
         }
     }
 }

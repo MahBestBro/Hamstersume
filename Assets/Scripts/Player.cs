@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public HamsterTracker hamsterTracker;
     public HamsterManager hamsterManager;
 
+    public Material outlineMaterial;
+
     [SerializeField]
     LayerMask grabbablesLayermask;
 
@@ -18,6 +20,9 @@ public class Player : MonoBehaviour
     InputAction mousePos;
 
     Grabbable heldGrabbable = null;
+    Interactable hoveredInteractable = null;
+
+    Material interactableOriginalMaterial;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,17 +51,32 @@ public class Player : MonoBehaviour
         if (heldGrabbable != null)
         {
             heldGrabbable.DragTo(mouseWorldPos);
-            Transform dropInteractable = heldGrabbable.HoverInteractable(mouseWorldPos);
+
+            Interactable dropInteractable = heldGrabbable.HoverInteractable(mouseWorldPos);
+
+            if (dropInteractable != null && hoveredInteractable == null)
+            {
+                hoveredInteractable = dropInteractable;
+                hoveredInteractable.Highlight(outlineMaterial);
+            }
+            else if (dropInteractable == null && hoveredInteractable != null)
+            {
+                hoveredInteractable.Unhighlight();
+                hoveredInteractable = null;
+            }
 
             if (pickUp.WasReleasedThisFrame())
             {
-                this.ReleaseGrabbable(mouseWorldPos, dropInteractable);
+                hoveredInteractable?.Unhighlight();
+                hoveredInteractable = null;
+                Transform dropInteractableTransform = (dropInteractable != null) ? dropInteractable.transform : null; 
+                this.ReleaseGrabbable(mouseWorldPos, dropInteractableTransform);
             }
 
         }
     }
 
-        void OnTryGrab(Vector2 mouseWorldPos)
+    void OnTryGrab(Vector2 mouseWorldPos)
     {
         // Fire Raycast at Cursor Pos
         Vector2 lineEnd = mouseWorldPos + MOUSE_CLICK_RAYCAST_DELTA * Vector2.right;
@@ -69,7 +89,7 @@ public class Player : MonoBehaviour
             foreach (RaycastHit2D hit in hits)
             {
                 Grabbable currentGrabbable = hit.transform.GetComponent<Grabbable>();
-                if (currentGrabbable && (mostForwardGrabbable==null||(currentGrabbable.SortingPriority < mostForwardGrabbable.SortingPriority)))
+                if (currentGrabbable && (mostForwardGrabbable==null || (currentGrabbable.SortingPriority < mostForwardGrabbable.SortingPriority)))
                 {
                     mostForwardGrabbable = currentGrabbable;
                 }
@@ -85,7 +105,8 @@ public class Player : MonoBehaviour
                 {
                     this.OnGrabbedHamster(grabbedHamster);
                 }
-            } else
+            } 
+            else
             {
                 Debug.LogWarning("No Grabbables Found amongst detected objects");
             }
