@@ -11,10 +11,9 @@ public enum HamsterState
     Eating,
 }
 
-public class Hamster : MonoBehaviour
+public class Hamster : Grabbable
 {
     public HamsterState state;
-    public bool pickedUp = false;
     
     [HideInInspector]
     public int sortingOrder;
@@ -74,7 +73,9 @@ public class Hamster : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        base.Start();
         bodySpriteRenderer = transform.Find("HamsterSprite").GetComponent<SpriteRenderer>();
+        this.spriteRenderer = bodySpriteRenderer;
         collider2D_ = GetComponent<Collider2D>();
         
         energyMeterTransform = transform.Find("EnergyMeter");

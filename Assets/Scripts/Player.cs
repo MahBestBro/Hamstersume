@@ -10,12 +10,13 @@ public class Player : MonoBehaviour
 
     public HamsterTracker hamsterTracker;
 
+    [SerializeField]
+    LayerMask grabbablesLayermask;
+
     InputAction pickUp;
     InputAction mousePos;
 
-    Hamster? heldHamster = null;
-    Vector2 heldHamsterOffset;
-
+    Grabbable heldGrabbable = null;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,90 +28,116 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        this.CheckGrabbables();
+    }
+
+
+    void CheckGrabbables()
+    {
+        // Get Cursor Pos
         Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(mousePos.ReadValue<Vector2>());
 
-        if (pickUp.WasPressedThisFrame()) 
+        if (pickUp.WasPressedThisFrame())
         {
-            int mask = LayerMask.GetMask("Hamster");
-            Vector2 lineEnd = mouseWorldPos + MOUSE_CLICK_RAYCAST_DELTA * Vector2.right;
-            RaycastHit2D[] hits = Physics2D.LinecastAll(mouseWorldPos, lineEnd, mask);
-            
-            if (hits.Length > 0) 
-            {
-                Hamster mostForwardHamster = hits[0].transform.GetComponent<Hamster>();
-                foreach (RaycastHit2D hit in hits) 
-                {
-                    Hamster currentHamster = hit.transform.GetComponent<Hamster>();
-                    if (currentHamster.sortingOrder < mostForwardHamster.sortingOrder) 
-                    {
-                        mostForwardHamster = currentHamster;
-                    }
-                }
-
-                heldHamster = mostForwardHamster;
-                heldHamsterOffset = (Vector2)mostForwardHamster.transform.position - mouseWorldPos; 
-                hamsterTracker.UnmarkExercisingHamster(mostForwardHamster);
-                mostForwardHamster.TryEnterState(HamsterState.Waiting);
-            }
+            this.OnTryGrab(mouseWorldPos);
         }
 
-        if (heldHamster is Hamster hamster) 
+        if (heldGrabbable != null)
         {
-            hamster.transform.position = (Vector3)(mouseWorldPos + heldHamsterOffset);
-            hamster.pickedUp = true;
-        
-            ContactFilter2D hamsterWheelFilter = new ContactFilter2D(); 
-            hamsterWheelFilter.SetLayerMask(LayerMask.GetMask("HamsterWheel"));
-            List<Collider2D> touchingWheels = new List<Collider2D>();
-            int numWheels = hamster.collider2D_.Overlap(hamsterWheelFilter, touchingWheels);
-            Transform? targetWheelTransform = null;
-            //NOTE: This assumes wheels do not overlap, I don't know why they would anyways
-            //Debug.Log("Hey");
-            if (numWheels > 0) 
+            heldGrabbable.DragTo(mouseWorldPos);
+            Transform dropInteractable = heldGrabbable.HoverInteractable(mouseWorldPos);
+
+            if (pickUp.WasReleasedThisFrame())
             {
-                targetWheelTransform = touchingWheels[0].transform; 
+                this.ReleaseGrabbable(mouseWorldPos, dropInteractable);
             }
 
-            //Vector2 lineEnd = mouseWorldPos + MOUSE_CLICK_RAYCAST_DELTA * Vector2.right;
-            //RaycastHit2D wheelHit = Physics2D.Linecast(mouseWorldPos, lineEnd, mask);
-            //if (targetWheel is Transform wheel) 
-            //{
-                //TODO: Hover animation/effect    
-            //}
+        }
+    }
 
-            if (pickUp.WasReleasedThisFrame()) 
+        void OnTryGrab(Vector2 mouseWorldPos)
+    {
+        // Fire Raycast at Cursor Pos
+        Vector2 lineEnd = mouseWorldPos + MOUSE_CLICK_RAYCAST_DELTA * Vector2.right;
+        RaycastHit2D[] hits = Physics2D.LinecastAll(mouseWorldPos, lineEnd, grabbablesLayermask);
+
+        if (hits.Length > 0)
+        {
+            // Get most forward Grabbable
+            Grabbable mostForwardGrabbable = null;
+            foreach (RaycastHit2D hit in hits)
             {
-                if (targetWheelTransform is Transform wheelTransform && hamster.state != HamsterState.Tired)
+                Grabbable currentGrabbable = hit.transform.GetComponent<Grabbable>();
+                if (currentGrabbable && (mostForwardGrabbable==null||(currentGrabbable.spriteRenderer.sortingOrder < mostForwardGrabbable.spriteRenderer.sortingOrder)))
                 {
-                    HamsterWheel wheel = wheelTransform.GetComponent<HamsterWheel>();
-                    int? wheelMapIndex = hamsterTracker.OccupiedHamsterWheelMapIndex(wheel);
-                    int? originalHamsterInstanceID = hamsterTracker.PlaceHamsterInWheel(hamster, wheel);
-                    if (originalHamsterInstanceID is int originalHamsterID)
-                    {
-                        GameObject originalHamsterObj = (GameObject)Resources.InstanceIDToObject(
-                            originalHamsterID
-                        );
-                        Hamster originalHamster = originalHamsterObj.GetComponent<Hamster>();
-                        Vector2 kickedOutPosition = (Vector2)wheel.transform.position - 2.0f * Vector2.one;
-                        originalHamster.transform.position = kickedOutPosition;
-                        originalHamster.TryEnterState(HamsterState.Waiting);
-                    }
+                    mostForwardGrabbable = currentGrabbable;
+                }
+            }
+            if (mostForwardGrabbable != null)
+            {
+                // Grab Grabbable
+                heldGrabbable = mostForwardGrabbable;
+                heldGrabbable.GrabAt(mouseWorldPos);
 
-                    //TODO: This state change is better, maybe make hamster method though?
-                    hamster.wheel = wheel;
-                    hamster.EnterState(HamsterState.Exercising);
-                }
-                else if (hamster.state != HamsterState.Tired)
+                Hamster grabbedHamster = heldGrabbable.GetComponent<Hamster>();
+                if (grabbedHamster)
                 {
-                    hamster.EnterState(HamsterState.Waiting);
+                    this.OnGrabbedHamster(grabbedHamster);
                 }
-                
-                hamster.pickedUp = false;
-                heldHamster = null;
+            } else
+            {
+                Debug.LogWarning("No Grabbables Found amongst detected objects");
             }
         }
     }
 
+    void OnGrabbedHamster(Hamster grabbedHamster)
+    {
+        hamsterTracker.UnmarkExercisingHamster(grabbedHamster);
+        grabbedHamster.TryEnterState(HamsterState.Waiting);
+    }
 
+    void OnReleasedHamster(Hamster droppedHamster, Transform dropInteractable)
+    {
+        if (dropInteractable != null && droppedHamster.state != HamsterState.Tired)
+        {
+            HamsterWheel wheel = dropInteractable.GetComponent<HamsterWheel>();
+            if (wheel) {
+                int? wheelMapIndex = hamsterTracker.OccupiedHamsterWheelMapIndex(wheel);
+                int? originalHamsterInstanceID = hamsterTracker.PlaceHamsterInWheel(droppedHamster, wheel);
+                if (originalHamsterInstanceID is int originalHamsterID)
+                {
+                    GameObject originalHamsterObj = (GameObject)Resources.InstanceIDToObject(
+                        originalHamsterID
+                    );
+                    Hamster originalHamster = originalHamsterObj.GetComponent<Hamster>();
+                    Vector2 kickedOutPosition = (Vector2)wheel.transform.position - 2.0f * Vector2.one;
+                    originalHamster.transform.position = kickedOutPosition;
+                    originalHamster.TryEnterState(HamsterState.Waiting);
+                }
+
+                //TODO: This state change is better, maybe make hamster method though?
+                droppedHamster.wheel = wheel;
+                droppedHamster.EnterState(HamsterState.Exercising);
+            }
+        }
+        else if (droppedHamster.state != HamsterState.Tired)
+        {
+            droppedHamster.EnterState(HamsterState.Waiting);
+        }
+    }
+
+    void ReleaseGrabbable(Vector2 releasePos, Transform dropInteractable) 
+    {
+        heldGrabbable.DropAt(releasePos);
+
+        Hamster grabbedHamster = heldGrabbable.GetComponent<Hamster>();
+        if (grabbedHamster)
+        {
+            this.OnReleasedHamster(grabbedHamster, dropInteractable);
+        }
+
+        heldGrabbable = null;
+    }
 
 }

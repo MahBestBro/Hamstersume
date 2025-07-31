@@ -47,8 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd597cc2965dc9f4287638564199b924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
+  spriteRenderer: {fileID: 0}
+  grabbedOffset: {x: 0, y: 0}
+  interactableLayermask:
+    serializedVersion: 2
+    m_Bits: 256
   pickedUp: 0
+  state: 0
   sortingOrder: 0
   collider2D_: {fileID: 0}
   wheel: {fileID: 0}
