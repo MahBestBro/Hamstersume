@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
         Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(mousePos.ReadValue<Vector2>());
 
         if (pickUp.WasPressedThisFrame()) {
-            RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.right);
+            RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, 0.001f * Vector2.right);
             if (hit) {
                 heldHamster = hit.transform;
                 heldHamsterOffset = (Vector2)hit.transform.position - mouseWorldPos; 
