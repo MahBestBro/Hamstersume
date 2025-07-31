@@ -14,6 +14,9 @@ public class Shop : MonoBehaviour
     [SerializeField]
     Text electricityText;
 
+    [SerializeField]
+    GameObject testFoodPrefab;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,15 +38,18 @@ public class Shop : MonoBehaviour
     public void CookPizza()
     {
         electricity -= 15 * Convert.ToInt32(electricity >= 15);
+        Instantiate(testFoodPrefab, Vector3.down * 3F, Quaternion.identity);
     }
 
     public void CookLasagna()
     {
         electricity -= 10 * Convert.ToInt32(electricity >= 10);
+        Instantiate(testFoodPrefab, Vector3.down * 3F, Quaternion.identity);
     }
 
     public void CookCurry()
     {
         electricity -= 5 * Convert.ToInt32(electricity >= 5);
+        Instantiate(testFoodPrefab, Vector3.down * 3F, Quaternion.identity);
     }
 }

@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
         {
             floorHeight = Random.Range(hamsterManager.hamsterWalkArea.center.y, hamsterManager.hamsterWalkArea.max.y);
         }
-        heldGrabbable.DropAt(releasePos, floorHeight);
+        heldGrabbable.DropAt(releasePos, dropInteractable, floorHeight);
         
 
         Hamster grabbedHamster = heldGrabbable.GetComponent<Hamster>();

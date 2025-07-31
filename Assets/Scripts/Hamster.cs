@@ -192,15 +192,17 @@ public class Hamster : Grabbable
         }
     }
 
-    public void TryEnterState(HamsterState newState)
+    public bool TryEnterState(HamsterState newState)
     {
         if (this.state == HamsterState.Tired)
         {
             tiredAwakenState = newState;
+            return false;
         } 
         else
         {
             EnterState(newState);
+            return true;
         }
     }
 
@@ -236,15 +238,17 @@ public class Hamster : Grabbable
         state = newState;
     }
 
-    bool EatFood(Food food)
+    public bool EatFood(Food food)
     {
         if (this.targetFood == null)
         {
-            this.targetFood = food;
-            return true;
-        } else {
-            return false;
+            if (TryEnterState(HamsterState.Eating))
+            {
+                this.targetFood = food;
+                return true;
+            }
         }
+        return false;
     }
 
     

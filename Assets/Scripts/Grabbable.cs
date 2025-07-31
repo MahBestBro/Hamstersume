@@ -6,8 +6,8 @@ using UnityEngine;
 public class Grabbable : MonoBehaviour
 {
     float GRAVITY_ACCEL = 9.81F * 0.1F;
-    public Vector2 _prevPos;
-    public Vector2 _velocity;
+    Vector2 _prevPos;
+    Vector2 _velocity;
 
     protected Collider2D _collider;
     [SerializeField]
@@ -111,12 +111,15 @@ public class Grabbable : MonoBehaviour
         return null;
     }
 
-    public void DropAt(Vector2 dropPos, float floorHeight)
+    public void DropAt(Vector2 dropPos, Transform interactable, float floorHeight)
     {
         this.pickedUp = false;
         this.floorHeight = floorHeight;
         this._prevPos = this.transform.position;
+        this.OnDrop(interactable);
     }
+
+    virtual protected void OnDrop(Transform interactable) { }
 
     public void RaiseFloorHere()
     {

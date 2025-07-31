@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class Food : MonoBehaviour
+public class Food : Grabbable
 {
     protected float consumeDuration = 1.0F;
-    protected float energyRestored = 1.0F;
+    protected float energyRestored = 10.0F;
 
     public float EnergyProvided
     {
@@ -34,5 +34,14 @@ public class Food : MonoBehaviour
         consumer.energy += this.energyRestored;
         Destroy(this.gameObject);
         return true;
+    }
+
+    override protected void OnDrop(Transform interactable) {
+        base.OnDrop(interactable);
+        Hamster hamster = interactable.GetComponent<Hamster>();
+        if (hamster != null)
+        {
+            hamster.EatFood(this);
+        }
     }
 }
