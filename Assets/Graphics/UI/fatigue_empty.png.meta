@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a49682f5f59afe246993b391e7b21eec
+guid: 4bd779c089ea899419bda2fe71af7d68
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3334844008761087055
-    second: home background resize 2_0
+      213: 2112662649455277349
+    second: fatigue_empty_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: home background resize 2_0
+      name: fatigue_empty_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 3840
-        height: 1080
+        y: 13
+        width: 155
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f445b8b05feb74e20800000000000000
-      internalID: 3334844008761087055
+      spriteID: 525740f7c7fa15d10800000000000000
+      internalID: 2112662649455277349
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      home background resize 2_0: 3334844008761087055
+      fatigue_empty_0: 2112662649455277349
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
