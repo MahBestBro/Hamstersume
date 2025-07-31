@@ -1,19 +1,35 @@
 using System.Collections.Generic;
 using NUnit.Framework;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Grabbable : MonoBehaviour
 {
-    protected Collider2D collider;
+    protected Collider2D _collider;
+    [SerializeField]
     public SpriteRenderer spriteRenderer;
     protected Vector2 grabbedOffset;
     [SerializeField]
     protected LayerMask interactableLayermask;
     public bool pickedUp = false;
+    protected Transform sortingAnchor;
+    public float SortingPriority { 
+        get
+        {
+            return sortingAnchor.position.y;
+        }
+    }
 
     protected void Start()
     {
-        this.collider = GetComponent<Collider2D>();
+        this._collider = GetComponent<Collider2D>();
+        this.AnchorSortingToSprite();
+    }
+
+    public bool AnchorSortingToSprite()
+    {
+        this.sortingAnchor = this.spriteRenderer?.transform;
+        return (this.sortingAnchor != null);
     }
 
     public void GrabAt(Vector2 grabPos)
@@ -32,8 +48,8 @@ public class Grabbable : MonoBehaviour
         ContactFilter2D interactableFilter = new ContactFilter2D();
         interactableFilter.SetLayerMask(interactableLayermask);
         List<Collider2D> touchingInteractables = new List<Collider2D>();
-        int numInteractables = this.collider.Overlap(interactableFilter, touchingInteractables);
-        Transform? targetInteractableTransform = null;
+        int numInteractables = this._collider.Overlap(interactableFilter, touchingInteractables);
+        Transform targetInteractableTransform = null;
         //NOTE: This assumes wheels do not overlap, I don't know why they would anyways
         //Debug.Log("Hey");
         if (numInteractables > 0)

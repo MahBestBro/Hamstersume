@@ -18,7 +18,7 @@ public class Hamster : Grabbable
     [HideInInspector]
     public int sortingOrder;
     [HideInInspector]
-    public Collider2D collider2D_;
+    public Collider2D _collider2D;
     [HideInInspector]
     public HamsterWheel wheel;
 
@@ -74,9 +74,8 @@ public class Hamster : Grabbable
     void Start()
     {
         base.Start();
-        bodySpriteRenderer = transform.Find("HamsterSprite").GetComponent<SpriteRenderer>();
-        this.spriteRenderer = bodySpriteRenderer;
-        collider2D_ = GetComponent<Collider2D>();
+        bodySpriteRenderer = this.spriteRenderer;
+        _collider2D = GetComponent<Collider2D>();
         
         energyMeterTransform = transform.Find("EnergyMeter");
         
