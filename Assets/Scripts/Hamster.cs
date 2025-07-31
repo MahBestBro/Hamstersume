@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.UI;
 using UnityEngine;
 
 public enum HamsterState 
@@ -13,7 +14,7 @@ public enum HamsterState
 public class Hamster : MonoBehaviour
 {
     public Collider2D collider2D_;
-    
+
     public HamsterState state;
     [HideInInspector]
     public HamsterWheel wheel;
@@ -23,7 +24,7 @@ public class Hamster : MonoBehaviour
     [HideInInspector]
     public float maxIdleTimeSecs;
     [HideInInspector]
-    public float walkSpeed; 
+    public float walkSpeed;
     [HideInInspector]
     public float maxEnergy;
     [HideInInspector]
@@ -36,13 +37,15 @@ public class Hamster : MonoBehaviour
     public Bounds walkArea;
     //TODO: Walk min and max "radius"
 
-    SpriteRenderer spriteRenderer;
+    [SerializeField]
+    public SpriteRenderer spriteRenderer;
     Transform energyMeterTransform;
     Transform energyMeterBarTransform;
     float maxEnergyMeterYScale;
 
     float idleElapsedTime = 0.0f;
     float idleDuration;
+    [SerializeField]
     Vector2 walkDestination = Vector2.zero;
 
     float wheelEletricityTriggerElapsedTime = 0.0f;
@@ -66,7 +69,7 @@ public class Hamster : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        //spriteRenderer = GetComponent<SpriteRenderer>();
         collider2D_ = GetComponent<Collider2D>();
         
         energyMeterTransform = transform.Find("EnergyMeter");
@@ -191,10 +194,10 @@ public class Hamster : MonoBehaviour
                 tiredAwakenState = HamsterState.Waiting;
                 break;
 
-            case HamsterState.Walking: 
+            case HamsterState.Walking:
                 walkDestination = new Vector2(
                     Random.Range(walkArea.min.x, walkArea.max.x), 
-                    Random.Range(walkArea.min.x, walkArea.max.x)
+                    Random.Range(walkArea.min.y, walkArea.max.y)
                 );
                 break;
 

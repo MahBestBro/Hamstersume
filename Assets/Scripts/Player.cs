@@ -40,8 +40,8 @@ public class Player : MonoBehaviour
                 Transform mostForwardHamster = hits[0].transform;
                 foreach (RaycastHit2D hit in hits) 
                 {
-                    int currentSortingOrder = hit.transform.GetComponent<SpriteRenderer>().sortingOrder;
-                    int maxSortingOrder = mostForwardHamster.GetComponent<SpriteRenderer>().sortingOrder;
+                    int? currentSortingOrder = hit.transform.GetComponent<Hamster>()?.spriteRenderer.sortingOrder;
+                    int? maxSortingOrder = mostForwardHamster.GetComponent<Hamster>()?.spriteRenderer.sortingOrder;
                     if (currentSortingOrder < maxSortingOrder) 
                     {
                         mostForwardHamster = hit.transform;
