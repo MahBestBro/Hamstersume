@@ -37,28 +37,30 @@ public class Player : MonoBehaviour
             
             if (hits.Length > 0) 
             {
-                Transform mostForwardHamster = hits[0].transform;
+                Hamster mostForwardHamster = hits[0].transform.GetComponent<Hamster>();
                 foreach (RaycastHit2D hit in hits) 
                 {
-                    int? currentSortingOrder = hit.transform.GetComponent<Hamster>()?.spriteRenderer.sortingOrder;
-                    int? maxSortingOrder = mostForwardHamster.GetComponent<Hamster>()?.spriteRenderer.sortingOrder;
-                    if (currentSortingOrder < maxSortingOrder) 
+                    Hamster currentHamster = hit.transform.GetComponent<Hamster>();
+                    if (currentHamster.sortingOrder < mostForwardHamster.sortingOrder) 
                     {
-                        mostForwardHamster = hit.transform;
+                        mostForwardHamster = currentHamster;
                     }
                 }
 
-                Hamster newHeldHamster = mostForwardHamster.GetComponent<Hamster>();
-                heldHamster = newHeldHamster;
-                heldHamsterOffset = (Vector2)newHeldHamster.transform.position - mouseWorldPos; 
-                hamsterTracker.UnmarkExercisingHamster(newHeldHamster);
-                newHeldHamster.TryEnterState(HamsterState.Waiting);
+                heldHamster = mostForwardHamster;
+                heldHamsterOffset = (Vector2)mostForwardHamster.transform.position - mouseWorldPos; 
+                hamsterTracker.UnmarkExercisingHamster(mostForwardHamster);
+                if (mostForwardHamster.state == HamsterState.Exercising)
+                {
+                    mostForwardHamster.EnterState(HamsterState.Waiting);
+                }
             }
         }
 
         if (heldHamster is Hamster hamster) 
         {
             hamster.transform.position = (Vector3)(mouseWorldPos + heldHamsterOffset);
+            hamster.pickedUp = true;
         
             ContactFilter2D hamsterWheelFilter = new ContactFilter2D(); 
             hamsterWheelFilter.SetLayerMask(LayerMask.GetMask("HamsterWheel"));
@@ -106,6 +108,7 @@ public class Player : MonoBehaviour
                     hamster.EnterState(HamsterState.Waiting);
                 }
                 
+                hamster.pickedUp = false;
                 heldHamster = null;
             }
         }

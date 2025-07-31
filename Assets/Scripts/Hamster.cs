@@ -13,9 +13,13 @@ public enum HamsterState
 
 public class Hamster : MonoBehaviour
 {
-    public Collider2D collider2D_;
-
     public HamsterState state;
+    public bool pickedUp = false;
+    
+    [HideInInspector]
+    public int sortingOrder;
+    [HideInInspector]
+    public Collider2D collider2D_;
     [HideInInspector]
     public HamsterWheel wheel;
 
@@ -37,11 +41,12 @@ public class Hamster : MonoBehaviour
     public Bounds walkArea;
     //TODO: Walk min and max "radius"
 
-    [SerializeField]
-    public SpriteRenderer spriteRenderer;
+    SpriteRenderer bodySpriteRenderer;
+    SpriteRenderer meterSpriteRenderer;
+    SpriteRenderer meterBackgroundSpriteRenderer;
     Transform energyMeterTransform;
     Transform energyMeterBarTransform;
-    float maxEnergyMeterYScale;
+    float maxEnergyMeterXScale;
 
     float idleElapsedTime = 0.0f;
     float idleDuration;
@@ -69,12 +74,16 @@ public class Hamster : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //spriteRenderer = GetComponent<SpriteRenderer>();
+        bodySpriteRenderer = transform.Find("HamsterSprite").GetComponent<SpriteRenderer>();
         collider2D_ = GetComponent<Collider2D>();
         
         energyMeterTransform = transform.Find("EnergyMeter");
+        
         energyMeterBarTransform = energyMeterTransform.Find("Meter");
-        maxEnergyMeterYScale = energyMeterBarTransform.localScale.y;
+        meterSpriteRenderer = energyMeterBarTransform.GetComponent<SpriteRenderer>();
+        maxEnergyMeterXScale = energyMeterBarTransform.localScale.x;
+        
+        meterBackgroundSpriteRenderer = energyMeterTransform.Find("Background").GetComponent<SpriteRenderer>();
 
         energy = maxEnergy;
         EnterState(HamsterState.Waiting);
@@ -84,16 +93,19 @@ public class Hamster : MonoBehaviour
     void Update()
     {
         int screenY = (int)Camera.main.WorldToScreenPoint(transform.position).y; 
-        spriteRenderer.sortingOrder = Screen.height - screenY;
+        sortingOrder = Screen.height - screenY;
+        bodySpriteRenderer.sortingOrder = sortingOrder;
+        meterBackgroundSpriteRenderer.sortingOrder = sortingOrder + 1;
+        meterSpriteRenderer.sortingOrder = sortingOrder + 2;
 
         HandleCurrentState(state);
 
         Vector3 newScale = energyMeterBarTransform.localScale;
-        newScale.y = maxEnergyMeterYScale * energy / maxEnergy;
+        newScale.x = maxEnergyMeterXScale * energy / maxEnergy;
         energyMeterBarTransform.localScale = newScale;
         
-        Vector3 yOffset = 0.5f * maxEnergyMeterYScale * (1.0f - energy / maxEnergy) * Vector3.down;
-        energyMeterBarTransform.position = energyMeterTransform.position + yOffset;
+        Vector3 xOffset = 0.5f * maxEnergyMeterXScale * (1.0f - energy / maxEnergy) * Vector3.left;
+        energyMeterBarTransform.position = energyMeterTransform.position + xOffset;
     }
 
     void OnDrawGizmos()
@@ -118,6 +130,12 @@ public class Hamster : MonoBehaviour
 
             case HamsterState.Walking:
                 Vector2 toTravel = walkDestination - (Vector2)transform.position; 
+
+                if (!pickedUp)
+                {
+                    bodySpriteRenderer.flipX = Vector2.Dot(toTravel, Vector2.right) >= 0.0f;
+                }
+
                 if (toTravel.magnitude >= walkSpeed * Time.deltaTime)
                 {
                     Vector2 direction = toTravel.normalized;

@@ -100,3 +100,4 @@ InitTestScene*.unity*
 
 # VS config
 .vsconfig
+.vscode/
