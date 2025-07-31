@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
     InputAction pickUp;
     InputAction mousePos;
     
-    Transform? heldHamster = null;
+    Hamster? heldHamster = null;
     Vector2 heldHamsterOffset;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -35,19 +35,21 @@ public class Player : MonoBehaviour
                     }
                 }
 
-                heldHamster = mostForwardHamster;
-                heldHamsterOffset = (Vector2)mostForwardHamster.position - mouseWorldPos; 
+                heldHamster = mostForwardHamster.GetComponent<Hamster>();
+                heldHamsterOffset = (Vector2)heldHamster.transform.position - mouseWorldPos; 
+                heldHamster.EnterState(HamsterState.PickedUp);
             }
         }
 
-        if (heldHamster is Transform hamster) 
+        if (heldHamster is Hamster hamster) 
         {
-            hamster.position = (Vector3)(mouseWorldPos + heldHamsterOffset);
-        }
-
-        if (pickUp.WasReleasedThisFrame()) 
-        {
-            heldHamster = null;
+            hamster.transform.position = (Vector3)(mouseWorldPos + heldHamsterOffset);
+        
+            if (pickUp.WasReleasedThisFrame()) 
+            {
+                hamster.EnterState(HamsterState.Waiting);
+                heldHamster = null;
+            }
         }
     }
 }
