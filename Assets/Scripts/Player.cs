@@ -50,10 +50,7 @@ public class Player : MonoBehaviour
                 heldHamster = mostForwardHamster;
                 heldHamsterOffset = (Vector2)mostForwardHamster.transform.position - mouseWorldPos; 
                 hamsterTracker.UnmarkExercisingHamster(mostForwardHamster);
-                if (mostForwardHamster.state == HamsterState.Exercising)
-                {
-                    mostForwardHamster.EnterState(HamsterState.Waiting);
-                }
+                mostForwardHamster.TryEnterState(HamsterState.Waiting);
             }
         }
 
@@ -96,7 +93,7 @@ public class Player : MonoBehaviour
                         Hamster originalHamster = originalHamsterObj.GetComponent<Hamster>();
                         Vector2 kickedOutPosition = (Vector2)wheel.transform.position - 2.0f * Vector2.one;
                         originalHamster.transform.position = kickedOutPosition;
-                        originalHamster.EnterState(HamsterState.Waiting);
+                        originalHamster.TryEnterState(HamsterState.Waiting);
                     }
 
                     //TODO: This state change is better, maybe make hamster method though?

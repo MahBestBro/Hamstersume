@@ -196,7 +196,8 @@ public class Hamster : MonoBehaviour
         if (this.state == HamsterState.Tired)
         {
             tiredAwakenState = newState;
-        } else
+        } 
+        else
         {
             EnterState(newState);
         }
