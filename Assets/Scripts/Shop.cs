@@ -5,7 +5,13 @@ using UnityEngine.UI;
 public class Shop : MonoBehaviour
 {
     [Range(0, 100)]
-    public int electricty;
+    public int electricity;
+    [Range(1.0f/60.0f, 10.0f)]
+    public float hamsterEletricityGainPeriodSecs;
+
+    public HamsterTracker hamsterTracker;
+
+    float elapsedTime = 0.0f;
 
     Text electricityText;
 
@@ -18,22 +24,31 @@ public class Shop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        electricityText.text = electricty.ToString();
+        electricityText.text = electricity.ToString();
+
+        //TODO: Change if certain hamsters can gain more electricity, or have different rates, etc.
+        if (elapsedTime >= hamsterEletricityGainPeriodSecs)
+        {
+            electricity += 5;
+            elapsedTime = 0.0f;
+        }
+
+        elapsedTime += Time.deltaTime * Convert.ToSingle(hamsterTracker.hamsterWheelMap.Count > 0);
     }
 
 
     public void CookPizza()
     {
-        electricty -= 15 * Convert.ToInt32(electricty >= 15);
+        electricity -= 15 * Convert.ToInt32(electricity >= 15);
     }
 
     public void CookLasagna()
     {
-        electricty -= 10 * Convert.ToInt32(electricty >= 10);
+        electricity -= 10 * Convert.ToInt32(electricity >= 10);
     }
 
     public void CookCurry()
     {
-        electricty -= 5 * Convert.ToInt32(electricty >= 5);
+        electricity -= 5 * Convert.ToInt32(electricity >= 5);
     }
 }

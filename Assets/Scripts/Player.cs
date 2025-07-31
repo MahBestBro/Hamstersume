@@ -3,26 +3,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-struct HamsterWheelIDPair
-{
-    public int hamsterInstanceID;
-    public int wheelInstanceID;
-
-    public HamsterWheelIDPair(int hamsterID, int wheelID)
-    {
-        hamsterInstanceID = hamsterID;
-        wheelInstanceID = wheelID;
-    }
-}
 
 public class Player : MonoBehaviour
 {
     const float MOUSE_CLICK_RAYCAST_DELTA = 0.001f; 
 
+    public HamsterTracker hamsterTracker;
+
     InputAction pickUp;
     InputAction mousePos;
-    
-    List<HamsterWheelIDPair> hamsterWheelMap = new List<HamsterWheelIDPair>();
 
     Hamster? heldHamster = null;
     Vector2 heldHamsterOffset;
@@ -62,7 +51,7 @@ public class Player : MonoBehaviour
                 Hamster newHeldHamster = mostForwardHamster.GetComponent<Hamster>();
                 heldHamster = newHeldHamster;
                 heldHamsterOffset = (Vector2)newHeldHamster.transform.position - mouseWorldPos; 
-                UnmarkHamsterAsExercising(newHeldHamster);
+                hamsterTracker.UnmarkExercisingHamster(newHeldHamster);
                 newHeldHamster.EnterState(HamsterState.PickedUp);
             }
         }
@@ -94,23 +83,23 @@ public class Player : MonoBehaviour
             {
                 if (targetWheel is Transform wheel)
                 {
-                    int? wheelMapIndex = OccupiedHamsterWheelMapIndex(wheel);
-                    if (wheelMapIndex == null)
+                    int? wheelMapIndex = hamsterTracker.OccupiedHamsterWheelMapIndex(wheel);
+                    int? originalHamsterInstanceID = hamsterTracker.PlaceHamsterInWheel(hamster, wheel);
+                    if (originalHamsterInstanceID is int originalHamsterID)
                     {
-                        hamsterWheelMap.Add(new HamsterWheelIDPair(
-                            hamster.gameObject.GetInstanceID(), 
-                            wheel.gameObject.GetInstanceID()
-                        ));
+                        GameObject originalHamsterObj = (GameObject)Resources.InstanceIDToObject(
+                            originalHamsterID
+                        );
+                        Hamster originalHamster = originalHamsterObj.GetComponent<Hamster>();
+                        originalHamster.transform.position = (Vector2)wheel.position - 2.0f * Vector2.one;
+                        originalHamster.EnterState(HamsterState.Waiting);
+                    }
 
-                        //TODO: This state change is dodgy, incorporate into state code or hamster somehow
-                        hamster.transform.position = wheel.transform.position; 
-                        hamster.EnterState(HamsterState.Exercising);
-                    }
-                    else
-                    {
-                        //TODO: Kick other hamster out
-                        hamster.EnterState(HamsterState.Waiting);
-                    }
+                    hamster.EnterState(HamsterState.Waiting);
+
+                    //TODO: This state change is dodgy, incorporate into state code or hamster somehow
+                    hamster.transform.position = wheel.transform.position; 
+                    hamster.EnterState(HamsterState.Exercising);
                 }
                 else
                 {
@@ -123,37 +112,5 @@ public class Player : MonoBehaviour
     }
 
 
-    void UnmarkHamsterAsExercising(Hamster hamster)
-    {
-        int id = hamster.gameObject.GetInstanceID();
-        int? hamsterWheelPairToRemoveIndex = null;
-        for (int i = 0; i < hamsterWheelMap.Count; i++)
-        {
-            if (hamsterWheelMap[i].hamsterInstanceID == id)
-            {
-                hamsterWheelPairToRemoveIndex = i;
-                break;
-            }
-        }
 
-        if (hamsterWheelPairToRemoveIndex is int indexToRemove)
-        {
-            hamsterWheelMap[indexToRemove] = hamsterWheelMap[hamsterWheelMap.Count - 1];
-            hamsterWheelMap.RemoveAt(hamsterWheelMap.Count - 1);
-        }
-    }
-
-    int? OccupiedHamsterWheelMapIndex(Transform wheel)
-    {
-        int id = wheel.gameObject.GetInstanceID();
-        for (int i = 0; i < hamsterWheelMap.Count; i++)
-        {
-            if (hamsterWheelMap[i].wheelInstanceID == id)
-            {
-                return i;
-            }
-        }
-
-        return null;
-    }
 }
