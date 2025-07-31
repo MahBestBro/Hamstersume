@@ -11,14 +11,13 @@ public class Shop : MonoBehaviour
 
     public HamsterTracker hamsterTracker;
 
+    [SerializeField]
     Text electricityText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         increaseElectricity += IncreaseEletricity;
-
-        electricityText = GameObject.Find("Canvas").transform.Find("ElectricityText").GetComponent<Text>();
     }
 
     // Update is called once per frame
