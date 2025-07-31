@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 214213216886367404}
   - component: {fileID: 3790154171237706822}
   - component: {fileID: 8533016572887107321}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hamster
   m_TagString: Untagged
   m_Icon: {fileID: 0}

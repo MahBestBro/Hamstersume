@@ -4,14 +4,16 @@ public enum HamsterState
 {
     Waiting,
     Walking,
+    Exercising,
     PickedUp
 }
 
 public class Hamster : MonoBehaviour
 {
+    public Collider2D collider2D_;
+    
     [HideInInspector]
     public HamsterState state;
-
 
     [HideInInspector]
     public float minIdleTimeSecs;
@@ -36,6 +38,7 @@ public class Hamster : MonoBehaviour
         EnterState(HamsterState.Waiting);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+        collider2D_ = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -80,6 +83,11 @@ public class Hamster : MonoBehaviour
                 }
                 break;
 
+            case HamsterState.Exercising:
+                //TODO: Somehow signal electricty increase, or have a script check every frame how many 
+                //hamsters are exercising and calculate.
+                break; 
+
             case HamsterState.PickedUp: break;
         }
     }
@@ -100,6 +108,8 @@ public class Hamster : MonoBehaviour
                 );
                 break;
 
+            case HamsterState.Exercising: break;
+            
             case HamsterState.PickedUp: break;
         }
 
