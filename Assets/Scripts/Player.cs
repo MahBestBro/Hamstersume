@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     const float MOUSE_CLICK_RAYCAST_DELTA = 0.001f; 
 
     public HamsterTracker hamsterTracker;
+    public HamsterManager hamsterManager;
 
     [SerializeField]
     LayerMask grabbablesLayermask;
@@ -129,7 +130,13 @@ public class Player : MonoBehaviour
 
     void ReleaseGrabbable(Vector2 releasePos, Transform dropInteractable) 
     {
-        heldGrabbable.DropAt(releasePos);
+        float floorHeight = releasePos.y;
+        if ( floorHeight > hamsterManager.hamsterWalkArea.max.y )
+        {
+            floorHeight = Random.Range(hamsterManager.hamsterWalkArea.center.y, hamsterManager.hamsterWalkArea.max.y);
+        }
+        heldGrabbable.DropAt(releasePos, floorHeight);
+        
 
         Hamster grabbedHamster = heldGrabbable.GetComponent<Hamster>();
         if (grabbedHamster)

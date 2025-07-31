@@ -71,7 +71,7 @@ public class Hamster : Grabbable
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    new protected void Start()
     {
         base.Start();
         bodySpriteRenderer = this.spriteRenderer;
@@ -90,8 +90,9 @@ public class Hamster : Grabbable
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
+
         int screenY = (int)Camera.main.WorldToScreenPoint(transform.position).y; 
         sortingOrder = Screen.height - screenY;
         bodySpriteRenderer.sortingOrder = sortingOrder;
@@ -224,6 +225,7 @@ public class Hamster : Grabbable
                 transform.position = wheel.transform.position;
                 wheelEletricityTriggerElapsedTime = 0.0f;
                 tiredAwakenState = HamsterState.Exercising;
+                this.RaiseFloorHere();
                 break;
 
             case HamsterState.Tired: 
