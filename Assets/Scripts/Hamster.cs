@@ -5,15 +5,16 @@ public enum HamsterState
     Waiting,
     Walking,
     Exercising,
-    PickedUp
+    Tired
 }
 
 public class Hamster : MonoBehaviour
 {
     public Collider2D collider2D_;
     
-    [HideInInspector]
     public HamsterState state;
+    [HideInInspector]
+    public HamsterWheel wheel;
 
     [HideInInspector]
     public float minIdleTimeSecs;
@@ -21,6 +22,14 @@ public class Hamster : MonoBehaviour
     public float maxIdleTimeSecs;
     [HideInInspector]
     public float walkSpeed; 
+    [HideInInspector]
+    public float maxEnergy;
+    [HideInInspector]
+    public float energyLossPerSec;
+    [HideInInspector]
+    public float energyRegenPerSec;
+    [HideInInspector]
+    public float tireDurationSecs;
     [HideInInspector]
     public Bounds walkArea;
     //TODO: Walk min and max "radius"
@@ -31,10 +40,16 @@ public class Hamster : MonoBehaviour
     float idleDuration;
     Vector2 walkDestination = Vector2.zero;
 
+    float wheelEletricityTriggerElapsedTime = 0.0f;
+    float tireElapsedTime = 0.0f;
+    
+    [SerializeField]
+    float energy;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        energy = maxEnergy;
         EnterState(HamsterState.Waiting);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -67,6 +82,7 @@ public class Hamster : MonoBehaviour
                 {
                     EnterState(HamsterState.Walking);
                 }
+
                 break;
 
             case HamsterState.Walking:
@@ -81,14 +97,31 @@ public class Hamster : MonoBehaviour
                     transform.position = walkDestination;
                     EnterState(HamsterState.Waiting);
                 }
+                
                 break;
 
             case HamsterState.Exercising:
-                //TODO: Somehow signal electricty increase, or have a script check every frame how many 
-                //hamsters are exercising and calculate.
-                break; 
+                wheelEletricityTriggerElapsedTime += Time.deltaTime;
+                if (wheelEletricityTriggerElapsedTime >= wheel.energyGainTriggerPeriodSecs)
+                {
+                    Shop.increaseElectricity?.Invoke(wheel.energyGain);
+                    wheelEletricityTriggerElapsedTime -= wheel.energyGainTriggerPeriodSecs;
+                }
 
-            case HamsterState.PickedUp: break;
+                energy = Mathf.Max(energy - energyLossPerSec * Time.deltaTime, 0.0f);
+                if (energy <= 0.0f) 
+                {
+                    EnterState(HamsterState.Tired);
+                }
+                break;
+
+            case HamsterState.Tired: 
+                tireElapsedTime += Time.deltaTime;
+                if (tireElapsedTime >= tireDurationSecs)
+                {
+                    EnterState(HamsterState.Waiting);
+                }
+                break;
         }
     }
 
@@ -108,9 +141,14 @@ public class Hamster : MonoBehaviour
                 );
                 break;
 
-            case HamsterState.Exercising: break;
-            
-            case HamsterState.PickedUp: break;
+            case HamsterState.Exercising: 
+                transform.position = wheel.transform.position;
+                wheelEletricityTriggerElapsedTime = 0.0f;
+                break;
+
+            case HamsterState.Tired: 
+                tireElapsedTime = 0.0f;
+                break;
         }
 
         state = newState;

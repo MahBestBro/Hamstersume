@@ -9,9 +9,17 @@ public class HamsterManager : MonoBehaviour
     [Range(0, 100.0f)]
     public float hamsterWalkSpeed;
     public Bounds hamsterWalkArea;
+    [Range(0, 100.0f)]
+    public float maxHamsterEnergy;
+    [Range(0, 100.0f)]
+    public float hamsterEnergyLossPerSec;
+    [Range(0, 100.0f)]
+    public float hamsterEnergyRegenPerSec;
+    [Range(0, 180.0f)]
+    public float hamsterTireDurationSecs;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         for (int i = 0; i < transform.childCount; i++) 
         {
@@ -20,13 +28,16 @@ public class HamsterManager : MonoBehaviour
             hamster.maxIdleTimeSecs = hamsterMaxIdleTimeSecs;
             hamster.walkSpeed = hamsterWalkSpeed;
             hamster.walkArea = hamsterWalkArea;
+            hamster.maxEnergy = maxHamsterEnergy;
+            hamster.energyLossPerSec = hamsterEnergyLossPerSec;
+            hamster.tireDurationSecs = hamsterTireDurationSecs;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnDrawGizmosSelected()

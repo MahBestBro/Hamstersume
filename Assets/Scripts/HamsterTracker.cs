@@ -13,7 +13,6 @@ public class HamsterWheelIDPair
     }
 }
 
-
 public class HamsterTracker : MonoBehaviour
 {
     public List<HamsterWheelIDPair> hamsterWheelMap;
@@ -24,7 +23,7 @@ public class HamsterTracker : MonoBehaviour
     }
 
     //NOTE: Returns the Instance ID of hamster already in wheel
-    public int? PlaceHamsterInWheel(Hamster hamster, Transform wheel)
+    public int? PlaceHamsterInWheel(Hamster hamster, HamsterWheel wheel)
     {
         int wheelID = wheel.gameObject.GetInstanceID();   
         int newHamsterID = hamster.gameObject.GetInstanceID();
@@ -42,7 +41,7 @@ public class HamsterTracker : MonoBehaviour
         return null;
     }
 
-    public int? OccupiedHamsterWheelMapIndex(Transform wheel)
+    public int? OccupiedHamsterWheelMapIndex(HamsterWheel wheel)
     {
         int id = wheel.gameObject.GetInstanceID();
         for (int i = 0; i < hamsterWheelMap.Count; i++)

@@ -52,7 +52,10 @@ public class Player : MonoBehaviour
                 heldHamster = newHeldHamster;
                 heldHamsterOffset = (Vector2)newHeldHamster.transform.position - mouseWorldPos; 
                 hamsterTracker.UnmarkExercisingHamster(newHeldHamster);
-                newHeldHamster.EnterState(HamsterState.PickedUp);
+                if (newHeldHamster.state == HamsterState.Exercising)
+                {
+                    newHeldHamster.EnterState(HamsterState.Waiting);
+                }
             }
         }
 
@@ -64,12 +67,12 @@ public class Player : MonoBehaviour
             hamsterWheelFilter.SetLayerMask(LayerMask.GetMask("HamsterWheel"));
             List<Collider2D> touchingWheels = new List<Collider2D>();
             int numWheels = hamster.collider2D_.Overlap(hamsterWheelFilter, touchingWheels);
-            Transform? targetWheel = null;
+            Transform? targetWheelTransform = null;
             //NOTE: This assumes wheels do not overlap, I don't know why they would anyways
             //Debug.Log("Hey");
             if (numWheels > 0) 
             {
-                targetWheel = touchingWheels[0].transform; 
+                targetWheelTransform = touchingWheels[0].transform; 
             }
 
             //Vector2 lineEnd = mouseWorldPos + MOUSE_CLICK_RAYCAST_DELTA * Vector2.right;
@@ -81,8 +84,9 @@ public class Player : MonoBehaviour
 
             if (pickUp.WasReleasedThisFrame()) 
             {
-                if (targetWheel is Transform wheel)
+                if (targetWheelTransform is Transform wheelTransform && hamster.state != HamsterState.Tired)
                 {
+                    HamsterWheel wheel = wheelTransform.GetComponent<HamsterWheel>();
                     int? wheelMapIndex = hamsterTracker.OccupiedHamsterWheelMapIndex(wheel);
                     int? originalHamsterInstanceID = hamsterTracker.PlaceHamsterInWheel(hamster, wheel);
                     if (originalHamsterInstanceID is int originalHamsterID)
@@ -91,17 +95,16 @@ public class Player : MonoBehaviour
                             originalHamsterID
                         );
                         Hamster originalHamster = originalHamsterObj.GetComponent<Hamster>();
-                        originalHamster.transform.position = (Vector2)wheel.position - 2.0f * Vector2.one;
+                        Vector2 kickedOutPosition = (Vector2)wheel.transform.position - 2.0f * Vector2.one;
+                        originalHamster.transform.position = kickedOutPosition;
                         originalHamster.EnterState(HamsterState.Waiting);
                     }
 
-                    hamster.EnterState(HamsterState.Waiting);
-
-                    //TODO: This state change is dodgy, incorporate into state code or hamster somehow
-                    hamster.transform.position = wheel.transform.position; 
+                    //TODO: This state change is better, maybe make hamster method though?
+                    hamster.wheel = wheel;
                     hamster.EnterState(HamsterState.Exercising);
                 }
-                else
+                else if (hamster.state != HamsterState.Tired)
                 {
                     hamster.EnterState(HamsterState.Waiting);
                 }
