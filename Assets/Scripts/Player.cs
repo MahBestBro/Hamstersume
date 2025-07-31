@@ -52,10 +52,7 @@ public class Player : MonoBehaviour
                 heldHamster = newHeldHamster;
                 heldHamsterOffset = (Vector2)newHeldHamster.transform.position - mouseWorldPos; 
                 hamsterTracker.UnmarkExercisingHamster(newHeldHamster);
-                if (newHeldHamster.state == HamsterState.Exercising)
-                {
-                    newHeldHamster.EnterState(HamsterState.Waiting);
-                }
+                newHeldHamster.TryEnterState(HamsterState.Waiting);
             }
         }
 
