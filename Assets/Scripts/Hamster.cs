@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum HamsterState 
@@ -5,7 +6,8 @@ public enum HamsterState
     Waiting,
     Walking,
     Exercising,
-    Tired
+    Tired,
+    Eating,
 }
 
 public class Hamster : MonoBehaviour
@@ -42,9 +44,21 @@ public class Hamster : MonoBehaviour
 
     float wheelEletricityTriggerElapsedTime = 0.0f;
     float tireElapsedTime = 0.0f;
-    
+    HamsterState tiredAwakenState = HamsterState.Waiting;
+
+    Food targetFood = null;
+
     [SerializeField]
-    float energy;
+    HamsterStats stats;
+
+    float energy
+    {
+        get => stats.energy;
+        set
+        {
+            stats.energy = value;
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -115,13 +129,41 @@ public class Hamster : MonoBehaviour
                 }
                 break;
 
-            case HamsterState.Tired: 
-                tireElapsedTime += Time.deltaTime;
-                if (tireElapsedTime >= tireDurationSecs)
+            case HamsterState.Eating:
+                if (this.targetFood != null)
+                {
+                    if (this.targetFood.Consume(this.stats, Time.deltaTime))
+                    {
+                        this.targetFood = null; // if food is consumed completely, unassign
+                        if (this.energy > this.maxEnergy)
+                        {
+                            this.tireDurationSecs = (this.maxEnergy - this.energy);
+                        }
+                    }
+                } else
                 {
                     EnterState(HamsterState.Waiting);
                 }
                 break;
+
+            case HamsterState.Tired: 
+                tireElapsedTime += Time.deltaTime;
+                if (tireElapsedTime >= tireDurationSecs)
+                {
+                    EnterState(this.tiredAwakenState);
+                }
+                break;
+        }
+    }
+
+    public void TryEnterState(HamsterState newState)
+    {
+        if (this.state == HamsterState.Tired)
+        {
+            tiredAwakenState = newState;
+        } else
+        {
+            EnterState(newState);
         }
     }
 
@@ -132,6 +174,7 @@ public class Hamster : MonoBehaviour
             case HamsterState.Waiting:
                 idleElapsedTime = 0.0f;
                 idleDuration = Random.Range(minIdleTimeSecs, maxIdleTimeSecs);
+                tiredAwakenState = HamsterState.Waiting;
                 break;
 
             case HamsterState.Walking: 
@@ -144,6 +187,7 @@ public class Hamster : MonoBehaviour
             case HamsterState.Exercising: 
                 transform.position = wheel.transform.position;
                 wheelEletricityTriggerElapsedTime = 0.0f;
+                tiredAwakenState = HamsterState.Exercising;
                 break;
 
             case HamsterState.Tired: 
@@ -152,6 +196,17 @@ public class Hamster : MonoBehaviour
         }
 
         state = newState;
+    }
+
+    bool EatFood(Food food)
+    {
+        if (this.targetFood == null)
+        {
+            this.targetFood = food;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     
