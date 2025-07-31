@@ -35,6 +35,9 @@ public class Hamster : MonoBehaviour
     //TODO: Walk min and max "radius"
 
     SpriteRenderer spriteRenderer;
+    Transform energyMeterTransform;
+    Transform energyMeterBarTransform;
+    float maxEnergyMeterYScale;
 
     float idleElapsedTime = 0.0f;
     float idleDuration;
@@ -49,11 +52,15 @@ public class Hamster : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        energy = maxEnergy;
-        EnterState(HamsterState.Waiting);
-
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider2D_ = GetComponent<Collider2D>();
+        
+        energyMeterTransform = transform.Find("EnergyMeter");
+        energyMeterBarTransform = energyMeterTransform.Find("Meter");
+        maxEnergyMeterYScale = energyMeterBarTransform.localScale.y;
+
+        energy = maxEnergy;
+        EnterState(HamsterState.Waiting);
     }
 
     // Update is called once per frame
@@ -63,6 +70,13 @@ public class Hamster : MonoBehaviour
         spriteRenderer.sortingOrder = Screen.height - screenY;
 
         HandleCurrentState(state);
+
+        Vector3 newScale = energyMeterBarTransform.localScale;
+        newScale.y = maxEnergyMeterYScale * energy / maxEnergy;
+        energyMeterBarTransform.localScale = newScale;
+        
+        Vector3 yOffset = 0.5f * maxEnergyMeterYScale * (1.0f - energy / maxEnergy) * Vector3.down;
+        energyMeterBarTransform.position = energyMeterTransform.position + yOffset;
     }
 
     void OnDrawGizmos()
