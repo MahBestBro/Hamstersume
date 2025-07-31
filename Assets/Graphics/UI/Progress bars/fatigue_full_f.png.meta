@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9014da944f5105749ac082c031912abc
+guid: e0f474dd4c26d0844ad7ffb6a1c03a14
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8338094154154128121
-    second: timer_full_0
+      213: 7685510061056339374
+    second: fatigue_full_f_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: timer_full_0
+      name: fatigue_full_f_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 12
-        width: 274
-        height: 55
+        x: 16
+        y: 16
+        width: 485
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9f23e12c47cd6b370800000000000000
-      internalID: 8338094154154128121
+      spriteID: ead24f25eaa68aa60800000000000000
+      internalID: 7685510061056339374
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      timer_full_0: 8338094154154128121
+      fatigue_full_f_0: 7685510061056339374
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
