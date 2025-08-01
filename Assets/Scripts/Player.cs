@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.UI.VirtualMouseInput;
 
 
 
@@ -12,6 +13,9 @@ public class Player : MonoBehaviour
     public HamsterManager hamsterManager;
 
     public Material outlineMaterial;
+
+    [SerializeField]
+    BigCursor specialCursor;
 
     [SerializeField]
     LayerMask grabbablesLayermask;
@@ -34,15 +38,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.CheckGrabbables();
+        // Get Cursor Pos
+        Vector2 mousePosition = this.mousePos.ReadValue<Vector2>();
+        Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(mousePosition);
+        this.CheckGrabbables(mouseWorldPos);
+        if(this.specialCursor) this.specialCursor.Goto(mousePosition);
     }
 
 
-    void CheckGrabbables()
+    void CheckGrabbables(Vector2 mouseWorldPos)
     {
-        // Get Cursor Pos
-        Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(mousePos.ReadValue<Vector2>());
-
         if (pickUp.WasPressedThisFrame())
         {
             this.OnTryGrab(mouseWorldPos);
