@@ -350,6 +350,8 @@ MonoBehaviour:
   transitionTimeSecs: 0.8
   minCameraSize: 4
   maxCameraSize: 7
+  victoryCameraSize: 2
+  victoryZoomDurationSecs: 3
   racecourse: {fileID: 1340364146}
 --- !u!1001 &155420005
 PrefabInstance:
@@ -377,11 +379,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.35857
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.89743
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.z
@@ -547,11 +549,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.35857
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.89743
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.z

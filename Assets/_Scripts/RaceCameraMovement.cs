@@ -10,11 +10,18 @@ public class RaceCameraMovement : MonoBehaviour
     public float minCameraSize;
     [Range(1.0f, 20.0f)]
     public float maxCameraSize;
+    [Range(0.0f, 10.0f)]
+    public float victoryCameraSize;
+    [Range(0.0f, 10.0f)]
+    public float victoryZoomDurationSecs;
     
     public Racecourse racecourse;
 
     RacingHamster[] hamsters;
     int winnerIndex = -1;
+    Vector2 initialCameraPosition;
+    float initialCameraSize;
+    float elapsedTime = 0.0f;
 
     Vector2 velocity = Vector2.zero; 
     
@@ -28,19 +35,17 @@ public class RaceCameraMovement : MonoBehaviour
         {
             hamsters[i] = hamsterParent.GetChild(i).GetComponent<RacingHamster>();
         }
+
+        initialCameraSize = Camera.main.orthographicSize;
+        initialCameraPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
         float[] trackCompletions = hamsters.Select(h => h.RaceCompletion).ToArray();
-        for (int i = 0; i < hamsters.Length; i++)
+        for (int i = 0; i < hamsters.Length && winnerIndex < 0; i++)
         {
-            if (winnerIndex >= 0) 
-            {
-                break;
-            }
-
             RacingHamster hamster = hamsters[i];
 
             //TODO: This track completion boolean is dodgy. Ideally, track completions would properly
@@ -55,17 +60,30 @@ public class RaceCameraMovement : MonoBehaviour
             if (trackCompletions[i] >= 0.2f && intersectedFinishLine)
             {
                 winnerIndex = i;
+                OnRaceEnd();
+                break;
             }
         }
 
-        Vector2 targetPos = Vector2.zero;
+        
         if (winnerIndex >= 0)
         {
-            //TODO: Lerped Zoom
-            targetPos = hamsters[winnerIndex].transform.position;
+            float t = Mathf.Min(elapsedTime / victoryZoomDurationSecs, 1.0f);
+            
+            Vector2 targetPos = hamsters[winnerIndex].transform.position;
+            Vector2 newPosition = Vector2.Lerp(initialCameraPosition, targetPos, t);
+            transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
+
+            Camera.main.orthographicSize = Mathf.Lerp(initialCameraSize, victoryCameraSize, t);
+
+            if (elapsedTime <= victoryZoomDurationSecs)
+            {
+                elapsedTime += Time.deltaTime;
+            }
         }
         else
         {
+            Vector2 targetPos = Vector2.zero;
             float[] weights = trackCompletions.Select(x => x + 1.0f).ToArray();
             Vector2 totalWeightedHamsterPos = Vector2.zero;
             for (int i = 0; i < hamsters.Length; i++) 
@@ -73,32 +91,38 @@ public class RaceCameraMovement : MonoBehaviour
                 totalWeightedHamsterPos += weights[i] * (Vector2)hamsters[i].transform.position;
             }
             targetPos = totalWeightedHamsterPos / weights.Sum();
-        }
 
-
-        Vector2 newPosition = Vector2.SmoothDamp(
-            (Vector2)transform.position, 
-            targetPos,
-            ref velocity,
-            transitionTimeSecs
-        );
-        transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
-
-        float largestDistance = -1.0f;
-        for (int i = 0; i < hamsters.Length; i++) 
-        {
-            for (int j = i; j < hamsters.Length; j++)
+            float largestDistance = -1.0f;
+            for (int i = 0; i < hamsters.Length; i++) 
             {
-                Vector2 posA = hamsters[i].transform.position;
-                Vector2 posB = hamsters[j].transform.position;
+                for (int j = i; j < hamsters.Length; j++)
+                {
+                    Vector2 posA = hamsters[i].transform.position;
+                    Vector2 posB = hamsters[j].transform.position;
 
-                largestDistance = Mathf.Max(Vector2.Distance(posA, posB), largestDistance);
-            } 
+                    largestDistance = Mathf.Max(Vector2.Distance(posA, posB), largestDistance);
+                } 
+            }
+
+            //TODO: Adjust zoom dynamically
+            Camera.main.orthographicSize = Mathf.Clamp(largestDistance, minCameraSize, maxCameraSize);
+
+            Vector2 newPosition = Vector2.SmoothDamp(
+                (Vector2)transform.position, 
+                targetPos,
+                ref velocity,
+                transitionTimeSecs
+            );
+            
+            transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
         }
-
-        //TODO: Adjust zoom dynamically
-        Camera.main.orthographicSize = Mathf.Clamp(largestDistance, minCameraSize, maxCameraSize);
         
+    }
 
+
+    void OnRaceEnd()
+    {
+        initialCameraPosition = transform.position;
+        initialCameraSize = Camera.main.orthographicSize;
     }
 }
