@@ -16,15 +16,6 @@ public class Food : Grabbable
         }
     }
 
-
-    protected void Update()
-    {
-        int screenY = (int)Camera.main.WorldToScreenPoint(transform.position).y; 
-        int sortingOrder = Screen.height - screenY;
-        spriteRenderer.sortingOrder = sortingOrder;
-    }
-
-
     /*
      * <returns>
      * True if food is fully consumed, False if food is partially consumed
@@ -55,8 +46,10 @@ public class Food : Grabbable
             Hamster hamster = interactable.GetComponent<Hamster>();
             if (hamster != null)
             {
-                hamster.EatFood(this);
-                this.isGrabbable = false;
+                if (hamster.EatFood(this))
+                {
+                    this.isGrabbable = false;
+                }
             }
         }
     }

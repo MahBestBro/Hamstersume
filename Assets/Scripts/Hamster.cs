@@ -214,23 +214,12 @@ public class Hamster : Grabbable
             if (TryEnterState(HamsterState.Eating))
             {
                 this.targetFood = food;
+                this.targetFood.transform.position = this.spriteRenderer.transform.position;
+                this.targetFood.ComputeSortOrderIndex();
+                this.targetFood.spriteRenderer.sortingOrder += 1;
                 return true;
             }
         }
         return false;
     }
-
-    
-
-    //void ExitCurrentState() 
-    //{
-    //    switch (state)
-    //    {
-    //        case HamsterState.Waiting: break;
-//
-    //        case HamsterState.Walking: break;
-//
-    //        case HamsterState.PickedUp: break;
-    //    }
-    //}
 }

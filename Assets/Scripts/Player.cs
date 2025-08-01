@@ -64,9 +64,9 @@ public class Player : MonoBehaviour
                 hoveredInteractable = dropInteractable;
                 hoveredInteractable.Highlight(outlineMaterial);
             }
-            else if (dropInteractable == null && hoveredInteractable != null)
+            else if (dropInteractable == null || dropInteractable != hoveredInteractable)
             {
-                hoveredInteractable.Unhighlight();
+                hoveredInteractable?.Unhighlight();
                 hoveredInteractable = null;
             }
 

@@ -35,7 +35,10 @@ public class Grabbable : MonoBehaviour
 
     protected void FixedUpdate()
     {
-        this.ProcessFalling(Time.fixedDeltaTime);
+        if ( this.isGrabbable )
+        {
+            this.ProcessFalling(Time.fixedDeltaTime);
+        }
     }
 
     private void ProcessFalling(float fixedDeltaTime)

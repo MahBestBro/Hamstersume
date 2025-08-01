@@ -47,8 +47,6 @@ public class Microwave : MonoBehaviour
         
         if (canPayForFood)
         {
-            Debug.Log("hey");
-
             float spawnX = UnityEngine.Random.Range(
                 hamsterManager.hamsterWalkArea.min.x,
                 hamsterManager.hamsterWalkArea.max.x
