@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: e051e9303b4f25d429a64affc6d2ab9f
+guid: 840f3bde579b04142835121b985bd5d6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1990131749802980383
-    second: big_ham_3_0
+      213: -213888452728153142
+    second: big_ham_2_sleep_0
+  - first:
+      213: 1732160007167391325
+    second: big_ham_2_sleep_1
+  - first:
+      213: -5711436001727033449
+    second: big_ham_2_sleep_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,8 +54,8 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
-  alignment: 7
+  spriteMeshType: 1
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: big_ham_3_0
+      name: big_ham_2_sleep_0
       rect:
         serializedVersion: 2
-        x: 50
-        y: 0
-        width: 451
-        height: 263
+        x: 45
+        y: 236
+        width: 83
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1eb44ccb7b1a164e0800000000000000
-      internalID: -1990131749802980383
+      spriteID: acb9491e59d180df0800000000000000
+      internalID: -213888452728153142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: big_ham_2_sleep_1
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 182
+        width: 63
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d56b951695ed90810800000000000000
+      internalID: 1732160007167391325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: big_ham_2_sleep_2
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 0
+        width: 511
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79fcea78737ecb0b0800000000000000
+      internalID: -5711436001727033449
       vertices: []
       indices: 
       edges: []
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      big_ham_3_0: -1990131749802980383
+      big_ham_2_sleep_0: -213888452728153142
+      big_ham_2_sleep_1: 1732160007167391325
+      big_ham_2_sleep_2: -5711436001727033449
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

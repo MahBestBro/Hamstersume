@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: e051e9303b4f25d429a64affc6d2ab9f
+guid: 57829c1d3ad078f4497a81518343f75f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1990131749802980383
-    second: big_ham_3_0
+      213: 3786318031042565296
+    second: big_ham_2_run_0
+  - first:
+      213: 6775705205547123738
+    second: big_ham_2_run_1
+  - first:
+      213: -8597743494270625039
+    second: big_ham_2_run_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,8 +54,8 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
-  alignment: 7
+  spriteMeshType: 1
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: big_ham_3_0
+      name: big_ham_2_run_0
       rect:
         serializedVersion: 2
-        x: 50
-        y: 0
-        width: 451
-        height: 263
+        x: 35
+        y: 15
+        width: 481
+        height: 267
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1eb44ccb7b1a164e0800000000000000
-      internalID: -1990131749802980383
+      spriteID: 0b4d2fe3034bb8430800000000000000
+      internalID: 3786318031042565296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: big_ham_2_run_1
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 259
+        width: 45
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a14c6673cf3280e50800000000000000
+      internalID: 6775705205547123738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: big_ham_2_run_2
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 263
+        width: 86
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fad21248ddaea880800000000000000
+      internalID: -8597743494270625039
       vertices: []
       indices: 
       edges: []
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      big_ham_3_0: -1990131749802980383
+      big_ham_2_run_0: 3786318031042565296
+      big_ham_2_run_1: 6775705205547123738
+      big_ham_2_run_2: -8597743494270625039
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
