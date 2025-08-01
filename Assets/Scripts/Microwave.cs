@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Shop : MonoBehaviour
+public class Microwave : MonoBehaviour
 {
     public static Action<int> increaseElectricity;
 
@@ -10,12 +10,17 @@ public class Shop : MonoBehaviour
     public int electricity;
 
     public HamsterTracker hamsterTracker;
+    public HamsterManager hamsterManager;
 
     [SerializeField]
     Text electricityText;
 
     [SerializeField]
-    GameObject testFoodPrefab;
+    GameObject sunflowerSeedPrefab;
+    [SerializeField]
+    GameObject brocolliPrefab;
+    [SerializeField]
+    GameObject carrotPrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,21 +40,42 @@ public class Shop : MonoBehaviour
         electricity += electricityGain;  
     }
 
+    void CookFood(int electricityCost, GameObject foodPrefab)
+    {
+        bool canPayForFood = electricity >= electricityCost;
+        electricity -= electricityCost * Convert.ToInt32(canPayForFood);
+        
+        if (canPayForFood)
+        {
+            Debug.Log("hey");
+
+            float spawnX = UnityEngine.Random.Range(
+                hamsterManager.hamsterWalkArea.min.x,
+                hamsterManager.hamsterWalkArea.max.x
+            );
+
+            float floorHeight = UnityEngine.Random.Range(
+                hamsterManager.hamsterWalkArea.center.y, 
+                hamsterManager.hamsterWalkArea.max.y
+            );
+            GameObject foodObj = Instantiate(foodPrefab, Vector3.zero, Quaternion.identity);
+            foodObj.GetComponent<Food>().DropAt(spawnX * Vector3.right + 5.0f * Vector3.up, null, floorHeight);
+        }
+    }
+
+
     public void CookSunflowerSeed()
     {
-        electricity -= 15 * Convert.ToInt32(electricity >= 15);
-        Instantiate(testFoodPrefab, Vector3.down * 3F, Quaternion.identity);
+        CookFood(0, sunflowerSeedPrefab);
     }
 
     public void CookCarrot()
     {
-        electricity -= 10 * Convert.ToInt32(electricity >= 10);
-        Instantiate(testFoodPrefab, Vector3.down * 3F, Quaternion.identity);
+        CookFood(10, carrotPrefab);
     }
 
-    public void CookCurry()
+    public void CookBrocolli()
     {
-        electricity -= 5 * Convert.ToInt32(electricity >= 5);
-        Instantiate(testFoodPrefab, Vector3.down * 3F, Quaternion.identity);
+        CookFood(15, brocolliPrefab);
     }
 }

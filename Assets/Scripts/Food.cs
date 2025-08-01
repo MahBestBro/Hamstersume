@@ -13,6 +13,15 @@ public class Food : Grabbable
         }
     }
 
+
+    protected void Update()
+    {
+        int screenY = (int)Camera.main.WorldToScreenPoint(transform.position).y; 
+        int sortingOrder = Screen.height - screenY;
+        spriteRenderer.sortingOrder = sortingOrder;
+    }
+
+
     /*
      * <returns>
      * True if food is fully consumed, False if food is partially consumed

@@ -156,7 +156,7 @@ public class Hamster : Grabbable
                 wheelEletricityTriggerElapsedTime += Time.deltaTime;
                 if (wheelEletricityTriggerElapsedTime >= wheel.energyGainTriggerPeriodSecs)
                 {
-                    Shop.increaseElectricity?.Invoke(wheel.energyGain);
+                    Microwave.increaseElectricity?.Invoke(wheel.energyGain);
                     wheelEletricityTriggerElapsedTime -= wheel.energyGainTriggerPeriodSecs;
                 }
 
