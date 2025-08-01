@@ -187,6 +187,7 @@ GameObject:
   - component: {fileID: 158059448}
   - component: {fileID: 158059449}
   - component: {fileID: 158059450}
+  - component: {fileID: 158059451}
   m_Layer: 8
   m_Name: HamsterWheel
   m_TagString: Untagged
@@ -315,6 +316,19 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   energyGain: 10
   energyGainTriggerPeriodSecs: 1.5
+--- !u!114 &158059451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158059446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96839a8a2f8b60489933bbb22d593ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 158059448}
 --- !u!4 &213144070 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5155274801321314318, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
@@ -713,6 +727,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -838,6 +853,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720901662fe7d594f91da9e389ee24b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  microwaveScreenWorldCentre: {x: 19.3, y: 0}
+  wheelScreenWorldCentre: {x: 0, y: 0}
+  transitionTimeSecs: 0.3
 --- !u!1 &521813305
 GameObject:
   m_ObjectHideFlags: 0
@@ -1330,7 +1360,6 @@ GameObject:
   - component: {fileID: 833887516}
   - component: {fileID: 833887515}
   - component: {fileID: 833887514}
-  - component: {fileID: 833887513}
   m_Layer: 5
   m_Name: MicrowaveScreenButton
   m_TagString: Untagged
@@ -1358,20 +1387,6 @@ RectTransform:
   m_AnchoredPosition: {x: 832.59, y: 323.7094}
   m_SizeDelta: {x: 220.15, y: 100.1813}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &833887513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 833887511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdd93841668978041965bb7a72439676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  microwaveScreenWorldCentre: {x: 20, y: 0}
-  cameraTransitionTimeSecs: 1
 --- !u!114 &833887514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1416,9 +1431,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MicrowaveButton, Assembly-CSharp
-        m_MethodName: StartMovingCameraToMicrowaveScreen
+      - m_Target: {fileID: 519420033}
+        m_TargetAssemblyTypeName: CameraMovement, Assembly-CSharp
+        m_MethodName: StartMovingCameraToMicrowaveScreenPos
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1565,7 +1580,6 @@ GameObject:
   - component: {fileID: 1200685579}
   - component: {fileID: 1200685578}
   - component: {fileID: 1200685577}
-  - component: {fileID: 1200685576}
   m_Layer: 5
   m_Name: WheelScreenButton
   m_TagString: Untagged
@@ -1593,18 +1607,6 @@ RectTransform:
   m_AnchoredPosition: {x: -835, y: 323.7094}
   m_SizeDelta: {x: 220.15, y: 100.1813}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1200685576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1200685574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e98aa5e6b4c55345b9a71218f318159, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1200685577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1648,7 +1650,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1200685578}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 519420033}
+        m_TargetAssemblyTypeName: CameraMovement, Assembly-CSharp
+        m_MethodName: StartMovingCameraToWheelScreenPos
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1200685578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2236,7 +2250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hamsterTracker: {fileID: 629696906}
   hamsterManager: {fileID: 98455650}
-  outlineMaterial: {fileID: 0}
+  outlineMaterial: {fileID: 2100000, guid: 05ba4858ae260f746a172e9ac588aabe, type: 2}
   grabbablesLayermask:
     serializedVersion: 2
     m_Bits: 640
