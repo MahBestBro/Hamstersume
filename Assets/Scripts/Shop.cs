@@ -35,13 +35,13 @@ public class Shop : MonoBehaviour
         electricity += electricityGain;  
     }
 
-    public void CookPizza()
+    public void CookSunflowerSeed()
     {
         electricity -= 15 * Convert.ToInt32(electricity >= 15);
         Instantiate(testFoodPrefab, Vector3.down * 3F, Quaternion.identity);
     }
 
-    public void CookLasagna()
+    public void CookCarrot()
     {
         electricity -= 10 * Convert.ToInt32(electricity >= 10);
         Instantiate(testFoodPrefab, Vector3.down * 3F, Quaternion.identity);

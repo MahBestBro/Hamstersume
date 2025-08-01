@@ -235,6 +235,9 @@ public class Hamster : Grabbable
             case HamsterState.Tired: 
                 tireElapsedTime = 0.0f;
                 break;
+
+            case HamsterState.Eating: 
+                break; 
         }
 
         state = newState;
