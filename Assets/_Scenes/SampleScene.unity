@@ -844,7 +844,7 @@ PrefabInstance:
     - target: {fileID: 2213047384176467128, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 729932cccc66afc4aaf8dd0c5e2c474d, type: 3}
+      objectReference: {fileID: 21300000, guid: 154dbf98e0fcbf34484d7e4d4350978a, type: 3}
     - target: {fileID: 4537650448517050314, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -905,6 +905,18 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8533016572887107321, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+      propertyPath: stateSprites.hamsterIdle
+      value: 
+      objectReference: {fileID: 21300000, guid: 154dbf98e0fcbf34484d7e4d4350978a, type: 3}
+    - target: {fileID: 8533016572887107321, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+      propertyPath: stateSprites.hamsterRunning
+      value: 
+      objectReference: {fileID: 21300000, guid: 57829c1d3ad078f4497a81518343f75f, type: 3}
+    - target: {fileID: 8533016572887107321, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+      propertyPath: stateSprites.hamsterSleeping
+      value: 
+      objectReference: {fileID: 21300000, guid: 840f3bde579b04142835121b985bd5d6, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

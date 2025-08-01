@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEditor.UI;
 using UnityEngine;
@@ -12,9 +13,18 @@ public enum HamsterState
     Eating,
 }
 
+[Serializable]
+public struct HamsterSprites
+{
+    public Sprite hamsterIdle;
+    public Sprite hamsterRunning;
+    public Sprite hamsterSleeping;
+}
+
 public class Hamster : Grabbable
 {
     public HamsterState state;
+    public HamsterSprites stateSprites;
     
     [HideInInspector]
     public Collider2D _collider2D;
@@ -57,6 +67,10 @@ public class Hamster : Grabbable
     {
         base.Start();
         _collider2D = GetComponent<Collider2D>();
+        if (stateSprites.hamsterIdle == null)
+        {
+            stateSprites.hamsterIdle = this.spriteRenderer.sprite;
+        }
 
         hEnergy.InitialiseEnergy();
         EnterState(HamsterState.Waiting);
@@ -169,24 +183,26 @@ public class Hamster : Grabbable
 
     public void EnterState(HamsterState newState) 
     {
+        Sprite newSprite = stateSprites.hamsterIdle;
         switch (newState)
         {
             case HamsterState.Waiting:
                 this.isGrabbable = true;
                 idleElapsedTime = 0.0f;
-                idleDuration = Random.Range(minIdleTimeSecs, maxIdleTimeSecs);
+                idleDuration = UnityEngine.Random.Range(minIdleTimeSecs, maxIdleTimeSecs);
                 tiredAwakenState = HamsterState.Waiting;
                 break;
 
             case HamsterState.Walking:
                 this.isGrabbable = true;
                 walkDestination = new Vector2(
-                    Random.Range(walkArea.min.x, walkArea.max.x), 
-                    Random.Range(walkArea.min.y, walkArea.max.y)
+                    UnityEngine.Random.Range(walkArea.min.x, walkArea.max.x),
+                    UnityEngine.Random.Range(walkArea.min.y, walkArea.max.y)
                 );
                 break;
 
             case HamsterState.Exercising:
+                newSprite = stateSprites.hamsterRunning;
                 this.isGrabbable = true;
                 transform.position = wheel.transform.position;
                 wheelEletricityTriggerElapsedTime = 0.0f;
@@ -195,6 +211,7 @@ public class Hamster : Grabbable
                 break;
 
             case HamsterState.Tired:
+                newSprite = stateSprites.hamsterSleeping;
                 this.isGrabbable = true;
                 tireElapsedTime = 0.0f;
                 break;
@@ -205,6 +222,7 @@ public class Hamster : Grabbable
         }
 
         state = newState;
+        this.spriteRenderer.sprite = newSprite ?? stateSprites.hamsterIdle;
     }
 
     public bool EatFood(Food food)
