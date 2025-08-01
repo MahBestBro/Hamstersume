@@ -13,18 +13,10 @@ public enum HamsterState
     Eating,
 }
 
-[Serializable]
-public struct HamsterSprites
-{
-    public Sprite hamsterIdle;
-    public Sprite hamsterRunning;
-    public Sprite hamsterSleeping;
-}
-
 public class Hamster : Grabbable
 {
     public HamsterState state;
-    public HamsterSprites stateSprites;
+    public HamsterSkinset hamsterSprites;
     
     [HideInInspector]
     public Collider2D _collider2D;
@@ -67,10 +59,6 @@ public class Hamster : Grabbable
     {
         base.Start();
         _collider2D = GetComponent<Collider2D>();
-        if (stateSprites.hamsterIdle == null)
-        {
-            stateSprites.hamsterIdle = this.spriteRenderer.sprite;
-        }
 
         hEnergy.InitialiseEnergy();
         EnterState(HamsterState.Waiting);
@@ -183,7 +171,7 @@ public class Hamster : Grabbable
 
     public void EnterState(HamsterState newState) 
     {
-        Sprite newSprite = stateSprites.hamsterIdle;
+        Sprite newSprite = hamsterSprites.hamsterIdle;
         switch (newState)
         {
             case HamsterState.Waiting:
@@ -202,7 +190,7 @@ public class Hamster : Grabbable
                 break;
 
             case HamsterState.Exercising:
-                newSprite = stateSprites.hamsterRunning;
+                newSprite = hamsterSprites.hamsterRunning;
                 this.isGrabbable = true;
                 transform.position = wheel.transform.position;
                 wheelEletricityTriggerElapsedTime = 0.0f;
@@ -211,7 +199,7 @@ public class Hamster : Grabbable
                 break;
 
             case HamsterState.Tired:
-                newSprite = stateSprites.hamsterSleeping;
+                newSprite = hamsterSprites.hamsterSleeping;
                 this.isGrabbable = true;
                 tireElapsedTime = 0.0f;
                 break;
@@ -222,7 +210,8 @@ public class Hamster : Grabbable
         }
 
         state = newState;
-        this.spriteRenderer.sprite = newSprite ?? stateSprites.hamsterIdle;
+        newSprite ??= hamsterSprites.hamsterIdle;
+        if (newSprite) this.spriteRenderer.sprite = newSprite;
     }
 
     public bool EatFood(Food food)
