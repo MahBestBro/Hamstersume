@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2734971}
   - component: {fileID: 2734972}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FinishLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ Transform:
   m_LocalScale: {x: 0.3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1340364147}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2734972
 BoxCollider2D:
@@ -365,7 +365,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: e051e9303b4f25d429a64affc6d2ab9f, type: 3}
     - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: laneNumber
-      value: 97
+      value: -21
       objectReference: {fileID: 0}
     - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: orderInRace
@@ -478,6 +478,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2734971}
   - {fileID: 1637318366}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -656,4 +657,3 @@ SceneRoots:
   m_Roots:
   - {fileID: 36222155}
   - {fileID: 1340364147}
-  - {fileID: 2734971}
