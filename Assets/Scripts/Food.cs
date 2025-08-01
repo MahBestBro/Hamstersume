@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Food : Grabbable
 {
+    [SerializeField]
     protected float consumeDuration = 1.0F;
+    [SerializeField]
     protected float energyRestored = 10.0F;
 
     public float EnergyProvided
