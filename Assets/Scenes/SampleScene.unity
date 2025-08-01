@@ -280,58 +280,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5155274801321314318, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
   m_PrefabInstance: {fileID: 8364658629683986665}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &253668947
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 253668949}
-  - component: {fileID: 253668948}
-  m_Layer: 0
-  m_Name: Shop
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &253668948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253668947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28df049a9daaf5c48acc147b4c964240, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  electricity: 0
-  hamsterTracker: {fileID: 629696906}
-  electricityText: {fileID: 1360663294}
-  testFoodPrefab: {fileID: 3298700040675696719, guid: b632589add95c9c4897d9bacf7bbcf23, type: 3}
---- !u!224 &253668949
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253668947}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.04781, y: -1.04574}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &262716702
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +439,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 25066536bce47bb4ebe09d0d3fd6f694, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -729,7 +677,7 @@ PrefabInstance:
     - target: {fileID: 3834290302953211811, guid: cf77ac67088bfe04180256baff546b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 253668948}
+      objectReference: {fileID: 0}
     - target: {fileID: 3834290302953211811, guid: cf77ac67088bfe04180256baff546b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CookCurry
@@ -1695,7 +1643,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 832a438e11282b347bfb146a2477349e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1985,8 +1933,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   electricity: 0
   hamsterTracker: {fileID: 629696906}
+  hamsterManager: {fileID: 98455650}
   electricityText: {fileID: 1360663294}
-  testFoodPrefab: {fileID: 3298700040675696719, guid: b632589add95c9c4897d9bacf7bbcf23, type: 3}
+  sunflowerSeedPrefab: {fileID: 3298700040675696719, guid: b632589add95c9c4897d9bacf7bbcf23, type: 3}
+  brocolliPrefab: {fileID: 3298700040675696719, guid: 455a1254d1b1b9244929ca594addffc6, type: 3}
+  carrotPrefab: {fileID: 3298700040675696719, guid: 85b2c1e897e2f5c48a3b85cac6a30f2f, type: 3}
 --- !u!1 &1445799458
 GameObject:
   m_ObjectHideFlags: 0
@@ -2687,7 +2638,7 @@ PrefabInstance:
     - target: {fileID: 3834290302953211811, guid: cf77ac67088bfe04180256baff546b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 253668948}
+      objectReference: {fileID: 0}
     - target: {fileID: 3834290302953211811, guid: cf77ac67088bfe04180256baff546b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CookCarrot
@@ -2762,10 +2713,10 @@ PrefabInstance:
     - target: {fileID: 5401864395907436126, guid: 9701f70d72652bb45b2809a2898deb72, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1432256527}
+      objectReference: {fileID: 1432256529}
     - target: {fileID: 5401864395907436126, guid: 9701f70d72652bb45b2809a2898deb72, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: CookBrocolli
       objectReference: {fileID: 0}
     - target: {fileID: 6537975136973634183, guid: 9701f70d72652bb45b2809a2898deb72, type: 3}
       propertyPath: m_Sprite
@@ -2944,7 +2895,7 @@ PrefabInstance:
     - target: {fileID: 3834290302953211811, guid: cf77ac67088bfe04180256baff546b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 253668948}
+      objectReference: {fileID: 0}
     - target: {fileID: 3834290302953211811, guid: cf77ac67088bfe04180256baff546b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CookSunflowerSeed
@@ -3067,6 +3018,10 @@ PrefabInstance:
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1432256529}
+    - target: {fileID: 5401864395907436126, guid: 9701f70d72652bb45b2809a2898deb72, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CookSunflowerSeed
+      objectReference: {fileID: 0}
     - target: {fileID: 7108896657950946897, guid: 9701f70d72652bb45b2809a2898deb72, type: 3}
       propertyPath: m_Name
       value: SunflowerSeedButton
@@ -3164,7 +3119,6 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 1933664941}
-  - {fileID: 253668949}
   - {fileID: 616924562}
   - {fileID: 262716705}
   - {fileID: 508838755}
