@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEditor.UI;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public enum HamsterState 
 {
@@ -16,12 +17,13 @@ public class Hamster : Grabbable
     public HamsterState state;
     
     [HideInInspector]
-    public int sortingOrder;
-    [HideInInspector]
     public Collider2D _collider2D;
     [HideInInspector]
     public HamsterWheel wheel;
-
+    [HideInInspector]
+    public float energyLossPerSec;
+    [HideInInspector]
+    public float tireDurationSecs;
     [HideInInspector]
     public float minIdleTimeSecs;
     [HideInInspector]
@@ -29,24 +31,8 @@ public class Hamster : Grabbable
     [HideInInspector]
     public float walkSpeed;
     [HideInInspector]
-    public float maxEnergy;
-    [HideInInspector]
-    public float energyLossPerSec;
-    [HideInInspector]
-    public float energyRegenPerSec;
-    [HideInInspector]
-    public float tireDurationSecs;
-    [HideInInspector]
     public Bounds walkArea;
     //TODO: Walk min and max "radius"
-
-    SpriteRenderer bodySpriteRenderer;
-    SpriteRenderer meterSpriteRenderer;
-    SpriteRenderer meterBackgroundSpriteRenderer;
-    SpriteRenderer meterFrontSpriteRenderer;
-    Transform energyMeterTransform;
-    Transform energyMeterFrontTransform;
-    float maxEnergyFrontXScale;
 
     float idleElapsedTime = 0.0f;
     float idleDuration;
@@ -60,55 +46,28 @@ public class Hamster : Grabbable
     Food targetFood = null;
 
     [SerializeField]
-    HamsterStats stats;
-
-    float energy
-    {
-        get => stats.energy;
-        set
-        {
-            stats.energy = value;
-        }
+    HamsterStats hStats;
+    [SerializeField]
+    public HamsterEnergy hEnergy {
+        get {  return this.hStats.hEnergy; }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     new protected void Start()
     {
         base.Start();
-        bodySpriteRenderer = this.spriteRenderer;
         _collider2D = GetComponent<Collider2D>();
-        
-        energyMeterTransform = transform.Find("EnergyMeter");
-        
-        energyMeterFrontTransform = energyMeterTransform.Find("Front");
-        meterFrontSpriteRenderer = energyMeterFrontTransform.GetComponent<SpriteRenderer>();
-        maxEnergyFrontXScale = energyMeterFrontTransform.localScale.x;
-        
-        meterBackgroundSpriteRenderer = energyMeterTransform.Find("Background").GetComponent<SpriteRenderer>();
-        meterSpriteRenderer = energyMeterTransform.Find("Meter").GetComponent<SpriteRenderer>();
 
-        energy = maxEnergy;
+        hEnergy.InitialiseEnergy();
         EnterState(HamsterState.Waiting);
     }
 
     // Update is called once per frame
     protected void Update()
     {
-        int screenY = (int)Camera.main.WorldToScreenPoint(transform.position).y; 
-        sortingOrder = Screen.height - screenY;
-        bodySpriteRenderer.sortingOrder = sortingOrder;
-        meterBackgroundSpriteRenderer.sortingOrder = sortingOrder + 1;
-        meterSpriteRenderer.sortingOrder = sortingOrder + 2;
-        meterFrontSpriteRenderer.sortingOrder = sortingOrder + 3;
-
+        this.ComputeSortOrderIndex();
         HandleCurrentState(state);
-
-        Vector3 newScale = energyMeterFrontTransform.localScale;
-        newScale.x = maxEnergyFrontXScale * (1.0f - energy / maxEnergy);
-        energyMeterFrontTransform.localScale = newScale;
-        
-        Vector3 xOffset = 0.5f * maxEnergyFrontXScale * energy / maxEnergy * Vector3.right;
-        energyMeterFrontTransform.position = energyMeterTransform.position + xOffset;
+        // TODO: Update Energy Meter
     }
 
     void OnDrawGizmos()
@@ -134,9 +93,9 @@ public class Hamster : Grabbable
             case HamsterState.Walking:
                 Vector2 toTravel = walkDestination - (Vector2)transform.position; 
 
-                if (!pickedUp)
+                if (!isGrabbed)
                 {
-                    bodySpriteRenderer.flipX = Vector2.Dot(toTravel, Vector2.right) >= 0.0f;
+                    this.spriteRenderer.flipX = Vector2.Dot(toTravel, Vector2.right) >= 0.0f;
                 }
 
                 if (toTravel.magnitude >= walkSpeed * Time.deltaTime)
@@ -160,8 +119,7 @@ public class Hamster : Grabbable
                     wheelEletricityTriggerElapsedTime -= wheel.energyGainTriggerPeriodSecs;
                 }
 
-                energy = Mathf.Max(energy - energyLossPerSec * Time.deltaTime, 0.0f);
-                if (energy <= 0.0f) 
+                if (hEnergy.ExhaustEnergy(energyLossPerSec * Time.deltaTime)) 
                 {
                     EnterState(HamsterState.Tired);
                 }
@@ -170,12 +128,13 @@ public class Hamster : Grabbable
             case HamsterState.Eating:
                 if (this.targetFood != null)
                 {
-                    if (this.targetFood.Consume(this.stats, Time.deltaTime))
+                    if (this.targetFood.Consume(this.hStats, Time.deltaTime))
                     {
                         this.targetFood = null; // if food is consumed completely, unassign
-                        if (this.energy > this.maxEnergy)
+                        float energyExcess = this.hEnergy.GetEnergyExcess();
+                        if (energyExcess > 0)
                         {
-                            this.tireDurationSecs = (this.maxEnergy - this.energy);
+                            this.tireDurationSecs = energyExcess;
                         }
                     }
                 } else
@@ -213,30 +172,35 @@ public class Hamster : Grabbable
         switch (newState)
         {
             case HamsterState.Waiting:
+                this.isGrabbable = true;
                 idleElapsedTime = 0.0f;
                 idleDuration = Random.Range(minIdleTimeSecs, maxIdleTimeSecs);
                 tiredAwakenState = HamsterState.Waiting;
                 break;
 
             case HamsterState.Walking:
+                this.isGrabbable = true;
                 walkDestination = new Vector2(
                     Random.Range(walkArea.min.x, walkArea.max.x), 
                     Random.Range(walkArea.min.y, walkArea.max.y)
                 );
                 break;
 
-            case HamsterState.Exercising: 
+            case HamsterState.Exercising:
+                this.isGrabbable = true;
                 transform.position = wheel.transform.position;
                 wheelEletricityTriggerElapsedTime = 0.0f;
                 tiredAwakenState = HamsterState.Exercising;
                 this.RaiseFloorHere();
                 break;
 
-            case HamsterState.Tired: 
+            case HamsterState.Tired:
+                this.isGrabbable = true;
                 tireElapsedTime = 0.0f;
                 break;
 
-            case HamsterState.Eating: 
+            case HamsterState.Eating:
+                this.isGrabbable = false;
                 break; 
         }
 

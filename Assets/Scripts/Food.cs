@@ -6,6 +6,7 @@ public class Food : Grabbable
     protected float consumeDuration = 1.0F;
     [SerializeField]
     protected float energyRestored = 10.0F;
+    
 
     public float EnergyProvided
     {
@@ -42,7 +43,7 @@ public class Food : Grabbable
 
     protected bool OnConsumed(HamsterStats consumer)
     {
-        consumer.energy += this.energyRestored;
+        consumer.hEnergy.RestoreFixedEnergy(this.energyRestored);
         Destroy(this.gameObject);
         return true;
     }
@@ -55,6 +56,7 @@ public class Food : Grabbable
             if (hamster != null)
             {
                 hamster.EatFood(this);
+                this.isGrabbable = false;
             }
         }
     }

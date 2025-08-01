@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
             foreach (RaycastHit2D hit in hits)
             {
                 Grabbable currentGrabbable = hit.transform.GetComponent<Grabbable>();
-                if (currentGrabbable && (mostForwardGrabbable==null || (currentGrabbable.SortingPriority < mostForwardGrabbable.SortingPriority)))
+                if (currentGrabbable && currentGrabbable.isGrabbable && (mostForwardGrabbable==null || (currentGrabbable.SortingPriority < mostForwardGrabbable.SortingPriority)))
                 {
                     mostForwardGrabbable = currentGrabbable;
                 }

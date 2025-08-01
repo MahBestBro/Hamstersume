@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,7 +16,8 @@ public class Grabbable : MonoBehaviour
     protected Vector2 grabbedOffset;
     [SerializeField]
     protected LayerMask interactableLayermask;
-    public bool pickedUp = false;
+    public bool isGrabbed = false;
+    public bool isGrabbable = true;
     protected Transform sortingAnchor;
     public float SortingPriority { 
         get
@@ -38,7 +40,7 @@ public class Grabbable : MonoBehaviour
 
     private void ProcessFalling(float fixedDeltaTime)
     {
-        if (!this.pickedUp && this.transform.position.y > this.floorHeight)
+        if (!this.isGrabbed && this.transform.position.y > this.floorHeight)
         {
             if (transform.position.y > 10)
             {
@@ -70,19 +72,41 @@ public class Grabbable : MonoBehaviour
     public bool AnchorSortingToSprite()
     {
         this.sortingAnchor = this.spriteRenderer?.transform;
-        return (this.sortingAnchor != null);
+        bool res = (this.sortingAnchor != null);
+        this.ComputeSortOrderIndex();
+        return res;
     }
 
-    public void GrabAt(Vector2 grabPos)
+    public int ComputeSortOrderIndex()
     {
+        int sortOrder;
+        if ( this.isGrabbed )
+        {
+            sortOrder = Screen.height;
+        } else
+        {
+            int screenY = (int)Camera.main.WorldToScreenPoint(this.sortingAnchor?.position ?? this.transform.position).y;
+            sortOrder = Screen.height - screenY;
+        }
+        this.spriteRenderer.sortingOrder = sortOrder;
+        return sortOrder;
+    }
+
+    public bool GrabAt(Vector2 grabPos)
+    {
+        if (!isGrabbable) return false;
         this.grabbedOffset = (Vector2)this.transform.position - grabPos;
-        this.pickedUp = true;
+        this.isGrabbed = true;
         this._velocity = Vector2.zero;
+        return true;
     }
 
     public void DragTo(Vector2 dragPos)
     {
         this.transform.position = (Vector3)(dragPos + grabbedOffset);
+        // update sorting
+        this.ComputeSortOrderIndex();
+        // update physics trackers
         this._velocity = ((Vector2)this.transform.position - this._prevPos) * 0.5F;
         this._prevPos = this.transform.position;
     }
@@ -112,7 +136,7 @@ public class Grabbable : MonoBehaviour
 
     public void DropAt(Vector2 dropPos, Transform interactable, float floorHeight)
     {
-        this.pickedUp = false;
+        this.isGrabbed = false;
         this.floorHeight = floorHeight;
         this._prevPos = this.transform.position;
         this.OnDrop(interactable);

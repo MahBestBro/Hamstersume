@@ -52,24 +52,25 @@ MonoBehaviour:
   interactableLayermask:
     serializedVersion: 2
     m_Bits: 256
-  pickedUp: 0
+  isGrabbed: 0
+  isGrabbable: 1
   state: 0
-  sortingOrder: 0
   _collider2D: {fileID: 0}
   wheel: {fileID: 0}
+  energyLossPerSec: 0
+  tireDurationSecs: 0
   minIdleTimeSecs: 1
   maxIdleTimeSecs: 3
   walkSpeed: 5
-  maxEnergy: 0
-  energyLossPerSec: 0
-  energyRegenPerSec: 0
-  tireDurationSecs: 0
   walkArea:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   walkDestination: {x: 0, y: 0}
-  stats:
-    energy: 0
+  hStats:
+    hEnergy:
+      energy: 0
+      maximumEnergy: 0
+      imgEnergyMeter: {fileID: 0}
 --- !u!70 &7897799143741374875
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -147,7 +148,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.32, y: 0.16, z: 1}
+  m_LocalScale: {x: 2.4147475, y: 0.23753175, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6746226622205962081}
@@ -283,7 +284,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 5557386343496892608, guid: 90184b7d28c8cf3438322548900d3cca, type: 3}
+  m_Sprite: {fileID: 2188010175890165858, guid: d724bd4e5833fd543839905f259d73ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -320,9 +321,9 @@ Transform:
   m_GameObject: {fileID: 2825535170833087443}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5155274801321314318}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -442,8 +443,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.47879112, y: 0.38303292, z: 0.47879112}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.49715364, y: 0.5691453, z: 0.47879112}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6746226622205962081}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

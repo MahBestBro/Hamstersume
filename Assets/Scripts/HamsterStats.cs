@@ -7,6 +7,5 @@ public class HamsterStats
     int statStamina;
     int statPower;
 
-    [SerializeField]
-    public float energy;
+    public HamsterEnergy hEnergy;
 }

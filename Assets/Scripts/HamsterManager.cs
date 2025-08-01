@@ -13,8 +13,6 @@ public class HamsterManager : MonoBehaviour
     public float maxHamsterEnergy;
     [Range(0, 100.0f)]
     public float hamsterEnergyLossPerSec;
-    [Range(0, 100.0f)]
-    public float hamsterEnergyRegenPerSec;
     [Range(0, 180.0f)]
     public float hamsterTireDurationSecs;
 
@@ -28,7 +26,7 @@ public class HamsterManager : MonoBehaviour
             hamster.maxIdleTimeSecs = hamsterMaxIdleTimeSecs;
             hamster.walkSpeed = hamsterWalkSpeed;
             hamster.walkArea = hamsterWalkArea;
-            hamster.maxEnergy = maxHamsterEnergy;
+            hamster.hEnergy.maximumEnergy = maxHamsterEnergy;
             hamster.energyLossPerSec = hamsterEnergyLossPerSec;
             hamster.tireDurationSecs = hamsterTireDurationSecs;
         }
