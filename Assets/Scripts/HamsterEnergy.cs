@@ -38,6 +38,7 @@ public class HamsterEnergy
         if(imgEnergyMeter)
         {
             imgEnergyMeter.fillAmount = this.GetPercentEnergy();
+            imgEnergyMeter.canvas.sortingOrder = sortingIndex;
         }
     }
 

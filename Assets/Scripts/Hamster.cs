@@ -67,7 +67,7 @@ public class Hamster : Grabbable
     {
         this.ComputeSortOrderIndex();
         HandleCurrentState(state);
-        // TODO: Update Energy Meter
+        this.hEnergy.UpdateEnergyDisplay(this.spriteRenderer.sortingOrder);
     }
 
     void OnDrawGizmos()
