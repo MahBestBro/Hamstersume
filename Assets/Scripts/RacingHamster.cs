@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class RacingHamster : MonoBehaviour
 {
+    public int laneNumber;
+
     Racecourse racecourse;
     SpriteRenderer spriteRenderer;
 
@@ -10,14 +12,15 @@ public class RacingHamster : MonoBehaviour
     {
         racecourse = transform.parent.GetComponent<Racecourse>();
         spriteRenderer = transform.Find("HamsterSprite").GetComponent<SpriteRenderer>();
-
-        transform.position = racecourse.transform.position + racecourse.curveRadius * Vector3.down;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = racecourse.NextPosOnRaceCourse(transform.position, 3.0f);
+        if (racecourse.RaceIsUnderway())
+        {
+            transform.position = racecourse.NextPosOnRaceCourse(transform.position, 3.0f, laneNumber);
+        }
         spriteRenderer.flipX = racecourse.GetRaceFacing(transform.position) == Facing.Right;
     }
 
