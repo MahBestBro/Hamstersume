@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4449162642194340024}
   - component: {fileID: 3635562079468594509}
+  - component: {fileID: 2096459526452235037}
   m_Layer: 0
   m_Name: RacingHamster
   m_TagString: Untagged
@@ -45,6 +46,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac27222a324da0458f2ed0683a86d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laneNumber: 0
+  _raceCompletion: 0
+--- !u!70 &2096459526452235037
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3897568332592999171}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 2.28, y: 1.33}
+  m_Direction: 1
 --- !u!1 &5233751173970689538
 GameObject:
   m_ObjectHideFlags: 0

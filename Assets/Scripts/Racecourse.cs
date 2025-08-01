@@ -19,6 +19,9 @@ public class Racecourse : MonoBehaviour
     public int numLanes;
     [Range(0.0f, 10.0f)]
     public float countdownTimeSecs;
+    
+    [HideInInspector]
+    public Collider2D finishLineCollider;
 
     float elapsedTime;
 
@@ -30,16 +33,25 @@ public class Racecourse : MonoBehaviour
     }
 
 
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        Transform hamsterParent = transform.Find("Hamsters");
+        for (int i = 0; i < hamsterParent.childCount; i++)
         {
-            RacingHamster racer = transform.GetChild(i).GetComponent<RacingHamster>();
+            RacingHamster racer = hamsterParent.GetChild(i).GetComponent<RacingHamster>();
             racer.laneNumber = i + 1;
             racer.transform.position = StartingPosition(racer.laneNumber);
         }
+
+        Transform finishLineTransform = transform.Find("FinishLine");
+        float finishLineCentreY = minCurveRadius + laneWidth * numLanes / 2.0f;
+        finishLineTransform.position = transform.position + finishLineCentreY * Vector3.down; 
+        Vector3 newScale = finishLineTransform.localScale;
+        newScale.y = laneWidth * numLanes;
+        finishLineTransform.localScale = newScale;
+
+        finishLineCollider = finishLineTransform.GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -83,11 +95,12 @@ public class Racecourse : MonoBehaviour
     }
 
     //NOTE: This assumes the race goes anticlockwise around the course
-    public Vector2 NextPosOnRaceCourse(Vector2 pos, float speed, int laneNumber)
+    public Vector2 NextPosOnRaceCourse(Vector2 pos, float speed, int laneNumber, ref float distanceCovered)
     {
         Vector2 nextPos = pos;
         Vector2 racetrackCentre = (Vector2)transform.position;
-        float distanceToTravel = speed * Time.deltaTime;
+        float intialDistance = speed * Time.deltaTime;
+        float distanceToTravel = intialDistance;
 
         float curveRadius = minCurveRadius + ((float)laneNumber - 1.0f) * laneWidth;
         float topStraightY = racetrackCentre.y + curveRadius; 
@@ -125,7 +138,7 @@ public class Racecourse : MonoBehaviour
             float nextPosAngleRad = Mathf.Deg2Rad * (currentAngle + angleTravelled + angleOffset);
             
             nextPos = curveCentre + curveRadius * (new Vector2(Mathf.Cos(nextPosAngleRad), Mathf.Sin(nextPosAngleRad)));
-            distanceToTravel -= angleTravelled / 360.0f * curveRadius;
+            distanceToTravel -= Mathf.Deg2Rad * angleTravelled * curveRadius;
         }
 
         //We are in the top straight
@@ -159,6 +172,7 @@ public class Racecourse : MonoBehaviour
             distanceToTravel -= angleTravelled / 360.0f * curveRadius;
         }
 
+        distanceCovered = intialDistance - distanceToTravel;
         return nextPos;
     } 
 
@@ -191,8 +205,6 @@ public class Racecourse : MonoBehaviour
             float angleOffset = Vector2.SignedAngle(Vector2.right, Vector2.down); 
             float angleRadians = Mathf.Deg2Rad * (curveAdjustmentAngle + angleOffset);
             Vector2 adjustmentRadial = curveRadius * (new Vector2(Mathf.Cos(angleRadians), Mathf.Sin(angleRadians)));
-            Debug.Log(curveDistanceAdjustment);
-            Debug.Log(angleOffset);
             
             Vector2 curveCentre = racetrackCentre + straightLength / 2.0f * Vector2.right;
             pos = curveCentre + adjustmentRadial;
