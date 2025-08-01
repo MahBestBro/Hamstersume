@@ -7,9 +7,9 @@ public class BigCursor : MonoBehaviour
     [SerializeField]
     Vector2 hotspotOffset;
     [SerializeField]
-    Texture2D cursorTexture;
+    Sprite cursorTexture;
     [SerializeField]
-    Texture2D cursorLeftClickTexture;
+    Sprite cursorLeftClickTexture;
 
     Image renderer;
     Vector2 screenBoundaryBuffer = Vector2.one * 100;
@@ -31,6 +31,16 @@ public class BigCursor : MonoBehaviour
             Cursor.visible = true;
         }
         
+    }
+
+    public void OnLeftClickDown()
+    {
+        this.renderer.sprite = cursorLeftClickTexture;
+    }
+
+    public void OnLeftClickUp()
+    {
+        this.renderer.sprite = cursorTexture;
     }
 
     public bool CheckInScreen(Vector2 cursorPos)

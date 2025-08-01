@@ -6,6 +6,8 @@ public class Microwave : MonoBehaviour
 {
     public static Action<int> increaseElectricity;
 
+    Animator anim;
+
     [Range(0, 100)]
     public int electricity;
 
@@ -25,6 +27,7 @@ public class Microwave : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        anim = GetComponent<Animator>();
         increaseElectricity += IncreaseEletricity;
     }
 
@@ -47,6 +50,8 @@ public class Microwave : MonoBehaviour
         
         if (canPayForFood)
         {
+            anim.SetTrigger("Trigger");
+
             float spawnX = UnityEngine.Random.Range(
                 hamsterManager.hamsterWalkArea.min.x,
                 hamsterManager.hamsterWalkArea.max.x

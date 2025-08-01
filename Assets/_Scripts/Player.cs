@@ -50,10 +50,14 @@ public class Player : MonoBehaviour
     {
         if (pickUp.WasPressedThisFrame())
         {
+            this.specialCursor.OnLeftClickDown();
             this.OnTryGrab(mouseWorldPos);
+        } else if (pickUp.WasReleasedThisFrame())
+        {
+            this.specialCursor.OnLeftClickUp();
         }
 
-        if (heldGrabbable != null)
+            if (heldGrabbable != null)
         {
             heldGrabbable.DragTo(mouseWorldPos);
 
