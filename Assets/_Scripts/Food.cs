@@ -87,6 +87,10 @@ public class Food : Grabbable
         Hamster hoveredHamster = hoverInteractable?.GetComponent<Hamster>();
         if (hoveredHamster) {
             hoveredHamster.hEnergy.IndicateEnergyIncreaseStart(foodStats.energyRestored);
+            if (hoveredHamster.state == HamsterState.Walking)
+            {
+                hoveredHamster.TryEnterState(HamsterState.Waiting);
+            }
         }
     }
     public override void OnHoverInteractableExit(Interactable hoverInteractable)
