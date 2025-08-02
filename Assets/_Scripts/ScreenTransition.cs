@@ -9,7 +9,7 @@ public enum Easing
     ExponetialOut
 }
 
-public class RaceTransition : MonoBehaviour
+public class ScreenTransition : MonoBehaviour
 {
     [Range(0.0f, 10.0f)]
     public float transitionDurationSecs;
@@ -55,8 +55,9 @@ public class RaceTransition : MonoBehaviour
     }
 
 
-    public void PlayRaceTransition(UnityEvent onTransitionEnd)
+    public void Play(UnityEvent onTransitionEnd = null)
     {
+        Debug.Log(transform.position);
         transform.position = startPosition;
         elapsedTime = 0.0f;
         playing = true;
