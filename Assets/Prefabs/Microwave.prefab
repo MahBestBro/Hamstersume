@@ -142,7 +142,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1070d5fdddf78ec4a916b9c6e77da61f, type: 2}
   - {fileID: 11400000, guid: 6e3dbdf5aa623ca4d98843f386160556, type: 2}
   electricity: 0
-  hamsterCost: 0
+  hamsterCost: 100
   hamsterTracker: {fileID: 0}
   hamsterManager: {fileID: 0}
   electricityText: {fileID: 0}
@@ -185,7 +185,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3388405693277985711, guid: 9701f70d72652bb45b2809a2898deb72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.7
+      value: 5.37
       objectReference: {fileID: 0}
     - target: {fileID: 3388405693277985711, guid: 9701f70d72652bb45b2809a2898deb72, type: 3}
       propertyPath: m_LocalPosition.y
@@ -287,7 +287,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3388405693277985711, guid: 9701f70d72652bb45b2809a2898deb72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.7
+      value: 5.369998
       objectReference: {fileID: 0}
     - target: {fileID: 3388405693277985711, guid: 9701f70d72652bb45b2809a2898deb72, type: 3}
       propertyPath: m_LocalPosition.y
@@ -393,7 +393,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3388405693277985711, guid: 9701f70d72652bb45b2809a2898deb72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.7
+      value: 5.369998
       objectReference: {fileID: 0}
     - target: {fileID: 3388405693277985711, guid: 9701f70d72652bb45b2809a2898deb72, type: 3}
       propertyPath: m_LocalPosition.y
@@ -499,7 +499,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3388405693277985711, guid: 9701f70d72652bb45b2809a2898deb72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.7
+      value: 5.369998
       objectReference: {fileID: 0}
     - target: {fileID: 3388405693277985711, guid: 9701f70d72652bb45b2809a2898deb72, type: 3}
       propertyPath: m_LocalPosition.y

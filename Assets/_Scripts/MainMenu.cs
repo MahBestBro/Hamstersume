@@ -22,6 +22,8 @@ public class MainMenu : MonoBehaviour
     Transform creditsPage;
 
     [SerializeField]
+    ScreenTransition startTransition;
+    [SerializeField]
     ScreenTransition playTransition;
     [SerializeField]
     BigCursor specialCursor;
@@ -53,6 +55,8 @@ public class MainMenu : MonoBehaviour
         currentPage = mainPage;
         currentPageOffscreenPos = nonMainPageOffscreenCentre;
         prevPageOffscreenPos = mainPageOffscreenCentre;
+
+        startTransition.Play();
     }
 
     // Update is called once per frame
