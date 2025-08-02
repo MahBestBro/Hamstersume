@@ -7,7 +7,9 @@ public class TrainingTimer : MonoBehaviour
     [SerializeField]
     float traningDurationSecs;
     [SerializeField]
-    RaceTransition transition;
+    ScreenTransition startTransition;
+    [SerializeField]
+    ScreenTransition endTransition;
 
     RectTransform timerMask;
     
@@ -23,6 +25,10 @@ public class TrainingTimer : MonoBehaviour
     {
         timerMask = transform.Find("BarMask").GetComponent<RectTransform>();
         originalBarWidth = timerMask.rect.width;
+
+        UnityEvent onTransitionEnd = new UnityEvent();
+        onTransitionEnd.AddListener(() => StartTimer());
+        startTransition.Play(onTransitionEnd);
     }
 
     // Update is called once per frame
@@ -56,12 +62,8 @@ public class TrainingTimer : MonoBehaviour
     {
         timerFinished = true;
         UnityEvent onTransitionEnd = new UnityEvent();
-        onTransitionEnd.AddListener(SwitchToRaceScene); 
-        transition.PlayRaceTransition(onTransitionEnd);
+        onTransitionEnd.AddListener(() => SceneManager.LoadScene("Racing")); 
+        endTransition.Play(onTransitionEnd);
     }
 
-    void SwitchToRaceScene()
-    {
-        SceneManager.LoadScene("Racing");
-    }
 }

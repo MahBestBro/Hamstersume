@@ -1,4 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 
 public enum Facing
@@ -19,32 +23,42 @@ public class Racecourse : MonoBehaviour
     public int numLanes;
     [Range(0.0f, 10.0f)]
     public float countdownTimeSecs;
+    [Range(0.0f, 25.0f)]
+    public float winCutsceneDurationSecs;
     
-    [SerializeField]
-    public RaceTransition startTransition;
-
     [HideInInspector]
-    public Collider2D finishLineCollider;
-
-    float elapsedTime;
-
-
-    //NOTE: Mathf.Approximately doesn't give you control over epsilon grrrrr
-    bool WithinEpsilon(float a, float b, float epsilon)
+    public RacingHamster[] hamsters;
+    public RacingHamster Winner
     {
-        return Mathf.Abs(a - b) <= epsilon;
+        get
+        {
+            return winner;
+        }
     }
+
+    [SerializeField]
+    ScreenTransition startTransition;
+    [SerializeField]
+    ScreenTransition endTransition;
+
+    RacingHamster winner = null;
+    Collider2D finishLineCollider;
+
+    float raceElapsedTime = 0.0f;
+    float winCutsceneElapsedTime = 0.0f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Transform hamsterParent = transform.Find("Hamsters");
+        hamsters = new RacingHamster[hamsterParent.childCount];
         for (int i = 0; i < hamsterParent.childCount; i++)
         {
-            RacingHamster racer = hamsterParent.GetChild(i).GetComponent<RacingHamster>();
-            racer.laneNumber = i + 1;
-            racer.transform.position = StartingPosition(racer.laneNumber);
+            RacingHamster hamster = hamsterParent.GetChild(i).GetComponent<RacingHamster>();
+            hamsters[i] = hamster;
+            hamster.laneNumber = i + 1;
+            hamster.transform.position = StartingPosition(hamster.laneNumber);
         }
 
         Transform finishLineTransform = transform.Find("FinishLine");
@@ -56,15 +70,49 @@ public class Racecourse : MonoBehaviour
 
         finishLineCollider = finishLineTransform.GetComponent<Collider2D>();
 
-        startTransition.PlayRaceTransition(null);
+        startTransition.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!startTransition.IsPlaying && !RaceIsUnderway())
+        bool racing = RaceIsUnderway();
+        if (!startTransition.IsPlaying && !racing)
         {
-            elapsedTime += Time.deltaTime;
+            raceElapsedTime += Time.deltaTime;
+        }
+        
+        if (winner != null)
+        {
+            winCutsceneElapsedTime += Time.deltaTime;
+        }
+
+        if (winCutsceneElapsedTime >= winCutsceneDurationSecs && !endTransition.IsPlaying)
+        {
+            UnityEvent onTransitionEnd = new UnityEvent();
+            onTransitionEnd.AddListener(() => SceneManager.LoadScene("SampleScene"));
+            endTransition.Play(onTransitionEnd);
+        }
+
+        //Check who's the winner
+        float[] raceCompletions = RaceCompletions();
+        foreach (RacingHamster hamster in hamsters)
+        {
+            ContactFilter2D finishLineFilter = new ContactFilter2D();
+            finishLineFilter.useTriggers = true;
+            finishLineFilter.useLayerMask = true;
+            finishLineFilter.SetLayerMask(LayerMask.GetMask("FinishLine"));
+            List<Collider2D> _ = new List<Collider2D>();
+            bool intersectedFinishLine = hamster.collider2D_.Overlap(finishLineFilter, _) > 0;
+            
+            //TODO: This track completion boolean is dodgy. Ideally, track completions would properly
+            //track total distance but for some reason it does not. Either fix track completion or
+            //clean 
+            if (hamster.RaceCompletion >= 0.2f && intersectedFinishLine)
+            {
+                winner = hamster;
+                break;
+            }
         }
     }
 
@@ -96,7 +144,12 @@ public class Racecourse : MonoBehaviour
 
     public bool RaceIsUnderway()
     {
-        return elapsedTime >= countdownTimeSecs;
+        return raceElapsedTime >= countdownTimeSecs;
+    }
+
+    public float[] RaceCompletions()
+    {
+        return hamsters.Select(h => h.RaceCompletion).ToArray();
     }
 
     //NOTE: This assumes the race goes anticlockwise around the course
@@ -116,7 +169,8 @@ public class Racecourse : MonoBehaviour
         bool inStraight = nextPos.x >= straightLeftSide && nextPos.x <= straightRightSide;
         
         //We are in the bottom straight
-        if (distanceToTravel > 0.0f && inStraight && WithinEpsilon(nextPos.y, bottomStraightY, 0.01f))
+        bool inBottomStraight = inStraight && MathHelpers.WithinEpsilon(nextPos.y, bottomStraightY, 0.01f);
+        if (distanceToTravel > 0.0f && inBottomStraight)
         {
             float remainingDistance = straightRightSide - nextPos.x; 
             float distanceTravelled = Mathf.Min(distanceToTravel, remainingDistance);
@@ -147,7 +201,8 @@ public class Racecourse : MonoBehaviour
         }
 
         //We are in the top straight
-        if (distanceToTravel > 0.0f && inStraight && WithinEpsilon(nextPos.y, topStraightY, 0.01f))
+        bool inTopStraight = inStraight && MathHelpers.WithinEpsilon(nextPos.y, topStraightY, 0.01f);
+        if (distanceToTravel > 0.0f && inTopStraight)
         {
             float remainingDistance = nextPos.x - straightLeftSide; 
             float distanceTravelled = Mathf.Min(distanceToTravel, remainingDistance);
@@ -204,7 +259,7 @@ public class Racecourse : MonoBehaviour
             -(minCurveRadius + laneWidth * laneRank)
         );
 
-        if (!WithinEpsilon(curveDistanceAdjustment, 0.0f, 0.01f))
+        if (!MathHelpers.WithinEpsilon(curveDistanceAdjustment, 0.0f, 0.01f))
         {
             float curveAdjustmentAngle = Mathf.Rad2Deg * curveDistanceAdjustment / curveRadius;
             float angleOffset = Vector2.SignedAngle(Vector2.right, Vector2.down); 
