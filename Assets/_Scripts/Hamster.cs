@@ -16,7 +16,6 @@ public enum HamsterState
 public class Hamster : Grabbable
 {
     public HamsterState state;
-    public HamsterVariant details;
     
     [HideInInspector]
     public Collider2D _collider2D;
@@ -42,8 +41,14 @@ public class Hamster : Grabbable
     Food targetFood = null;
 
     [SerializeField]
-    HamsterStats hStats;
-    [SerializeField]
+    public HamsterProfile hamsterProfile;
+    public HamsterVariant hamsterVariant
+    {
+        get { return hamsterProfile.hVariant; }
+    }
+    HamsterStats hStats { 
+        get { return hamsterProfile.hStats; }
+    }
     public HamsterEnergy hEnergy 
     {
         get {  return this.hStats.hEnergy; }
@@ -62,7 +67,18 @@ public class Hamster : Grabbable
 
         hover = GetComponent<Hoverable>();
 
-        HamsterManager hamsterManager = transform.parent.GetComponent<HamsterManager>();
+		this.InitialiseFromManager();
+
+        hEnergy.InitialiseEnergy();
+        EnterState(HamsterState.Waiting);
+
+        statDisplay = transform.Find("StatDisplay").GetComponent<HamsterStatDisplay>();
+        statDisplay.ToggleVisibility(hover.isHovered);
+    }
+
+	void InitialiseFromManager()
+	{
+		HamsterManager hamsterManager = transform.parent.GetComponent<HamsterManager>();
 
         minIdleTimeSecs = hamsterManager.hamsterMinIdleTimeSecs;
         maxIdleTimeSecs = hamsterManager.hamsterMaxIdleTimeSecs;
@@ -72,26 +88,21 @@ public class Hamster : Grabbable
         energyLossPerSec = hamsterManager.hamsterEnergyLossPerSec;
         hEnergy.SetFullSleepDuration(hamsterManager.hamsterTireDurationSecs);
 
-        hStats.statSpeed = (int)(details.startingSpeedStatFrac * 10.0f);
-        hStats.statStamina = (int)(details.startingStaminaStatFrac * 10.0f);
-        hStats.statPower = (int)(details.startingPowerStatFrac * 10.0f);
+        hStats.statSpeed = (int)(hamsterVariant.startingSpeedStatFrac * 10.0f);
+        hStats.statStamina = (int)(hamsterVariant.startingStaminaStatFrac * 10.0f);
+        hStats.statPower = (int)(hamsterVariant.startingPowerStatFrac * 10.0f);
 
-        hEnergy.maximumEnergy = details.startingMaxEnergy;
-        hEnergy.InitialiseEnergy();
-        EnterState(HamsterState.Waiting);
-
-        statDisplay = transform.Find("StatDisplay").GetComponent<HamsterStatDisplay>();
-        statDisplay.ToggleVisibility(hover.isHovered);
-    }
+        hEnergy.maximumEnergy = hamsterVariant.startingMaxEnergy;
+	}
 
     // Update is called once per frame
-    protected void Update()
-    {
-        this.ComputeSortOrderIndex();
-        HandleCurrentState(state);
-        this.hEnergy.UpdateEnergyDisplay(this.spriteRenderer.sortingOrder);
-        this.statDisplay.UpdateStatDisplay(this.hStats, this.spriteRenderer.sortingOrder);
-    }
+	protected void Update()
+	{
+		this.ComputeSortOrderIndex();
+		HandleCurrentState(state);
+		this.hEnergy.UpdateEnergyDisplay(this.spriteRenderer.sortingOrder);
+		this.statDisplay.UpdateStatDisplay(this.hStats, this.spriteRenderer.sortingOrder);
+	}
 
     public void OnHoverEnter_() 
     {
@@ -206,7 +217,7 @@ public class Hamster : Grabbable
 
     public void EnterState(HamsterState newState) 
     {
-        Sprite newSprite = details.hamsterIdle;
+        Sprite newSprite = hamsterVariant.hamsterIdle;
         switch (newState)
         {
             case HamsterState.Waiting:
@@ -225,7 +236,7 @@ public class Hamster : Grabbable
                 break;
 
             case HamsterState.Exercising:
-                newSprite = details.hamsterRunning;
+                newSprite = hamsterVariant.hamsterRunning;
                 this.isGrabbable = true;
                 transform.position = wheel.transform.position;
                 wheelEletricityTriggerElapsedTime = 0.0f;
@@ -234,7 +245,7 @@ public class Hamster : Grabbable
                 break;
 
             case HamsterState.Tired:
-                newSprite = details.hamsterSleeping;
+                newSprite = hamsterVariant.hamsterSleeping;
                 this.isGrabbable = true;
                 this.hEnergy.SleepFull();
                 break;
@@ -245,7 +256,7 @@ public class Hamster : Grabbable
         }
 
         state = newState;
-        newSprite ??= details.hamsterIdle;
+        newSprite ??= hamsterVariant.hamsterIdle;
         if (newSprite) this.spriteRenderer.sprite = newSprite;
     }
 

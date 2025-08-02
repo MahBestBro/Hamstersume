@@ -856,6 +856,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 1070d5fdddf78ec4a916b9c6e77da61f, type: 2}
     - target: {fileID: 8533016572887107321, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+      propertyPath: hamsterProfile.hVariant
+      value: 
+      objectReference: {fileID: 11400000, guid: 1070d5fdddf78ec4a916b9c6e77da61f, type: 2}
+    - target: {fileID: 8533016572887107321, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: stateSprites.hamsterIdle
       value: 
       objectReference: {fileID: 21300000, guid: 154dbf98e0fcbf34484d7e4d4350978a, type: 3}
@@ -932,10 +936,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc9cec9dd15aa84cbf3a3a3140e392e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  traningDurationSecs: 120
+  traningDurationSecs: 2
   startTransition: {fileID: 527460406}
   endTransition: {fileID: 598323553}
   elapsedTimeSecs: 0
+  onTimerEnded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!212 &590409700 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 1090305677570209913, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
@@ -2362,6 +2369,104 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!1 &2028063379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2028063381}
+  - component: {fileID: 2028063380}
+  - component: {fileID: 2028063382}
+  m_Layer: 0
+  m_Name: HamsterDataPocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2028063380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028063379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7488548b0deb3445991b5a4cd53baa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raceCircuit: {fileID: 2028063382}
+  hamsterManager: {fileID: 98455650}
+  hamsters: []
+--- !u!4 &2028063381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028063379}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.37705, y: -2.90233, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2028063382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028063379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbff209fc15b7a4c89231247dda29bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  races:
+  - npcParticipants:
+    - hStats:
+        statSpeed: 0
+        statStamina: 0
+        statPower: 0
+        hEnergy:
+          energy: 0
+          maximumEnergy: 0
+          imgEnergyMeter: {fileID: 0}
+          imgSleepMeter: {fileID: 0}
+          imgEnergyIncreaseIndicator: {fileID: 0}
+      hVariant: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
+    - hStats:
+        statSpeed: 0
+        statStamina: 0
+        statPower: 0
+        hEnergy:
+          energy: 0
+          maximumEnergy: 0
+          imgEnergyMeter: {fileID: 0}
+          imgSleepMeter: {fileID: 0}
+          imgEnergyIncreaseIndicator: {fileID: 0}
+      hVariant: {fileID: 11400000, guid: 1070d5fdddf78ec4a916b9c6e77da61f, type: 2}
+    - hStats:
+        statSpeed: 0
+        statStamina: 0
+        statPower: 0
+        hEnergy:
+          energy: 0
+          maximumEnergy: 0
+          imgEnergyMeter: {fileID: 0}
+          imgSleepMeter: {fileID: 0}
+          imgEnergyIncreaseIndicator: {fileID: 0}
+      hVariant: {fileID: 11400000, guid: 6e3dbdf5aa623ca4d98843f386160556, type: 2}
+    playerParticipants: []
+    numberPlayerParticipants: 1
+    trackType: Standard
 --- !u!1 &2105118498
 GameObject:
   m_ObjectHideFlags: 0
@@ -2947,6 +3052,10 @@ PrefabInstance:
       propertyPath: hamsterSprites
       value: 
       objectReference: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
+    - target: {fileID: 8533016572887107321, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+      propertyPath: hamsterProfile.hVariant
+      value: 
+      objectReference: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2956,6 +3065,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 2028063381}
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 1933664941}

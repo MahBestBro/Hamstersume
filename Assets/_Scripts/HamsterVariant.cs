@@ -16,5 +16,5 @@ public class HamsterVariant : ScriptableObject
     public float startingPowerStatFrac;
     
     [Range(1.0f, 200.0f)]
-    public float startingMaxEnergy;
+    public float startingMaxEnergy = 100F;
 }

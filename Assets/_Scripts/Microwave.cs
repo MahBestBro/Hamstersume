@@ -81,7 +81,7 @@ public class Microwave : MonoBehaviour
             {
                 obj = Instantiate(prefab, Vector3.zero, Quaternion.identity, hamsterManager.transform);
                 int variantIndex = UnityEngine.Random.Range(0, variants.Length);
-                obj.GetComponent<Hamster>().details = variants[variantIndex];
+                obj.GetComponent<Hamster>().hamsterProfile.hVariant = variants[variantIndex];
             }
             else
             {

@@ -20,6 +20,8 @@ public class TrainingTimer : MonoBehaviour
     bool timerFinished = false;
     public bool isTimerStarted {  get { return timerStarted; } }
 
+    public UnityEvent onTimerEnded;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -61,6 +63,9 @@ public class TrainingTimer : MonoBehaviour
     void OnTimerCompletion()
     {
         timerFinished = true;
+        onTimerEnded.Invoke();
+
+        // Transition to next scene
         UnityEvent onTransitionEnd = new UnityEvent();
         onTransitionEnd.AddListener(() => SceneManager.LoadScene("Racing")); 
         endTransition.Play(onTransitionEnd);

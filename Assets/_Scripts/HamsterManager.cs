@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HamsterManager : MonoBehaviour
@@ -16,11 +17,10 @@ public class HamsterManager : MonoBehaviour
     [Range(0, 180.0f)]
     public float hamsterTireDurationSecs;
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+	public Hamster[] GetManagedHamsters()
+	{
+		return this.GetComponentsInChildren<Hamster>();
+	}
 
     void OnDrawGizmosSelected()
     {

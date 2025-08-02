@@ -34,6 +34,6 @@ public class HamsterStats
         }
     }
 
-
+    [SerializeField]
     public HamsterEnergy hEnergy;
 }
