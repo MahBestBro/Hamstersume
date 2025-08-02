@@ -778,6 +778,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 154dbf98e0fcbf34484d7e4d4350978a, type: 3}
+    - target: {fileID: 5118946903141810356, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 5155274801321314318, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -792,11 +796,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5155274801321314318, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.58
+      value: -3.217
       objectReference: {fileID: 0}
     - target: {fileID: 5155274801321314318, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.09
+      value: -3.294
       objectReference: {fileID: 0}
     - target: {fileID: 5155274801321314318, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -834,6 +838,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5980010726589145205, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 8533016572887107321, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: hamsterSprites
       value: 
@@ -1155,6 +1163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815a7b85f8e04924596572b5afb4db71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: {fileID: 563652374}
 --- !u!4 &629696907
 Transform:
   m_ObjectHideFlags: 0

@@ -16,7 +16,9 @@ public class TrainingTimer : MonoBehaviour
     [SerializeField]
     float elapsedTimeSecs = 0.0f;
     float originalBarWidth;
-    bool timing = false;
+    bool timerStarted = false;
+    bool timerFinished = false;
+    public bool isTimerStarted {  get { return timerStarted; } }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,7 +34,7 @@ public class TrainingTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timing)
+        if (timerStarted && !timerFinished)
         {
             float fracTimeRemaining = Mathf.Max(1.0f - elapsedTimeSecs / traningDurationSecs, 0.0f);
             timerMask.SetInsetAndSizeFromParentEdge(
@@ -49,15 +51,16 @@ public class TrainingTimer : MonoBehaviour
         }
     }
 
-
-    void StartTimer()
+    public bool StartTimer() // (called in HamsterTracker)
     {
-        timing = true;
+        if (timerStarted) return false;
+        timerStarted = true;
+        return true;
     }
 
     void OnTimerCompletion()
     {
-        timing = false;
+        timerFinished = true;
         UnityEvent onTransitionEnd = new UnityEvent();
         onTransitionEnd.AddListener(() => SceneManager.LoadScene("Racing")); 
         endTransition.Play(onTransitionEnd);

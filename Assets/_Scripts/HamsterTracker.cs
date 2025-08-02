@@ -16,6 +16,7 @@ public class HamsterWheelIDPair
 public class HamsterTracker : MonoBehaviour
 {
     public List<HamsterWheelIDPair> hamsterWheelMap;
+    public TrainingTimer timer;
 
     void Start()
     {
@@ -25,6 +26,8 @@ public class HamsterTracker : MonoBehaviour
     //NOTE: Returns the Instance ID of hamster already in wheel
     public int? PlaceHamsterInWheel(Hamster hamster, HamsterWheel wheel)
     {
+        if(!timer.isTimerStarted) timer.StartTimer(); // start timer when first hamster is placed in wheel
+
         int wheelID = wheel.gameObject.GetInstanceID();   
         int newHamsterID = hamster.gameObject.GetInstanceID();
         for (int i = 0; i < hamsterWheelMap.Count; i++)

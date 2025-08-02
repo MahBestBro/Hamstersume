@@ -70,4 +70,20 @@ public class Food : Grabbable
             }
         }
     }
+
+    public override void OnHoverInteractableEnter(Interactable hoverInteractable)
+    {
+        Hamster hoveredHamster = hoverInteractable?.GetComponent<Hamster>();
+        if (hoveredHamster) {
+            hoveredHamster.hEnergy.IndicateEnergyIncreaseStart(this.energyRestored);
+        }
+    }
+    public override void OnHoverInteractableExit(Interactable hoverInteractable)
+    {
+        Hamster hoveredHamster = hoverInteractable?.GetComponent<Hamster>();
+        if (hoveredHamster)
+        {
+            hoveredHamster.hEnergy.IndicateEnergyIncreaseStop();
+        }
+    }
 }
