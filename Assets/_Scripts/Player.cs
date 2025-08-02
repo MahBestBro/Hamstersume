@@ -18,11 +18,14 @@ public class Player : MonoBehaviour
     BigCursor specialCursor;
 
     [SerializeField]
+    LayerMask hoverablesLayermask;
+    [SerializeField]
     LayerMask grabbablesLayermask;
 
     InputAction pickUp;
     InputAction mousePos;
 
+    Hoverable currentHoverable = null;
     Grabbable hoveredGrabbable = null;
     Grabbable heldGrabbable = null;
     Interactable hoveredInteractable = null;
@@ -49,6 +52,14 @@ public class Player : MonoBehaviour
 
     void CheckGrabbables(Vector2 mouseWorldPos)
     {
+        Hoverable newHoverable = GetHoverable(mouseWorldPos);
+        if (newHoverable != currentHoverable)
+        {
+            currentHoverable?.OnHoverExit();
+            currentHoverable = newHoverable;
+            currentHoverable?.OnHoverEnter();
+        }
+
         Grabbable newHoveredGrabbable = GetHoveredGrabbable(mouseWorldPos);
         if (newHoveredGrabbable != hoveredGrabbable)
         {
@@ -95,6 +106,35 @@ public class Player : MonoBehaviour
             }
 
         }
+    }
+
+    Hoverable GetHoverable(Vector2 mouseWorldPos)
+    {
+        // Fire Raycast at Cursor Pos
+        Vector2 lineEnd = mouseWorldPos + MOUSE_CLICK_RAYCAST_DELTA * Vector2.right;
+        RaycastHit2D[] hits = Physics2D.LinecastAll(mouseWorldPos, lineEnd, hoverablesLayermask);
+
+        if (hits.Length > 0)
+        {
+            // Get most forward Grabbable
+            Hoverable bestHoverable = null;
+            foreach (RaycastHit2D hit in hits)
+            {
+                Hoverable hoverable = hit.transform.GetComponent<Hoverable>();
+                if (hoverable && hoverable.isHoverable && (bestHoverable == null || (hoverable.SortingPriority < bestHoverable.SortingPriority)))
+                {
+                    bestHoverable = hoverable;
+                }
+            }
+
+            if (bestHoverable == null)
+            {
+                Debug.LogWarning("No Hoverables Found amongst detected objects");
+            }
+
+            return bestHoverable; 
+        }
+        return null;
     }
 
     Grabbable GetHoveredGrabbable(Vector2 mouseWorldPos)

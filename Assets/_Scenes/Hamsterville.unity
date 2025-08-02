@@ -358,6 +358,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &263646270 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4634177523606606120, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+  m_PrefabInstance: {fileID: 1097125511417085552}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &309949295 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5155274801321314318, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
@@ -1187,6 +1192,16 @@ Transform:
   - {fileID: 1432256528}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &703507313 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6765707275078555178, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+  m_PrefabInstance: {fileID: 1097125511417085552}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &704268888 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7690215843550476945, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+  m_PrefabInstance: {fileID: 1097125511417085552}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &833887511
 GameObject:
   m_ObjectHideFlags: 0
@@ -2296,6 +2311,9 @@ MonoBehaviour:
   hamsterManager: {fileID: 98455650}
   outlineMaterial: {fileID: 2100000, guid: 05ba4858ae260f746a172e9ac588aabe, type: 2}
   specialCursor: {fileID: 1460543330}
+  hoverablesLayermask:
+    serializedVersion: 2
+    m_Bits: 128
   grabbablesLayermask:
     serializedVersion: 2
     m_Bits: 640
@@ -2541,6 +2559,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5575202065097039500, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 704268888}
     - target: {fileID: 5698367646621369004, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: m_Name
       value: Microwave
@@ -2557,6 +2579,14 @@ PrefabInstance:
       propertyPath: electricityText
       value: 
       objectReference: {fileID: 1360663294}
+    - target: {fileID: 7469745317720749365, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 263646270}
+    - target: {fileID: 8791770593975300663, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 703507313}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

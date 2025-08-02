@@ -140,12 +140,7 @@ MonoBehaviour:
   isGrabbed: 0
   isGrabbable: 1
   isHovered: 0
-  energyRestored: 70
-  consumeDuration: 1
-  speedStatIncrease: 0
-  staminaStatIncrease: 15
-  powerStatIncrease: 2
-  electricityCost: 5
+  foodStats: {fileID: 11400000, guid: 3255dd0e83049804cab180dd1fa5afc0, type: 2}
 --- !u!58 &4293394688970127827
 CircleCollider2D:
   m_ObjectHideFlags: 0
