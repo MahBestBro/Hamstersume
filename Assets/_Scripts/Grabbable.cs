@@ -132,8 +132,7 @@ public class Grabbable : MonoBehaviour
         ContactFilter2D interactableFilter = new ContactFilter2D();
         interactableFilter.SetLayerMask(interactableLayermask);
         List<Collider2D> touchingInteractables = new List<Collider2D>();
-        // idk if it's unintuitive to use the collider of the grabbable instead of just the hoverPos (cursor)
-        int numInteractables = this._collider.Overlap(interactableFilter, touchingInteractables);
+        int numInteractables = Physics2D.OverlapPoint(hoverPos, interactableFilter, touchingInteractables);
         Transform targetInteractableTransform = null;
         //TODO: Handle overlapping case (e.g., food drop over two hamsters)
         Interactable newHoveredInteractable;
