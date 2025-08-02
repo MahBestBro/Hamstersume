@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class TrainingTimer : MonoBehaviour
 {
@@ -44,7 +46,14 @@ public class TrainingTimer : MonoBehaviour
 
     void OnTimerCompletion()
     {
-        transition.PlayRaceTransition();
         timerFinished = true;
+        UnityEvent onTransitionEnd = new UnityEvent();
+        onTransitionEnd.AddListener(SwitchToRaceScene); 
+        transition.PlayRaceTransition(onTransitionEnd);
+    }
+
+    void SwitchToRaceScene()
+    {
+        SceneManager.LoadScene("Racing");
     }
 }

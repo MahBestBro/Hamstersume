@@ -20,6 +20,9 @@ public class Racecourse : MonoBehaviour
     [Range(0.0f, 10.0f)]
     public float countdownTimeSecs;
     
+    [SerializeField]
+    public RaceTransition startTransition;
+
     [HideInInspector]
     public Collider2D finishLineCollider;
 
@@ -52,12 +55,14 @@ public class Racecourse : MonoBehaviour
         finishLineTransform.localScale = newScale;
 
         finishLineCollider = finishLineTransform.GetComponent<Collider2D>();
+
+        startTransition.PlayRaceTransition(null);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!RaceIsUnderway())
+        if (!startTransition.IsPlaying && !RaceIsUnderway())
         {
             elapsedTime += Time.deltaTime;
         }
