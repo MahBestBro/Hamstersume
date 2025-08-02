@@ -13,6 +13,8 @@ public enum Facing
 
 public class Racecourse : MonoBehaviour
 {
+    public RacingHamster racingHamsterPrefab;
+
     [Range(0.0f, 50.0f)]
     public float minCurveRadius;
     [Range(0.0f, 50.0f)]
@@ -26,7 +28,6 @@ public class Racecourse : MonoBehaviour
     [Range(0.0f, 25.0f)]
     public float winCutsceneDurationSecs;
     
-    [HideInInspector]
     public RacingHamster[] hamsters;
     public RacingHamster Winner
     {
@@ -47,35 +48,81 @@ public class Racecourse : MonoBehaviour
     float raceElapsedTime = 0.0f;
     float winCutsceneElapsedTime = 0.0f;
 
+    private bool isInitialised = false;
+    public bool IsInitialised { get { return this.isInitialised; } }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public RacingHamster[] SpawnRacingHamsters(RacingEventData raceData)
+    {
+        RacingHamster[] spawnedHamsters = new RacingHamster[raceData.TotalParticipants];
+        int idx = 0;
+        foreach (HamsterProfile npcRacer in raceData.npcParticipants)
+        {
+            GameObject spawnedHam = Instantiate(racingHamsterPrefab.gameObject);
+            spawnedHamsters[idx] = spawnedHam.GetComponent<RacingHamster>();
+            spawnedHamsters[idx].hamsterProfile = npcRacer;
+            idx++;
+        }
+        foreach (HamsterProfile playerRacer in raceData.playerParticipants)
+        {
+            GameObject spawnedHam = Instantiate(racingHamsterPrefab.gameObject);
+            spawnedHamsters[idx] = spawnedHam.GetComponent<RacingHamster>();
+            spawnedHamsters[idx].hamsterProfile = playerRacer;
+            idx++;
+        }
+        return spawnedHamsters;
+    }
+
+    public RacingHamster[] GetDummyHamsters()
     {
         Transform hamsterParent = transform.Find("Hamsters");
-        hamsters = new RacingHamster[hamsterParent.childCount];
+        RacingHamster[] dummyHamsters = new RacingHamster[hamsterParent.childCount];
         for (int i = 0; i < hamsterParent.childCount; i++)
         {
             RacingHamster hamster = hamsterParent.GetChild(i).GetComponent<RacingHamster>();
-            hamsters[i] = hamster;
+            dummyHamsters[i] = hamster;
             hamster.laneNumber = i + 1;
             hamster.transform.position = StartingPosition(hamster.laneNumber);
+        }
+        return dummyHamsters;
+    }
+
+    public void InitialiseRacecourse(RacingEventData raceData)
+    {
+        this.hamsters = (raceData!=null) ? this.SpawnRacingHamsters(raceData) : this.GetDummyHamsters();
+        for (int i = 0; i < hamsters.Length; i++)
+        {
+            hamsters[i].InitialiseSelf(this);
+            hamsters[i].laneNumber = i + 1;
+            hamsters[i].transform.position = StartingPosition(hamsters[i].laneNumber);
         }
 
         Transform finishLineTransform = transform.Find("FinishLine");
         float finishLineCentreY = minCurveRadius + laneWidth * numLanes / 2.0f;
-        finishLineTransform.position = transform.position + finishLineCentreY * Vector3.down; 
+        finishLineTransform.position = transform.position + finishLineCentreY * Vector3.down;
         Vector3 newScale = finishLineTransform.localScale;
         newScale.y = laneWidth * numLanes;
         finishLineTransform.localScale = newScale;
 
         finishLineCollider = finishLineTransform.GetComponent<Collider2D>();
 
+        isInitialised = true;
+    }
+
+    public void StartRace()
+    {
+        if (!isInitialised)
+        {
+            Debug.LogWarning("Starting uninitialised Race!");
+        }
         startTransition.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isInitialised) return;
+
         bool racing = RaceIsUnderway();
         if (!startTransition.IsPlaying && !racing)
         {

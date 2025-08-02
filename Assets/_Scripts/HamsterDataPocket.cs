@@ -8,15 +8,9 @@ public class HamsterDataPocket : MonoBehaviour
     [SerializeField]
     public RacingCircuit raceCircuit;
     [SerializeField]
-    public TrainingTimer trainingTimer
-    {
-        get { return _trainingTimer; }
-        set {
-            this._trainingTimer = value;
-            this._trainingTimer.onTimerEnded.AddListener(OnTrainingPhaseEnded);
-        }
-    }
-    private TrainingTimer _trainingTimer;
+    public Racecourse raceCourse;
+    [SerializeField]
+    public TrainingTimer trainingTimer;
     [SerializeField]
 	public HamsterManager hamsterManager;
     [SerializeField]
@@ -26,14 +20,34 @@ public class HamsterDataPocket : MonoBehaviour
 	{
         if (instance)
         {
-            instance.trainingTimer = this.trainingTimer;
-            instance.hamsterManager = this.hamsterManager;
+            instance.EncounterSceneInstance(this);
             Destroy(this.gameObject);
             return;
         }
         instance = this;
         DontDestroyOnLoad(this.gameObject);
-	}
+        this.OnEnterNewScene();
+    }
+
+    void EncounterSceneInstance(HamsterDataPocket sceneInstance) {
+        this.trainingTimer = sceneInstance.trainingTimer;
+        this.hamsterManager = sceneInstance.hamsterManager;
+        this.raceCourse = sceneInstance.raceCourse;
+        this.OnEnterNewScene();
+    }
+
+    void OnEnterNewScene()
+    {
+        if (this.trainingTimer)
+        {
+            this.trainingTimer.onTimerEnded.AddListener(this.OnTrainingPhaseEnded);
+        }
+        if (this.raceCourse)
+        {
+            this.raceCourse.InitialiseRacecourse(this.raceCircuit?.CurrentRace);
+            this.raceCourse.StartRace();
+        }
+    }
 
     private void Start()
     {

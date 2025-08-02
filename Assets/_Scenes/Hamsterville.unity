@@ -2400,6 +2400,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raceCircuit: {fileID: 2028063382}
+  raceCourse: {fileID: 0}
+  trainingTimer: {fileID: 563652374}
   hamsterManager: {fileID: 98455650}
   hamsters: []
 --- !u!4 &2028063381
@@ -2467,6 +2469,7 @@ MonoBehaviour:
     playerParticipants: []
     numberPlayerParticipants: 1
     trackType: Standard
+  currentRaceIndex: 0
 --- !u!1 &2105118498
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,15 +33,16 @@ public class RaceCameraMovement : MonoBehaviour
 
     void Update()
     {
-        if (racecourse.Winner != null)
-        {
-            this.FocusOnWinner();
+        if (racecourse.IsInitialised){
+            if (racecourse.Winner != null)
+            {
+                this.FocusOnWinner();
+            }
+            else
+            {
+                this.FollowAllHamsters();
+            }
         }
-        else
-        {
-            this.FollowAllHamsters();
-        }
-        
     }
 
     void FollowAllHamsters()

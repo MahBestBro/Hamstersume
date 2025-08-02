@@ -10,6 +10,8 @@ public class RacingEventData
     public int numberPlayerParticipants = 1;
     public string trackType = "Standard";
 
+    public int TotalParticipants { get { return numberPlayerParticipants + npcParticipants.Count; } }
+
     public void GenerateRandomRace(int numOpponents, int numPlayerRacers = -1)
     {
         if (numPlayerRacers >= 0) this.numberPlayerParticipants = numPlayerRacers;

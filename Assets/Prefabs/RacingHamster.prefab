@@ -46,8 +46,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac27222a324da0458f2ed0683a86d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hamsterProfile:
+    hStats:
+      statSpeed: 0
+      statStamina: 0
+      statPower: 0
+      hEnergy:
+        energy: 0
+        maximumEnergy: 0
+        imgEnergyMeter: {fileID: 0}
+        imgSleepMeter: {fileID: 0}
+        imgEnergyIncreaseIndicator: {fileID: 0}
+    hVariant: {fileID: 11400000, guid: 6e3dbdf5aa623ca4d98843f386160556, type: 2}
   laneNumber: 0
   collider2D_: {fileID: 0}
+  racecourse: {fileID: 0}
+  spriteRenderer: {fileID: 2125604826380073360}
   _raceCompletion: 0
 --- !u!70 &2096459526452235037
 CapsuleCollider2D:

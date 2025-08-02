@@ -1157,6 +1157,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 434207436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1300880150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1300880152}
+  - component: {fileID: 1300880151}
+  m_Layer: 0
+  m_Name: HamsterDataPocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1300880151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300880150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7488548b0deb3445991b5a4cd53baa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raceCircuit: {fileID: 0}
+  raceCourse: {fileID: 1340364146}
+  trainingTimer: {fileID: 0}
+  hamsterManager: {fileID: 0}
+  hamsters:
+  - hStats:
+      statSpeed: 2
+      statStamina: 3
+      statPower: 4
+      hEnergy:
+        energy: 0
+        maximumEnergy: 0
+        imgEnergyMeter: {fileID: 0}
+        imgSleepMeter: {fileID: 0}
+        imgEnergyIncreaseIndicator: {fileID: 0}
+    hVariant: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
+--- !u!4 &1300880152
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300880150}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.59173, y: -1.60778, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1340364145
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,6 +1246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c720236e9d72b41a0bb5b032bf81a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  racingHamsterPrefab: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
   minCurveRadius: 2.2
   straightLength: 14
   laneWidth: 1.23
@@ -1327,6 +1388,10 @@ PrefabInstance:
       propertyPath: orderInRace
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: hamsterProfile.hVariant
+      value: 
+      objectReference: {fileID: 11400000, guid: 1070d5fdddf78ec4a916b9c6e77da61f, type: 2}
     - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_Name
       value: RacingHamster (1)
@@ -1388,6 +1453,10 @@ PrefabInstance:
       propertyPath: laneNumber
       value: 88
       objectReference: {fileID: 0}
+    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: hamsterProfile.hVariant
+      value: 
+      objectReference: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
     - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_Name
       value: RacingHamster
@@ -1441,6 +1510,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1300880152}
   - {fileID: 36222155}
   - {fileID: 1340364147}
   - {fileID: 434207436}
