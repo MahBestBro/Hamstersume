@@ -43,10 +43,12 @@ public class Microwave : MonoBehaviour
         electricity += electricityGain;  
     }
 
-    void CookFood(int electricityCost, GameObject foodPrefab)
+    void CookFood(GameObject foodPrefab)
     {
-        bool canPayForFood = electricity >= electricityCost;
-        electricity -= electricityCost * Convert.ToInt32(canPayForFood);
+        Food food = foodPrefab.GetComponent<Food>();
+
+        bool canPayForFood = electricity >= food.electricityCost;
+        electricity -= food.electricityCost * Convert.ToInt32(canPayForFood);
         
         if (canPayForFood)
         {
@@ -61,6 +63,7 @@ public class Microwave : MonoBehaviour
                 hamsterManager.hamsterWalkArea.center.y, 
                 hamsterManager.hamsterWalkArea.max.y
             );
+            
             GameObject foodObj = Instantiate(foodPrefab, Vector3.zero, Quaternion.identity);
             foodObj.GetComponent<Food>().DropAt(spawnX * Vector3.right + 5.0f * Vector3.up, null, floorHeight);
         }
@@ -69,16 +72,16 @@ public class Microwave : MonoBehaviour
 
     public void CookSunflowerSeed()
     {
-        CookFood(0, sunflowerSeedPrefab);
+        CookFood(sunflowerSeedPrefab);
     }
 
     public void CookCarrot()
     {
-        CookFood(10, carrotPrefab);
+        CookFood(carrotPrefab);
     }
 
     public void CookBrocolli()
     {
-        CookFood(15, brocolliPrefab);
+        CookFood(brocolliPrefab);
     }
 }

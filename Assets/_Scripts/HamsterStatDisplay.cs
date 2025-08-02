@@ -27,14 +27,6 @@ public class HamsterStatDisplay : MonoBehaviour
         staminaIconImage = transform.Find("StaminaMeter").Find("Icon").GetComponent<Image>();
         powerMeterImage = transform.Find("PowerMeter").Find("Meter").GetComponent<Image>();
         powerIconImage = transform.Find("PowerMeter").Find("Icon").GetComponent<Image>();
-
-        Debug.Log($"here? - { containerImage}");
-        Debug.Log($"here? - { speedMeterImage}");
-        Debug.Log($"here? - { speedIconImage}");
-        Debug.Log($"here? - { staminaMeterImage}");
-        Debug.Log($"here? - { staminaIconImage}");
-        Debug.Log($"here? - { powerMeterImage}");
-        Debug.Log($"here? - { powerIconImage}");
     }
 
 

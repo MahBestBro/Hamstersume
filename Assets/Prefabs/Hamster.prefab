@@ -71,9 +71,9 @@ MonoBehaviour:
     m_Extent: {x: 0, y: 0, z: 0}
   walkDestination: {x: 0, y: 0}
   hStats:
-    statSpeed: 22
-    statStamina: 48
-    statPower: 9
+    statSpeed: 1
+    statStamina: 1
+    statPower: 1
     hEnergy:
       energy: 0
       maximumEnergy: 100
@@ -353,7 +353,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895351015754718794}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

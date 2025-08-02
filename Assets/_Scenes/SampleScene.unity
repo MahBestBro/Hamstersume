@@ -1849,7 +1849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158bae41c52d8344ea1328d25c81e255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotspotOffset: {x: 0, y: 0}
+  hotspotOffset: {x: -21.9, y: 42.3}
   cursorTexture: {fileID: 5351613047467733308, guid: cdcea355503277347965b8947b46c183, type: 3}
   cursorLeftClickTexture: {fileID: 6960741055048397801, guid: 6bb68895de7344347bff34b2cdb77f3f, type: 3}
 --- !u!222 &1460543331

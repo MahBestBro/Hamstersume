@@ -20,6 +20,13 @@ public class BigCursor : MonoBehaviour
         Cursor.visible = false;
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position + (Vector3)hotspotOffset, 8.0f);
+    }
+
+
     public void Goto(Vector2 cursorPos)
     {
         if (this.CheckInScreen(cursorPos))
@@ -32,6 +39,7 @@ public class BigCursor : MonoBehaviour
         }
         
     }
+
 
     public void OnLeftClickDown()
     {

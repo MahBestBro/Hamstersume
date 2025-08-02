@@ -3,10 +3,22 @@ using UnityEngine;
 public class Food : Grabbable
 {
     [SerializeField]
-    protected float consumeDuration = 1.0F;
-    [SerializeField]
     protected float energyRestored = 10.0F;
+    [SerializeField]
+    protected float consumeDuration = 1.0F;
     
+    [SerializeField]
+    [Range(0, 100)]
+    protected int speedStatIncrease;
+    [SerializeField]
+    [Range(0, 100)]
+    protected int staminaStatIncrease;
+    [SerializeField]
+    [Range(0, 100)]
+    protected int powerStatIncrease;
+
+    [Range(0, 800)]
+    public int electricityCost;
 
     public float EnergyProvided
     {
@@ -35,6 +47,11 @@ public class Food : Grabbable
     protected bool OnConsumed(HamsterStats consumer)
     {
         consumer.hEnergy.RestoreFixedEnergy(this.energyRestored);
+
+        consumer.statSpeed += speedStatIncrease;
+        consumer.statStamina += staminaStatIncrease;
+        consumer.statPower += powerStatIncrease;
+
         Destroy(this.gameObject);
         return true;
     }

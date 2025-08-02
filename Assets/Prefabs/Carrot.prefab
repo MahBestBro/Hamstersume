@@ -137,7 +137,15 @@ MonoBehaviour:
   interactableLayermask:
     serializedVersion: 2
     m_Bits: 128
-  pickedUp: 0
+  isGrabbed: 0
+  isGrabbable: 1
+  isHovered: 0
+  energyRestored: 45
+  consumeDuration: 1
+  speedStatIncrease: 7
+  staminaStatIncrease: 1
+  powerStatIncrease: 3
+  electricityCost: 5
 --- !u!58 &4293394688970127827
 CircleCollider2D:
   m_ObjectHideFlags: 0
