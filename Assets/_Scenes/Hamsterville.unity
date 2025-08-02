@@ -727,6 +727,17 @@ MonoBehaviour:
   microwaveScreenWorldCentre: {x: 19.3, y: 0}
   wheelScreenWorldCentre: {x: 0, y: 0}
   transitionTimeSecs: 0.3
+--- !u!114 &527376817 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5265108915443531144, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
+  m_PrefabInstance: {fileID: 988270802515486326}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158bae41c52d8344ea1328d25c81e255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &527460405 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4942849695644595390, guid: 0737f953f384b83409c90012973a0e3d, type: 3}
@@ -1839,17 +1850,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3344033652531943310, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
   m_PrefabInstance: {fileID: 988270802515486326}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1460543330 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6543144429596009921, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
-  m_PrefabInstance: {fileID: 988270802515486326}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 158bae41c52d8344ea1328d25c81e255, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1662208552
 GameObject:
   m_ObjectHideFlags: 0
@@ -2310,7 +2310,7 @@ MonoBehaviour:
   hamsterTracker: {fileID: 629696906}
   hamsterManager: {fileID: 98455650}
   outlineMaterial: {fileID: 2100000, guid: 05ba4858ae260f746a172e9ac588aabe, type: 2}
-  specialCursor: {fileID: 1460543330}
+  specialCursor: {fileID: 527376817}
   hoverablesLayermask:
     serializedVersion: 2
     m_Bits: 128
@@ -2448,11 +2448,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3344033652531943310, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 327
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3344033652531943310, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 412
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344033652531943310, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344033652531943310, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3344033652531943310, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2484,11 +2492,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3344033652531943310, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 838.5
+      value: 797
       objectReference: {fileID: 0}
     - target: {fileID: 3344033652531943310, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -330
       objectReference: {fileID: 0}
     - target: {fileID: 3344033652531943310, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
