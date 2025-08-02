@@ -1,10 +1,15 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+    [SerializeField]
+    ScreenTransition mainMenuTransition;
+    
     CanvasGroup canvasGroup;
     InputAction pause;
 
@@ -40,5 +45,14 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Game quit.");
         Application.Quit();
+    }
+
+    public void GoToMainMenu()
+    {
+        TogglePause();
+
+        UnityEvent onTransitionEnd = new UnityEvent();
+        onTransitionEnd.AddListener(() => SceneManager.LoadScene("MainMenu"));
+        mainMenuTransition.Play(onTransitionEnd);
     }
 }

@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Racing.unity
     guid: 905822df2a7665346a2048f890acd04c
+  - enabled: 1
+    path: Assets/_Scenes/MainMenu.unity
+    guid: 5a5b87ff085d8e849901a365f600dea3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

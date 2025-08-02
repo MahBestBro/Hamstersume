@@ -30,7 +30,7 @@ public class ScreenTransition : MonoBehaviour
     UnityEvent _onTransitionEnd;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         startPosition = transform.position;    
     }
