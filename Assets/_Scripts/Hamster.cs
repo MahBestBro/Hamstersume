@@ -22,16 +22,12 @@ public class Hamster : Grabbable
     public Collider2D _collider2D;
     [HideInInspector]
     public HamsterWheel wheel;
-    [HideInInspector]
-    public float energyLossPerSec;
-    [HideInInspector]
-    public float minIdleTimeSecs;
-    [HideInInspector]
-    public float maxIdleTimeSecs;
-    [HideInInspector]
-    public float walkSpeed;
-    [HideInInspector]
-    public Bounds walkArea;
+    
+    float energyLossPerSec;
+    float minIdleTimeSecs;
+    float maxIdleTimeSecs;
+    float walkSpeed;
+    Bounds walkArea;
     //TODO: Walk min and max "radius"
 
     float idleElapsedTime = 0.0f;
@@ -48,11 +44,11 @@ public class Hamster : Grabbable
     [SerializeField]
     HamsterStats hStats;
     [SerializeField]
-    public HamsterEnergy hEnergy {
+    public HamsterEnergy hEnergy 
+    {
         get {  return this.hStats.hEnergy; }
     }
 
-    [SerializeField]
     HamsterStatDisplay statDisplay;
 
     [SerializeField]
@@ -66,8 +62,20 @@ public class Hamster : Grabbable
 
         hover = GetComponent<Hoverable>();
 
+        HamsterManager hamsterManager = transform.parent.GetComponent<HamsterManager>();
+
+        minIdleTimeSecs = hamsterManager.hamsterMinIdleTimeSecs;
+        maxIdleTimeSecs = hamsterManager.hamsterMaxIdleTimeSecs;
+        walkSpeed = hamsterManager.hamsterWalkSpeed;
+        walkArea = hamsterManager.hamsterWalkArea;
+        hEnergy.maximumEnergy = hamsterManager.maxHamsterEnergy;
+        energyLossPerSec = hamsterManager.hamsterEnergyLossPerSec;
+        hEnergy.SetFullSleepDuration(hamsterManager.hamsterTireDurationSecs);
+
         hEnergy.InitialiseEnergy();
         EnterState(HamsterState.Waiting);
+
+        statDisplay = transform.Find("StatDisplay").GetComponent<HamsterStatDisplay>();
         statDisplay.ToggleVisibility(hover.isHovered);
     }
 

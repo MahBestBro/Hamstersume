@@ -358,15 +358,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &263646270 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 4634177523606606120, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
-  m_PrefabInstance: {fileID: 1097125511417085552}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &309949295 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5155274801321314318, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
   m_PrefabInstance: {fileID: 538135391}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &311121731 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4070188944029160642, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+  m_PrefabInstance: {fileID: 1097125511417085552}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &394041039
 GameObject:
@@ -727,17 +727,6 @@ MonoBehaviour:
   microwaveScreenWorldCentre: {x: 19.3, y: 0}
   wheelScreenWorldCentre: {x: 0, y: 0}
   transitionTimeSecs: 0.3
---- !u!114 &527376817 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5265108915443531144, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
-  m_PrefabInstance: {fileID: 988270802515486326}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 158bae41c52d8344ea1328d25c81e255, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &527460405 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4942849695644595390, guid: 0737f953f384b83409c90012973a0e3d, type: 3}
@@ -947,6 +936,11 @@ MonoBehaviour:
   startTransition: {fileID: 527460406}
   endTransition: {fileID: 598323553}
   elapsedTimeSecs: 0
+--- !u!212 &590409700 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1090305677570209913, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+  m_PrefabInstance: {fileID: 1097125511417085552}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &598323552 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 456918906311553943, guid: 8507315598de21f4db0e2b575a3bf418, type: 3}
@@ -1203,16 +1197,6 @@ Transform:
   - {fileID: 1432256528}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &703507313 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 6765707275078555178, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
-  m_PrefabInstance: {fileID: 1097125511417085552}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &704268888 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 7690215843550476945, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
-  m_PrefabInstance: {fileID: 1097125511417085552}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &833887511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1850,6 +1834,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3344033652531943310, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
   m_PrefabInstance: {fileID: 988270802515486326}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &1484603109 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2726734186116944832, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+  m_PrefabInstance: {fileID: 1097125511417085552}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1662208552
 GameObject:
   m_ObjectHideFlags: 0
@@ -2205,6 +2194,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762683660}
   m_CullTransparentMesh: 1
+--- !u!114 &1879636312 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5265108915443531144, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
+  m_PrefabInstance: {fileID: 988270802515486326}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158bae41c52d8344ea1328d25c81e255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1912753485
 GameObject:
   m_ObjectHideFlags: 0
@@ -2310,10 +2310,10 @@ MonoBehaviour:
   hamsterTracker: {fileID: 629696906}
   hamsterManager: {fileID: 98455650}
   outlineMaterial: {fileID: 2100000, guid: 05ba4858ae260f746a172e9ac588aabe, type: 2}
-  specialCursor: {fileID: 527376817}
+  specialCursor: {fileID: 1879636312}
   hoverablesLayermask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1152
   grabbablesLayermask:
     serializedVersion: 2
     m_Bits: 640
@@ -2570,7 +2570,7 @@ PrefabInstance:
     - target: {fileID: 5575202065097039500, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: spriteRenderer
       value: 
-      objectReference: {fileID: 704268888}
+      objectReference: {fileID: 590409700}
     - target: {fileID: 5698367646621369004, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: m_Name
       value: Microwave
@@ -2590,11 +2590,11 @@ PrefabInstance:
     - target: {fileID: 7469745317720749365, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: spriteRenderer
       value: 
-      objectReference: {fileID: 263646270}
+      objectReference: {fileID: 1484603109}
     - target: {fileID: 8791770593975300663, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: spriteRenderer
       value: 
-      objectReference: {fileID: 703507313}
+      objectReference: {fileID: 311121731}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
