@@ -10,6 +10,14 @@ public class Microwave : MonoBehaviour
 
     Animator anim;
 
+    public Animator Anim 
+    {
+        get
+        {
+            return anim;
+        }
+    }
+
     [Range(0, 100)]
     public int electricity;
     [Range(0, 100)]
@@ -30,12 +38,9 @@ public class Microwave : MonoBehaviour
     [SerializeField]
     GameObject hamsterPrefab;
 
-    [SerializeField]
-    FoodStats sunflowerSeedStats;
-    [SerializeField]
-    FoodStats brocolliStats;
-    [SerializeField]
-    FoodStats carrotStats;
+    public FoodStats sunflowerSeedStats;
+    public FoodStats brocolliStats;
+    public FoodStats carrotStats;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

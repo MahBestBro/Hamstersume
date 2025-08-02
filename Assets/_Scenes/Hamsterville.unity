@@ -852,6 +852,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 519420031}
     - target: {fileID: 8533016572887107321, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+      propertyPath: details
+      value: 
+      objectReference: {fileID: 11400000, guid: 1070d5fdddf78ec4a916b9c6e77da61f, type: 2}
+    - target: {fileID: 8533016572887107321, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: hamsterSprites
       value: 
       objectReference: {fileID: 11400000, guid: 1070d5fdddf78ec4a916b9c6e77da61f, type: 2}
@@ -2527,6 +2531,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 629696907}
     m_Modifications:
+    - target: {fileID: 2400336509720318609, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: foodKind
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3541093749954489707, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.75
@@ -2567,6 +2575,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3761227893638079807, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5007449547194503775, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5575202065097039500, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: spriteRenderer
       value: 
@@ -2575,6 +2591,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Microwave
       objectReference: {fileID: 0}
+    - target: {fileID: 5765501790253049329, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: isHamsterButton
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5765501790253049329, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CookHamster
+      objectReference: {fileID: 0}
+    - target: {fileID: 6401147622782309725, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972481323877540612, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: hamsterPrefab
+      value: 
+      objectReference: {fileID: 177487292718794850, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
     - target: {fileID: 6972481323877540612, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: hamsterManager
       value: 
@@ -2591,10 +2623,26 @@ PrefabInstance:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 1484603109}
+    - target: {fileID: 7469745317720749365, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: onHoverEnter.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469745317720749365, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: onHoverEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CookHamster
+      objectReference: {fileID: 0}
+    - target: {fileID: 8036899631574809062, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 8791770593975300663, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 311121731}
+    - target: {fileID: 8860243082695315016, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: foodKind
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2772,7 +2820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408020340666610636, guid: 0737f953f384b83409c90012973a0e3d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4942849695644595390, guid: 0737f953f384b83409c90012973a0e3d, type: 3}
       propertyPath: m_Pivot.x

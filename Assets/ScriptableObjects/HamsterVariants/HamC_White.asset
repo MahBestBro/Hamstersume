@@ -18,3 +18,4 @@ MonoBehaviour:
   startingSpeedStatFrac: 0.6
   startingStaminaStatFrac: 0.2
   startingPowerStatFrac: 0.6
+  startingMaxEnergy: 80
