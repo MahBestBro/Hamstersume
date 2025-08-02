@@ -14,7 +14,9 @@ public class TrainingTimer : MonoBehaviour
     [SerializeField]
     float elapsedTimeSecs = 0.0f;
     float originalBarWidth;
+    bool timerStarted = false;
     bool timerFinished = false;
+    public bool isTimerStarted {  get { return timerStarted; } }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,7 +28,7 @@ public class TrainingTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!timerFinished)
+        if (timerStarted && !timerFinished)
         {
             float fracTimeRemaining = Mathf.Max(1.0f - elapsedTimeSecs / traningDurationSecs, 0.0f);
             timerMask.SetInsetAndSizeFromParentEdge(
@@ -43,6 +45,12 @@ public class TrainingTimer : MonoBehaviour
         }
     }
 
+    public bool StartTimer() // (called in HamsterTracker)
+    {
+        if (timerStarted) return false;
+        timerStarted = true;
+        return true;
+    }
 
     void OnTimerCompletion()
     {

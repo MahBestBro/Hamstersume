@@ -11,12 +11,12 @@ public class BigCursor : MonoBehaviour
     [SerializeField]
     Sprite cursorLeftClickTexture;
 
-    Image renderer;
+    Image imgRenderer;
     Vector2 screenBoundaryBuffer = Vector2.one * 100;
 
     private void Start()
     {
-        renderer = GetComponent<Image> ();
+        imgRenderer = GetComponent<Image> ();
         Cursor.visible = false;
     }
 
@@ -43,12 +43,12 @@ public class BigCursor : MonoBehaviour
 
     public void OnLeftClickDown()
     {
-        this.renderer.sprite = cursorLeftClickTexture;
+        this.imgRenderer.sprite = cursorLeftClickTexture;
     }
 
     public void OnLeftClickUp()
     {
-        this.renderer.sprite = cursorTexture;
+        this.imgRenderer.sprite = cursorTexture;
     }
 
     public bool CheckInScreen(Vector2 cursorPos)

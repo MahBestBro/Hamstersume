@@ -43,6 +43,7 @@ public class Hamster : Grabbable
 
     float wheelEletricityTriggerElapsedTime = 0.0f;
     float tireElapsedTime = 0.0f;
+    [SerializeField]
     HamsterState tiredAwakenState = HamsterState.Waiting;
 
     Food targetFood = null;
@@ -65,18 +66,25 @@ public class Hamster : Grabbable
 
         hEnergy.InitialiseEnergy();
         EnterState(HamsterState.Waiting);
+        statDisplay.ToggleVisibility(this.isHovered);
     }
 
     // Update is called once per frame
-    new protected void Update()
+    protected void Update()
     {
-        base.Update();
-
         this.ComputeSortOrderIndex();
         HandleCurrentState(state);
         this.hEnergy.UpdateEnergyDisplay(this.spriteRenderer.sortingOrder);
         this.statDisplay.UpdateStatDisplay(this.hStats, this.spriteRenderer.sortingOrder);
+    }
 
+    public override void OnHoverEnter() {
+        base.OnHoverEnter();
+        statDisplay.ToggleVisibility(this.isHovered);
+    }
+    public override void OnHoverExit()
+    {
+        base.OnHoverExit();
         statDisplay.ToggleVisibility(this.isHovered);
     }
 
@@ -168,7 +176,10 @@ public class Hamster : Grabbable
     {
         if (this.state == HamsterState.Tired)
         {
-            tiredAwakenState = newState;
+            if (newState != HamsterState.Eating)
+            {
+                tiredAwakenState = newState;
+            }
             return false;
         } 
         else

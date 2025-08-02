@@ -12,6 +12,10 @@ public class HamsterEnergy
 
     [SerializeField]
     public Image imgEnergyMeter;
+    [SerializeField]
+    public Image imgEnergyIncreaseIndicator;
+    private float energyIncrAmtBuffer;
+    private float energyIncrIndicatorBaseWidth = 2.43F;
 
 
     /// Check Energy
@@ -22,6 +26,10 @@ public class HamsterEnergy
     public float GetPercentEnergy()
     {
         return energy / maximumEnergy;
+    }
+    public float GetPercentOfMax(float energyAmt)
+    {
+        return energyAmt / maximumEnergy;
     }
     public float GetPercentEnergyDefecit()
     {
@@ -39,7 +47,29 @@ public class HamsterEnergy
         {
             imgEnergyMeter.fillAmount = this.GetPercentEnergy();
             imgEnergyMeter.canvas.sortingOrder = sortingIndex;
+
+            if (imgEnergyIncreaseIndicator.gameObject.activeSelf)
+            {
+                this.IndicateEnergyIncreaseUpdate();
+            }
         }
+    }
+    public void IndicateEnergyIncreaseStart(float energyIncrease)
+    {
+        imgEnergyIncreaseIndicator.gameObject.SetActive(true);
+        this.energyIncrAmtBuffer = energyIncrease;
+        this.IndicateEnergyIncreaseUpdate();
+    }
+    public void IndicateEnergyIncreaseStop()
+    {
+        imgEnergyIncreaseIndicator.gameObject.SetActive(false);
+    }
+    public void IndicateEnergyIncreaseUpdate()
+    {
+        float percentAfterIncrease = this.GetPercentOfMax(energy + this.energyIncrAmtBuffer);
+        Vector2 indicatorSize = imgEnergyIncreaseIndicator.rectTransform.sizeDelta;
+        indicatorSize.x = energyIncrIndicatorBaseWidth * percentAfterIncrease;
+        imgEnergyIncreaseIndicator.rectTransform.sizeDelta = indicatorSize;
     }
 
 

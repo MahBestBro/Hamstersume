@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     InputAction pickUp;
     InputAction mousePos;
 
+    Grabbable hoveredGrabbable = null;
     Grabbable heldGrabbable = null;
     Interactable hoveredInteractable = null;
 
@@ -48,8 +49,13 @@ public class Player : MonoBehaviour
 
     void CheckGrabbables(Vector2 mouseWorldPos)
     {
-        Grabbable hoveredGrabbable = GetHoveredGrabbable(mouseWorldPos);
-        hoveredGrabbable?.EnterHover();
+        Grabbable newHoveredGrabbable = GetHoveredGrabbable(mouseWorldPos);
+        if (newHoveredGrabbable != hoveredGrabbable)
+        {
+            hoveredGrabbable?.OnHoverExit();
+            hoveredGrabbable = newHoveredGrabbable;
+            hoveredGrabbable?.OnHoverEnter();
+        }
 
         if (pickUp.WasPressedThisFrame())
         {
@@ -67,7 +73,7 @@ public class Player : MonoBehaviour
         {
             heldGrabbable.DragTo(mouseWorldPos);
 
-            Interactable dropInteractable = heldGrabbable.HoverInteractable(mouseWorldPos);
+            Interactable dropInteractable = heldGrabbable.CheckHoverInteractable(mouseWorldPos);
 
             if (dropInteractable != null && hoveredInteractable == null)
             {
@@ -97,28 +103,27 @@ public class Player : MonoBehaviour
         Vector2 lineEnd = mouseWorldPos + MOUSE_CLICK_RAYCAST_DELTA * Vector2.right;
         RaycastHit2D[] hits = Physics2D.LinecastAll(mouseWorldPos, lineEnd, grabbablesLayermask);
 
-        if (hits.Length <= 0)
+        if (hits.Length > 0)
         {
-            return null;
-        }
-
-        // Get most forward Grabbable
-        Grabbable hoveredGrabbable = null;
-        foreach (RaycastHit2D hit in hits)
-        {
-            Grabbable currentGrabbable = hit.transform.GetComponent<Grabbable>();
-            if (currentGrabbable && currentGrabbable.isGrabbable && (hoveredGrabbable==null || (currentGrabbable.SortingPriority < hoveredGrabbable.SortingPriority)))
+            // Get most forward Grabbable
+            Grabbable hoveredGrabbable = null;
+            foreach (RaycastHit2D hit in hits)
             {
-                hoveredGrabbable = currentGrabbable;
+                Grabbable currentGrabbable = hit.transform.GetComponent<Grabbable>();
+                if (currentGrabbable && currentGrabbable.isGrabbable && (hoveredGrabbable == null || (currentGrabbable.SortingPriority < hoveredGrabbable.SortingPriority)))
+                {
+                    hoveredGrabbable = currentGrabbable;
+                }
             }
-        }
 
-        if (hoveredGrabbable == null)
-        {
-            Debug.LogWarning("No Grabbables Found amongst detected objects");
-        }
+            if (hoveredGrabbable == null)
+            {
+                Debug.LogWarning("No Grabbables Found amongst detected objects");
+            }
 
-        return hoveredGrabbable;
+            return hoveredGrabbable; 
+        }
+        return null;
     }
 
     void Grab(Grabbable grabbable, Vector2 mouseWorldPos)

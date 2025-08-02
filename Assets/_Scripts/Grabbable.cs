@@ -20,6 +20,7 @@ public class Grabbable : MonoBehaviour
     public bool isGrabbed = false;
     public bool isGrabbable = true;
     public bool isHovered = false;
+    Interactable hoveredInteractable;
     protected Transform sortingAnchor;
     public float SortingPriority { 
         get
@@ -37,14 +38,6 @@ public class Grabbable : MonoBehaviour
         this.AnchorSortingToSprite();
 
         this.mousePos = InputSystem.actions.FindAction("Mouse Pos");
-    }
-
-    protected void Update()
-    {
-        if (this.isHovered)
-        {
-            HandleHover();
-        }
     }
 
     protected void FixedUpdate()
@@ -86,23 +79,13 @@ public class Grabbable : MonoBehaviour
         }
     }
 
-    private void HandleHover()
-    {
-        Vector2 mousePosition = this.mousePos.ReadValue<Vector2>();
-        Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(mousePosition);
-        if (this.isHovered && !_collider.OverlapPoint(mouseWorldPos))
-        {
-            this.isHovered = false;
-        }
-        else 
-        {
-            this.OnHover();
-        }
-    }
-
-    public void EnterHover()
+    public virtual void OnHoverEnter()
     {
         this.isHovered = true;
+    }
+    public virtual void OnHoverExit()
+    {
+        this.isHovered = false;
     }
 
     public bool AnchorSortingToSprite()
@@ -147,7 +130,7 @@ public class Grabbable : MonoBehaviour
         this._prevPos = this.transform.position;
     }
 
-    public Interactable HoverInteractable(Vector2 hoverPos)
+    public Interactable CheckHoverInteractable(Vector2 hoverPos)
     {
         ContactFilter2D interactableFilter = new ContactFilter2D();
         interactableFilter.SetLayerMask(interactableLayermask);
@@ -155,30 +138,39 @@ public class Grabbable : MonoBehaviour
         int numInteractables = this._collider.Overlap(interactableFilter, touchingInteractables);
         Transform targetInteractableTransform = null;
         //TODO: Handle overlapping case (e.g., food drop over two hamsters)
+        Interactable newHoveredInteractable;
         if (numInteractables > 0)
         {
             targetInteractableTransform = touchingInteractables[0].transform;
-            return targetInteractableTransform.GetComponent<Interactable>();
+            newHoveredInteractable = targetInteractableTransform.GetComponent<Interactable>();
+        }else
+        {
+            newHoveredInteractable = null;
         }
-
-        //Vector2 lineEnd = hoverPos + MOUSE_CLICK_RAYCAST_DELTA * Vector2.right;
-        //RaycastHit2D wheelHit = Physics2D.Linecast(hoverPos, lineEnd, mask);
-        //if (targetWheel is Transform wheel) 
-        //{
-        //TODO: Hover animation/effect    
-        //}
-        return null;
+        if (newHoveredInteractable == null || newHoveredInteractable != hoveredInteractable)
+        {
+            if (this.hoveredInteractable != null) this.OnHoverInteractableExit(hoveredInteractable);
+            this.hoveredInteractable = newHoveredInteractable;
+            if (hoveredInteractable != null) this.OnHoverInteractableEnter(hoveredInteractable);
+        }
+        return hoveredInteractable;
     }
+
+    public virtual void OnHoverInteractableEnter(Interactable hoverInteractable) { }
+    public virtual void OnHoverInteractableExit(Interactable hoverInteractable) { }
 
     public void DropAt(Vector2 dropPos, Transform interactable, float floorHeight)
     {
         this.isGrabbed = false;
         this.floorHeight = floorHeight;
         this._prevPos = this.transform.position;
+        if (this.hoveredInteractable)
+        {
+            this.OnHoverInteractableExit(this.hoveredInteractable);
+            this.hoveredInteractable = null;
+        }
         this.OnDrop(interactable);
     }
-
-    virtual protected void OnHover() { }
 
     virtual protected void OnDrop(Transform interactable) { }
 

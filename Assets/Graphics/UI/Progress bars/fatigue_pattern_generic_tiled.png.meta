@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 90184b7d28c8cf3438322548900d3cca
+guid: 5aa0adb35b362db4599a414668ae6e85
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5557386343496892608
-    second: fatigue_empty_f_0
+      213: -5274705471650374246
+    second: fatigue_pattern_generic_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fatigue_empty_f_0
+      name: fatigue_pattern_generic_tiled
       rect:
         serializedVersion: 2
-        x: 16
+        x: 258
         y: 16
-        width: 485
+        width: 156
         height: 41
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 30, y: 1, z: 30, w: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0c04db36f6dcf1d40800000000000000
-      internalID: 5557386343496892608
+      spriteID: a9d5873f15b7cc6b0800000000000000
+      internalID: -5274705471650374246
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e770b6e6b5a1aa149b569841fa3c6d37
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      fatigue_empty_f_0: 5557386343496892608
+      fatigue_pattern_generic_tiled: -5274705471650374246
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
