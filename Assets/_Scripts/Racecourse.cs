@@ -121,7 +121,7 @@ public class Racecourse : MonoBehaviour
         Gizmos.color = Color.red;
         Vector2 centre = (Vector2)transform.position;
 
-        for (int laneNumber = 0; laneNumber <= numLanes; laneNumber++)
+        for (int laneNumber = 0; laneNumber < numLanes; laneNumber++)
         {
             float curveRadius = minCurveRadius + (float)laneNumber * laneWidth;
 
