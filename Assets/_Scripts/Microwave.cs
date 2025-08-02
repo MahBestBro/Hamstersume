@@ -10,6 +10,8 @@ public class Microwave : MonoBehaviour
 
     [Range(0, 100)]
     public int electricity;
+    [Range(0, 100)]
+    public int hamsterCost;
 
     public HamsterTracker hamsterTracker;
     public HamsterManager hamsterManager;
@@ -23,6 +25,8 @@ public class Microwave : MonoBehaviour
     GameObject brocolliPrefab;
     [SerializeField]
     GameObject carrotPrefab;
+    [SerializeField]
+    GameObject hamsterPrefab;
 
     [SerializeField]
     FoodStats sunflowerSeedStats;
@@ -50,15 +54,14 @@ public class Microwave : MonoBehaviour
         electricity += electricityGain;  
     }
 
-    void CookFood(GameObject foodPrefab)
+    void Cook(GameObject prefab, bool isFood = true)
     {
-        Food food = foodPrefab.GetComponent<Food>();
-
-        bool canPayForFood = electricity >= food.Stats.electricityCost;
-        electricity -= food.Stats.electricityCost * Convert.ToInt32(canPayForFood);
+        int cost = isFood ? prefab.GetComponent<Food>().Stats.electricityCost : hamsterCost;
+        bool canPay = electricity >= cost;
         
-        if (canPayForFood)
+        if (canPay)
         {
+            electricity -= cost;
             anim.SetTrigger("Trigger");
 
             float spawnX = UnityEngine.Random.Range(
@@ -71,35 +74,53 @@ public class Microwave : MonoBehaviour
                 hamsterManager.hamsterWalkArea.max.y
             );
             
-            GameObject foodObj = Instantiate(foodPrefab, Vector3.zero, Quaternion.identity);
-            foodObj.GetComponent<Food>().DropAt(spawnX * Vector3.right + 5.0f * Vector3.up, null, floorHeight);
+            GameObject obj;
+            if (!isFood)
+            {
+                obj = Instantiate(prefab, Vector3.zero, Quaternion.identity, hamsterManager.transform);
+            }
+            else
+            {
+                obj = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            }
+            obj.GetComponent<Grabbable>().DropAt(spawnX * Vector3.right + 5.0f * Vector3.up, null, floorHeight);
         }
+    }
+
+    void CookFood(GameObject foodPrefab)
+    {
+        
     }
 
     //TODO: Figure out position and shid
     void ShowFoodStats(FoodStats foodStats)
     {
-        Debug.Log($"Speed: +{foodStats.speedStatIncrease}");
-        Debug.Log($"Speed: +{foodStats.staminaStatIncrease}");
-        Debug.Log($"Speed: +{foodStats.powerStatIncrease}");
-
-        Debug.Log($"Energy: +{foodStats.energyRestored}");
+        //Debug.Log($"Speed: +{foodStats.speedStatIncrease}");
+        //Debug.Log($"Speed: +{foodStats.staminaStatIncrease}");
+        //Debug.Log($"Speed: +{foodStats.powerStatIncrease}");
+//
+        //Debug.Log($"Energy: +{foodStats.energyRestored}");
     }
 
 
     public void CookSunflowerSeed()
     {
-        CookFood(sunflowerSeedPrefab);
+        Cook(sunflowerSeedPrefab);
     }
 
     public void CookCarrot()
     {
-        CookFood(carrotPrefab);
+        Cook(carrotPrefab);
     }
 
     public void CookBrocolli()
     {
-        CookFood(brocolliPrefab);
+        Cook(brocolliPrefab);
+    }
+
+    public void CookHamster()
+    {
+        Cook(hamsterPrefab, false);
     }
 
     public void ShowSunflowerSeedStats()
