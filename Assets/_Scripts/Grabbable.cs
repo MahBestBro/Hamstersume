@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using NUnit.Framework;
+using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ public class Grabbable : MonoBehaviour
     protected LayerMask interactableLayermask;
     public bool isGrabbed = false;
     public bool isGrabbable = true;
+    public bool isHovered = false;
     protected Transform sortingAnchor;
     public float SortingPriority { 
         get
@@ -27,10 +29,22 @@ public class Grabbable : MonoBehaviour
     }
     float floorHeight = 1000F;
 
+    InputAction mousePos;
+
     protected void Start()
     {
         this._collider = GetComponent<Collider2D>();
         this.AnchorSortingToSprite();
+
+        this.mousePos = InputSystem.actions.FindAction("Mouse Pos");
+    }
+
+    protected void Update()
+    {
+        if (this.isHovered)
+        {
+            HandleHover();
+        }
     }
 
     protected void FixedUpdate()
@@ -70,6 +84,26 @@ public class Grabbable : MonoBehaviour
             this._velocity = (Vector2)newPos - this._prevPos;
             this._prevPos = newPos;
         }
+    }
+
+    private void HandleHover()
+    {
+        Vector2 mousePosition = this.mousePos.ReadValue<Vector2>();
+        Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(mousePosition);
+        Debug.Log(_collider.OverlapPoint(mouseWorldPos));
+        if (this.isHovered && !_collider.OverlapPoint(mouseWorldPos))
+        {
+            this.isHovered = false;
+        }
+        else 
+        {
+            this.OnHover();
+        }
+    }
+
+    public void EnterHover()
+    {
+        this.isHovered = true;
     }
 
     public bool AnchorSortingToSprite()
@@ -144,6 +178,8 @@ public class Grabbable : MonoBehaviour
         this._prevPos = this.transform.position;
         this.OnDrop(interactable);
     }
+
+    virtual protected void OnHover() { }
 
     virtual protected void OnDrop(Transform interactable) { }
 

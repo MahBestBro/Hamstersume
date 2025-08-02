@@ -54,6 +54,9 @@ public class Hamster : Grabbable
         get {  return this.hStats.hEnergy; }
     }
 
+    [SerializeField]
+    HamsterStatDisplay statsDisplay;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     new protected void Start()
     {
@@ -65,11 +68,15 @@ public class Hamster : Grabbable
     }
 
     // Update is called once per frame
-    protected void Update()
+    new protected void Update()
     {
+        base.Update();
+
         this.ComputeSortOrderIndex();
         HandleCurrentState(state);
         this.hEnergy.UpdateEnergyDisplay(this.spriteRenderer.sortingOrder);
+
+        statsDisplay.gameObject.SetActive(this.isHovered);
     }
 
     void OnDrawGizmos()
@@ -77,6 +84,7 @@ public class Hamster : Grabbable
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere((Vector3)walkDestination, 0.25f);
     }
+
 
 
     void HandleCurrentState(HamsterState state)
