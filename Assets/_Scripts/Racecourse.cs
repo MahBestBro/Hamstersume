@@ -90,7 +90,7 @@ public class Racecourse : MonoBehaviour
         if (winCutsceneElapsedTime >= winCutsceneDurationSecs && !endTransition.IsPlaying)
         {
             UnityEvent onTransitionEnd = new UnityEvent();
-            onTransitionEnd.AddListener(() => SceneManager.LoadScene("SampleScene"));
+            onTransitionEnd.AddListener(() => SceneManager.LoadScene("Hamsterville"));
             endTransition.Play(onTransitionEnd);
         }
 
