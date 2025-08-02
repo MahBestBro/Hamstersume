@@ -55,7 +55,7 @@ public class Hamster : Grabbable
     }
 
     [SerializeField]
-    HamsterStatDisplay statsDisplay;
+    HamsterStatDisplay statDisplay;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     new protected void Start()
@@ -75,8 +75,9 @@ public class Hamster : Grabbable
         this.ComputeSortOrderIndex();
         HandleCurrentState(state);
         this.hEnergy.UpdateEnergyDisplay(this.spriteRenderer.sortingOrder);
+        this.statDisplay.UpdateStatDisplay(this.hStats, this.spriteRenderer.sortingOrder);
 
-        statsDisplay.gameObject.SetActive(this.isHovered);
+        statDisplay.ToggleVisibility(this.isHovered);
     }
 
     void OnDrawGizmos()

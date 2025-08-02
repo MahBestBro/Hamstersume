@@ -90,7 +90,6 @@ public class Grabbable : MonoBehaviour
     {
         Vector2 mousePosition = this.mousePos.ReadValue<Vector2>();
         Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(mousePosition);
-        Debug.Log(_collider.OverlapPoint(mouseWorldPos));
         if (this.isHovered && !_collider.OverlapPoint(mouseWorldPos))
         {
             this.isHovered = false;

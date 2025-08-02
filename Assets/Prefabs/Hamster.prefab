@@ -71,11 +71,14 @@ MonoBehaviour:
     m_Extent: {x: 0, y: 0, z: 0}
   walkDestination: {x: 0, y: 0}
   hStats:
+    statSpeed: 22
+    statStamina: 48
+    statPower: 9
     hEnergy:
       energy: 0
-      maximumEnergy: 0
+      maximumEnergy: 100
       imgEnergyMeter: {fileID: 2537602075897787495}
-  statsDisplay: {fileID: 711297645348350451}
+  statDisplay: {fileID: 711297645348350451}
 --- !u!70 &7897799143741374875
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -236,13 +239,14 @@ GameObject:
   - component: {fileID: 3702618589132032822}
   - component: {fileID: 2860298302692304538}
   - component: {fileID: 711297645348350451}
+  - component: {fileID: 6175356176221684003}
   m_Layer: 7
   m_Name: StatDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2403480997485837706
 RectTransform:
   m_ObjectHideFlags: 0
@@ -341,6 +345,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a1d14c70b869f47bc8bf08b2f5e9e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &6175356176221684003
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895351015754718794}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1002460478829101489
 GameObject:
   m_ObjectHideFlags: 0
