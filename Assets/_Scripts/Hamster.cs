@@ -25,8 +25,6 @@ public class Hamster : Grabbable
     [HideInInspector]
     public float energyLossPerSec;
     [HideInInspector]
-    public float tireDurationSecs;
-    [HideInInspector]
     public float minIdleTimeSecs;
     [HideInInspector]
     public float maxIdleTimeSecs;
@@ -42,7 +40,6 @@ public class Hamster : Grabbable
     Vector2 walkDestination = Vector2.zero;
 
     float wheelEletricityTriggerElapsedTime = 0.0f;
-    float tireElapsedTime = 0.0f;
     [SerializeField]
     HamsterState tiredAwakenState = HamsterState.Waiting;
 
@@ -153,7 +150,8 @@ public class Hamster : Grabbable
                         float energyExcess = this.hEnergy.GetEnergyExcess();
                         if (energyExcess > 0)
                         {
-                            this.tireDurationSecs = energyExcess;
+                            EnterState(HamsterState.Tired);
+                            this.hEnergy.OvereatNap();
                         }
                     }
                 } else
@@ -163,8 +161,7 @@ public class Hamster : Grabbable
                 break;
 
             case HamsterState.Tired: 
-                tireElapsedTime += Time.deltaTime;
-                if (tireElapsedTime >= tireDurationSecs)
+                if (!this.hEnergy.TickSleep(Time.deltaTime))
                 {
                     EnterState(this.tiredAwakenState);
                 }
@@ -221,7 +218,7 @@ public class Hamster : Grabbable
             case HamsterState.Tired:
                 newSprite = hamsterSprites.hamsterSleeping;
                 this.isGrabbable = true;
-                tireElapsedTime = 0.0f;
+                this.hEnergy.SleepFull();
                 break;
 
             case HamsterState.Eating:

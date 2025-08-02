@@ -13,9 +13,16 @@ public class HamsterEnergy
     [SerializeField]
     public Image imgEnergyMeter;
     [SerializeField]
-    public Image imgEnergyIncreaseIndicator;
+    Image imgSleepMeter;
+    [SerializeField]
+    Image imgEnergyIncreaseIndicator;
+
     private float energyIncrAmtBuffer;
     private float energyIncrIndicatorBaseWidth = 2.43F;
+
+    private float sleepDrainRate = 0.1F;
+    private float sleepFullDurationSecs = 10.0F;
+    private float sleepDurationRemaining = 0F;
 
 
     /// Check Energy
@@ -47,11 +54,20 @@ public class HamsterEnergy
         {
             imgEnergyMeter.fillAmount = this.GetPercentEnergy();
             imgEnergyMeter.canvas.sortingOrder = sortingIndex;
+            
+            this.UpdateSleepDisplay();
 
             if (imgEnergyIncreaseIndicator.gameObject.activeSelf)
             {
                 this.IndicateEnergyIncreaseUpdate();
             }
+        }
+    }
+    public void UpdateSleepDisplay()
+    {
+        if (imgSleepMeter)
+        {
+            imgSleepMeter.fillAmount = (sleepDurationRemaining > 0F) ? (sleepDurationRemaining / sleepFullDurationSecs) : 0F;
         }
     }
     public void IndicateEnergyIncreaseStart(float energyIncrease)
@@ -72,6 +88,36 @@ public class HamsterEnergy
         imgEnergyIncreaseIndicator.rectTransform.sizeDelta = indicatorSize;
     }
 
+    /// Config Sleep
+    
+    public void SetFullSleepDuration(float seconds)
+    {
+        this.sleepFullDurationSecs = seconds;
+    }
+
+    /// Update Sleep
+
+    public void SleepFull()
+    {
+        this.sleepDurationRemaining = this.sleepFullDurationSecs;
+    }
+    public void OvereatNap()
+    {
+        float overeatAmtPercent = this.GetPercentEnergy() - 1F;
+        if (overeatAmtPercent > 0F)
+        {
+            this.sleepDurationRemaining = this.sleepFullDurationSecs * overeatAmtPercent;
+        }
+    }
+    public bool TickSleep(float deltaTime)
+    {
+        if (this.sleepDurationRemaining > 0F)
+        {
+            this.sleepDurationRemaining -= deltaTime;
+            return true;
+        }
+        return false;
+    }
 
     /// Use Energy
     public bool ExhaustEnergy(float energySpent)

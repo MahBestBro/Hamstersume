@@ -28,7 +28,7 @@ public class HamsterManager : MonoBehaviour
             hamster.walkArea = hamsterWalkArea;
             hamster.hEnergy.maximumEnergy = maxHamsterEnergy;
             hamster.energyLossPerSec = hamsterEnergyLossPerSec;
-            hamster.tireDurationSecs = hamsterTireDurationSecs;
+            hamster.hEnergy.SetFullSleepDuration(hamsterTireDurationSecs);
         }
     }
 
