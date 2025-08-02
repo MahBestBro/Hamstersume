@@ -66,18 +66,16 @@ public class ScreenTransition : MonoBehaviour
 
     float Ease(float x, Easing easing)
     {
-        float unclamped = 0.0f;
         switch (easing)
         {
             case Easing.ExponetialIn:
-                unclamped = Mathf.Pow(2.0f, 10.0f * (x - 1.0f));
-                break;
+                return MathHelpers.ExponentialEaseIn(x);
 
             case Easing.ExponetialOut:
-                unclamped = 1.0f - Mathf.Pow(2.0f, -10.0f * x);
-                break;
+                return MathHelpers.ExponentialEaseOut(x);
+
+            default:
+                return x;
         }
-        
-        return Mathf.Clamp(unclamped, 0.0f, 1.0f);
     }
 }

@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 7886425773649617095}
   - component: {fileID: 2374880184411040030}
   m_Layer: 5
-  m_Name: RaceTransitionPanel
+  m_Name: TransitionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
