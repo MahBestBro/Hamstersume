@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using System.Reflection;
-using NUnit.Framework;
 using UnityEngine.InputSystem;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Grabbable : MonoBehaviour
@@ -135,6 +132,7 @@ public class Grabbable : MonoBehaviour
         ContactFilter2D interactableFilter = new ContactFilter2D();
         interactableFilter.SetLayerMask(interactableLayermask);
         List<Collider2D> touchingInteractables = new List<Collider2D>();
+        // idk if it's unintuitive to use the collider of the grabbable instead of just the hoverPos (cursor)
         int numInteractables = this._collider.Overlap(interactableFilter, touchingInteractables);
         Transform targetInteractableTransform = null;
         //TODO: Handle overlapping case (e.g., food drop over two hamsters)
@@ -142,11 +140,23 @@ public class Grabbable : MonoBehaviour
         if (numInteractables > 0)
         {
             targetInteractableTransform = touchingInteractables[0].transform;
+            foreach (Collider2D overlappedCol in touchingInteractables)
+            {
+                //if (collided.gameObject == this.hoveredInteractable?.gameObject)
+                //{
+                //    return this.hoveredInteractable;
+                //}
+                if (overlappedCol.transform.position.y < targetInteractableTransform.position.y)
+                {
+                    targetInteractableTransform = overlappedCol.transform;
+                }
+            }
             newHoveredInteractable = targetInteractableTransform.GetComponent<Interactable>();
         }else
         {
             newHoveredInteractable = null;
         }
+
         if (newHoveredInteractable == null || newHoveredInteractable != hoveredInteractable)
         {
             if (this.hoveredInteractable != null) this.OnHoverInteractableExit(hoveredInteractable);

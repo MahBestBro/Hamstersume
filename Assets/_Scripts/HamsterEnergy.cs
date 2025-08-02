@@ -108,6 +108,7 @@ public class HamsterEnergy
         {
             this.sleepDurationRemaining = this.sleepFullDurationSecs * overeatAmtPercent;
         }
+        this.ResetToMax();
     }
     public bool TickSleep(float deltaTime)
     {
@@ -136,10 +137,10 @@ public class HamsterEnergy
 
     public void InitialiseEnergy()
     {
-        this.RefillMax();
+        this.ResetToMax();
     }
 
-    public void RefillMax()
+    public void ResetToMax()
     {
         this.energy = this.maximumEnergy;
     }
