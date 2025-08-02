@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -19,6 +20,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     Transform guidePage;
     [SerializeField]
+    Transform settingsPage;
+    [SerializeField]
     Transform creditsPage;
 
     [SerializeField]
@@ -32,11 +35,14 @@ public class MainMenu : MonoBehaviour
     InputAction pickUp;
     Transform previousPage;
     Transform currentPage;
+
+    CanvasGroup guideCanvasGroup;
     
     Vector2 currentPageOffscreenPos;
     Vector2 prevPageOffscreenPos;
 
     bool switchingPage = false; 
+    bool guideOpen = false;
     float pageSwitchElapsedTime = 0.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,10 +52,12 @@ public class MainMenu : MonoBehaviour
         pickUp = InputSystem.actions.FindAction("Pick Up");
 
         mainPage = transform.Find("MainPage");
-        guidePage = transform.Find("GuidePage");
+        guidePage = transform.Find("Guide");
         creditsPage = transform.Find("CreditsPage");
 
-        guidePage.position = nonMainPageOffscreenCentre;
+        guideCanvasGroup = guidePage.GetComponent<CanvasGroup>();
+
+        settingsPage.position = nonMainPageOffscreenCentre;
         creditsPage.position = nonMainPageOffscreenCentre;
 
         currentPage = mainPage;
@@ -100,6 +108,9 @@ public class MainMenu : MonoBehaviour
             switchingPage = false;
             pageSwitchElapsedTime = 0.0f;
         }
+
+        guideCanvasGroup.alpha = Convert.ToSingle(guideOpen);
+        guideCanvasGroup.blocksRaycasts = guideOpen;
     }
 
     void OnDrawGizmosSelected()
@@ -113,7 +124,7 @@ public class MainMenu : MonoBehaviour
     }
 
 
-    public void SwitchToPage(Transform page, Vector2 offscreenPos)
+    void SwitchToPage(Transform page, Vector2 offscreenPos)
     {
         previousPage = currentPage;
         prevPageOffscreenPos = offscreenPos;
@@ -131,14 +142,24 @@ public class MainMenu : MonoBehaviour
         SwitchToPage(mainPage, nonMainPageOffscreenCentre);
     }
 
-    public void SwitchToGuidePage()
+    public void SwitchToSettingsPage()
     {
-        SwitchToPage(guidePage, mainPageOffscreenCentre);
+        SwitchToPage(settingsPage, mainPageOffscreenCentre);
     }
 
     public void SwitchToCreditsPage()
     {
         SwitchToPage(creditsPage, mainPageOffscreenCentre);
+    }
+
+    public void OpenGuide()
+    {
+        guideOpen = true;
+    }
+
+    public void CloseGuide()
+    {
+        guideOpen = false;
     }
 
     public void PlayGame()
