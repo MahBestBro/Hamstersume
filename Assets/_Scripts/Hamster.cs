@@ -16,7 +16,7 @@ public enum HamsterState
 public class Hamster : Grabbable
 {
     public HamsterState state;
-    public HamsterSkinset hamsterSprites;
+    public HamsterVariant details;
     
     [HideInInspector]
     public Collider2D _collider2D;
@@ -72,6 +72,11 @@ public class Hamster : Grabbable
         energyLossPerSec = hamsterManager.hamsterEnergyLossPerSec;
         hEnergy.SetFullSleepDuration(hamsterManager.hamsterTireDurationSecs);
 
+        hStats.statSpeed = (int)(details.startingSpeedStatFrac * 10.0f);
+        hStats.statStamina = (int)(details.startingStaminaStatFrac * 10.0f);
+        hStats.statPower = (int)(details.startingPowerStatFrac * 10.0f);
+
+        hEnergy.maximumEnergy = details.startingMaxEnergy;
         hEnergy.InitialiseEnergy();
         EnterState(HamsterState.Waiting);
 
@@ -201,7 +206,7 @@ public class Hamster : Grabbable
 
     public void EnterState(HamsterState newState) 
     {
-        Sprite newSprite = hamsterSprites.hamsterIdle;
+        Sprite newSprite = details.hamsterIdle;
         switch (newState)
         {
             case HamsterState.Waiting:
@@ -220,7 +225,7 @@ public class Hamster : Grabbable
                 break;
 
             case HamsterState.Exercising:
-                newSprite = hamsterSprites.hamsterRunning;
+                newSprite = details.hamsterRunning;
                 this.isGrabbable = true;
                 transform.position = wheel.transform.position;
                 wheelEletricityTriggerElapsedTime = 0.0f;
@@ -229,7 +234,7 @@ public class Hamster : Grabbable
                 break;
 
             case HamsterState.Tired:
-                newSprite = hamsterSprites.hamsterSleeping;
+                newSprite = details.hamsterSleeping;
                 this.isGrabbable = true;
                 this.hEnergy.SleepFull();
                 break;
@@ -240,7 +245,7 @@ public class Hamster : Grabbable
         }
 
         state = newState;
-        newSprite ??= hamsterSprites.hamsterIdle;
+        newSprite ??= details.hamsterIdle;
         if (newSprite) this.spriteRenderer.sprite = newSprite;
     }
 

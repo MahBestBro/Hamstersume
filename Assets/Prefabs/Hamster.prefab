@@ -59,16 +59,9 @@ MonoBehaviour:
   isGrabbable: 1
   isHovered: 0
   state: 0
-  hamsterSprites: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
+  details: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
   _collider2D: {fileID: 0}
   wheel: {fileID: 0}
-  energyLossPerSec: 0
-  minIdleTimeSecs: 1
-  maxIdleTimeSecs: 3
-  walkSpeed: 5
-  walkArea:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
   walkDestination: {x: 0, y: 0}
   tiredAwakenState: 0
   hStats:
@@ -81,8 +74,7 @@ MonoBehaviour:
       imgEnergyMeter: {fileID: 2537602075897787495}
       imgSleepMeter: {fileID: 1611170909101019079}
       imgEnergyIncreaseIndicator: {fileID: 883384013386927753}
-  statDisplay: {fileID: 711297645348350451}
-  hover: {fileID: 0}
+  hover: {fileID: 6111777856556196356}
 --- !u!70 &7897799143741374875
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -394,6 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a1d14c70b869f47bc8bf08b2f5e9e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 0}
 --- !u!225 &6175356176221684003
 CanvasGroup:
   m_ObjectHideFlags: 0

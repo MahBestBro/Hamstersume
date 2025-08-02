@@ -6,6 +6,8 @@ public class Microwave : MonoBehaviour
 {
     public static Action<int> increaseElectricity;
 
+    public HamsterVariant[] variants;
+
     Animator anim;
 
     [Range(0, 100)]
@@ -78,6 +80,8 @@ public class Microwave : MonoBehaviour
             if (!isFood)
             {
                 obj = Instantiate(prefab, Vector3.zero, Quaternion.identity, hamsterManager.transform);
+                int variantIndex = UnityEngine.Random.Range(0, variants.Length);
+                obj.GetComponent<Hamster>().details = variants[variantIndex];
             }
             else
             {
@@ -85,11 +89,6 @@ public class Microwave : MonoBehaviour
             }
             obj.GetComponent<Grabbable>().DropAt(spawnX * Vector3.right + 5.0f * Vector3.up, null, floorHeight);
         }
-    }
-
-    void CookFood(GameObject foodPrefab)
-    {
-        
     }
 
     //TODO: Figure out position and shid
