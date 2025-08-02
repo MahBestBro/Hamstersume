@@ -24,6 +24,13 @@ public class Microwave : MonoBehaviour
     [SerializeField]
     GameObject carrotPrefab;
 
+    [SerializeField]
+    FoodStats sunflowerSeedStats;
+    [SerializeField]
+    FoodStats brocolliStats;
+    [SerializeField]
+    FoodStats carrotStats;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -47,8 +54,8 @@ public class Microwave : MonoBehaviour
     {
         Food food = foodPrefab.GetComponent<Food>();
 
-        bool canPayForFood = electricity >= food.electricityCost;
-        electricity -= food.electricityCost * Convert.ToInt32(canPayForFood);
+        bool canPayForFood = electricity >= food.Stats.electricityCost;
+        electricity -= food.Stats.electricityCost * Convert.ToInt32(canPayForFood);
         
         if (canPayForFood)
         {
@@ -69,6 +76,16 @@ public class Microwave : MonoBehaviour
         }
     }
 
+    //TODO: Figure out position and shid
+    void ShowFoodStats(FoodStats foodStats)
+    {
+        Debug.Log($"Speed: +{foodStats.speedStatIncrease}");
+        Debug.Log($"Speed: +{foodStats.staminaStatIncrease}");
+        Debug.Log($"Speed: +{foodStats.powerStatIncrease}");
+
+        Debug.Log($"Energy: +{foodStats.energyRestored}");
+    }
+
 
     public void CookSunflowerSeed()
     {
@@ -83,5 +100,20 @@ public class Microwave : MonoBehaviour
     public void CookBrocolli()
     {
         CookFood(brocolliPrefab);
+    }
+
+    public void ShowSunflowerSeedStats()
+    {
+        ShowFoodStats(sunflowerSeedStats);
+    }
+
+    public void ShowCarrotStats()
+    {
+        ShowFoodStats(carrotStats);
+    }
+
+    public void ShowBrocolliStats()
+    {
+        ShowFoodStats(brocolliStats);
     }
 }

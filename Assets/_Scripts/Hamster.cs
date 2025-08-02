@@ -58,15 +58,20 @@ public class Hamster : Grabbable
     [SerializeField]
     HamsterStatDisplay statDisplay;
 
+    [SerializeField]
+    Hoverable hover;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     new protected void Start()
     {
         base.Start();
         _collider2D = GetComponent<Collider2D>();
 
+        hover = GetComponent<Hoverable>();
+
         hEnergy.InitialiseEnergy();
         EnterState(HamsterState.Waiting);
-        statDisplay.ToggleVisibility(this.isHovered);
+        statDisplay.ToggleVisibility(hover.isHovered);
     }
 
     // Update is called once per frame
@@ -78,14 +83,14 @@ public class Hamster : Grabbable
         this.statDisplay.UpdateStatDisplay(this.hStats, this.spriteRenderer.sortingOrder);
     }
 
-    public override void OnHoverEnter() {
-        base.OnHoverEnter();
-        statDisplay.ToggleVisibility(this.isHovered);
-    }
-    public override void OnHoverExit()
+    public void OnHoverEnter_() 
     {
-        base.OnHoverExit();
-        statDisplay.ToggleVisibility(this.isHovered);
+        statDisplay.ToggleVisibility(hover.isHovered);
+    }
+
+    public void OnHoverExit_()
+    {
+        statDisplay.ToggleVisibility(hover.isHovered);
     }
 
     void OnDrawGizmos()
