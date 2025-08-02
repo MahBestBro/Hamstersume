@@ -27,7 +27,7 @@ public class TrainingTimer : MonoBehaviour
         originalBarWidth = timerMask.rect.width;
 
         UnityEvent onTransitionEnd = new UnityEvent();
-        onTransitionEnd.AddListener(() => StartTimer());
+        //onTransitionEnd.AddListener(() => StartTimer());
         startTransition.Play(onTransitionEnd);
     }
 
