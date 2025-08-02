@@ -92,6 +92,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HomeTransitionPanel Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6588633906668965581, guid: 8507315598de21f4db0e2b575a3bf418, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 205
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588633906668965581, guid: 8507315598de21f4db0e2b575a3bf418, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 153
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
