@@ -17,25 +17,17 @@ public class RaceCameraMovement : MonoBehaviour
     
     public Racecourse racecourse;
 
-    RacingHamster[] hamsters;
-    int winnerIndex = -1;
     Vector2 initialCameraPosition;
     float initialCameraSize;
     float elapsedTime = 0.0f;
 
     Vector2 velocity = Vector2.zero; 
+    bool focusingOnWinner = false;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Transform hamsterParent = racecourse.transform.Find("Hamsters");
-        hamsters = new RacingHamster[hamsterParent.childCount];
-        for (int i = 0; i < hamsterParent.childCount; i++)
-        {
-            hamsters[i] = hamsterParent.GetChild(i).GetComponent<RacingHamster>();
-        }
-
         initialCameraSize = Camera.main.orthographicSize;
         initialCameraPosition = transform.position;
     }
@@ -43,34 +35,19 @@ public class RaceCameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float[] trackCompletions = hamsters.Select(h => h.RaceCompletion).ToArray();
-        for (int i = 0; i < hamsters.Length && winnerIndex < 0; i++)
+        if (racecourse.Winner != null)
         {
-            RacingHamster hamster = hamsters[i];
-
-            //TODO: This track completion boolean is dodgy. Ideally, track completions would properly
-            //track total distance but for some reason it does not. Either fix track completion or
-            //clean 
-            ContactFilter2D finishLineFilter = new ContactFilter2D();
-            finishLineFilter.useTriggers = true;
-            finishLineFilter.useLayerMask = true;
-            finishLineFilter.SetLayerMask(LayerMask.GetMask("FinishLine"));
-            List<Collider2D> _ = new List<Collider2D>();
-            bool intersectedFinishLine = hamster.collider2D_.Overlap(finishLineFilter, _) > 0;
-            if (trackCompletions[i] >= 0.2f && intersectedFinishLine)
+            if (!focusingOnWinner)
             {
-                winnerIndex = i;
-                OnRaceEnd();
-                break;
+                initialCameraPosition = transform.position;
+                initialCameraSize = Camera.main.orthographicSize;
+                elapsedTime = 0.0f;
+                focusingOnWinner = true;
             }
-        }
 
-        
-        if (winnerIndex >= 0)
-        {
             float t = Mathf.Min(elapsedTime / victoryZoomDurationSecs, 1.0f);
             
-            Vector2 targetPos = hamsters[winnerIndex].transform.position;
+            Vector2 targetPos = racecourse.Winner.transform.position;
             Vector2 newPosition = Vector2.Lerp(initialCameraPosition, targetPos, t);
             transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
 
@@ -84,21 +61,21 @@ public class RaceCameraMovement : MonoBehaviour
         else
         {
             Vector2 targetPos = Vector2.zero;
-            float[] weights = trackCompletions.Select(x => x + 1.0f).ToArray();
+            float[] weights = racecourse.RaceCompletions().Select(x => x + 1.0f).ToArray();
             Vector2 totalWeightedHamsterPos = Vector2.zero;
-            for (int i = 0; i < hamsters.Length; i++) 
+            for (int i = 0; i < racecourse.hamsters.Length; i++) 
             {
-                totalWeightedHamsterPos += weights[i] * (Vector2)hamsters[i].transform.position;
+                totalWeightedHamsterPos += weights[i] * (Vector2)racecourse.hamsters[i].transform.position;
             }
             targetPos = totalWeightedHamsterPos / weights.Sum();
 
             float largestDistance = -1.0f;
-            for (int i = 0; i < hamsters.Length; i++) 
+            for (int i = 0; i < racecourse.hamsters.Length; i++) 
             {
-                for (int j = i; j < hamsters.Length; j++)
+                for (int j = i; j < racecourse.hamsters.Length; j++)
                 {
-                    Vector2 posA = hamsters[i].transform.position;
-                    Vector2 posB = hamsters[j].transform.position;
+                    Vector2 posA = racecourse.hamsters[i].transform.position;
+                    Vector2 posB = racecourse.hamsters[j].transform.position;
 
                     largestDistance = Mathf.Max(Vector2.Distance(posA, posB), largestDistance);
                 } 
@@ -117,12 +94,5 @@ public class RaceCameraMovement : MonoBehaviour
             transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
         }
         
-    }
-
-
-    void OnRaceEnd()
-    {
-        initialCameraPosition = transform.position;
-        initialCameraSize = Camera.main.orthographicSize;
     }
 }

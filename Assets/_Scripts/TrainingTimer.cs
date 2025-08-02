@@ -7,26 +7,32 @@ public class TrainingTimer : MonoBehaviour
     [SerializeField]
     float traningDurationSecs;
     [SerializeField]
-    RaceTransition transition;
+    ScreenTransition startTransition;
+    [SerializeField]
+    ScreenTransition endTransition;
 
     RectTransform timerMask;
     
     [SerializeField]
     float elapsedTimeSecs = 0.0f;
     float originalBarWidth;
-    bool timerFinished = false;
+    bool timing = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         timerMask = transform.Find("BarMask").GetComponent<RectTransform>();
         originalBarWidth = timerMask.rect.width;
+
+        UnityEvent onTransitionEnd = new UnityEvent();
+        onTransitionEnd.AddListener(() => StartTimer());
+        startTransition.Play(onTransitionEnd);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!timerFinished)
+        if (timing)
         {
             float fracTimeRemaining = Mathf.Max(1.0f - elapsedTimeSecs / traningDurationSecs, 0.0f);
             timerMask.SetInsetAndSizeFromParentEdge(
@@ -44,16 +50,17 @@ public class TrainingTimer : MonoBehaviour
     }
 
 
-    void OnTimerCompletion()
+    void StartTimer()
     {
-        timerFinished = true;
-        UnityEvent onTransitionEnd = new UnityEvent();
-        onTransitionEnd.AddListener(SwitchToRaceScene); 
-        transition.PlayRaceTransition(onTransitionEnd);
+        timing = true;
     }
 
-    void SwitchToRaceScene()
+    void OnTimerCompletion()
     {
-        SceneManager.LoadScene("Racing");
+        timing = false;
+        UnityEvent onTransitionEnd = new UnityEvent();
+        onTransitionEnd.AddListener(() => SceneManager.LoadScene("Racing")); 
+        endTransition.Play(onTransitionEnd);
     }
+
 }
