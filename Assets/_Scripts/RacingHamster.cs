@@ -133,7 +133,7 @@ public class RacingHamster : MonoBehaviour
             float distanceCovered = 0.0f;
             transform.position = racecourse.NextPosOnRaceCourse(
                 transform.position,
-                10.0F, //this.velocity,
+                this.velocity,
                 laneNumber,
                 deltaTime,
                 ref distanceCovered
