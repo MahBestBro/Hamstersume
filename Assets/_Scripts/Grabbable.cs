@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class Grabbable : MonoBehaviour
 {
+    const float SEMITONE_RATIO = 1.05946309435929f;
+
     float GRAVITY_ACCEL = 9.81F * 0.1F;
     Vector2 _prevPos;
     Vector2 _velocity;
     public Bounds physicsBounds = new Bounds(Vector2.zero, new Vector2(18, 20));
     protected float physicsBoundsBuffer = 1F;
+
+    float pitch = 1.0f;
+
+    [SerializeField]
+    AudioSource grabSound;
+    [SerializeField]
+    AudioSource dropSound;
 
     protected Collider2D _collider;
     [SerializeField]
@@ -138,6 +147,11 @@ public class Grabbable : MonoBehaviour
         this.grabbedOffset = (Vector2)this.transform.position - grabPos;
         this.isGrabbed = true;
         this._velocity = Vector2.zero;
+
+        pitch = UnityEngine.Random.Range(1.0f / SEMITONE_RATIO, SEMITONE_RATIO);
+        grabSound.pitch = pitch; 
+        grabSound.Play();
+        
         return true;
     }
 
@@ -207,7 +221,11 @@ public class Grabbable : MonoBehaviour
         this.OnDrop(interactable);
     }
 
-    virtual protected void OnDrop(Transform interactable) { }
+    virtual protected void OnDrop(Transform interactable) 
+    {
+        dropSound.pitch = pitch;
+        dropSound.Play();
+    }
 
     public void RaiseFloorHere()
     {
