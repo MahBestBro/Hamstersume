@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class RaceCameraMovement : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class RaceCameraMovement : MonoBehaviour
     public float victoryZoomDurationSecs;
     
     public Racecourse racecourse;
+    public UnityEvent onWinTransitionEnd;
 
     Vector2 initialCameraPosition;
     float initialCameraSize;
@@ -23,6 +25,7 @@ public class RaceCameraMovement : MonoBehaviour
 
     Vector2 velocity = Vector2.zero; 
     bool focusingOnWinner = false;
+    bool triggerWinTransitionEnd = true;
     
     void Start()
     {
@@ -34,9 +37,9 @@ public class RaceCameraMovement : MonoBehaviour
     void Update()
     {
         if (racecourse.IsInitialised){
-            if (racecourse.Winner != null)
+            if (racecourse.PlayerWinner != null)
             {
-                this.FocusOnWinner();
+                this.FocusOnPlayerWinner();
             }
             else
             {
@@ -81,7 +84,7 @@ public class RaceCameraMovement : MonoBehaviour
         transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
     }
 
-    void FocusOnWinner()
+    void FocusOnPlayerWinner()
     {
         if (!focusingOnWinner)
         {
@@ -93,7 +96,7 @@ public class RaceCameraMovement : MonoBehaviour
 
         float t = Mathf.Min(elapsedTime / victoryZoomDurationSecs, 1.0f);
 
-        Vector2 targetPos = racecourse.Winner.transform.position;
+        Vector2 targetPos = racecourse.PlayerWinner.transform.position;
         Vector2 newPosition = Vector2.Lerp(initialCameraPosition, targetPos, t);
         transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
 
@@ -102,6 +105,11 @@ public class RaceCameraMovement : MonoBehaviour
         if (elapsedTime <= victoryZoomDurationSecs)
         {
             elapsedTime += Time.deltaTime;
+        }
+        else if (triggerWinTransitionEnd)
+        {
+            onWinTransitionEnd?.Invoke();
+            triggerWinTransitionEnd = false;
         }
     }
 }

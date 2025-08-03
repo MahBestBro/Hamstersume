@@ -29,11 +29,12 @@ public class Racecourse : MonoBehaviour
     public float winCutsceneDurationSecs;
     
     public RacingHamster[] hamsters;
-    public RacingHamster Winner
+    public int playerHamstersOffset = 0;
+    public RacingHamster PlayerWinner
     {
         get
         {
-            return winner;
+            return playerWinner;
         }
     }
 
@@ -42,7 +43,7 @@ public class Racecourse : MonoBehaviour
     [SerializeField]
     ScreenTransition endTransition;
 
-    RacingHamster winner = null;
+    RacingHamster playerWinner = null;
     Collider2D finishLineCollider;
 
     float raceElapsedTime = 0.0f;
@@ -63,6 +64,8 @@ public class Racecourse : MonoBehaviour
             spawnedHamsters[idx].hamsterProfile = npcRacer;
             idx++;
         }
+
+        playerHamstersOffset = idx;
         foreach (HamsterProfile playerRacer in raceData.playerParticipants)
         {
             GameObject spawnedHam = Instantiate(racingHamsterPrefab.gameObject);
@@ -70,6 +73,7 @@ public class Racecourse : MonoBehaviour
             spawnedHamsters[idx].hamsterProfile = playerRacer;
             idx++;
         }
+        
         return spawnedHamsters;
     }
 
@@ -129,7 +133,7 @@ public class Racecourse : MonoBehaviour
             raceElapsedTime += Time.deltaTime;
         }
         
-        if (winner != null)
+        if (playerWinner != null)
         {
             winCutsceneElapsedTime += Time.deltaTime;
         }
@@ -141,10 +145,12 @@ public class Racecourse : MonoBehaviour
             endTransition.Play(onTransitionEnd);
         }
 
-        //Check who's the winner
+        //Check who's the winner out of the player's hamsters
         float[] raceCompletions = RaceCompletions();
-        foreach (RacingHamster hamster in hamsters)
+        for (int i = playerHamstersOffset; i < hamsters.Length; i++)
         {
+            RacingHamster hamster = hamsters[i];
+
             ContactFilter2D finishLineFilter = new ContactFilter2D();
             finishLineFilter.useTriggers = true;
             finishLineFilter.useLayerMask = true;
@@ -157,7 +163,7 @@ public class Racecourse : MonoBehaviour
             //clean 
             if (hamster.RaceCompletion >= 0.2f && intersectedFinishLine)
             {
-                winner = hamster;
+                playerWinner = hamster;
                 break;
             }
         }
