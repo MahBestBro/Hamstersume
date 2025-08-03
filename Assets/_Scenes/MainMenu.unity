@@ -286,6 +286,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayButton_new
       objectReference: {fileID: 0}
+    - target: {fileID: 6926824787348850307, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
+      propertyPath: m_Text
+      value: Play
+      objectReference: {fileID: 0}
     - target: {fileID: 7332247621957874124, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -434,6 +438,10 @@ PrefabInstance:
     - target: {fileID: 149501519001837791, guid: 5684914cdc2e4944c895378fa1007e29, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: MainMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 572877418443872144, guid: 5684914cdc2e4944c895378fa1007e29, type: 3}
+      propertyPath: m_Text
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 913917799582300049, guid: 5684914cdc2e4944c895378fa1007e29, type: 3}
       propertyPath: m_SizeDelta.x
@@ -719,6 +727,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PreviousPageButton
       objectReference: {fileID: 0}
+    - target: {fileID: 6926824787348850307, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
+      propertyPath: m_Text
+      value: <
+      objectReference: {fileID: 0}
     - target: {fileID: 7332247621957874124, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -915,6 +927,10 @@ PrefabInstance:
     - target: {fileID: 3852763001918969498, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_Name
       value: SettingsButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926824787348850307, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
+      propertyPath: m_Text
+      value: Settings
       objectReference: {fileID: 0}
     - target: {fileID: 7332247621957874124, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2026,6 +2042,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GuideButton_new
       objectReference: {fileID: 0}
+    - target: {fileID: 6926824787348850307, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
+      propertyPath: m_Text
+      value: Guide
+      objectReference: {fileID: 0}
     - target: {fileID: 7332247621957874124, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2459,6 +2479,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'QuitButton_new '
       objectReference: {fileID: 0}
+    - target: {fileID: 6926824787348850307, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
+      propertyPath: m_Text
+      value: Quit
+      objectReference: {fileID: 0}
     - target: {fileID: 7332247621957874124, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2582,6 +2606,10 @@ PrefabInstance:
     - target: {fileID: 3852763001918969498, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_Name
       value: NextPageButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926824787348850307, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
+      propertyPath: m_Text
+      value: '>'
       objectReference: {fileID: 0}
     - target: {fileID: 7332247621957874124, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3684,6 +3712,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackButton
       objectReference: {fileID: 0}
+    - target: {fileID: 6926824787348850307, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
+      propertyPath: m_Text
+      value: Back
+      objectReference: {fileID: 0}
     - target: {fileID: 7332247621957874124, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -4109,6 +4141,10 @@ PrefabInstance:
     - target: {fileID: 3852763001918969498, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_Name
       value: CreditButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926824787348850307, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
+      propertyPath: m_Text
+      value: Credits
       objectReference: {fileID: 0}
     - target: {fileID: 7332247621957874124, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -4671,6 +4707,10 @@ PrefabInstance:
     - target: {fileID: 149501519001837791, guid: 5684914cdc2e4944c895378fa1007e29, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SwitchToMainPage
+      objectReference: {fileID: 0}
+    - target: {fileID: 572877418443872144, guid: 5684914cdc2e4944c895378fa1007e29, type: 3}
+      propertyPath: m_Text
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 913917799582300049, guid: 5684914cdc2e4944c895378fa1007e29, type: 3}
       propertyPath: m_SizeDelta.x

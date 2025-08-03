@@ -15,6 +15,7 @@ public class ScreenTransition : MonoBehaviour
     public float transitionDurationSecs;
     public Vector2 endPosition;
     public Easing easeMode;
+    public bool autoplayOnStart = false;
 
     public bool IsPlaying
     {
@@ -29,11 +30,14 @@ public class ScreenTransition : MonoBehaviour
     bool playing = false;
     UnityEvent _onTransitionEnd;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        startPosition = transform.position;    
+        startPosition = transform.position;
+        if (autoplayOnStart) {
+            this.Play();
+        }
     }
+
 
     // Update is called once per frame
     void Update()

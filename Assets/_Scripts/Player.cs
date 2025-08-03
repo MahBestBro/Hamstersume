@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
             {
                 this.Grab(hoveredGrabbable, mouseWorldPos);
             }
-            else if (pelletBowl.collider2D_.OverlapPoint(mouseWorldPos)) 
+            else if (pelletBowl && pelletBowl.collider2D_.OverlapPoint(mouseWorldPos)) 
             {
                 pelletBowl.SpawnPellet();
             }
@@ -187,7 +187,7 @@ public class Player : MonoBehaviour
 
     void OnGrabbedHamster(Hamster grabbedHamster)
     {
-        hamsterTracker.UnmarkExercisingHamster(grabbedHamster);
+        hamsterTracker?.UnmarkExercisingHamster(grabbedHamster);
         grabbedHamster.TryEnterState(HamsterState.Waiting);
     }
 

@@ -758,6 +758,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuitButton_new
       objectReference: {fileID: 0}
+    - target: {fileID: 6926824787348850307, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
+      propertyPath: m_Text
+      value: Quit
+      objectReference: {fileID: 0}
     - target: {fileID: 7332247621957874124, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -875,6 +879,10 @@ PrefabInstance:
     - target: {fileID: 3852763001918969498, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_Name
       value: MainMenuButton_new
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926824787348850307, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
+      propertyPath: m_Text
+      value: Main Menu
       objectReference: {fileID: 0}
     - target: {fileID: 7332247621957874124, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
