@@ -14,6 +14,8 @@ public class HamsterDataPocket : MonoBehaviour
     [SerializeField]
 	public HamsterManager hamsterManager;
     [SerializeField]
+    public RacingPreview racingPreview;
+    [SerializeField]
     public HamsterSelectionBox hamsterBox;
     [SerializeField]
     public List<HamsterProfile> hamsters = new List<HamsterProfile>();
@@ -36,6 +38,7 @@ public class HamsterDataPocket : MonoBehaviour
     {
         this.trainingTimer = sceneInstance.trainingTimer;
         this.hamsterManager = sceneInstance.hamsterManager;
+        this.racingPreview = sceneInstance.racingPreview;
         this.hamsterBox = sceneInstance.hamsterBox;
         this.raceCourse = sceneInstance.raceCourse;
         this.OnEnterNewScene();
@@ -54,6 +57,10 @@ public class HamsterDataPocket : MonoBehaviour
         if (this.trainingTimer)
         {
             this.trainingTimer.onTimerEnded.AddListener(this.OnTrainingPhaseEnded);
+        }
+        if (this.racingPreview)
+        {
+            this.racingPreview.PopulateRacerList(this.raceCircuit.CurrentRace.npcParticipants);
         }
         if (this.hamsterBox)
         {

@@ -44,12 +44,20 @@ public class HamsterStatDisplay : MonoBehaviour
         powerLabel = powerMeter.Find("StatLabel").GetComponent<TMP_Text>();
     }
 
-
-    public void UpdateStatDisplay(HamsterStats stats, int sortingIndex)
+    public void UpdateStatDisplay(HamsterStats stats)
     {
         speedMeterImage.fillAmount = stats.SpeedFrac;
         staminaMeterImage.fillAmount = stats.StaminaFrac;
         powerMeterImage.fillAmount = stats.PowerFrac;
+
+        speedLabel.text = $"{stats.statSpeed}";
+        staminaLabel.text = $"{stats.statStamina}";
+        powerLabel.text = $"{stats.statPower}";
+    }
+
+    public void UpdateStatDisplay(HamsterStats stats, int sortingIndex)
+    {
+        this.UpdateStatDisplay(stats);
         
         containerImage.canvas.sortingOrder = sortingIndex;
         speedMeterImage.canvas.sortingOrder = sortingIndex + 1;
@@ -58,14 +66,10 @@ public class HamsterStatDisplay : MonoBehaviour
         staminaIconImage.canvas.sortingOrder = sortingIndex + 1;
         powerMeterImage.canvas.sortingOrder = sortingIndex + 1;
         powerIconImage.canvas.sortingOrder = sortingIndex + 1;
-
-        speedLabel.text = $"{stats.statSpeed}";
-        staminaLabel.text = $"{stats.statStamina}";
-        powerLabel.text = $"{stats.statPower}";
     }
 
     public void ToggleVisibility(bool visible)
     {
-        canvasGroup.alpha = Convert.ToSingle(visible);
+        if (canvasGroup) canvasGroup.alpha = Convert.ToSingle(visible);
     }
 }
