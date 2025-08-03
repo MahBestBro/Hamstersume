@@ -54,7 +54,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 2213047384176467128}
   interactableLayermask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4352
   isGrabbed: 0
   isGrabbable: 1
   isHovered: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 2213047384176467128}
+  defaultHighlightMateral: {fileID: 0}
 --- !u!95 &8953059860821444402
 Animator:
   serializedVersion: 7
@@ -1232,6 +1233,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2403480997485837706}
     m_Modifications:
+    - target: {fileID: 705063581866348467, guid: 12b5189b32959f749a056de173bb991d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2405907369085167861, guid: a1220d2d0acb81b41b9725439404746a, type: 2}
     - target: {fileID: 5207822682394882019, guid: 12b5189b32959f749a056de173bb991d, type: 3}
       propertyPath: m_Name
       value: StaminaMeter
@@ -1342,6 +1347,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2403480997485837706}
     m_Modifications:
+    - target: {fileID: 705063581866348467, guid: 12b5189b32959f749a056de173bb991d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2405907369085167861, guid: a1220d2d0acb81b41b9725439404746a, type: 2}
     - target: {fileID: 5207822682394882019, guid: 12b5189b32959f749a056de173bb991d, type: 3}
       propertyPath: m_Name
       value: SpeedMeter
@@ -1444,6 +1453,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2403480997485837706}
     m_Modifications:
+    - target: {fileID: 705063581866348467, guid: 12b5189b32959f749a056de173bb991d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2405907369085167861, guid: a1220d2d0acb81b41b9725439404746a, type: 2}
     - target: {fileID: 5207822682394882019, guid: 12b5189b32959f749a056de173bb991d, type: 3}
       propertyPath: m_Name
       value: PowerMeter

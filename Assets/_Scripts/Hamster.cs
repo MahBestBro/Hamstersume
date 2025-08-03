@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Text.RegularExpressions;
 using UnityEditor.UI;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -68,6 +69,7 @@ public class Hamster : Grabbable
         hover = GetComponent<Hoverable>();
 
 		this.InitialiseFromManager();
+        this.InitialiseNewHamster();
 
         hEnergy.InitialiseEnergy();
         EnterState(HamsterState.Waiting);
@@ -79,24 +81,37 @@ public class Hamster : Grabbable
 	void InitialiseFromManager()
 	{
 		HamsterManager hamsterManager = transform.parent.GetComponent<HamsterManager>();
+        if (hamsterManager){
+            minIdleTimeSecs = hamsterManager.hamsterMinIdleTimeSecs;
+            maxIdleTimeSecs = hamsterManager.hamsterMaxIdleTimeSecs;
+            walkSpeed = hamsterManager.hamsterWalkSpeed;
+            walkArea = hamsterManager.hamsterWalkArea;
+            this.physicsBounds = hamsterManager.hamsterPhysicsBounds;
+            this.physicsBoundsBuffer = hamsterManager.hamsterPhysicsBoundsBuffer;
+            //hEnergy.maximumEnergy = hamsterManager.maxHamsterEnergy;
+            energyLossPerSec = hamsterManager.hamsterEnergyLossPerSec;
+            hEnergy.SetFullSleepDuration(hamsterManager.hamsterTireDurationSecs);
+        }
+	}
 
-        minIdleTimeSecs = hamsterManager.hamsterMinIdleTimeSecs;
-        maxIdleTimeSecs = hamsterManager.hamsterMaxIdleTimeSecs;
-        walkSpeed = hamsterManager.hamsterWalkSpeed;
-        walkArea = hamsterManager.hamsterWalkArea;
-        hEnergy.maximumEnergy = hamsterManager.maxHamsterEnergy;
-        energyLossPerSec = hamsterManager.hamsterEnergyLossPerSec;
-        hEnergy.SetFullSleepDuration(hamsterManager.hamsterTireDurationSecs);
-
+    void InitialiseNewHamster()
+    {
         hStats.statSpeed = (int)(hamsterVariant.startingSpeedStatFrac * 10.0f);
         hStats.statStamina = (int)(hamsterVariant.startingStaminaStatFrac * 10.0f);
         hStats.statPower = (int)(hamsterVariant.startingPowerStatFrac * 10.0f);
 
         hEnergy.maximumEnergy = hamsterVariant.startingMaxEnergy;
-	}
+    }
+
+    public override void OnCaptured(GrabbableCapturer capturer)
+    {
+        base.OnCaptured(capturer);
+        capturer.ScaleDroppedTransform(this.transform);
+        this.InitialiseFromManager();
+    }
 
     // Update is called once per frame
-	protected void Update()
+    protected void Update()
 	{
 		this.ComputeSortOrderIndex();
 		HandleCurrentState(state);
@@ -112,6 +127,25 @@ public class Hamster : Grabbable
     public void OnHoverExit_()
     {
         statDisplay.ToggleVisibility(hover.isHovered);
+    }
+
+    public override void OnHoverInteractableEnter(Interactable hoverInteractable) {
+        base.OnHoverInteractableEnter(hoverInteractable);
+        HamsterSelectionBox hamsterBox = hoverInteractable.GetComponent<HamsterSelectionBox>();
+        if (hamsterBox)
+        {
+            hoverInteractable.Highlight();
+        }
+    }
+
+    public override void OnHoverInteractableExit(Interactable hoverInteractable)
+    {
+        base.OnHoverInteractableExit(hoverInteractable);
+        HamsterSelectionBox hamsterBox = hoverInteractable.GetComponent<HamsterSelectionBox>();
+        if (hamsterBox)
+        {
+            hoverInteractable.Unhighlight();
+        }
     }
 
     void OnDrawGizmos()
@@ -233,10 +267,7 @@ public class Hamster : Grabbable
 
             case HamsterState.Walking:
                 this.isGrabbable = true;
-                walkDestination = new Vector2(
-                    UnityEngine.Random.Range(walkArea.min.x, walkArea.max.x),
-                    UnityEngine.Random.Range(walkArea.min.y, walkArea.max.y)
-                );
+                walkDestination = this.GetRandomWalkDestination();
                 break;
 
             case HamsterState.Exercising:
@@ -262,6 +293,20 @@ public class Hamster : Grabbable
         state = newState;
         newSprite ??= hamsterVariant.hamsterIdle;
         if (newSprite) this.spriteRenderer.sprite = newSprite;
+    }
+
+    public override void OnPhysicsReset()
+    {
+        base.OnPhysicsReset();
+        this.floorHeight = this.GetRandomWalkDestination().y;
+    }
+
+    public Vector2 GetRandomWalkDestination()
+    {
+        return new Vector2(
+            UnityEngine.Random.Range(walkArea.min.x, walkArea.max.x),
+            UnityEngine.Random.Range(walkArea.min.y, walkArea.max.y)
+        );
     }
 
     public bool EatFood(Food food)

@@ -7,6 +7,8 @@ public class Grabbable : MonoBehaviour
     float GRAVITY_ACCEL = 9.81F * 0.1F;
     Vector2 _prevPos;
     Vector2 _velocity;
+    public Bounds physicsBounds = new Bounds(Vector2.zero, new Vector2(18, 20));
+    protected float physicsBoundsBuffer = 1F;
 
     protected Collider2D _collider;
     [SerializeField]
@@ -25,9 +27,15 @@ public class Grabbable : MonoBehaviour
             return sortingAnchor.position.y;
         }
     }
-    float floorHeight = 1000F;
+    protected float floorHeight = 1000F;
 
     InputAction mousePos;
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(physicsBounds.center, physicsBounds.size);
+    }
 
     protected void Start()
     {
@@ -47,35 +55,51 @@ public class Grabbable : MonoBehaviour
 
     private void ProcessFalling(float fixedDeltaTime)
     {
-        if (!this.isGrabbed && this.transform.position.y > this.floorHeight)
+        if (!this.isGrabbed)
         {
-            if (transform.position.y > 10)
-            {
-                this._velocity.y = Mathf.Max(0F, -this._velocity.y);
-            }
-            if (Mathf.Abs(transform.position.x) > 9)
-            {
-                this._velocity.x *= -0.9F;
-            } 
-            this._velocity += (Vector2.down * GRAVITY_ACCEL) * fixedDeltaTime;
-            Vector3 newPos = (transform.position + (Vector3)this._velocity);
-            if (newPos.y < this.floorHeight)
-            {
-                if (Mathf.Abs(transform.position.x) > 9) {
-                    newPos = Vector3.up * 10F;
-                    this._prevPos = newPos;
-                } else
+            bool resetPosition = 
+                (transform.position.y > physicsBounds.max.y + physicsBoundsBuffer ||
+                transform.position.y < physicsBounds.min.y - physicsBoundsBuffer ||
+                transform.position.x > physicsBounds.max.x + physicsBoundsBuffer ||
+                transform.position.x < physicsBounds.min.x - physicsBoundsBuffer);
+            
+            if (!resetPosition) {
+                if (this.transform.position.y > this.floorHeight)
                 {
-                    newPos.y = this.floorHeight;
-                    this.floorHeight = 1000;
+                    // Bounce off walls
+                    if (transform.position.y > physicsBounds.max.y)
+                    {
+                        this._velocity.y = Mathf.Max(0F, -this._velocity.y);
+                    }
+                    if (transform.position.x > physicsBounds.max.x ||
+                        transform.position.x < physicsBounds.min.x)
+                    {
+                        this._velocity.x *= -0.9F;
+                    }
+                    // Gravity
+                    this._velocity += (Vector2.down * GRAVITY_ACCEL) * fixedDeltaTime;
+                    // Compute Position
+                    Vector3 newPos = (transform.position + (Vector3)this._velocity);
+                    if (newPos.y < this.floorHeight) // If at floor, stop
+                    {
+                        newPos.y = this.floorHeight;
+                        this.floorHeight = physicsBounds.max.y * 2F;
+                    }
+                    this.transform.position = newPos;
+                    this._velocity = (Vector2)newPos - this._prevPos;
+                    this._prevPos = newPos;
                 }
+            } else
+            {
+                this.transform.position = new Vector2(physicsBounds.center.x, physicsBounds.max.y - physicsBoundsBuffer);
+                this._prevPos = this.transform.position;
+                this._velocity = Vector2.zero;
+                this.OnPhysicsReset();
             }
-            this.transform.position = newPos;
-            this._velocity = (Vector2)newPos - this._prevPos;
-            this._prevPos = newPos;
+           
         }
     }
-
+    public virtual void OnPhysicsReset() { }
     public virtual void OnHoverEnter()
     {
         this.isHovered = true;
@@ -134,7 +158,6 @@ public class Grabbable : MonoBehaviour
         List<Collider2D> touchingInteractables = new List<Collider2D>();
         int numInteractables = Physics2D.OverlapPoint(hoverPos, interactableFilter, touchingInteractables);
         Transform targetInteractableTransform = null;
-        //TODO: Handle overlapping case (e.g., food drop over two hamsters)
         Interactable newHoveredInteractable;
         if (numInteractables > 0)
         {
@@ -168,6 +191,8 @@ public class Grabbable : MonoBehaviour
     public virtual void OnHoverInteractableEnter(Interactable hoverInteractable) { }
     public virtual void OnHoverInteractableExit(Interactable hoverInteractable) { }
 
+    public virtual void OnCaptured(GrabbableCapturer capturer) { }
+
     public void DropAt(Vector2 dropPos, Transform interactable, float floorHeight)
     {
         this.isGrabbed = false;
@@ -176,6 +201,7 @@ public class Grabbable : MonoBehaviour
         if (this.hoveredInteractable)
         {
             this.OnHoverInteractableExit(this.hoveredInteractable);
+            this.hoveredInteractable.DroppedOn(this);
             this.hoveredInteractable = null;
         }
         this.OnDrop(interactable);
