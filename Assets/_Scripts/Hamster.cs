@@ -22,7 +22,8 @@ public class Hamster : Grabbable
     public Collider2D _collider2D;
     [HideInInspector]
     public HamsterWheel wheel;
-    
+
+    public bool isNewHamster = true;
     float energyLossPerSec;
     float minIdleTimeSecs;
     float maxIdleTimeSecs;
@@ -69,7 +70,8 @@ public class Hamster : Grabbable
         hover = GetComponent<Hoverable>();
 
 		this.InitialiseFromManager();
-        this.InitialiseNewHamster();
+        if (isNewHamster) this.InitialiseNewHamster();
+        hEnergy.maximumEnergy = hamsterVariant.startingMaxEnergy;
 
         hEnergy.InitialiseEnergy();
         EnterState(HamsterState.Waiting);
@@ -94,13 +96,13 @@ public class Hamster : Grabbable
         }
 	}
 
-    void InitialiseNewHamster()
+    public void InitialiseNewHamster()
     {
         hStats.statSpeed = (int)(hamsterVariant.startingSpeedStatFrac * 10.0f);
         hStats.statStamina = (int)(hamsterVariant.startingStaminaStatFrac * 10.0f);
         hStats.statPower = (int)(hamsterVariant.startingPowerStatFrac * 10.0f);
 
-        hEnergy.maximumEnergy = hamsterVariant.startingMaxEnergy;
+        
     }
 
     public override void OnCaptured(GrabbableCapturer capturer)

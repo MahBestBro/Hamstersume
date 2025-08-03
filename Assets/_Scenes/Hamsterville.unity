@@ -250,6 +250,7 @@ MonoBehaviour:
   maxHamsterEnergy: 100
   hamsterEnergyLossPerSec: 10
   hamsterTireDurationSecs: 5
+  hamsterPrefab: {fileID: 177487292718794850, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
 --- !u!4 &158059447 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2274271715212751481, guid: 9aaa35cd6952561458047cb1e6be3403, type: 3}
@@ -353,7 +354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408020340666610636, guid: 0737f953f384b83409c90012973a0e3d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4942849695644595390, guid: 0737f953f384b83409c90012973a0e3d, type: 3}
       propertyPath: m_Pivot.x
@@ -756,7 +757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408020340666610636, guid: 0737f953f384b83409c90012973a0e3d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4942849695644595390, guid: 0737f953f384b83409c90012973a0e3d, type: 3}
       propertyPath: m_Pivot.x
@@ -2703,7 +2704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408020340666610636, guid: 0737f953f384b83409c90012973a0e3d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4942849695644595390, guid: 0737f953f384b83409c90012973a0e3d, type: 3}
       propertyPath: m_Pivot.x
@@ -3537,7 +3538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6972481323877540612, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: electricity
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6972481323877540612, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: hamsterPrefab
@@ -3832,7 +3833,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1295352056280278442, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1464796394012168282, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
       propertyPath: m_Color.b
@@ -3888,15 +3889,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5162912789087981475, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.525
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5162912789087981475, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5162912789087981475, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.475
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5975710567744711656, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
       propertyPath: m_AnchorMax.x

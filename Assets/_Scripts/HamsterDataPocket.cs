@@ -28,10 +28,12 @@ public class HamsterDataPocket : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(this.gameObject);
+        CollectStartingHamsters();
         this.OnEnterNewScene();
     }
 
-    void EncounterSceneInstance(HamsterDataPocket sceneInstance) {
+    void EncounterSceneInstance(HamsterDataPocket sceneInstance) 
+    {
         this.trainingTimer = sceneInstance.trainingTimer;
         this.hamsterManager = sceneInstance.hamsterManager;
         this.hamsterBox = sceneInstance.hamsterBox;
@@ -41,6 +43,14 @@ public class HamsterDataPocket : MonoBehaviour
 
     void OnEnterNewScene()
     {
+        if (this.hamsterManager)
+        {
+            this.hamsterManager.NukeManagedHamsters();
+            foreach (HamsterProfile profile in hamsters)
+            {
+                this.hamsterManager.CreateHamster(profile);
+            }
+        }
         if (this.trainingTimer)
         {
             this.trainingTimer.onTimerEnded.AddListener(this.OnTrainingPhaseEnded);
@@ -56,21 +66,40 @@ public class HamsterDataPocket : MonoBehaviour
         }
     }
 
-    private void Start()
+    void CollectStartingHamsters()
+    {
+        if (hamsterManager)
+        {
+            Hamster[] managedHamsters = hamsterManager.GetManagedHamsters();
+            hamsters.Capacity += managedHamsters.Length;
+            foreach (Hamster hamster in managedHamsters)
+            {
+                hamster.InitialiseNewHamster();
+                hamsters.Add(hamster.hamsterProfile);
+            }
+
+        }
+    }
+
+    void RecollectManagedHamsters()
     {
         if (hamsterManager)
 		{
 			Hamster[] managedHamsters = hamsterManager.GetManagedHamsters();
+            hamsters.Clear();
 			hamsters.Capacity += managedHamsters.Length;
 			foreach (Hamster hamster in managedHamsters)
 			{
 				hamsters.Add(hamster.hamsterProfile);
             }
+            
         }
     }
 
     void OnTrainingPhaseEnded()
     {
+        this.RecollectManagedHamsters();
+
         // TEMP: Assign random racer/s
         // raceCircuit.CurrentRace.playerParticipants = this.GetRandomHamsters(raceCircuit.CurrentRace.numberPlayerParticipants);
     }

@@ -84,9 +84,9 @@ public class Microwave : MonoBehaviour
             GameObject obj;
             if (!isFood)
             {
-                obj = Instantiate(prefab, Vector3.zero, Quaternion.identity, hamsterManager.transform);
                 int variantIndex = UnityEngine.Random.Range(0, variants.Length);
-                obj.GetComponent<Hamster>().hamsterProfile.hVariant = variants[variantIndex];
+                Hamster newHamster = hamsterManager.CreateHamster(variants[variantIndex]);
+                obj = newHamster.gameObject;
             }
             else
             {

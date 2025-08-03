@@ -2091,6 +2091,7 @@ MonoBehaviour:
   maxHamsterEnergy: 100
   hamsterEnergyLossPerSec: 10
   hamsterTireDurationSecs: 5
+  hamsterPrefab: {fileID: 177487292718794850, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
 --- !u!4 &2039469794
 Transform:
   m_ObjectHideFlags: 0
