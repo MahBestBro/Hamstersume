@@ -200,11 +200,11 @@ public class Racecourse : MonoBehaviour
     }
 
     //NOTE: This assumes the race goes anticlockwise around the course
-    public Vector2 NextPosOnRaceCourse(Vector2 pos, float speed, int laneNumber, ref float distanceCovered)
+    public Vector2 NextPosOnRaceCourse(Vector2 pos, float speed, int laneNumber, float deltaTime, ref float distanceCovered)
     {
         Vector2 nextPos = pos;
         Vector2 racetrackCentre = (Vector2)transform.position;
-        float intialDistance = speed * Time.deltaTime;
+        float intialDistance = speed * deltaTime;
         float distanceToTravel = intialDistance;
 
         float curveRadius = minCurveRadius + ((float)laneNumber - 1.0f) * laneWidth;
@@ -235,7 +235,7 @@ public class Racecourse : MonoBehaviour
             Vector2 toPosRadial = (nextPos - curveCentre).normalized;
             
             float angularSpeed = speed / curveRadius; 
-            float angleToTravel = Mathf.Rad2Deg * angularSpeed * Time.deltaTime;
+            float angleToTravel = Mathf.Rad2Deg * angularSpeed * deltaTime;
             float remainingAngle = Vector2.Angle(endRadial, toPosRadial) * curveRadius;
             float angleTravelled = Mathf.Min(angleToTravel, remainingAngle);
 
@@ -267,7 +267,7 @@ public class Racecourse : MonoBehaviour
             Vector2 toPosRadial = (nextPos - curveCentre).normalized;
             
             float angularSpeed = speed / curveRadius; 
-            float angleToTravel = Mathf.Rad2Deg * angularSpeed * Time.deltaTime;
+            float angleToTravel = Mathf.Rad2Deg * angularSpeed * deltaTime;
             float remainingAngle = Vector2.Angle(endRadial, toPosRadial) * curveRadius;
             float angleTravelled = Mathf.Min(angleToTravel, remainingAngle);
             

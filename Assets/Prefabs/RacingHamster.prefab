@@ -48,9 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hamsterProfile:
     hStats:
-      statSpeed: 0
-      statStamina: 0
-      statPower: 0
+      statSpeed: 3
+      statStamina: 3
+      statPower: 3
       hEnergy:
         energy: 0
         maximumEnergy: 0
@@ -58,6 +58,10 @@ MonoBehaviour:
         imgSleepMeter: {fileID: 0}
         imgEnergyIncreaseIndicator: {fileID: 0}
     hVariant: {fileID: 11400000, guid: 6e3dbdf5aa623ca4d98843f386160556, type: 2}
+  endurance: 0
+  maxEndurance: 0
+  velocity: 0
+  acceleration: 0
   laneNumber: 0
   collider2D_: {fileID: 0}
   racecourse: {fileID: 0}
