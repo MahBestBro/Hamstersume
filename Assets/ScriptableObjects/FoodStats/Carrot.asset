@@ -16,5 +16,5 @@ MonoBehaviour:
   staminaStatIncrease: 1
   powerStatIncrease: 3
   electricityCost: 35
-  energyRestored: 45
-  consumeDuration: 1
+  energyRestored: 35
+  consumeDuration: -0.0019758854
