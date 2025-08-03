@@ -18,11 +18,17 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     Transform mainPage;
     [SerializeField]
-    Transform guidePage;
-    [SerializeField]
     Transform settingsPage;
     [SerializeField]
     Transform creditsPage;
+    
+    [SerializeField]
+    Transform guide;
+    CanvasGroup guideCanvasGroup;
+    GameObject[] guidePages;
+    int currentGuidePageIndex = 0;
+    GameObject prevGuidePageButton;
+    GameObject nextGuidePageButton;
 
     [SerializeField]
     ScreenTransition startTransition;
@@ -36,7 +42,6 @@ public class MainMenu : MonoBehaviour
     Transform previousPage;
     Transform currentPage;
 
-    CanvasGroup guideCanvasGroup;
     
     Vector2 currentPageOffscreenPos;
     Vector2 prevPageOffscreenPos;
@@ -52,10 +57,18 @@ public class MainMenu : MonoBehaviour
         pickUp = InputSystem.actions.FindAction("Pick Up");
 
         mainPage = transform.Find("MainPage");
-        guidePage = transform.Find("Guide");
         creditsPage = transform.Find("CreditsPage");
 
-        guideCanvasGroup = guidePage.GetComponent<CanvasGroup>();
+        guide = transform.Find("Guide");
+        guideCanvasGroup = guide.GetComponent<CanvasGroup>();
+        Transform guidePagesParent = guide.Find("Pages");
+        guidePages = new GameObject[guidePagesParent.childCount];
+        for (int i = 0; i < guidePages.Length; i++)
+        {
+            guidePages[i] = guidePagesParent.GetChild(i).gameObject;
+        }
+        prevGuidePageButton = guide.Find("PreviousPageButton").gameObject;
+        nextGuidePageButton = guide.Find("NextPageButton").gameObject;
 
         settingsPage.position = nonMainPageOffscreenCentre;
         creditsPage.position = nonMainPageOffscreenCentre;
@@ -111,6 +124,14 @@ public class MainMenu : MonoBehaviour
 
         guideCanvasGroup.alpha = Convert.ToSingle(guideOpen);
         guideCanvasGroup.blocksRaycasts = guideOpen;
+
+        for (int i = 0; i < guidePages.Length; i++)
+        {
+            guidePages[i].SetActive(i == currentGuidePageIndex);
+        }
+
+        prevGuidePageButton.SetActive(currentGuidePageIndex > 0);
+        nextGuidePageButton.SetActive(currentGuidePageIndex < guidePages.Length - 1);
     }
 
     void OnDrawGizmosSelected()
@@ -160,6 +181,16 @@ public class MainMenu : MonoBehaviour
     public void CloseGuide()
     {
         guideOpen = false;
+    }
+
+    public void NextGuidePage()
+    {
+        currentGuidePageIndex = Math.Min(currentGuidePageIndex + 1, guidePages.Length - 1);
+    }
+
+    public void PreviousGuidePage()
+    {
+        currentGuidePageIndex = Math.Max(currentGuidePageIndex - 1, 0);
     }
 
     public void PlayGame()
