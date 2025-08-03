@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     LayerMask hoverablesLayermask;
     [SerializeField]
     LayerMask grabbablesLayermask;
+    [SerializeField]
+    PelletBowl pelletBowl;
 
     InputAction pickUp;
     InputAction mousePos;
@@ -74,6 +76,10 @@ public class Player : MonoBehaviour
             if (hoveredGrabbable != null)
             {
                 this.Grab(hoveredGrabbable, mouseWorldPos);
+            }
+            else if (pelletBowl.collider2D_.OverlapPoint(mouseWorldPos)) 
+            {
+                pelletBowl.SpawnPellet();
             }
         } else if (pickUp.WasReleasedThisFrame())
         {

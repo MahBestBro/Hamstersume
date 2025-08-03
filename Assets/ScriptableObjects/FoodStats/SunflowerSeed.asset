@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbc1894321ffdd2418be8e6ffc97fd8b, type: 3}
   m_Name: SunflowerSeed
   m_EditorClassIdentifier: 
-  speedStatIncrease: 0
-  staminaStatIncrease: 0
-  powerStatIncrease: 0
-  electricityCost: 0
-  energyRestored: 10
-  consumeDuration: -0.021940801
+  speedStatIncrease: 2
+  staminaStatIncrease: 3
+  powerStatIncrease: 5
+  electricityCost: 10
+  energyRestored: 25
+  consumeDuration: -0.0037203215

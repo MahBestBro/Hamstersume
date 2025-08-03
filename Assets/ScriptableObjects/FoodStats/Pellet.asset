@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbc1894321ffdd2418be8e6ffc97fd8b, type: 3}
-  m_Name: Brocolli
+  m_Name: Pellet
   m_EditorClassIdentifier: 
   speedStatIncrease: 0
-  staminaStatIncrease: 15
-  powerStatIncrease: 2
-  electricityCost: 65
-  energyRestored: 70
-  consumeDuration: 1
+  staminaStatIncrease: 0
+  powerStatIncrease: 0
+  electricityCost: 0
+  energyRestored: 10
+  consumeDuration: 0.2
