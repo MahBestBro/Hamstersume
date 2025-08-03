@@ -283,10 +283,16 @@ public class Racecourse : MonoBehaviour
     public void TransitionToHamsterville()
     {
         UnityEvent onTransitionEnd = new UnityEvent();
-        onTransitionEnd.AddListener(() => SceneManager.LoadScene("Hamsterville"));
+        onTransitionEnd.AddListener(OnRaceEnd);
         endTransition.Play(onTransitionEnd);
     }
 
+
+    void OnRaceEnd()
+    {
+        HamsterDataPocket.instance.raceCircuit.QueueNextRace();
+        SceneManager.LoadScene("Hamsterville");
+    }
 
     //NOTE: Hamsters start at the middle of the bottom straight. This function also assumes hamsters will only
     //go around one curve. Any more is likely absurd anyways.

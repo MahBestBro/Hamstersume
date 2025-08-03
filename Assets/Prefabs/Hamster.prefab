@@ -68,6 +68,7 @@ MonoBehaviour:
   state: 0
   _collider2D: {fileID: 0}
   wheel: {fileID: 0}
+  isNewHamster: 1
   walkDestination: {x: 0, y: 0}
   tiredAwakenState: 0
   hamsterProfile:
@@ -78,11 +79,9 @@ MonoBehaviour:
       hEnergy:
         energy: 0
         maximumEnergy: 0
-        imgEnergyMeter: {fileID: 2537602075897787495}
-        imgSleepMeter: {fileID: 1611170909101019079}
-        imgEnergyIncreaseIndicator: {fileID: 883384013386927753}
     hVariant: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
   hover: {fileID: 6111777856556196356}
+  energyDisplay: {fileID: 7073891022460425825}
 --- !u!70 &7897799143741374875
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -552,6 +551,7 @@ GameObject:
   - component: {fileID: 5980010726589145205}
   - component: {fileID: 1986047097398739583}
   - component: {fileID: 4269636529240021080}
+  - component: {fileID: 7073891022460425825}
   m_Layer: 5
   m_Name: EnergyMeter
   m_TagString: Untagged
@@ -642,6 +642,24 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7073891022460425825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002460478829101489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01d2e416d242ce46bfe2aa358a3dc8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hEnergy:
+    energy: 0
+    maximumEnergy: 0
+  imgEnergyMeter: {fileID: 2537602075897787495}
+  imgSleepMeter: {fileID: 1611170909101019079}
+  imgEnergyIncreaseIndicator: {fileID: 883384013386927753}
 --- !u!1 &1659632513373567245
 GameObject:
   m_ObjectHideFlags: 0

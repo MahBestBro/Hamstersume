@@ -60,6 +60,9 @@ public class Hamster : Grabbable
 
     [SerializeField]
     Hoverable hover;
+    
+    [HideInInspector]
+    public EnergyDisplay energyDisplay;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     new protected void Start()
@@ -75,6 +78,8 @@ public class Hamster : Grabbable
 
         hEnergy.InitialiseEnergy();
         EnterState(HamsterState.Waiting);
+
+        energyDisplay = transform.Find("EnergyMeter").GetComponent<EnergyDisplay>();
 
         statDisplay = transform.Find("StatDisplay").GetComponent<HamsterStatDisplay>();
         statDisplay.ToggleVisibility(hover.isHovered);
@@ -92,7 +97,7 @@ public class Hamster : Grabbable
             this.physicsBoundsBuffer = hamsterManager.hamsterPhysicsBoundsBuffer;
             //hEnergy.maximumEnergy = hamsterManager.maxHamsterEnergy;
             energyLossPerSec = hamsterManager.hamsterEnergyLossPerSec;
-            hEnergy.SetFullSleepDuration(hamsterManager.hamsterTireDurationSecs);
+            energyDisplay.SetFullSleepDuration(hamsterManager.hamsterTireDurationSecs);
         }
 	}
 
@@ -117,7 +122,7 @@ public class Hamster : Grabbable
 	{
 		this.ComputeSortOrderIndex();
 		HandleCurrentState(state);
-		this.hEnergy.UpdateEnergyDisplay(this.spriteRenderer.sortingOrder);
+		energyDisplay.UpdateEnergyDisplay(this.spriteRenderer.sortingOrder);
 		this.statDisplay.UpdateStatDisplay(this.hStats, this.spriteRenderer.sortingOrder);
 	}
 
@@ -216,7 +221,7 @@ public class Hamster : Grabbable
                         if (energyExcess > 0)
                         {
                             EnterState(HamsterState.Tired);
-                            this.hEnergy.OvereatNap();
+                            energyDisplay.OvereatNap();
                         }
                     }
                 } else
@@ -226,7 +231,7 @@ public class Hamster : Grabbable
                 break;
 
             case HamsterState.Tired: 
-                if (!this.hEnergy.TickSleep(Time.deltaTime))
+                if (!energyDisplay.TickSleep(Time.deltaTime))
                 {
                     EnterState(this.tiredAwakenState);
                 }
@@ -284,7 +289,7 @@ public class Hamster : Grabbable
             case HamsterState.Tired:
                 newSprite = hamsterVariant.hamsterSleeping;
                 this.isGrabbable = true;
-                this.hEnergy.SleepFull();
+                energyDisplay.SleepFull();
                 break;
 
             case HamsterState.Eating:

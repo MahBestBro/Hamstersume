@@ -18,6 +18,15 @@ public class HamsterDataPocket : MonoBehaviour
     [SerializeField]
     public List<HamsterProfile> hamsters = new List<HamsterProfile>();
 
+    int numRounds = 0;
+    public int NumRounds
+    {
+        get
+        {
+            return numRounds;
+        }
+    }
+
 	void Awake()
 	{
         if (instance)
@@ -43,6 +52,8 @@ public class HamsterDataPocket : MonoBehaviour
 
     void OnEnterNewScene()
     {
+        numRounds += 1;
+
         if (this.hamsterManager)
         {
             this.hamsterManager.NukeManagedHamsters();
