@@ -1413,7 +1413,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 885fca1739601724ebc4a05758b9d800, type: 3}
-    m_FontSize: 62
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1424,7 +1424,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Power - Increases hamster final speed
+  m_Text: Power - Increases hamster final acceleration
 --- !u!222 &580534941
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2767,13 +2767,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Hamsters tire out if all there energy is drained. Take them off the wheel
-    just before they run out
+  m_Text: 'Hamsters tire out if all their energy is drained. Take them off the wheel
+    just before they run out. Hamsters will also take a nap after overeating!
 
 
-
-    You can view the other racers and their stats
-    via the info panel'
+    You
+    can view the other racers and their stats via the info panel'
 --- !u!222 &1155016517
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4431,7 +4430,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 885fca1739601724ebc4a05758b9d800, type: 3}
-    m_FontSize: 62
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -4442,7 +4441,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Speed - Increases hamster start speed
+  m_Text: Speed - Increases hamster start and max speed
 --- !u!222 &1624824954
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6827,7 +6826,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 885fca1739601724ebc4a05758b9d800, type: 3}
-    m_FontSize: 62
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -6838,7 +6837,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Stamina - Reduces hamster speed decrease
+  m_Text: Stamina - Increase hamster endurance
 --- !u!222 &2123405691
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6906,7 +6905,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 885fca1739601724ebc4a05758b9d800, type: 3}
-    m_FontSize: 62
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
