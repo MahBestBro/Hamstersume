@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7587283636556462544}
   - component: {fileID: 7332247621957874124}
   m_Layer: 5
-  m_Name: ResumeButton_new
+  m_Name: GenericButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
