@@ -4,20 +4,34 @@ public class Interactable : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
 
+    public Material defaultHighlightMateral;
     Material originalMaterial;
 
     void Start()
     {
-        originalMaterial = spriteRenderer.material;
+        if (spriteRenderer)
+        {
+            originalMaterial = spriteRenderer.material;
+        }
     }
 
-    public void Highlight(Material outlineMaterial)
+    public void Highlight(Material outlineMaterial = null)
     {
-        spriteRenderer.material = outlineMaterial;
+        if(spriteRenderer)
+        {
+            spriteRenderer.material = outlineMaterial ?? defaultHighlightMateral;
+        }
     }
 
     public void Unhighlight()
     {
-        spriteRenderer.material = originalMaterial;
+        if (spriteRenderer)
+        {
+            spriteRenderer.material = originalMaterial;
+        }
+    }
+
+    public virtual void DroppedOn(Grabbable droppedGrabbable)
+    {
     }
 }

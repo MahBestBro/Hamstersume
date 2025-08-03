@@ -134,7 +134,6 @@ public class Grabbable : MonoBehaviour
         List<Collider2D> touchingInteractables = new List<Collider2D>();
         int numInteractables = Physics2D.OverlapPoint(hoverPos, interactableFilter, touchingInteractables);
         Transform targetInteractableTransform = null;
-        //TODO: Handle overlapping case (e.g., food drop over two hamsters)
         Interactable newHoveredInteractable;
         if (numInteractables > 0)
         {
@@ -168,6 +167,8 @@ public class Grabbable : MonoBehaviour
     public virtual void OnHoverInteractableEnter(Interactable hoverInteractable) { }
     public virtual void OnHoverInteractableExit(Interactable hoverInteractable) { }
 
+    public virtual void OnCaptured() { }
+
     public void DropAt(Vector2 dropPos, Transform interactable, float floorHeight)
     {
         this.isGrabbed = false;
@@ -176,6 +177,7 @@ public class Grabbable : MonoBehaviour
         if (this.hoveredInteractable)
         {
             this.OnHoverInteractableExit(this.hoveredInteractable);
+            this.hoveredInteractable.DroppedOn(this);
             this.hoveredInteractable = null;
         }
         this.OnDrop(interactable);
