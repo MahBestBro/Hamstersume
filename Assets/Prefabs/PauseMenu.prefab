@@ -386,7 +386,19 @@ MonoBehaviour:
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 425220133408365911}
+        m_TargetAssemblyTypeName: VolumeSlider, Assembly-CSharp
+        m_MethodName: ChangeVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4639792148232007572
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +519,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4883525463416223499}
+  - component: {fileID: 425220133408365911}
   m_Layer: 5
   m_Name: Volume
   m_TagString: Untagged
@@ -535,6 +548,18 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000091552734, y: -216}
   m_SizeDelta: {x: 582.947, y: 38.49829}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &425220133408365911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8782847313870757506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21dc4737c7b9d42409067264e83cb62f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2033367281993043926
 PrefabInstance:
   m_ObjectHideFlags: 0

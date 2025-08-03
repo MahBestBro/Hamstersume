@@ -201,7 +201,7 @@ MonoBehaviour:
   m_text: Resume
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a1220d2d0acb81b41b9725439404746a, type: 2}
-  m_sharedMaterial: {fileID: -8426601112206738124, guid: a1220d2d0acb81b41b9725439404746a, type: 2}
+  m_sharedMaterial: {fileID: -2405907369085167861, guid: a1220d2d0acb81b41b9725439404746a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
