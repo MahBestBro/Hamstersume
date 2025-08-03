@@ -692,6 +692,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   defaultHighlightMateral: {fileID: 0}
   droppedGrabbablesParent: {fileID: 0}
+  droppedScale: {x: 0.75, y: 0.75}
 --- !u!114 &710183184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,6 +711,10 @@ MonoBehaviour:
   hamsterWalkArea:
     m_Center: {x: 4.54, y: 0, z: 0}
     m_Extent: {x: 1.5, y: 1.5, z: 0}
+  hamsterPhysicsBounds:
+    m_Center: {x: 4.54, y: 0, z: 0}
+    m_Extent: {x: 1.5, y: 1.5, z: 0}
+  hamsterPhysicsBoundsBuffer: 0.24
   maxHamsterEnergy: 100
   hamsterEnergyLossPerSec: 10
   hamsterTireDurationSecs: 5
@@ -1735,6 +1740,10 @@ MonoBehaviour:
   hamsterWalkArea:
     m_Center: {x: -5.18, y: 0.04, z: 0}
     m_Extent: {x: 3.96, y: 5.06, z: 0}
+  hamsterPhysicsBounds:
+    m_Center: {x: -5.18, y: 0.04, z: 0}
+    m_Extent: {x: 4.16, y: 10, z: 0}
+  hamsterPhysicsBoundsBuffer: 1
   maxHamsterEnergy: 100
   hamsterEnergyLossPerSec: 10
   hamsterTireDurationSecs: 5
@@ -1816,6 +1825,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   defaultHighlightMateral: {fileID: 0}
   droppedGrabbablesParent: {fileID: 0}
+  droppedScale: {x: 1, y: 1}
 --- !u!1001 &2062261027
 PrefabInstance:
   m_ObjectHideFlags: 0

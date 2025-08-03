@@ -3,6 +3,7 @@ using UnityEngine;
 public class GrabbableCapturer : Interactable
 {
     public Transform droppedGrabbablesParent;
+    public Vector2 droppedScale;
 
     private void Start()
     {
@@ -12,6 +13,18 @@ public class GrabbableCapturer : Interactable
     {
         base.DroppedOn(droppedGrabbable);
         droppedGrabbable.transform.SetParent(droppedGrabbablesParent);
-        droppedGrabbable.OnCaptured();
+        droppedGrabbable.OnCaptured(this);
+    }
+    public bool ScaleDroppedTransform(Transform droppedTransform)
+    {
+        if (droppedScale != Vector2.zero)
+        {
+            droppedTransform.localScale = droppedScale;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

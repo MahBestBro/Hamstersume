@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Text.RegularExpressions;
 using UnityEditor.UI;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -85,6 +86,8 @@ public class Hamster : Grabbable
             maxIdleTimeSecs = hamsterManager.hamsterMaxIdleTimeSecs;
             walkSpeed = hamsterManager.hamsterWalkSpeed;
             walkArea = hamsterManager.hamsterWalkArea;
+            this.physicsBounds = hamsterManager.hamsterPhysicsBounds;
+            this.physicsBoundsBuffer = hamsterManager.hamsterPhysicsBoundsBuffer;
             //hEnergy.maximumEnergy = hamsterManager.maxHamsterEnergy;
             energyLossPerSec = hamsterManager.hamsterEnergyLossPerSec;
             hEnergy.SetFullSleepDuration(hamsterManager.hamsterTireDurationSecs);
@@ -100,9 +103,10 @@ public class Hamster : Grabbable
         hEnergy.maximumEnergy = hamsterVariant.startingMaxEnergy;
     }
 
-    public override void OnCaptured()
+    public override void OnCaptured(GrabbableCapturer capturer)
     {
-        base.OnCaptured();
+        base.OnCaptured(capturer);
+        capturer.ScaleDroppedTransform(this.transform);
         this.InitialiseFromManager();
     }
 
@@ -263,10 +267,7 @@ public class Hamster : Grabbable
 
             case HamsterState.Walking:
                 this.isGrabbable = true;
-                walkDestination = new Vector2(
-                    UnityEngine.Random.Range(walkArea.min.x, walkArea.max.x),
-                    UnityEngine.Random.Range(walkArea.min.y, walkArea.max.y)
-                );
+                walkDestination = this.GetRandomWalkDestination();
                 break;
 
             case HamsterState.Exercising:
@@ -292,6 +293,20 @@ public class Hamster : Grabbable
         state = newState;
         newSprite ??= hamsterVariant.hamsterIdle;
         if (newSprite) this.spriteRenderer.sprite = newSprite;
+    }
+
+    public override void OnPhysicsReset()
+    {
+        base.OnPhysicsReset();
+        this.floorHeight = this.GetRandomWalkDestination().y;
+    }
+
+    public Vector2 GetRandomWalkDestination()
+    {
+        return new Vector2(
+            UnityEngine.Random.Range(walkArea.min.x, walkArea.max.x),
+            UnityEngine.Random.Range(walkArea.min.y, walkArea.max.y)
+        );
     }
 
     public bool EatFood(Food food)
