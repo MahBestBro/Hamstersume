@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
             }
             else if (pelletBowl && pelletBowl.collider2D_.OverlapPoint(mouseWorldPos)) 
             {
-                pelletBowl.SpawnPellet();
+                this.Grab(pelletBowl.SpawnPellet(mouseWorldPos), mouseWorldPos);
             }
         } else if (pickUp.WasReleasedThisFrame())
         {

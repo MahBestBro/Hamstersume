@@ -2658,7 +2658,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hamsterManager: {fileID: 98455650}
-  pelletPrefab: {fileID: 3298700040675696719, guid: f380b313dee9ddb4bb5f8f9885151bec, type: 3}
+  pelletPrefab: {fileID: 4066634159500771746, guid: f380b313dee9ddb4bb5f8f9885151bec, type: 3}
+  pelletSpawnOffset: {x: -0.21, y: 0.35}
   collider2D_: {fileID: 0}
 --- !u!70 &1758436885
 CapsuleCollider2D:

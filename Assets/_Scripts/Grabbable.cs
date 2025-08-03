@@ -145,6 +145,7 @@ public class Grabbable : MonoBehaviour
     {
         if (!isGrabbable) return false;
         this.grabbedOffset = (Vector2)this.transform.position - grabPos;
+        //Debug.Log(this.grabbedOffset);
         this.isGrabbed = true;
         this._velocity = Vector2.zero;
 
