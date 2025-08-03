@@ -299,6 +299,85 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &337181429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 337181430}
+  - component: {fileID: 337181432}
+  - component: {fileID: 337181431}
+  m_Layer: 5
+  m_Name: SelectedCountLabel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &337181430
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337181429}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1755415406}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 448.9, y: 136.1}
+  m_SizeDelta: {x: 300, y: 120}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &337181431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337181429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.86415094, g: 0.63732064, b: 0.50055534, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 885fca1739601724ebc4a05758b9d800, type: 3}
+    m_FontSize: 80
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 169
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0/1
+--- !u!222 &337181432
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337181429}
+  m_CullTransparentMesh: 1
 --- !u!1 &456164508
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,6 +756,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0331216c143665428e2c73f4d2f3a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxCapturer: {fileID: 710183183}
+  selectionLimit: 1
 --- !u!114 &710183183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,8 +772,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
   defaultHighlightMateral: {fileID: 0}
+  onDroppedOnEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 710183182}
+        m_TargetAssemblyTypeName: HamsterSelectionBox, Assembly-CSharp
+        m_MethodName: OnDroppedInto
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   droppedGrabbablesParent: {fileID: 0}
   droppedScale: {x: 0.75, y: 0.75}
+  rejectAll: 0
 --- !u!114 &710183184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,8 +810,8 @@ MonoBehaviour:
     m_Extent: {x: 1.5, y: 1.5, z: 0}
   hamsterPhysicsBounds:
     m_Center: {x: 4.54, y: 0, z: 0}
-    m_Extent: {x: 1.5, y: 1.5, z: 0}
-  hamsterPhysicsBoundsBuffer: 0.24
+    m_Extent: {x: 1.6, y: 1.6, z: 0}
+  hamsterPhysicsBoundsBuffer: 0.23
   maxHamsterEnergy: 100
   hamsterEnergyLossPerSec: 10
   hamsterTireDurationSecs: 5
@@ -1424,6 +1521,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2013087240}
+  - {fileID: 337181430}
   m_Father: {fileID: 1402668566}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1824,8 +1922,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
   defaultHighlightMateral: {fileID: 0}
+  onDroppedOnEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 710183182}
+        m_TargetAssemblyTypeName: HamsterSelectionBox, Assembly-CSharp
+        m_MethodName: OnDroppedOutof
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   droppedGrabbablesParent: {fileID: 0}
   droppedScale: {x: 1, y: 1}
+  rejectAll: 0
 --- !u!1001 &2062261027
 PrefabInstance:
   m_ObjectHideFlags: 0

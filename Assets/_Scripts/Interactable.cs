@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class Interactable : MonoBehaviour
 
     public Material defaultHighlightMateral;
     Material originalMaterial;
+
+    public UnityEvent<Grabbable> onDroppedOnEvent;
 
     void Start()
     {
@@ -31,7 +34,12 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    public virtual void DroppedOn(Grabbable droppedGrabbable)
+    public void ReceiveDropped(Grabbable droppedGrabbable)
+    {
+        this.DroppedOn(droppedGrabbable);
+        onDroppedOnEvent.Invoke(droppedGrabbable);
+    }
+    protected virtual void DroppedOn(Grabbable droppedGrabbable)
     {
     }
 }

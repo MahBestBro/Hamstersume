@@ -201,7 +201,7 @@ public class Grabbable : MonoBehaviour
         if (this.hoveredInteractable)
         {
             this.OnHoverInteractableExit(this.hoveredInteractable);
-            this.hoveredInteractable.DroppedOn(this);
+            this.hoveredInteractable.ReceiveDropped(this);
             this.hoveredInteractable = null;
         }
         this.OnDrop(interactable);

@@ -4,16 +4,20 @@ public class GrabbableCapturer : Interactable
 {
     public Transform droppedGrabbablesParent;
     public Vector2 droppedScale;
+    public bool rejectAll = false;
 
     private void Start()
     {
         if (droppedGrabbablesParent == null) droppedGrabbablesParent = this.transform;
     }
-    public override void DroppedOn(Grabbable droppedGrabbable)
+    protected override void DroppedOn(Grabbable droppedGrabbable)
     {
         base.DroppedOn(droppedGrabbable);
-        droppedGrabbable.transform.SetParent(droppedGrabbablesParent);
-        droppedGrabbable.OnCaptured(this);
+        if (!rejectAll)
+        {
+            droppedGrabbable.transform.SetParent(droppedGrabbablesParent);
+            droppedGrabbable.OnCaptured(this);
+        }
     }
     public bool ScaleDroppedTransform(Transform droppedTransform)
     {
