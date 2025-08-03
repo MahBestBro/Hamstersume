@@ -1049,6 +1049,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8627914030424429665}
   - {fileID: 1167476896}
   - {fileID: 1320377121}
   - {fileID: 1433102827}
@@ -1830,6 +1831,7 @@ MonoBehaviour:
   raceCourse: {fileID: 1340364146}
   trainingTimer: {fileID: 0}
   hamsterManager: {fileID: 0}
+  racingPreview: {fileID: 0}
   hamsterBox: {fileID: 0}
   hamsters:
   - hStats:
@@ -1839,9 +1841,6 @@ MonoBehaviour:
       hEnergy:
         energy: 0
         maximumEnergy: 0
-        imgEnergyMeter: {fileID: 0}
-        imgSleepMeter: {fileID: 0}
-        imgEnergyIncreaseIndicator: {fileID: 0}
     hVariant: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
 --- !u!4 &1300880152
 Transform:
@@ -2635,6 +2634,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56726a65962c5743a958b8a45be3b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2279851383164010661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4867726722604078410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b45f7d9853dfa4690a963887edd102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinning: 0
+  autoplayOnStart: 1
+  spinSpeed: 10
+--- !u!1 &4867726722604078410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8627914030424429665}
+  - component: {fileID: 2279851383164010661}
+  - component: {fileID: 8627914030424429667}
+  - component: {fileID: 8627914030424429666}
+  m_Layer: 0
+  m_Name: SpinningLight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8627914030424429665
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4867726722604078410}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 485806344}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 2624, y: 2624}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8627914030424429666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4867726722604078410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a5a6271e844d78047b6cf013db83eb8a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &8627914030424429667
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4867726722604078410}
+  m_CullTransparentMesh: 1
 --- !u!1001 &9037070433846474910
 PrefabInstance:
   m_ObjectHideFlags: 0

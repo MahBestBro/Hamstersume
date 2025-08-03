@@ -41,7 +41,7 @@ public class HamsterDataPocket : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         
         CollectStartingHamsters();
-        this.raceCircuit.InitialiseCircuit();
+        this.raceCircuit?.InitialiseCircuit();
 
         this.OnEnterNewScene();
     }
