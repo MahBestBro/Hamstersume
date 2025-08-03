@@ -142,6 +142,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
   - {fileID: 11400000, guid: 1070d5fdddf78ec4a916b9c6e77da61f, type: 2}
   - {fileID: 11400000, guid: 6e3dbdf5aa623ca4d98843f386160556, type: 2}
+  - {fileID: 11400000, guid: 3506214ee52ded34a837ca01e1713f66, type: 2}
+  - {fileID: 11400000, guid: fa50e8982c206e44b84d05823069074f, type: 2}
+  - {fileID: 11400000, guid: 3087da2fb72cdbf49b0da3d8c667d6ca, type: 2}
+  - {fileID: 11400000, guid: fc10d22fc78c67346940252ef5d43c3d, type: 2}
+  - {fileID: 11400000, guid: 9e52b0fab33fdaf49b8ad0cfaaaf163b, type: 2}
   electricity: 0
   hamsterCost: 100
   hamsterTracker: {fileID: 0}
@@ -150,7 +155,7 @@ MonoBehaviour:
   sunflowerSeedPrefab: {fileID: 3298700040675696719, guid: b632589add95c9c4897d9bacf7bbcf23, type: 3}
   brocolliPrefab: {fileID: 3298700040675696719, guid: 455a1254d1b1b9244929ca594addffc6, type: 3}
   carrotPrefab: {fileID: 3298700040675696719, guid: 85b2c1e897e2f5c48a3b85cac6a30f2f, type: 3}
-  hamsterPrefab: {fileID: 0}
+  hamsterPrefab: {fileID: 177487292718794850, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
   sunflowerSeedStats: {fileID: 11400000, guid: b591db7ea323c07429e435950118f013, type: 2}
   brocolliStats: {fileID: 11400000, guid: 3255dd0e83049804cab180dd1fa5afc0, type: 2}
   carrotStats: {fileID: 11400000, guid: 94d53809e730662458e4a319f42ff9b6, type: 2}

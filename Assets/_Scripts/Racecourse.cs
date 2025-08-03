@@ -60,6 +60,7 @@ public class Racecourse : MonoBehaviour
             GameObject spawnedHam = Instantiate(racingHamsterPrefab.gameObject);
             spawnedHamsters[idx] = spawnedHam.GetComponent<RacingHamster>();
             spawnedHamsters[idx].hamsterProfile = npcRacer;
+            spawnedHamsters[idx].playerIndicator?.gameObject.SetActive(false);
             idx++;
         }
 
@@ -69,6 +70,7 @@ public class Racecourse : MonoBehaviour
             GameObject spawnedHam = Instantiate(racingHamsterPrefab.gameObject);
             spawnedHamsters[idx] = spawnedHam.GetComponent<RacingHamster>();
             spawnedHamsters[idx].hamsterProfile = playerRacer;
+            spawnedHamsters[idx].playerIndicator?.gameObject.SetActive(true);
             idx++;
         }
         

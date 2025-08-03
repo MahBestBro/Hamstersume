@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RacingHamster : MonoBehaviour
@@ -29,6 +30,8 @@ public class RacingHamster : MonoBehaviour
     public Racecourse racecourse;
     [SerializeField]
     SpriteRenderer spriteRenderer;
+    [SerializeField]
+    public SpriteRenderer playerIndicator;
     [SerializeField]
     float distanceTravelled;
     [SerializeField]
@@ -158,6 +161,11 @@ public class RacingHamster : MonoBehaviour
         this.ComputeSortOrderIndex();
 
         _raceCompletion = RaceCompletion;
+        if (_raceCompletion > 1.1F)
+        {
+            //playerIndicator.color = playerIndicator.color.WithAlpha(0.5F);
+            playerIndicator.gameObject.SetActive(false);
+        }
     }
 
     private void FixedUpdate()
