@@ -14,6 +14,8 @@ public class HamsterDataPocket : MonoBehaviour
     [SerializeField]
 	public HamsterManager hamsterManager;
     [SerializeField]
+    public HamsterSelectionBox hamsterBox;
+    [SerializeField]
     public List<HamsterProfile> hamsters = new List<HamsterProfile>();
 
 	void Awake()
@@ -32,6 +34,7 @@ public class HamsterDataPocket : MonoBehaviour
     void EncounterSceneInstance(HamsterDataPocket sceneInstance) {
         this.trainingTimer = sceneInstance.trainingTimer;
         this.hamsterManager = sceneInstance.hamsterManager;
+        this.hamsterBox = sceneInstance.hamsterBox;
         this.raceCourse = sceneInstance.raceCourse;
         this.OnEnterNewScene();
     }
@@ -41,6 +44,10 @@ public class HamsterDataPocket : MonoBehaviour
         if (this.trainingTimer)
         {
             this.trainingTimer.onTimerEnded.AddListener(this.OnTrainingPhaseEnded);
+        }
+        if (this.hamsterBox)
+        {
+            this.hamsterBox.onSelectionConfirmed.AddListener(this.OnRacersSelected);
         }
         if (this.raceCourse)
         {
@@ -65,7 +72,12 @@ public class HamsterDataPocket : MonoBehaviour
     void OnTrainingPhaseEnded()
     {
         // TEMP: Assign random racer/s
-        raceCircuit.CurrentRace.playerParticipants = this.GetRandomHamsters(raceCircuit.CurrentRace.numberPlayerParticipants);
+        // raceCircuit.CurrentRace.playerParticipants = this.GetRandomHamsters(raceCircuit.CurrentRace.numberPlayerParticipants);
+    }
+
+    void OnRacersSelected(List<HamsterProfile> selectedHamsters)
+    {
+        raceCircuit.CurrentRace.playerParticipants = selectedHamsters;
     }
 
     List<HamsterProfile> GetRandomHamsters(int num)

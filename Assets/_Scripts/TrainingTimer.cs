@@ -67,7 +67,7 @@ public class TrainingTimer : MonoBehaviour
 
         // Transition to next scene
         UnityEvent onTransitionEnd = new UnityEvent();
-        onTransitionEnd.AddListener(() => SceneManager.LoadScene("Racing")); 
+        onTransitionEnd.AddListener(() => SceneManager.LoadScene("HamsterSelection")); 
         endTransition.Play(onTransitionEnd);
     }
 
