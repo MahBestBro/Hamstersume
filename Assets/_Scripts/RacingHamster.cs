@@ -82,9 +82,20 @@ public class RacingHamster : MonoBehaviour
 
     float TickSpeed(float deltaTime)
     {
+        float raceCompletion = this.RaceCompletion;
         if (this.isSprinting)
         {
             this.acceleration = this.burstAcceleration * (this.endurance / this.maxEndurance);
+            this.endurance = this.endurance - (deltaTime * 1.1F);
+            if (this.endurance <= 0F)
+            {
+                this.endurance = 0F;
+                this.isTired = true;
+            }
+            if (raceCompletion > 1.1F)
+            {
+                this.isSprinting = false;
+            }
         }
         else
         {
@@ -112,7 +123,7 @@ public class RacingHamster : MonoBehaviour
                     this.acceleration = this.CalcFatigueRate() * decelerationFactor;
                 }
             }
-            if (this.RaceCompletion > (2F / 3F))
+            if (raceCompletion > (2F / 3F) && raceCompletion  < 1.1F)
             {
                 this.isSprinting = true;
             }
