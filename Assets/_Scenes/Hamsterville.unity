@@ -3548,6 +3548,30 @@ PrefabInstance:
       propertyPath: electricityText
       value: 
       objectReference: {fileID: 1360663294}
+    - target: {fileID: 6972481323877540612, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: variants.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972481323877540612, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: 'variants.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3506214ee52ded34a837ca01e1713f66, type: 2}
+    - target: {fileID: 6972481323877540612, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: 'variants.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: fa50e8982c206e44b84d05823069074f, type: 2}
+    - target: {fileID: 6972481323877540612, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: 'variants.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3087da2fb72cdbf49b0da3d8c667d6ca, type: 2}
+    - target: {fileID: 6972481323877540612, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: 'variants.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: fc10d22fc78c67346940252ef5d43c3d, type: 2}
+    - target: {fileID: 6972481323877540612, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: 'variants.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e52b0fab33fdaf49b8ad0cfaaaf163b, type: 2}
     - target: {fileID: 7469745317720749365, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: spriteRenderer
       value: 
