@@ -48,8 +48,9 @@ public class RaceWinOverlay : MonoBehaviour
         Array.Sort(completions, hamsters);
         int rank = hamsters.Length - Array.IndexOf(hamsters, racecourse.PlayerWinner);
         
+        int energyReward = 30 - 10 * Math.Max(rank - 1, 0);
         rankText.text = $"{rank}{RankSuffix(rank)} place";
-        electricityRewardText.text = $"{15 - 5 * Math.Max(rank - 1, 0)}";
+        electricityRewardText.text = $"{energyReward}";
 
         canvasGroup.alpha = 1.0f;
         canvasGroup.blocksRaycasts = true;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -290,6 +291,13 @@ public class Racecourse : MonoBehaviour
 
     void OnRaceEnd()
     {
+        float[] completions = RaceCompletions();
+        RacingHamster[] hamstersCopy = new RacingHamster[hamsters.Length];
+        hamsters.CopyTo(hamstersCopy, 0);
+        Array.Sort(completions, hamstersCopy);
+        int rank = hamsters.Length - Array.IndexOf(hamstersCopy, playerWinner);
+        HamsterDataPocket.instance.electricityReward = 30 - 10 * Math.Max(rank - 1, 0);
+
         HamsterDataPocket.instance.raceCircuit.QueueNextRace();
         SceneManager.LoadScene("Hamsterville");
     }

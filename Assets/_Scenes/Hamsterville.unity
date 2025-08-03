@@ -337,7 +337,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1432256528}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &274421084
@@ -1388,7 +1389,6 @@ Transform:
   m_Children:
   - {fileID: 98455649}
   - {fileID: 441749560}
-  - {fileID: 1432256528}
   - {fileID: 1758436883}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2876,9 +2876,11 @@ MonoBehaviour:
   raceCourse: {fileID: 0}
   trainingTimer: {fileID: 1237182458}
   hamsterManager: {fileID: 98455650}
+  microwave: {fileID: 0}
   racingPreview: {fileID: 1603956642}
   hamsterBox: {fileID: 0}
   hamsters: []
+  electricityReward: 0
 --- !u!4 &2028063381
 Transform:
   m_ObjectHideFlags: 0
@@ -3152,7 +3154,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 629696907}
+    m_TransformParent: {fileID: 262716705}
     m_Modifications:
     - target: {fileID: 669815686618173212, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -3228,15 +3230,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3541093749954489707, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3541093749954489707, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3541093749954489707, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3541093749954489707, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
