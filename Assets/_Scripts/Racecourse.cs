@@ -276,10 +276,10 @@ public class Racecourse : MonoBehaviour
             float nextPosAngle = Mathf.Deg2Rad * (currentAngle + angleTravelled + angleOffset);
             
             nextPos = curveCentre + curveRadius * (new Vector2(Mathf.Cos(nextPosAngle), Mathf.Sin(nextPosAngle)));
-            distanceToTravel -= angleTravelled / 360.0f * curveRadius;
+            distanceToTravel -= Mathf.Deg2Rad * angleTravelled * curveRadius;
         }
 
-        distanceCovered = intialDistance - distanceToTravel;
+        distanceCovered = intialDistance;// - distanceToTravel;
         return nextPos;
     } 
 

@@ -40,7 +40,7 @@ public class RacingHamster : MonoBehaviour
         get 
         {
             float totalStraightDistance = 2.0f * racecourse.straightLength;
-            float curveRadius = racecourse.minCurveRadius + racecourse.laneWidth * ((float)laneNumber - 1.0f);
+            float curveRadius = racecourse.minCurveRadius; //+ racecourse.laneWidth * ((float)laneNumber - 1.0f); // already accounted for in lane starting pos
             float totalCurveDistance = 2.0f * Mathf.PI * curveRadius;
             float trackDistance = totalStraightDistance + totalCurveDistance;
 
@@ -133,7 +133,7 @@ public class RacingHamster : MonoBehaviour
             float distanceCovered = 0.0f;
             transform.position = racecourse.NextPosOnRaceCourse(
                 transform.position,
-                this.velocity,
+                10.0F, //this.velocity,
                 laneNumber,
                 deltaTime,
                 ref distanceCovered
