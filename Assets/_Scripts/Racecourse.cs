@@ -25,8 +25,6 @@ public class Racecourse : MonoBehaviour
     public int numLanes;
     [Range(0.0f, 10.0f)]
     public float countdownTimeSecs;
-    [Range(0.0f, 25.0f)]
-    public float winCutsceneDurationSecs;
     
     public RacingHamster[] hamsters;
     public int playerHamstersOffset = 0;
@@ -47,7 +45,6 @@ public class Racecourse : MonoBehaviour
     Collider2D finishLineCollider;
 
     float raceElapsedTime = 0.0f;
-    float winCutsceneElapsedTime = 0.0f;
 
     private bool isInitialised = false;
     public bool IsInitialised { get { return this.isInitialised; } }
@@ -133,21 +130,9 @@ public class Racecourse : MonoBehaviour
             raceElapsedTime += Time.deltaTime;
         }
         
-        if (playerWinner != null)
-        {
-            winCutsceneElapsedTime += Time.deltaTime;
-        }
-
-        if (winCutsceneElapsedTime >= winCutsceneDurationSecs && !endTransition.IsPlaying)
-        {
-            UnityEvent onTransitionEnd = new UnityEvent();
-            onTransitionEnd.AddListener(() => SceneManager.LoadScene("Hamsterville"));
-            endTransition.Play(onTransitionEnd);
-        }
-
         //Check who's the winner out of the player's hamsters
         float[] raceCompletions = RaceCompletions();
-        for (int i = playerHamstersOffset; i < hamsters.Length; i++)
+        for (int i = playerHamstersOffset; i < hamsters.Length && playerWinner == null; i++)
         {
             RacingHamster hamster = hamsters[i];
 
@@ -293,6 +278,13 @@ public class Racecourse : MonoBehaviour
     {
         //If in the bottom half of the race course, face right, else face left
         return (pos.y <= transform.position.y) ? Facing.Right : Facing.Left;
+    }
+
+    public void TransitionToHamsterville()
+    {
+        UnityEvent onTransitionEnd = new UnityEvent();
+        onTransitionEnd.AddListener(() => SceneManager.LoadScene("Hamsterville"));
+        endTransition.Play(onTransitionEnd);
     }
 
 

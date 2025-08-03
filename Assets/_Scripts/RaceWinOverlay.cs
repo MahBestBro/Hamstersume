@@ -52,5 +52,6 @@ public class RaceWinOverlay : MonoBehaviour
         electricityRewardText.text = $"{15 - 5 * Math.Max(rank - 1, 0)}";
 
         canvasGroup.alpha = 1.0f;
+        canvasGroup.blocksRaycasts = true;
     }
 }
