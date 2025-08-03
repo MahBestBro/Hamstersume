@@ -1,6 +1,8 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TrainingTimer : MonoBehaviour
 {
@@ -10,7 +12,9 @@ public class TrainingTimer : MonoBehaviour
     ScreenTransition startTransition;
     [SerializeField]
     ScreenTransition endTransition;
-
+    [SerializeField]
+    TextMeshProUGUI timeRemainingLabel;
+    [SerializeField]
     RectTransform timerMask;
     
     [SerializeField]
@@ -25,8 +29,8 @@ public class TrainingTimer : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        timerMask = transform.Find("BarMask").GetComponent<RectTransform>();
         originalBarWidth = timerMask.rect.width;
+        this.UpdateLabel();
 
         UnityEvent onTransitionEnd = new UnityEvent();
         //onTransitionEnd.AddListener(() => StartTimer());
@@ -45,11 +49,21 @@ public class TrainingTimer : MonoBehaviour
                 fracTimeRemaining * originalBarWidth
             );
 
+            this.UpdateLabel();
+
             elapsedTimeSecs += Time.deltaTime;
             if (elapsedTimeSecs >= traningDurationSecs)
             {
                 OnTimerCompletion();
             }
+        }
+    }
+
+    void UpdateLabel()
+    {
+        if (timeRemainingLabel)
+        {
+            timeRemainingLabel.text = Mathf.CeilToInt(traningDurationSecs - elapsedTimeSecs).ToString();
         }
     }
 
@@ -63,6 +77,7 @@ public class TrainingTimer : MonoBehaviour
     void OnTimerCompletion()
     {
         timerFinished = true;
+        this.UpdateLabel();
         onTimerEnded.Invoke();
 
         // Transition to next scene
