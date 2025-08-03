@@ -46,9 +46,24 @@ public class Player : MonoBehaviour
     {
         // Get Cursor Pos
         Vector2 mousePosition = this.mousePos.ReadValue<Vector2>();
-        Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(mousePosition);
-        this.CheckGrabbables(mouseWorldPos);
-        if(this.specialCursor) this.specialCursor.Goto(mousePosition);
+        if (this.specialCursor)
+        {
+            if (pickUp.WasPressedThisFrame())
+            {
+                this.specialCursor.OnLeftClickDown();
+            }
+            else if (pickUp.WasReleasedThisFrame())
+            {
+                this.specialCursor.OnLeftClickUp();
+            }
+            this.specialCursor.Goto(mousePosition);
+        }
+        if (Time.timeScale > 0F) // Ignore when paused
+        {
+            Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(mousePosition);
+            this.CheckGrabbables(mouseWorldPos);
+        }
+        
     }
 
 
@@ -72,7 +87,6 @@ public class Player : MonoBehaviour
 
         if (pickUp.WasPressedThisFrame())
         {
-            this.specialCursor.OnLeftClickDown();
             if (hoveredGrabbable != null)
             {
                 this.Grab(hoveredGrabbable, mouseWorldPos);
@@ -81,9 +95,6 @@ public class Player : MonoBehaviour
             {
                 this.Grab(pelletBowl.SpawnPellet(mouseWorldPos), mouseWorldPos);
             }
-        } else if (pickUp.WasReleasedThisFrame())
-        {
-            this.specialCursor.OnLeftClickUp();
         }
 
         if (heldGrabbable != null)
