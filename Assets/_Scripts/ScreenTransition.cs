@@ -61,7 +61,6 @@ public class ScreenTransition : MonoBehaviour
 
     public void Play(UnityEvent onTransitionEnd = null)
     {
-        Debug.Log(transform.position);
         transform.position = startPosition;
         elapsedTime = 0.0f;
         playing = true;

@@ -2905,45 +2905,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dbff209fc15b7a4c89231247dda29bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  races:
-  - npcParticipants:
-    - hStats:
-        statSpeed: 0
-        statStamina: 0
-        statPower: 0
-        hEnergy:
-          energy: 0
-          maximumEnergy: 0
-          imgEnergyMeter: {fileID: 0}
-          imgSleepMeter: {fileID: 0}
-          imgEnergyIncreaseIndicator: {fileID: 0}
-      hVariant: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
-    - hStats:
-        statSpeed: 0
-        statStamina: 0
-        statPower: 0
-        hEnergy:
-          energy: 0
-          maximumEnergy: 0
-          imgEnergyMeter: {fileID: 0}
-          imgSleepMeter: {fileID: 0}
-          imgEnergyIncreaseIndicator: {fileID: 0}
-      hVariant: {fileID: 11400000, guid: 1070d5fdddf78ec4a916b9c6e77da61f, type: 2}
-    - hStats:
-        statSpeed: 0
-        statStamina: 0
-        statPower: 0
-        hEnergy:
-          energy: 0
-          maximumEnergy: 0
-          imgEnergyMeter: {fileID: 0}
-          imgSleepMeter: {fileID: 0}
-          imgEnergyIncreaseIndicator: {fileID: 0}
-      hVariant: {fileID: 11400000, guid: 6e3dbdf5aa623ca4d98843f386160556, type: 2}
-    playerParticipants: []
-    numberPlayerParticipants: 1
-    trackType: Standard
+  races: []
   currentRaceIndex: 0
+  hamsterPrefab: {fileID: 177487292718794850, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+  opponentVariants:
+  - {fileID: 11400000, guid: 4d73c09835f807e47bd93fbcd6a1ea17, type: 2}
+  - {fileID: 11400000, guid: d5c5c0d7d3c27394fbc5011035bf8fa2, type: 2}
+  - {fileID: 11400000, guid: 9974c1e270111bb48bab275f5e885cdb, type: 2}
 --- !u!1 &2091314711
 GameObject:
   m_ObjectHideFlags: 0
