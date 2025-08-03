@@ -35,6 +35,8 @@ public class RacingHamster : MonoBehaviour
     float _raceCompletion;
 
 
+    //NOTE: It's more useful if this is kept unclamped so that you can track which rank the hamsters are
+    //after they've gone past the finish line.
     public float RaceCompletion
     {
         get 

@@ -268,7 +268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3423310876925759394, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 84
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 3423310876925759394, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -910,7 +910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3423310876925759394, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -23.643974
+      value: -66
       objectReference: {fileID: 0}
     - target: {fileID: 3423310876925759394, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1927,7 +1927,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3423310876925759394, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -23.643982
+      value: -66
       objectReference: {fileID: 0}
     - target: {fileID: 3423310876925759394, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2166,6 +2166,7 @@ RectTransform:
   - {fileID: 2146662067}
   - {fileID: 1709935146}
   - {fileID: 1114423694}
+  - {fileID: 2052955431}
   m_Father: {fileID: 780607486}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2364,7 +2365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3423310876925759394, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -245
+      value: -272.35602
       objectReference: {fileID: 0}
     - target: {fileID: 3423310876925759394, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3002,7 +3003,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1709935146
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4027,7 +4028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3423310876925759394, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -135.64398
+      value: -163
       objectReference: {fileID: 0}
     - target: {fileID: 3423310876925759394, guid: 93b525f5a6adedd43aefa7e5b1de23ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4372,6 +4373,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040943142}
   m_CullTransparentMesh: 1
+--- !u!1 &2052955430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2052955431}
+  - component: {fileID: 2052955433}
+  - component: {fileID: 2052955432}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2052955431
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052955430}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1212819765}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -469, y: 301}
+  m_SizeDelta: {x: 790, y: 452}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2052955432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052955430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: ae929b93e60c28b4ab580ec0d1f3c566, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2052955433
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052955430}
+  m_CullTransparentMesh: 1
 --- !u!1001 &2056820269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4621,7 +4697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 913917799582300049, guid: 5684914cdc2e4944c895378fa1007e29, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 282.91
+      value: 476.0624
       objectReference: {fileID: 0}
     - target: {fileID: 913917799582300049, guid: 5684914cdc2e4944c895378fa1007e29, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -4629,7 +4705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 913917799582300049, guid: 5684914cdc2e4944c895378fa1007e29, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 141.46
+      value: 44.883835
       objectReference: {fileID: 0}
     - target: {fileID: 2254549653404427642, guid: 5684914cdc2e4944c895378fa1007e29, type: 3}
       propertyPath: m_Name
@@ -4718,8 +4794,7 @@ PrefabInstance:
     - target: {fileID: 7224931549147255056, guid: 5684914cdc2e4944c895378fa1007e29, type: 3}
       propertyPath: m_Text
       value: "* Thomas Cox (MahBestBro): \n  Programming, Audio \r\n\r\n\n* Wrygondryn:\n 
-        Programming, Animations\r\n\n\n* [Insert Name if Comfortable] (Hanase)\n 
-        Art + Animation\r\n\r\n\r\n"
+        Programming, Animations\r\n\n\n* Hanase:\n  Art, Animation\r\n\r\n\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 7224931549147255056, guid: 5684914cdc2e4944c895378fa1007e29, type: 3}
       propertyPath: m_FontData.m_MinSize
@@ -4727,7 +4802,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7224931549147255056, guid: 5684914cdc2e4944c895378fa1007e29, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 28
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
