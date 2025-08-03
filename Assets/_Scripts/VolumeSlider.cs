@@ -8,7 +8,7 @@ public class VolumeSlider : MonoBehaviour
     void Start()
     {
         slider = GetComponentInChildren<Scrollbar>();
-        slider.value = Soundtrack.Volume;
+        slider.value = AudioListener.volume;
     }
 
 

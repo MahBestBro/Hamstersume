@@ -61,6 +61,7 @@ public class MicrowaveButton : MonoBehaviour
             foodInfo.Find("Speed").GetComponentInChildren<TMP_Text>().text = $"+{foodStats.speedStatIncrease}";
             foodInfo.Find("Stamina").GetComponentInChildren<TMP_Text>().text = $"+{foodStats.staminaStatIncrease}";
             foodInfo.Find("Power").GetComponentInChildren<TMP_Text>().text = $"+{foodStats.powerStatIncrease}";
+            foodInfo.Find("Energy").GetComponentInChildren<TMP_Text>().text = $"+{foodStats.energyRestored}";
             
             transform.Find("CostDisplay").GetComponentInChildren<TMP_Text>().text = $"{foodStats.electricityCost}";
         }
