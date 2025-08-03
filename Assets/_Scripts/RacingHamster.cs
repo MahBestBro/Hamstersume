@@ -16,7 +16,6 @@ public class RacingHamster : MonoBehaviour
     [SerializeField]
     float acceleration = 0;
     float decelerationFactor = 1F;
-    [SerializeField]
     float burstAcceleration;
     bool isSprinting = false;
     [SerializeField]
@@ -30,6 +29,7 @@ public class RacingHamster : MonoBehaviour
     public Racecourse racecourse;
     [SerializeField]
     SpriteRenderer spriteRenderer;
+    [SerializeField]
     float distanceTravelled;
     [SerializeField]
     float _raceCompletion;
@@ -71,31 +71,52 @@ public class RacingHamster : MonoBehaviour
         this.isSprinting = false;
     }
 
+    public int ComputeSortOrderIndex()
+    {
+        int sortOrder;
+        int screenY = (int)Camera.main.WorldToScreenPoint(this.spriteRenderer?.transform.position ?? this.transform.position).y;
+        sortOrder = Screen.height - screenY;
+        this.spriteRenderer.sortingOrder = sortOrder;
+        return sortOrder;
+    }
+
     float TickSpeed(float deltaTime)
     {
-        if (this.isTired)
+        if (this.isSprinting)
         {
-            this.endurance = this.endurance + (deltaTime * 0.5F);
-            this.acceleration = -decelerationFactor;
-            if (this.endurance >= this.maxEndurance) {
-                this.endurance = this.maxEndurance;
-                this.isTired = false;
-                this.acceleration = this.burstAcceleration;
+            this.acceleration = this.burstAcceleration * (this.endurance / this.maxEndurance);
+        }
+        else
+        {
+            if (this.isTired)
+            {
+                this.endurance = this.endurance + (deltaTime * 0.5F);
+                this.acceleration = -decelerationFactor;
+                if (this.endurance >= this.maxEndurance)
+                {
+                    this.endurance = this.maxEndurance;
+                    //this.isTired = false;
+                    //this.isSprinting = true;
+                }
+            }
+            else
+            {
+                this.endurance = this.endurance - deltaTime;
+                if (this.endurance <= 0F)
+                {
+                    this.endurance = 0F;
+                    this.isTired = true;
+                }
+                if (!this.isSprinting)
+                {
+                    this.acceleration = this.CalcFatigueRate() * decelerationFactor;
+                }
+            }
+            if (this.RaceCompletion > (2F / 3F))
+            {
                 this.isSprinting = true;
             }
-        } else
-        {
-            this.endurance = this.endurance - deltaTime;
-            if (this.endurance <= 0F)
-            {
-                this.endurance = 0F;
-                this.isTired = true;
-            }
-            if (!this.isSprinting)
-            {
-                this.acceleration = -(1F - (this.endurance / this.maxEndurance)) * decelerationFactor;
-            }
-        }        
+        }
         this.velocity = Mathf.Min(Mathf.Max(minSpeed, this.velocity + this.acceleration * deltaTime), this.maxSpeed);
         return this.velocity;
     }
@@ -107,25 +128,36 @@ public class RacingHamster : MonoBehaviour
 
         if ((bool)racecourse?.RaceIsUnderway())
         {
-            this.TickSpeed(Time.fixedDeltaTime);
+            float deltaTime = Time.deltaTime;
             this.spriteRenderer.sprite = hamsterProfile.hVariant.hamsterRunning;
             float distanceCovered = 0.0f;
             transform.position = racecourse.NextPosOnRaceCourse(
                 transform.position,
                 this.velocity,
                 laneNumber,
+                deltaTime,
                 ref distanceCovered
             );
             distanceTravelled += distanceCovered;
         }
 
         spriteRenderer.flipX = racecourse.GetRaceFacing(transform.position) == Facing.Right;
+        this.ComputeSortOrderIndex();
 
         _raceCompletion = RaceCompletion;
     }
 
     private void FixedUpdate()
     {
-        
+        if ((bool)racecourse?.RaceIsUnderway())
+        {
+            float deltaTime = Time.fixedDeltaTime;
+            this.TickSpeed(deltaTime);
+        }
+    }
+
+    float CalcFatigueRate()
+    {
+        return -(1F - (this.endurance / this.maxEndurance));
     }
 }
