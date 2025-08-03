@@ -16,6 +16,7 @@ public class HamsterDataPocket : MonoBehaviour
     [SerializeField]
     public List<HamsterProfile> hamsters = new List<HamsterProfile>();
 
+
 	void Awake()
 	{
         if (instance)
@@ -24,12 +25,17 @@ public class HamsterDataPocket : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
+        else
+        {
+            hamsters.Add(hamsterManager.hamsterPrefab.GetComponent<Hamster>().hamsterProfile);
+        }
         instance = this;
         DontDestroyOnLoad(this.gameObject);
         this.OnEnterNewScene();
     }
 
-    void EncounterSceneInstance(HamsterDataPocket sceneInstance) {
+    void EncounterSceneInstance(HamsterDataPocket sceneInstance) 
+    {
         this.trainingTimer = sceneInstance.trainingTimer;
         this.hamsterManager = sceneInstance.hamsterManager;
         this.raceCourse = sceneInstance.raceCourse;
@@ -38,6 +44,13 @@ public class HamsterDataPocket : MonoBehaviour
 
     void OnEnterNewScene()
     {
+        if (this.hamsterManager)
+        {
+            foreach (HamsterProfile profile in hamsters)
+            {
+                this.hamsterManager.CreateHamster(profile);
+            }
+        }
         if (this.trainingTimer)
         {
             this.trainingTimer.onTimerEnded.AddListener(this.OnTrainingPhaseEnded);
@@ -51,19 +64,23 @@ public class HamsterDataPocket : MonoBehaviour
 
     private void Start()
     {
+        
+        
+    }
+
+    void OnTrainingPhaseEnded()
+    {
         if (hamsterManager)
 		{
 			Hamster[] managedHamsters = hamsterManager.GetManagedHamsters();
-			hamsters.Capacity += managedHamsters.Length;
+			hamsters.Clear();
+            //hamsters.Capacity += managedHamsters.Length;
 			foreach (Hamster hamster in managedHamsters)
 			{
 				hamsters.Add(hamster.hamsterProfile);
             }
         }
-    }
 
-    void OnTrainingPhaseEnded()
-    {
         // TEMP: Assign random racer/s
         raceCircuit.CurrentRace.playerParticipants = this.GetRandomHamsters(raceCircuit.CurrentRace.numberPlayerParticipants);
     }

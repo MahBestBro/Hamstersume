@@ -51,6 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd597cc2965dc9f4287638564199b924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  physicsBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 9, y: 10, z: 0}
   spriteRenderer: {fileID: 2213047384176467128}
   interactableLayermask:
     serializedVersion: 2
@@ -65,12 +68,12 @@ MonoBehaviour:
   tiredAwakenState: 0
   hamsterProfile:
     hStats:
-      statSpeed: 0
-      statStamina: 0
-      statPower: 0
+      statSpeed: 5
+      statStamina: 5
+      statPower: 5
       hEnergy:
-        energy: 0
-        maximumEnergy: 0
+        energy: 94.44758
+        maximumEnergy: 100
         imgEnergyMeter: {fileID: 2537602075897787495}
         imgSleepMeter: {fileID: 1611170909101019079}
         imgEnergyIncreaseIndicator: {fileID: 883384013386927753}
@@ -264,7 +267,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.682
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

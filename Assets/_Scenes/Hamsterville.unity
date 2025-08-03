@@ -171,9 +171,14 @@ MonoBehaviour:
   hamsterWalkArea:
     m_Center: {x: 0, y: -3.48, z: 0}
     m_Extent: {x: 8.84, y: 1.41, z: 0}
+  hamsterPhysicsBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 9, y: 10, z: 0}
+  hamsterPhysicsBoundsBuffer: 1
   maxHamsterEnergy: 100
   hamsterEnergyLossPerSec: 10
   hamsterTireDurationSecs: 5
+  hamsterPrefab: {fileID: 177487292718794850, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
 --- !u!1 &158059446
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 394041041}
+  defaultHighlightMateral: {fileID: 0}
 --- !u!4 &213144070 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5155274801321314318, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
@@ -984,6 +990,10 @@ PrefabInstance:
     - target: {fileID: 177487292718794850, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: m_Name
       value: Hamster (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 177487292718794850, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 214213216886367404, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: m_Sprite
@@ -3957,6 +3967,10 @@ PrefabInstance:
     - target: {fileID: 177487292718794850, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: m_Name
       value: Hamster
+      objectReference: {fileID: 0}
+    - target: {fileID: 177487292718794850, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 214213216886367404, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: m_Sprite
