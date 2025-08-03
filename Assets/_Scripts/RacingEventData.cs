@@ -25,18 +25,19 @@ public class RacingEventData
         if (numPlayerRacers >= 0) this.numberPlayerParticipants = numPlayerRacers;
         this.npcParticipants = new List<HamsterProfile>(numOpponents);
         this.playerParticipants = new List<HamsterProfile>(this.numberPlayerParticipants);
+        
         for (int i = 0; i < numOpponents; i++)
         {
             int variantIndex = UnityEngine.Random.Range(0, opponentVariants.Length);
             HamsterVariant variant = opponentVariants[variantIndex];
 
-            HamsterProfile newHamProfile = defaultProfile;
+            HamsterProfile newHamProfile = new HamsterProfile(defaultProfile);
             newHamProfile.hVariant = variant;
             newHamProfile.hStats.statSpeed = (int)(variant.startingSpeedStatFrac * statMultiplier);
             newHamProfile.hStats.statStamina = (int)(variant.startingStaminaStatFrac * statMultiplier);
             newHamProfile.hStats.statPower = (int)(variant.startingPowerStatFrac * statMultiplier);
             
-            Debug.Log(variantIndex);
+            Debug.Log(variant);
 
             this.npcParticipants.Add(newHamProfile);
         }

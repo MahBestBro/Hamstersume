@@ -26,7 +26,6 @@ public class EnergyDisplay : MonoBehaviour
     {
         if (imgEnergyMeter)
         {
-            Debug.Log(hEnergy.GetPercentEnergy());
             imgEnergyMeter.fillAmount = hEnergy.GetPercentEnergy();
             imgEnergyMeter.canvas.sortingOrder = sortingIndex;
             

@@ -21,7 +21,7 @@ public class RacingCircuit : MonoBehaviour
         get { return (currentRaceIndex <= races.Count) ? races[currentRaceIndex] : null; }
     }
 
-    private void Start()
+    public void InitialiseCircuit()
     {
         prefabProfile = hamsterPrefab.GetComponent<Hamster>().hamsterProfile;
         this.AddRace(this.GenerateRace());

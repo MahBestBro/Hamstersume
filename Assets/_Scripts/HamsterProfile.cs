@@ -5,7 +5,16 @@ using UnityEngine;
 public class HamsterProfile
 {
     [SerializeField]
-    public HamsterStats hStats;
+    public HamsterStats hStats = new HamsterStats();
     [SerializeField]
     public HamsterVariant hVariant;
+
+    public HamsterProfile()
+    {
+    }
+
+    public HamsterProfile(HamsterProfile copyProfile)
+    {
+        //TODO: Implement. hStats is referenced and thus must manually deep copy
+    }
 }
