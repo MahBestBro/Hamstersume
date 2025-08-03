@@ -80,6 +80,7 @@ public class Hamster : Grabbable
         EnterState(HamsterState.Waiting);
 
         energyDisplay = transform.Find("EnergyMeter").GetComponent<EnergyDisplay>();
+        energyDisplay.hEnergy = hEnergy;
 
         statDisplay = transform.Find("StatDisplay").GetComponent<HamsterStatDisplay>();
         statDisplay.ToggleVisibility(hover.isHovered);

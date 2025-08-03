@@ -55,6 +55,7 @@ public class HamsterEnergy
 
     public void ResetToMax()
     {
+        Debug.Log(this.maximumEnergy);
         this.energy = this.maximumEnergy;
     }
 
