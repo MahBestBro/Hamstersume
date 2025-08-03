@@ -2205,7 +2205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc9cec9dd15aa84cbf3a3a3140e392e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  traningDurationSecs: 120
+  traningDurationSecs: 60
   startTransition: {fileID: 274421086}
   endTransition: {fileID: 1710402927}
   timeRemainingLabelTMP: {fileID: 1031824659}

@@ -2907,33 +2907,13 @@ PrefabInstance:
       propertyPath: m_FontData.m_HorizontalOverflow
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3086294189967378424, guid: 67009e9df5c2b1141bc278ea2f08e02a, type: 3}
-      propertyPath: m_Maskable
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3365799753959377800, guid: 67009e9df5c2b1141bc278ea2f08e02a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000033885313
+      value: 0.0034542
       objectReference: {fileID: 0}
     - target: {fileID: 3365799753959377800, guid: 67009e9df5c2b1141bc278ea2f08e02a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -45
-      objectReference: {fileID: 0}
-    - target: {fileID: 4813537906602787687, guid: 67009e9df5c2b1141bc278ea2f08e02a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 4813537906602787687, guid: 67009e9df5c2b1141bc278ea2f08e02a, type: 3}
-      propertyPath: m_Color.b
-      value: 0.6862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 4813537906602787687, guid: 67009e9df5c2b1141bc278ea2f08e02a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.882353
-      objectReference: {fileID: 0}
-    - target: {fileID: 4813537906602787687, guid: 67009e9df5c2b1141bc278ea2f08e02a, type: 3}
-      propertyPath: m_Color.r
-      value: 0.9960785
+      value: -43
       objectReference: {fileID: 0}
     - target: {fileID: 5461578588637623415, guid: 67009e9df5c2b1141bc278ea2f08e02a, type: 3}
       propertyPath: m_SizeDelta.x
