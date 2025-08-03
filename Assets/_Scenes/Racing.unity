@@ -761,6 +761,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RacingHamster (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1831,6 +1835,7 @@ MonoBehaviour:
   raceCourse: {fileID: 1340364146}
   trainingTimer: {fileID: 0}
   hamsterManager: {fileID: 0}
+  microwave: {fileID: 0}
   racingPreview: {fileID: 0}
   hamsterBox: {fileID: 0}
   hamsters:
@@ -1842,6 +1847,7 @@ MonoBehaviour:
         energy: 0
         maximumEnergy: 0
     hVariant: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
+  electricityReward: 0
 --- !u!4 &1300880152
 Transform:
   m_ObjectHideFlags: 0
@@ -2403,6 +2409,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RacingHamster (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2748,6 +2758,10 @@ PrefabInstance:
     - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_Name
       value: RacingHamster
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.x

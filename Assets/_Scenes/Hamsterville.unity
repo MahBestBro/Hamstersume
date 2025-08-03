@@ -337,8 +337,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1432256528}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &274421084
@@ -881,6 +880,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hamster (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 177487292718794850, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 214213216886367404, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1389,6 +1392,7 @@ Transform:
   m_Children:
   - {fileID: 98455649}
   - {fileID: 441749560}
+  - {fileID: 1432256528}
   - {fileID: 1758436883}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2047,7 +2051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc9cec9dd15aa84cbf3a3a3140e392e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  traningDurationSecs: 2
+  traningDurationSecs: 120
   startTransition: {fileID: 274421086}
   endTransition: {fileID: 1710402927}
   timeRemainingLabel: {fileID: 1031824659}
@@ -2842,6 +2846,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158bae41c52d8344ea1328d25c81e255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1915144412 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6972481323877540612, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+  m_PrefabInstance: {fileID: 1097125511417085552}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28df049a9daaf5c48acc147b4c964240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2028063379
 GameObject:
   m_ObjectHideFlags: 0
@@ -2876,7 +2891,7 @@ MonoBehaviour:
   raceCourse: {fileID: 0}
   trainingTimer: {fileID: 1237182458}
   hamsterManager: {fileID: 98455650}
-  microwave: {fileID: 0}
+  microwave: {fileID: 1915144412}
   racingPreview: {fileID: 1603956642}
   hamsterBox: {fileID: 0}
   hamsters: []
@@ -3154,7 +3169,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 262716705}
+    m_TransformParent: {fileID: 629696907}
     m_Modifications:
     - target: {fileID: 669815686618173212, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -3298,7 +3313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6972481323877540612, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: electricity
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6972481323877540612, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: hamsterPrefab
@@ -3937,6 +3952,18 @@ PrefabInstance:
       propertyPath: hamsterProfile.hVariant
       value: 
       objectReference: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
+    - target: {fileID: 8533016572887107321, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+      propertyPath: hamsterProfile.hStats.statPower
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533016572887107321, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+      propertyPath: hamsterProfile.hStats.statSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533016572887107321, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
+      propertyPath: hamsterProfile.hStats.statStamina
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

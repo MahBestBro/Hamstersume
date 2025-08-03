@@ -49,6 +49,7 @@ public class HamsterManager : MonoBehaviour
         HamsterEnergy tempEnergy = newHamster.hamsterProfile.hStats.hEnergy;
         newHamster.hamsterProfile = profile;
         newHamster.hamsterProfile.hStats.hEnergy = tempEnergy;
+        
         newHamster.isNewHamster = false;
 
         //TODO: This is weird, refactor

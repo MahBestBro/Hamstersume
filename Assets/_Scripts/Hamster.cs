@@ -104,11 +104,12 @@ public class Hamster : Grabbable
 
     public void InitialiseNewHamster()
     {
-        hStats.statSpeed = (int)(hamsterVariant.startingSpeedStatFrac * 10.0f);
-        hStats.statStamina = (int)(hamsterVariant.startingStaminaStatFrac * 10.0f);
-        hStats.statPower = (int)(hamsterVariant.startingPowerStatFrac * 10.0f);
+        float s = 8.0f * (float)(Math.Max(HamsterDataPocket.instance.raceCircuit.races.Count, 1));
+        hStats.statSpeed = (int)(hamsterVariant.startingSpeedStatFrac * s);
+        hStats.statStamina = (int)(hamsterVariant.startingStaminaStatFrac * s);
+        hStats.statPower = (int)(hamsterVariant.startingPowerStatFrac * s);
 
-        
+        //TODO: HAcky Fix, double check order of instantiation
     }
 
     public override void OnCaptured(GrabbableCapturer capturer)
