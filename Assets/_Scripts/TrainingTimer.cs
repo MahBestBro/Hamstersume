@@ -13,7 +13,9 @@ public class TrainingTimer : MonoBehaviour
     [SerializeField]
     ScreenTransition endTransition;
     [SerializeField]
-    TextMeshProUGUI timeRemainingLabel;
+    TextMeshProUGUI timeRemainingLabelTMP;
+    [SerializeField]
+    Text timeRemainingLabel;
     [SerializeField]
     RectTransform timerMask;
     
@@ -61,9 +63,14 @@ public class TrainingTimer : MonoBehaviour
 
     void UpdateLabel()
     {
+        string label = Mathf.CeilToInt(traningDurationSecs - elapsedTimeSecs).ToString();
         if (timeRemainingLabel)
         {
-            timeRemainingLabel.text = Mathf.CeilToInt(traningDurationSecs - elapsedTimeSecs).ToString();
+            timeRemainingLabel.text = label;
+        }
+        if (timeRemainingLabelTMP)
+        {
+            timeRemainingLabelTMP.text = label;
         }
     }
 

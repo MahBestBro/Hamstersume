@@ -627,6 +627,10 @@ PrefabInstance:
       propertyPath: endPosition.x
       value: 4224
       objectReference: {fileID: 0}
+    - target: {fileID: 148183869710822167, guid: 9401e18664e2a1649bb103f4edb2b2a9, type: 3}
+      propertyPath: autoplayOnStart
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2642625427117273502, guid: 9401e18664e2a1649bb103f4edb2b2a9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

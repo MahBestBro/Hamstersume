@@ -1420,9 +1420,11 @@ MonoBehaviour:
   raceCourse: {fileID: 0}
   trainingTimer: {fileID: 0}
   hamsterManager: {fileID: 2039469793}
+  microwave: {fileID: 0}
   racingPreview: {fileID: 544942217}
   hamsterBox: {fileID: 710183182}
   hamsters: []
+  electricityReward: 0
 --- !u!4 &1196608144
 Transform:
   m_ObjectHideFlags: 0
@@ -2373,26 +2375,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1464796394012168282, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
-      propertyPath: m_Color.b
-      value: 0.3019608
-      objectReference: {fileID: 0}
-    - target: {fileID: 1464796394012168282, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
-      propertyPath: m_Color.g
-      value: 0.4745098
-      objectReference: {fileID: 0}
-    - target: {fileID: 1464796394012168282, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
-      propertyPath: m_Color.r
-      value: 0.7490196
-      objectReference: {fileID: 0}
-    - target: {fileID: 1464796394012168282, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1464796394012168282, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 40
-      objectReference: {fileID: 0}
     - target: {fileID: 2006334688342293940, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2460,22 +2442,6 @@ PrefabInstance:
     - target: {fileID: 6101321203034363576, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261731393981518270, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 190.6482
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261731393981518270, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 42.2104
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261731393981518270, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -196.1459
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261731393981518270, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 40.3547
       objectReference: {fileID: 0}
     - target: {fileID: 7430214656657513222, guid: 8d9998176c2cbcc4194b0d1dfa9a2717, type: 3}
       propertyPath: m_IsActive
