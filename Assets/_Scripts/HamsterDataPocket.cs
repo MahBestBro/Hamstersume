@@ -14,11 +14,16 @@ public class HamsterDataPocket : MonoBehaviour
     [SerializeField]
 	public HamsterManager hamsterManager;
     [SerializeField]
+    public Microwave microwave;
+    [SerializeField]
     public RacingPreview racingPreview;
     [SerializeField]
     public HamsterSelectionBox hamsterBox;
     [SerializeField]
     public List<HamsterProfile> hamsters = new List<HamsterProfile>();
+
+    //TODO: Perhaps move out or rename this class cause this ain't really a hamster related thing
+    public int electricityReward = 0;
 
     int numRounds = 0;
     public int NumRounds
@@ -50,6 +55,7 @@ public class HamsterDataPocket : MonoBehaviour
     {
         this.trainingTimer = sceneInstance.trainingTimer;
         this.hamsterManager = sceneInstance.hamsterManager;
+        this.microwave = sceneInstance.microwave;
         this.racingPreview = sceneInstance.racingPreview;
         this.hamsterBox = sceneInstance.hamsterBox;
         this.raceCourse = sceneInstance.raceCourse;
@@ -71,6 +77,10 @@ public class HamsterDataPocket : MonoBehaviour
         if (this.trainingTimer)
         {
             this.trainingTimer.onTimerEnded.AddListener(this.OnTrainingPhaseEnded);
+        }
+        if (this.microwave)
+        {
+            this.microwave.electricity = electricityReward;
         }
         if (this.racingPreview)
         {
