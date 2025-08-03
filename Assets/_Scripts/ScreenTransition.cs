@@ -43,7 +43,7 @@ public class ScreenTransition : MonoBehaviour
             float t = elapsedTime / transitionDurationSecs;
             transform.position = Vector2.Lerp(startPosition, endPosition, Ease(t, easeMode));
 
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             if (elapsedTime >= transitionDurationSecs)
             {
                 transform.position = endPosition;

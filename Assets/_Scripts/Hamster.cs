@@ -200,6 +200,10 @@ public class Hamster : Grabbable
 
     public bool TryEnterState(HamsterState newState)
     {
+        if (newState == HamsterState.Eating && this.state == HamsterState.Exercising)
+        {
+            return false;
+        }
         if (this.state == HamsterState.Tired)
         {
             if (newState != HamsterState.Eating)
