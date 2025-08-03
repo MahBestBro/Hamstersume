@@ -20,6 +20,24 @@ public class EnergyDisplay : MonoBehaviour
     private float sleepFullDurationSecs = 10.0F;
     private float sleepDurationRemaining = 0F;
 
+    Vector2 initialLocalPos;
+
+    public Vector2 SetInitialPos()
+    {
+        initialLocalPos = this.transform.localPosition;
+        return initialLocalPos;
+    }
+    public Vector2 ResetPos()
+    {
+        this.transform.localPosition = initialLocalPos;
+        return this.transform.localPosition;
+    }
+    public Vector2 OffsetPos(Vector2 offset)
+    {
+        this.transform.localPosition = initialLocalPos + offset;
+        return this.transform.localPosition;
+    }
+
 
     /// Display Energy
     public void UpdateEnergyDisplay(int sortingIndex)

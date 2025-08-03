@@ -81,6 +81,7 @@ public class Hamster : Grabbable
 
         energyDisplay = transform.Find("EnergyMeter").GetComponent<EnergyDisplay>();
         energyDisplay.hEnergy = hEnergy;
+        energyDisplay.SetInitialPos();
 
         statDisplay = transform.Find("StatDisplay").GetComponent<HamsterStatDisplay>();
         statDisplay.ToggleVisibility(hover.isHovered);
@@ -264,6 +265,7 @@ public class Hamster : Grabbable
 
     public void EnterState(HamsterState newState) 
     {
+        energyDisplay.ResetPos();
         Sprite newSprite = hamsterVariant.hamsterIdle;
         switch (newState)
         {
@@ -280,6 +282,8 @@ public class Hamster : Grabbable
                 break;
 
             case HamsterState.Exercising:
+                energyDisplay.OffsetPos(this.wheel.GetEnergybarOffset());
+                wheel.StartSpinning(-1, !this.spriteRenderer.flipX);
                 newSprite = hamsterVariant.hamsterRunning;
                 this.isGrabbable = true;
                 transform.position = wheel.transform.position;
@@ -290,6 +294,7 @@ public class Hamster : Grabbable
 
             case HamsterState.Tired:
                 newSprite = hamsterVariant.hamsterSleeping;
+                wheel?.StopSpinning();
                 this.isGrabbable = true;
                 energyDisplay.SleepFull();
                 break;

@@ -67,6 +67,7 @@ public class HamsterTracker : MonoBehaviour
             if (hamsterWheelMap[i].hamsterInstanceID == id)
             {
                 hamsterWheelPairToRemoveIndex = i;
+                hamster.wheel.StopSpinning();
                 break;
             }
         }
