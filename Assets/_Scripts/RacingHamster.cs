@@ -63,10 +63,10 @@ public class RacingHamster : MonoBehaviour
         this.Start();
         this.spriteRenderer.sprite = hamsterProfile.hVariant.hamsterIdle;
 
-        this.maxSpeed = this.minSpeed + this.hamsterProfile.hStats.statSpeed;
+        this.maxSpeed = this.minSpeed + this.hamsterProfile.hStats.statSpeed * 0.5F;
         this.velocity = this.maxSpeed;
         this.burstAcceleration = Mathf.Max(this.hamsterProfile.hStats.statPower, 0F);
-        this.maxEndurance = Mathf.Min(this.hamsterProfile.hStats.statStamina * 5F, 3F);
+        this.maxEndurance = Mathf.Max(this.hamsterProfile.hStats.statStamina, 3F);
         this.endurance = this.maxEndurance;
         this.isTired = false;
         this.isSprinting = false;
@@ -86,7 +86,7 @@ public class RacingHamster : MonoBehaviour
         float raceCompletion = this.RaceCompletion;
         if (this.isSprinting)
         {
-            this.acceleration = this.burstAcceleration * (this.endurance / this.maxEndurance);
+            this.acceleration = this.burstAcceleration * (this.endurance / this.maxEndurance) + (this.CalcFatigueRate() * decelerationFactor);
             this.endurance = this.endurance - (deltaTime * 1.1F);
             if (this.endurance <= 0F)
             {
@@ -142,6 +142,17 @@ public class RacingHamster : MonoBehaviour
         {
             float deltaTime = Time.deltaTime;
             this.spriteRenderer.sprite = hamsterProfile.hVariant.hamsterRunning;
+
+            // Should probably be in FixedUpdate
+            float distanceCovered = 0.0f;
+            transform.position = racecourse.NextPosOnRaceCourse(
+                transform.position,
+                this.velocity,
+                laneNumber,
+                deltaTime,
+                ref distanceCovered
+            );
+            distanceTravelled += distanceCovered;
         }
 
         spriteRenderer.flipX = racecourse.GetRaceFacing(transform.position) == Facing.Right;
@@ -167,16 +178,6 @@ public class RacingHamster : MonoBehaviour
         {
             float deltaTime = Time.fixedDeltaTime;
             this.TickSpeed(deltaTime);
-
-            float distanceCovered = 0.0f;
-            transform.position = racecourse.NextPosOnRaceCourse(
-                transform.position,
-                this.velocity,
-                laneNumber,
-                deltaTime,
-                ref distanceCovered
-            );
-            distanceTravelled += distanceCovered;
         }
     }
 

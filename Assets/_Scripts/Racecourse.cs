@@ -91,13 +91,30 @@ public class Racecourse : MonoBehaviour
         return dummyHamsters;
     }
 
+    public int[] GenerateShuffledIndexes(int n)
+    {
+        int[] indexes = new int[n];
+        bool[] selectedIndexes = new bool[n];
+        for (int i = 0; i < n; i++)
+        {
+            indexes[i] = UnityEngine.Random.Range(0, n);
+            while(selectedIndexes[indexes[i]])
+            {
+                indexes[i] = (indexes[i] + 1) % n;
+            }
+            selectedIndexes[indexes[i]] = true;
+        }
+        return indexes;
+    }
+
     public void InitialiseRacecourse(RacingEventData raceData)
     {
         this.hamsters = (raceData!=null) ? this.SpawnRacingHamsters(raceData) : this.GetDummyHamsters();
+        int[] orderedLanes = GenerateShuffledIndexes(this.hamsters.Length);
         for (int i = 0; i < hamsters.Length; i++)
         {
             hamsters[i].InitialiseSelf(this);
-            hamsters[i].laneNumber = i + 1;
+            hamsters[i].laneNumber = orderedLanes[i] + 1;
             hamsters[i].transform.position = StartingPosition(hamsters[i].laneNumber);
         }
 
