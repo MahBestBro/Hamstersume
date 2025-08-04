@@ -17,4 +17,18 @@ public class HamsterVariant : ScriptableObject
     
     [Range(1.0f, 200.0f)]
     public float startingMaxEnergy = 100F;
+
+    public Sprite GetSpriteByID(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                return hamsterIdle;
+            case 2:
+                return hamsterRunning;
+            case 3:
+                return hamsterSleeping;
+        }
+        return null;
+    }
 }

@@ -17,7 +17,14 @@ public enum HamsterState
 public class Hamster : Grabbable
 {
     public HamsterState state;
-    
+
+    Animator animator;
+    int anim_stateEnum = Animator.StringToHash("stateEnum");
+    public int spriteIdOverride = -1;
+    [SerializeField]
+    public Transform spriteRoot;
+    bool facingRight;
+
     [HideInInspector]
     public Collider2D _collider2D;
     [HideInInspector]
@@ -69,6 +76,7 @@ public class Hamster : Grabbable
     {
         base.Start();
         _collider2D = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
 
         hover = GetComponent<Hoverable>();
 
@@ -165,10 +173,18 @@ public class Hamster : Grabbable
     }
 
 
+    public void OverrideSprite()
+    {
+        //if (this.spriteRenderer && spriteIdOverride >= 0)
+        //{
+        //    this.spriteRenderer.sprite = this.hamsterProfile.hVariant.GetSpriteByID(spriteIdOverride);
+        //}
+    }
 
     void HandleCurrentState(HamsterState state)
     {
-        switch (state)
+        this.OverrideSprite();
+            switch (state)
         {
             case HamsterState.Waiting:
                 idleElapsedTime += Time.deltaTime;
@@ -184,7 +200,13 @@ public class Hamster : Grabbable
 
                 if (!isGrabbed)
                 {
-                    this.spriteRenderer.flipX = Vector2.Dot(toTravel, Vector2.right) >= 0.0f;
+                    this.facingRight = Vector2.Dot(toTravel, Vector2.right) >= 0.0f;
+                    //this.spriteRenderer.flipX = flipSelf;
+                    this.spriteRoot.localScale = new Vector3((facingRight ? -1F : 1F), 1, 1);
+                    //Vector3 scale = this.transform.localScale;
+                    //scale.x = Mathf.Abs(scale.x) * (facingRight ? -1F : 1F);
+                    //if (this.transform.localScale != scale) this.transform.localScale = scale;
+
                 }
 
                 if (toTravel.magnitude >= walkSpeed * Time.deltaTime)
@@ -283,7 +305,7 @@ public class Hamster : Grabbable
 
             case HamsterState.Exercising:
                 energyDisplay.OffsetPos(this.wheel.GetEnergybarOffset());
-                wheel.StartSpinning(-1, this.spriteRenderer.flipX);
+                wheel.StartSpinning(-1, this.facingRight);
                 newSprite = hamsterVariant.hamsterRunning;
                 this.isGrabbable = true;
                 transform.position = wheel.transform.position;
@@ -307,6 +329,7 @@ public class Hamster : Grabbable
         state = newState;
         newSprite ??= hamsterVariant.hamsterIdle;
         if (newSprite) this.spriteRenderer.sprite = newSprite;
+        if (animator) this.animator.SetInteger(anim_stateEnum, ((int)this.state));
     }
 
     public override void OnPhysicsReset()
