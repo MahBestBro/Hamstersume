@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     InputAction pickUp;
     InputAction mousePos;
 
+    InputAction skipScene;
+
     Hoverable currentHoverable = null;
     Grabbable hoveredGrabbable = null;
     Grabbable heldGrabbable = null;
@@ -39,6 +41,7 @@ public class Player : MonoBehaviour
     {
         pickUp = InputSystem.actions.FindAction("Pick Up");
         mousePos = InputSystem.actions.FindAction("Mouse Pos");
+        skipScene = InputSystem.actions.FindAction("Skip Scene");
     }
 
     // Update is called once per frame
@@ -62,6 +65,10 @@ public class Player : MonoBehaviour
         {
             Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(mousePosition);
             this.CheckGrabbables(mouseWorldPos);
+        }
+        if (this.hamsterTracker && skipScene.WasPressedThisFrame())
+        {
+            this.hamsterTracker.timer.ModifyTimerElapsed(10F);
         }
         
     }

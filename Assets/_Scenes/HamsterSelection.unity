@@ -338,7 +338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &337181430
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2172,7 +2172,7 @@ MonoBehaviour:
   hamsterWalkSpeed: 5
   hamsterWalkArea:
     m_Center: {x: -5.18, y: 0.04, z: 0}
-    m_Extent: {x: 3.96, y: 5.06, z: 0}
+    m_Extent: {x: 3.5, y: 5.06, z: 0}
   hamsterPhysicsBounds:
     m_Center: {x: -5.18, y: 0.04, z: 0}
     m_Extent: {x: 4.43, y: 10, z: 0}
@@ -2602,10 +2602,6 @@ PrefabInstance:
       propertyPath: endTransition
       value: 
       objectReference: {fileID: 2104543679}
-    - target: {fileID: 2972171938314218017, guid: fbc7688416bef2e4787aa9a2923ff253, type: 3}
-      propertyPath: selectionCounterText
-      value: 
-      objectReference: {fileID: 337181431}
     - target: {fileID: 6201447799817586656, guid: fbc7688416bef2e4787aa9a2923ff253, type: 3}
       propertyPath: m_Name
       value: HamsterBox

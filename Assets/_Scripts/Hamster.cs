@@ -126,6 +126,7 @@ public class Hamster : Grabbable
         base.OnCaptured(capturer);
         capturer.ScaleDroppedTransform(this.transform);
         this.InitialiseFromManager();
+        this.TryEnterState(HamsterState.Waiting);
     }
 
     // Update is called once per frame
@@ -198,16 +199,9 @@ public class Hamster : Grabbable
             case HamsterState.Walking:
                 Vector2 toTravel = walkDestination - (Vector2)transform.position; 
 
-                if (!isGrabbed)
-                {
-                    this.facingRight = Vector2.Dot(toTravel, Vector2.right) >= 0.0f;
-                    //this.spriteRenderer.flipX = flipSelf;
-                    this.spriteRoot.localScale = new Vector3((facingRight ? -1F : 1F), 1, 1);
-                    //Vector3 scale = this.transform.localScale;
-                    //scale.x = Mathf.Abs(scale.x) * (facingRight ? -1F : 1F);
-                    //if (this.transform.localScale != scale) this.transform.localScale = scale;
-
-                }
+                this.facingRight = Vector2.Dot(toTravel, Vector2.right) >= 0.0f;
+                //this.spriteRenderer.flipX = flipSelf;
+                this.spriteRoot.localScale = new Vector3((facingRight ? -1F : 1F), 1, 1);
 
                 if (toTravel.magnitude >= walkSpeed * Time.deltaTime)
                 {

@@ -44,14 +44,7 @@ public class TrainingTimer : MonoBehaviour
     {
         if (timerStarted && !timerFinished)
         {
-            float fracTimeRemaining = Mathf.Max(1.0f - elapsedTimeSecs / traningDurationSecs, 0.0f);
-            timerMask.SetInsetAndSizeFromParentEdge(
-                RectTransform.Edge.Left, 
-                0.0f,
-                fracTimeRemaining * originalBarWidth
-            );
-
-            this.UpdateLabel();
+            this.UpdateTimerDisplay();
 
             elapsedTimeSecs += Time.deltaTime;
             if (elapsedTimeSecs >= traningDurationSecs)
@@ -59,6 +52,18 @@ public class TrainingTimer : MonoBehaviour
                 OnTimerCompletion();
             }
         }
+    }
+
+    public void UpdateTimerDisplay()
+    {
+        float fracTimeRemaining = Mathf.Max(1.0f - elapsedTimeSecs / traningDurationSecs, 0.0f);
+        timerMask.SetInsetAndSizeFromParentEdge(
+            RectTransform.Edge.Left,
+            0.0f,
+            fracTimeRemaining * originalBarWidth
+        );
+
+        this.UpdateLabel();
     }
 
     void UpdateLabel()
@@ -79,6 +84,12 @@ public class TrainingTimer : MonoBehaviour
         if (timerStarted) return false;
         timerStarted = true;
         return true;
+    }
+
+    public void ModifyTimerElapsed(float seconds)
+    {
+        this.elapsedTimeSecs += seconds;
+        this.UpdateTimerDisplay();
     }
 
     void OnTimerCompletion()

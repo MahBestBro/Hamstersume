@@ -13,12 +13,14 @@ public class HamsterSelectionBox : MonoBehaviour
     public int selectionLimit = 1;
     HashSet<Hamster> selectedHamsters = new HashSet<Hamster>();
 
+    Animator animator;
     [SerializeField]
     ScreenTransition endTransition;
     public UnityEvent<List<HamsterProfile>> onSelectionConfirmed;
 
     private void Start()
     {
+        this.animator = GetComponent<Animator>();
         UpdateCounterDisplay();
     }
 
@@ -67,6 +69,16 @@ public class HamsterSelectionBox : MonoBehaviour
 
         onSelectionConfirmed.Invoke(GetSelectedHamsterProfiles());
 
+        animator.SetTrigger("doCloseExit");
+    }
+
+    public void HideSelectedHamsters()
+    {
+        boxCapturer.gameObject.SetActive(false);
+    }
+
+    public void TriggerEndTransition()
+    {
         // Transition to next scene 
         UnityEvent onTransitionEnd = new UnityEvent();
         onTransitionEnd.AddListener(() => SceneManager.LoadScene("Racing"));
