@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5172835503177054261}
   - component: {fileID: 6466006214744540560}
   - component: {fileID: 5962843438447720702}
+  - component: {fileID: 3483517811989801713}
   m_Layer: 8
   m_Name: HamsterWheel
   m_TagString: Untagged
@@ -87,6 +88,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 4319010944892199554}
   spinAnimation: {fileID: 1282928185280233607}
+  animator: {fileID: 0}
   energyGain: 5
   energyGainTriggerPeriodSecs: 1
   energybarOffsetAnchor: {fileID: 4494740695756556998}
@@ -107,6 +109,28 @@ MonoBehaviour:
   onDroppedOnEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &3483517811989801713
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2762216341553879390}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 63b1d54dd3f6fd842b6a760c74929a98, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4629232686694835848
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +226,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4629232686694835848}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42b45f7d9853dfa4690a963887edd102, type: 3}
   m_Name: 

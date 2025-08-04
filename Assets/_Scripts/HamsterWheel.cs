@@ -5,6 +5,8 @@ public class HamsterWheel : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer; 
     public SpinAnimation spinAnimation;
+    public Animator animator;
+    int anim_spinSpeed;
 
     [Range(0, 50)]
     public int energyGain;
@@ -17,6 +19,8 @@ public class HamsterWheel : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        anim_spinSpeed = Animator.StringToHash("spinSpeed");
     }
 
     public Vector2 GetEnergybarOffset()
@@ -26,13 +30,19 @@ public class HamsterWheel : MonoBehaviour
 
     public void StartSpinning(float speed, bool clockwise)
     {
-        if (speed != -1) this.spinAnimation.spinSpeed = speed;
-        this.spinAnimation.spinSpeed = (Mathf.Abs(this.spinAnimation.spinSpeed) * ((clockwise) ? -1F : 1F));
-        this.spinAnimation.spinning = true;
+        float spinningSpeed = 1F;
+        //float spinningSpeed = this.spinAnimation.spinSpeed;
+        if (speed != -1) spinningSpeed = speed;
+        spinningSpeed = (Mathf.Abs(spinningSpeed) * ((clockwise) ? -1F : 1F));
+        //this.spinAnimation.spinSpeed = spinningSpeed;
+        //this.spinAnimation.spinning = true;
+        animator.SetFloat(anim_spinSpeed, -spinningSpeed);
+        animator.speed = Mathf.Abs(spinningSpeed);
     }
 
     public void StopSpinning()
     {
-        this.spinAnimation.spinning = false;
+        //this.spinAnimation.spinning = false;
+        animator.SetFloat(anim_spinSpeed, 0F);
     }
 }
