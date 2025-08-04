@@ -2,23 +2,7 @@ using UnityEngine;
 
 public class Food : Grabbable
 {
-    //[SerializeField]
-    //protected float energyRestored = 10.0F;
-    //[SerializeField]
-    //protected float consumeDuration = 1.0F;
-    //
-    //[SerializeField]
-    //[Range(0, 100)]
-    //protected int speedStatIncrease;
-    //[SerializeField]
-    //[Range(0, 100)]
-    //protected int staminaStatIncrease;
-    //[SerializeField]
-    //[Range(0, 100)]
-    //protected int powerStatIncrease;
-//
-    //[Range(0, 800)]
-    //public int electricityCost;
+    protected float consumeDurationRemaining;
 
     [SerializeField]
     FoodStats foodStats;
@@ -39,6 +23,11 @@ public class Food : Grabbable
         }
     }
 
+    private void Start()
+    {
+        consumeDurationRemaining = foodStats.consumeDuration;
+    }
+
     /*
      * <returns>
      * True if food is fully consumed, False if food is partially consumed
@@ -46,8 +35,8 @@ public class Food : Grabbable
      */
     public bool Consume(HamsterStats consumer, float elapsedTime)
     {
-        foodStats.consumeDuration -= elapsedTime;
-        if (foodStats.consumeDuration > 0.0F)
+        consumeDurationRemaining -= elapsedTime;
+        if (consumeDurationRemaining > 0.0F)
         {
             return false;
         }

@@ -17,4 +17,4 @@ MonoBehaviour:
   powerStatIncrease: 0
   electricityCost: 0
   energyRestored: 10
-  consumeDuration: 0.2
+  consumeDuration: 0.5

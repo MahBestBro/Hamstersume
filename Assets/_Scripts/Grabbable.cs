@@ -29,6 +29,7 @@ public class Grabbable : MonoBehaviour
     public bool isGrabbable = true;
     public bool isHovered = false;
     Interactable hoveredInteractable;
+    [SerializeField]
     protected Transform sortingAnchor;
     public float SortingPriority { 
         get
@@ -49,13 +50,14 @@ public class Grabbable : MonoBehaviour
     protected void Start()
     {
         this._collider = GetComponent<Collider2D>();
-        this.AnchorSortingToSprite();
+        if (sortingAnchor==null) this.AnchorSortingToSprite();
 
         this.mousePos = InputSystem.actions.FindAction("Mouse Pos");
     }
 
     protected void FixedUpdate()
     {
+
         if ( this.isGrabbable )
         {
             this.ProcessFalling(Time.fixedDeltaTime);
@@ -66,6 +68,7 @@ public class Grabbable : MonoBehaviour
     {
         if (!this.isGrabbed)
         {
+            bool isFalling = false;
             bool resetPosition = 
                 (transform.position.y > physicsBounds.max.y + physicsBoundsBuffer ||
                 transform.position.y < physicsBounds.min.y - physicsBoundsBuffer ||
@@ -94,7 +97,11 @@ public class Grabbable : MonoBehaviour
                         newPos.y = this.floorHeight;
                         this.floorHeight = physicsBounds.max.y * 2F;
                     }
-                    this.transform.position = newPos;
+                    if (transform.position != newPos)
+                    {
+                        this.transform.position = newPos;
+                        isFalling = true;
+                    }
                     this._velocity = (Vector2)newPos - this._prevPos;
                     this._prevPos = newPos;
                 }
@@ -104,8 +111,13 @@ public class Grabbable : MonoBehaviour
                 this._prevPos = this.transform.position;
                 this._velocity = Vector2.zero;
                 this.OnPhysicsReset();
+                isFalling = true;
             }
-           
+            this.ComputeSortOrderIndex();
+            if (isFalling)
+            {
+                if (this.spriteRenderer) this.spriteRenderer.sortingOrder += 100;
+            }
         }
     }
     public virtual void OnPhysicsReset() { }
@@ -131,11 +143,14 @@ public class Grabbable : MonoBehaviour
         int sortOrder;
         if ( this.isGrabbed )
         {
-            sortOrder = Screen.height;
+            sortOrder = Screen.height * 2;
         } else
         {
             int screenY = (int)Camera.main.WorldToScreenPoint(this.sortingAnchor?.position ?? this.transform.position).y;
             sortOrder = Screen.height - screenY;
+            //Debug.Log("this.sortingAnchor?.position");
+            //Debug.Log(this.sortingAnchor?.position);
+            //Debug.Log(screenY);
         }
         this.spriteRenderer.sortingOrder = sortOrder;
         return sortOrder;
@@ -220,6 +235,7 @@ public class Grabbable : MonoBehaviour
             this.hoveredInteractable = null;
         }
         this.OnDrop(interactable);
+        this.ComputeSortOrderIndex();
     }
 
     virtual protected void OnDrop(Transform interactable) 
