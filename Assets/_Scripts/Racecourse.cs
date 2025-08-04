@@ -198,8 +198,10 @@ public class Racecourse : MonoBehaviour
     {
         Vector2 nextPos = pos;
         Vector2 racetrackCentre = (Vector2)transform.position;
-        float intialDistance = speed * deltaTime;
-        float distanceToTravel = intialDistance;
+        distanceCovered = 0;
+        float timeRemaining = deltaTime;
+        float distanceToTravel;
+        float distanceTravelled;
 
         float curveRadius = minCurveRadius + ((float)laneNumber - 1.0f) * laneWidth;
         float curveCircumference = Mathf.PI * 2F * curveRadius;
@@ -211,86 +213,70 @@ public class Racecourse : MonoBehaviour
         bool inStraight = nextPos.x >= straightLeftSide && nextPos.x <= straightRightSide;
 
         int _currentTrackSection = 0;
-        Debug.Log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LANE " + laneNumber);
-        Debug.Log("total|distanceToTravel>> " + distanceToTravel);
 
         //We are in the bottom straight
         bool inBottomStraight = inStraight && MathHelpers.WithinEpsilon(nextPos.y, bottomStraightY, 0.01f);
-        if (distanceToTravel > 0.0f && inBottomStraight)
+        if (timeRemaining > 0.0f && inBottomStraight)
         {
+            distanceToTravel = speed * timeRemaining;
             float remainingDistance = straightRightSide - nextPos.x;
-            float distanceTravelled = Mathf.Min(distanceToTravel, remainingDistance);
-
+            distanceTravelled = Mathf.Min(distanceToTravel, remainingDistance);
             nextPos.x += distanceTravelled;
-            distanceToTravel -= distanceTravelled;
+            timeRemaining -= distanceTravelled / speed;
+            distanceCovered += distanceTravelled;
+
             _currentTrackSection = 1;
         }
 
-        Debug.Log("rightCurve|distanceToTravel >> " + distanceToTravel);
         //We are in the right curve
-        if (distanceToTravel > 0.0f && nextPos.x >= straightRightSide)
+        if (timeRemaining > 0.0f && nextPos.x >= straightRightSide)
         {
             Vector2 curveCentre = new Vector2(straightRightSide, racetrackCentre.y);
             Vector2 startRadial = Vector2.down;
             Vector2 endRadial = Vector2.up;
             Vector2 toPosRadial = (nextPos - curveCentre).normalized;
 
-            float remainingAngleRadians = Mathf.Deg2Rad * Vector2.Angle(toPosRadial, endRadial);
-            float remainingCurveDistance = curveCircumference * remainingAngleRadians;
-            float distanceTravelled = Mathf.Min(distanceToTravel, remainingCurveDistance);
-            float angleTravelledRadians = distanceTravelled / curveCircumference;
-            float angleStartToPosRadians = Mathf.Deg2Rad * Vector2.Angle(startRadial, toPosRadial);
-            float angleTravelledFromStartRadians = angleStartToPosRadians + angleTravelledRadians;
-            float angleUnitCircleOffsetRadians = Mathf.Deg2Rad * -Vector2.SignedAngle(startRadial, Vector2.right);
-            float nextPosAngleRadians = angleTravelledFromStartRadians + angleUnitCircleOffsetRadians;
-            nextPos = curveCentre + (curveRadius * new Vector2(Mathf.Cos(nextPosAngleRadians), Mathf.Sin(nextPosAngleRadians)));
-            distanceToTravel -= distanceTravelled;
-
-            Debug.Log("rightCurve|remainingAngle >> " + remainingAngleRadians * Mathf.Rad2Deg);
-            Debug.Log("rightCurve|angleTravelledFromStart >> " + angleTravelledFromStartRadians * Mathf.Rad2Deg);
-
-            /*
-            float angularSpeed = (coverFixedDistance?distanceToTravel:speed) / curveRadius; 
-            float angleToTravel = Mathf.Rad2Deg * angularSpeed * deltaTime;
+            float angularSpeed = speed / curveRadius; 
+            float angleToTravel = Mathf.Rad2Deg * angularSpeed * timeRemaining;
             float remainingAngle = Vector2.Angle(endRadial, toPosRadial);
             float angleTravelled = Mathf.Min(angleToTravel, remainingAngle);
-            Debug.Log("rightCurve|remainingAngle >> " + remainingAngle);
-            Debug.Log("rightCurve|angleTravelled >> " + angleTravelled);
 
             float currentAngle = Vector2.Angle(startRadial, toPosRadial);
             float angleOffset = Vector2.SignedAngle(Vector2.right, startRadial); 
             float nextPosAngleRad = Mathf.Deg2Rad * (currentAngle + angleTravelled + angleOffset);
             
             nextPos = curveCentre + curveRadius * (new Vector2(Mathf.Cos(nextPosAngleRad), Mathf.Sin(nextPosAngleRad)));
-            distanceToTravel -= (angleTravelled/360F) * curveCircumference;
-            */
+            distanceTravelled = (angleTravelled/360F) * curveCircumference;
+            timeRemaining -= distanceTravelled / speed;
+            distanceCovered += distanceTravelled;
 
             _currentTrackSection = 2;
         }
-
-        Debug.Log("topStraight|distanceToTravel >> " + distanceToTravel);
+        
         //We are in the top straight
         bool inTopStraight = inStraight && MathHelpers.WithinEpsilon(nextPos.y, topStraightY, 0.01f);
-        if (distanceToTravel > 0.0f && inTopStraight)
+        if (timeRemaining > 0.0f && inTopStraight)
         {
-            float remainingDistance = nextPos.x - straightLeftSide; 
-            float distanceTravelled = Mathf.Min(distanceToTravel, remainingDistance);
-            
+            distanceToTravel = speed * timeRemaining;
+            float remainingDistance = nextPos.x - straightLeftSide;
+            distanceTravelled = Mathf.Min(distanceToTravel, remainingDistance);
             nextPos.x -= distanceTravelled;
-            distanceToTravel -= distanceTravelled;
+            timeRemaining -= distanceTravelled / speed;
+            distanceCovered += distanceTravelled;
+
             _currentTrackSection = 3;
         }
 
         //We are in the left curve
-        if (distanceToTravel > 0.0f && nextPos.x <= straightLeftSide)
+        if (timeRemaining > 0.0f && nextPos.x <= straightLeftSide)
         {
             Vector2 curveCentre = new Vector2(straightLeftSide, racetrackCentre.y);
             Vector2 startRadial = Vector2.up;
             Vector2 endRadial = Vector2.down;
             Vector2 toPosRadial = (nextPos - curveCentre).normalized;
             
-            float angularSpeed = (coverFixedDistance ? distanceToTravel : speed) / curveRadius; 
-            float angleToTravel = Mathf.Rad2Deg * angularSpeed * deltaTime;
+            float angularSpeed = (speed) / curveRadius; 
+            float angleToTravel = Mathf.Rad2Deg * angularSpeed * timeRemaining;
             float remainingAngle = Vector2.Angle(toPosRadial, endRadial);
             float angleTravelled = Mathf.Min(angleToTravel, remainingAngle);
             
@@ -299,28 +285,13 @@ public class Racecourse : MonoBehaviour
             float nextPosAngle = Mathf.Deg2Rad * (currentAngle + angleTravelled + angleOffset);
             
             nextPos = curveCentre + curveRadius * (new Vector2(Mathf.Cos(nextPosAngle), Mathf.Sin(nextPosAngle)));
-            distanceToTravel -= Mathf.Deg2Rad * angleTravelled * curveRadius;
+            distanceTravelled = Mathf.Deg2Rad * angleTravelled * curveRadius;
+
+            timeRemaining -= distanceTravelled / speed;
+            distanceCovered += distanceTravelled;
             _currentTrackSection = 4;
         }
 
-        /* if (laneNumber == 2)
-        {
-            Debug.Log("[*]");
-            Debug.Log("_currentTrackSection: " + _currentTrackSection);
-            Debug.Log("travelError: " + distanceToTravel);
-            Debug.Log("inStraight: " + inStraight);
-            Debug.Log("inBottomStraight: " + inBottomStraight);
-            Debug.Log("inRightCurve: " + (nextPos.x >= straightRightSide));
-            Debug.Log("inTopStraight: " + inTopStraight);
-            Debug.Log("inLeftCurve: " + (nextPos.x <= straightLeftSide));
-            Debug.Log("-----------------------------------");
-            Debug.Log("nextPos.y: " + nextPos.y);
-            Debug.Log("topStraightY: " + topStraightY);
-            Debug.Log("bottomStraightY: " + bottomStraightY);
-            Debug.Log("===================================");
-        } */
-
-        distanceCovered = intialDistance - distanceToTravel;
         return nextPos;
     } 
 
