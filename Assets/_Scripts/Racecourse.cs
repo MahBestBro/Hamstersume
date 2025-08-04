@@ -220,7 +220,6 @@ public class Racecourse : MonoBehaviour
         {
             float remainingDistance = straightRightSide - nextPos.x;
             float distanceTravelled = Mathf.Min(distanceToTravel, remainingDistance);
-            Debug.Log("bottomStraight|remainingDistance >> " + remainingDistance);
 
             nextPos.x += distanceTravelled;
             distanceToTravel -= distanceTravelled;
@@ -236,6 +235,21 @@ public class Racecourse : MonoBehaviour
             Vector2 endRadial = Vector2.up;
             Vector2 toPosRadial = (nextPos - curveCentre).normalized;
 
+            float remainingAngleRadians = Mathf.Deg2Rad * Vector2.Angle(toPosRadial, endRadial);
+            float remainingCurveDistance = curveCircumference * remainingAngleRadians;
+            float distanceTravelled = Mathf.Min(distanceToTravel, remainingCurveDistance);
+            float angleTravelledRadians = distanceTravelled / curveCircumference;
+            float angleStartToPosRadians = Mathf.Deg2Rad * Vector2.Angle(startRadial, toPosRadial);
+            float angleTravelledFromStartRadians = angleStartToPosRadians + angleTravelledRadians;
+            float angleUnitCircleOffsetRadians = Mathf.Deg2Rad * -Vector2.SignedAngle(startRadial, Vector2.right);
+            float nextPosAngleRadians = angleTravelledFromStartRadians + angleUnitCircleOffsetRadians;
+            nextPos = curveCentre + (curveRadius * new Vector2(Mathf.Cos(nextPosAngleRadians), Mathf.Sin(nextPosAngleRadians)));
+            distanceToTravel -= distanceTravelled;
+
+            Debug.Log("rightCurve|remainingAngle >> " + remainingAngleRadians * Mathf.Rad2Deg);
+            Debug.Log("rightCurve|angleTravelledFromStart >> " + angleTravelledFromStartRadians * Mathf.Rad2Deg);
+
+            /*
             float angularSpeed = (coverFixedDistance?distanceToTravel:speed) / curveRadius; 
             float angleToTravel = Mathf.Rad2Deg * angularSpeed * deltaTime;
             float remainingAngle = Vector2.Angle(endRadial, toPosRadial);
@@ -249,7 +263,8 @@ public class Racecourse : MonoBehaviour
             
             nextPos = curveCentre + curveRadius * (new Vector2(Mathf.Cos(nextPosAngleRad), Mathf.Sin(nextPosAngleRad)));
             distanceToTravel -= (angleTravelled/360F) * curveCircumference;
-            
+            */
+
             _currentTrackSection = 2;
         }
 
@@ -288,7 +303,7 @@ public class Racecourse : MonoBehaviour
             _currentTrackSection = 4;
         }
 
-        if (laneNumber == 2)
+        /* if (laneNumber == 2)
         {
             Debug.Log("[*]");
             Debug.Log("_currentTrackSection: " + _currentTrackSection);
@@ -303,8 +318,7 @@ public class Racecourse : MonoBehaviour
             Debug.Log("topStraightY: " + topStraightY);
             Debug.Log("bottomStraightY: " + bottomStraightY);
             Debug.Log("===================================");
-
-        }
+        } */
 
         distanceCovered = intialDistance - distanceToTravel;
         return nextPos;
