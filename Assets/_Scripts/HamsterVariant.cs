@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "HamsterVariant", menuName = "Scriptable Objects/HamsterSkinset")]
+[CreateAssetMenu(fileName = "HamsterVariant", menuName = "Scriptable Objects/HamsterVariant")]
 public class HamsterVariant : ScriptableObject
 {
     public Sprite hamsterIdle;

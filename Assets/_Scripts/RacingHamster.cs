@@ -161,10 +161,16 @@ public class RacingHamster : MonoBehaviour
         this.ComputeSortOrderIndex();
 
         _raceCompletion = RaceCompletion;
-        if (_raceCompletion > 1.1F)
+        if (playerIndicator.gameObject.activeInHierarchy && _raceCompletion > 1F)
         {
-            //playerIndicator.color = playerIndicator.color.WithAlpha(0.5F);
-            playerIndicator.gameObject.SetActive(false);
+            float overCompletion = Mathf.Pow(((_raceCompletion - 1F) / 0.2F), 2F);
+            if (overCompletion < 1F)
+            {
+                playerIndicator.color = playerIndicator.color.WithAlpha(1F - overCompletion);
+            } else
+            {
+                playerIndicator.gameObject.SetActive(false);
+            }
         }
     }
 

@@ -728,7 +728,7 @@ PrefabInstance:
       objectReference: {fileID: -2405907369085167861, guid: a1220d2d0acb81b41b9725439404746a, type: 2}
     - target: {fileID: 177487292718794850, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: m_Name
-      value: Hamster (4)
+      value: HamsterOmega
       objectReference: {fileID: 0}
     - target: {fileID: 214213216886367404, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: m_Sprite
@@ -751,9 +751,9 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2213047384176467128, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 154dbf98e0fcbf34484d7e4d4350978a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4537650448517050314, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -845,7 +845,7 @@ PrefabInstance:
     - target: {fileID: 8533016572887107321, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: hamsterProfile.hVariant
       value: 
-      objectReference: {fileID: 11400000, guid: 1070d5fdddf78ec4a916b9c6e77da61f, type: 2}
+      objectReference: {fileID: 11400000, guid: 94bcec3602ab45c419188695b5b867c3, type: 2}
     - target: {fileID: 8533016572887107321, guid: 70c30a6a7aee39b4ba5dce218c3e1ed3, type: 3}
       propertyPath: stateSprites.hamsterIdle
       value: 
