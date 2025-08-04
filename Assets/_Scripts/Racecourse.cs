@@ -22,7 +22,7 @@ public class Racecourse : MonoBehaviour
     public float straightLength;
     [Range(0.0f, 50.0f)]
     public float laneWidth;
-    [Range(1, 5)]
+    [Range(1, 10)]
     public int numLanes;
     [Range(0.0f, 10.0f)]
     public float countdownTimeSecs;
@@ -194,7 +194,7 @@ public class Racecourse : MonoBehaviour
     }
 
     //NOTE: This assumes the race goes anticlockwise around the course
-    public Vector2 NextPosOnRaceCourse(Vector2 pos, float speed, int laneNumber, float deltaTime, ref float distanceCovered)
+    public Vector2 NextPosOnRaceCourse(Vector2 pos, float speed, int laneNumber, float deltaTime, ref float distanceCovered, bool coverFixedDistance = false)
     {
         Vector2 nextPos = pos;
         Vector2 racetrackCentre = (Vector2)transform.position;
@@ -202,24 +202,32 @@ public class Racecourse : MonoBehaviour
         float distanceToTravel = intialDistance;
 
         float curveRadius = minCurveRadius + ((float)laneNumber - 1.0f) * laneWidth;
+        float curveCircumference = Mathf.PI * 2F * curveRadius;
         float topStraightY = racetrackCentre.y + curveRadius; 
         float bottomStraightY = racetrackCentre.y - curveRadius; 
         float straightLeftSide = racetrackCentre.x - straightLength / 2.0f;
         float straightRightSide = racetrackCentre.x + straightLength / 2.0f;
 
         bool inStraight = nextPos.x >= straightLeftSide && nextPos.x <= straightRightSide;
-        
+
+        int _currentTrackSection = 0;
+        Debug.Log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LANE " + laneNumber);
+        Debug.Log("total|distanceToTravel>> " + distanceToTravel);
+
         //We are in the bottom straight
         bool inBottomStraight = inStraight && MathHelpers.WithinEpsilon(nextPos.y, bottomStraightY, 0.01f);
         if (distanceToTravel > 0.0f && inBottomStraight)
         {
-            float remainingDistance = straightRightSide - nextPos.x; 
+            float remainingDistance = straightRightSide - nextPos.x;
             float distanceTravelled = Mathf.Min(distanceToTravel, remainingDistance);
-            
+            Debug.Log("bottomStraight|remainingDistance >> " + remainingDistance);
+
             nextPos.x += distanceTravelled;
             distanceToTravel -= distanceTravelled;
+            _currentTrackSection = 1;
         }
 
+        Debug.Log("rightCurve|distanceToTravel >> " + distanceToTravel);
         //We are in the right curve
         if (distanceToTravel > 0.0f && nextPos.x >= straightRightSide)
         {
@@ -227,20 +235,25 @@ public class Racecourse : MonoBehaviour
             Vector2 startRadial = Vector2.down;
             Vector2 endRadial = Vector2.up;
             Vector2 toPosRadial = (nextPos - curveCentre).normalized;
-            
-            float angularSpeed = speed / curveRadius; 
+
+            float angularSpeed = (coverFixedDistance?distanceToTravel:speed) / curveRadius; 
             float angleToTravel = Mathf.Rad2Deg * angularSpeed * deltaTime;
-            float remainingAngle = Vector2.Angle(endRadial, toPosRadial) * curveRadius;
+            float remainingAngle = Vector2.Angle(endRadial, toPosRadial);
             float angleTravelled = Mathf.Min(angleToTravel, remainingAngle);
+            Debug.Log("rightCurve|remainingAngle >> " + remainingAngle);
+            Debug.Log("rightCurve|angleTravelled >> " + angleTravelled);
 
             float currentAngle = Vector2.Angle(startRadial, toPosRadial);
             float angleOffset = Vector2.SignedAngle(Vector2.right, startRadial); 
             float nextPosAngleRad = Mathf.Deg2Rad * (currentAngle + angleTravelled + angleOffset);
             
             nextPos = curveCentre + curveRadius * (new Vector2(Mathf.Cos(nextPosAngleRad), Mathf.Sin(nextPosAngleRad)));
-            distanceToTravel -= Mathf.Deg2Rad * angleTravelled * curveRadius;
+            distanceToTravel -= (angleTravelled/360F) * curveCircumference;
+            
+            _currentTrackSection = 2;
         }
 
+        Debug.Log("topStraight|distanceToTravel >> " + distanceToTravel);
         //We are in the top straight
         bool inTopStraight = inStraight && MathHelpers.WithinEpsilon(nextPos.y, topStraightY, 0.01f);
         if (distanceToTravel > 0.0f && inTopStraight)
@@ -250,6 +263,7 @@ public class Racecourse : MonoBehaviour
             
             nextPos.x -= distanceTravelled;
             distanceToTravel -= distanceTravelled;
+            _currentTrackSection = 3;
         }
 
         //We are in the left curve
@@ -260,9 +274,9 @@ public class Racecourse : MonoBehaviour
             Vector2 endRadial = Vector2.down;
             Vector2 toPosRadial = (nextPos - curveCentre).normalized;
             
-            float angularSpeed = speed / curveRadius; 
+            float angularSpeed = (coverFixedDistance ? distanceToTravel : speed) / curveRadius; 
             float angleToTravel = Mathf.Rad2Deg * angularSpeed * deltaTime;
-            float remainingAngle = Vector2.Angle(endRadial, toPosRadial) * curveRadius;
+            float remainingAngle = Vector2.Angle(toPosRadial, endRadial);
             float angleTravelled = Mathf.Min(angleToTravel, remainingAngle);
             
             float currentAngle = Vector2.Angle(startRadial, toPosRadial);
@@ -271,9 +285,28 @@ public class Racecourse : MonoBehaviour
             
             nextPos = curveCentre + curveRadius * (new Vector2(Mathf.Cos(nextPosAngle), Mathf.Sin(nextPosAngle)));
             distanceToTravel -= Mathf.Deg2Rad * angleTravelled * curveRadius;
+            _currentTrackSection = 4;
         }
 
-        distanceCovered = intialDistance;// - distanceToTravel;
+        if (laneNumber == 2)
+        {
+            Debug.Log("[*]");
+            Debug.Log("_currentTrackSection: " + _currentTrackSection);
+            Debug.Log("travelError: " + distanceToTravel);
+            Debug.Log("inStraight: " + inStraight);
+            Debug.Log("inBottomStraight: " + inBottomStraight);
+            Debug.Log("inRightCurve: " + (nextPos.x >= straightRightSide));
+            Debug.Log("inTopStraight: " + inTopStraight);
+            Debug.Log("inLeftCurve: " + (nextPos.x <= straightLeftSide));
+            Debug.Log("-----------------------------------");
+            Debug.Log("nextPos.y: " + nextPos.y);
+            Debug.Log("topStraightY: " + topStraightY);
+            Debug.Log("bottomStraightY: " + bottomStraightY);
+            Debug.Log("===================================");
+
+        }
+
+        distanceCovered = intialDistance - distanceToTravel;
         return nextPos;
     } 
 
@@ -304,33 +337,32 @@ public class Racecourse : MonoBehaviour
         SceneManager.LoadScene("Hamsterville");
     }
 
-    //NOTE: Hamsters start at the middle of the bottom straight. This function also assumes hamsters will only
-    //go around one curve. Any more is likely absurd anyways.
+    public float CalcTrackDistance(float laneNumber)
+    {
+        float totalStraightDistance = 2.0f * this.straightLength;
+        float curveRadius = this.minCurveRadius + this.laneWidth * ((float)laneNumber - 1.0f);
+        float totalCurveDistance = 2.0f * Mathf.PI * curveRadius;
+        float trackDistance = totalStraightDistance + totalCurveDistance;
+
+        return trackDistance;
+    }
+
     Vector2 StartingPosition(int laneNumber)
     {
         float laneRank = (float)laneNumber - 1.0f;
         float curveRadius = minCurveRadius + laneRank * laneWidth;   
-        float distanceAdjustment = 2.0f * Mathf.PI * laneRank * laneWidth;
-        float straightDistanceAdjustment = Mathf.Min(distanceAdjustment, straightLength / 2.0f);
-        float curveDistanceAdjustment = distanceAdjustment - straightDistanceAdjustment;
+        float distanceAdjustment = this.CalcTrackDistance(laneNumber) - this.CalcTrackDistance(1F);
         
-        Vector2 racetrackCentre = (Vector2)transform.position;
-        Vector2 pos = racetrackCentre + new Vector2(
-            straightDistanceAdjustment,
-            -(minCurveRadius + laneWidth * laneRank)
-        );
+        Vector2 racetrackStartline = transform.position;
+        racetrackStartline += (Vector2.down * curveRadius);
+        float distanceOffset = 0F;
+        Vector2 startingPos = NextPosOnRaceCourse(racetrackStartline, distanceAdjustment, laneNumber, 1F, ref distanceOffset, true);
 
-        if (!MathHelpers.WithinEpsilon(curveDistanceAdjustment, 0.0f, 0.01f))
-        {
-            float curveAdjustmentAngle = Mathf.Rad2Deg * curveDistanceAdjustment / curveRadius;
-            float angleOffset = Vector2.SignedAngle(Vector2.right, Vector2.down); 
-            float angleRadians = Mathf.Deg2Rad * (curveAdjustmentAngle + angleOffset);
-            Vector2 adjustmentRadial = curveRadius * (new Vector2(Mathf.Cos(angleRadians), Mathf.Sin(angleRadians)));
-            
-            Vector2 curveCentre = racetrackCentre + straightLength / 2.0f * Vector2.right;
-            pos = curveCentre + adjustmentRadial;
-        }
+        Debug.Log("LANE::" + laneNumber);
+        Debug.Log("Distance Adjustment::" + distanceAdjustment);
+        Debug.Log("Distance Offset::" + distanceOffset);
+        Debug.Log("****************************************");
 
-        return pos;    
+        return startingPos;    
     }
 }

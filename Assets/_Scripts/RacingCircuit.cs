@@ -35,7 +35,7 @@ public class RacingCircuit : MonoBehaviour
     RacingEventData GenerateRace()
     {
         RacingEventData race = new RacingEventData();
-        race.GenerateRandomRace(3, opponentVariants, prefabProfile, currentRaceIndex);
+        race.GenerateRandomRace(4, opponentVariants, prefabProfile, currentRaceIndex);
         return race;
     }
 

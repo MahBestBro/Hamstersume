@@ -737,83 +737,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56726a65962c5743a958b8a45be3b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &155420005
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1637318366}
-    m_Modifications:
-    - target: {fileID: 2125604826380073360, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e051e9303b4f25d429a64affc6d2ab9f, type: 3}
-    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: laneNumber
-      value: -21
-      objectReference: {fileID: 0}
-    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: racecourse
-      value: 
-      objectReference: {fileID: 1340364146}
-    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: orderInRace
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_Name
-      value: RacingHamster (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
 --- !u!1 &246489836
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,6 +824,79 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &275829256
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1637318366}
+    m_Modifications:
+    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: laneNumber
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: racecourse
+      value: 
+      objectReference: {fileID: 1340364146}
+    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: hamsterProfile.hVariant
+      value: 
+      objectReference: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
+    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_Name
+      value: RacingHamster (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
 --- !u!1 &293296457 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3564120480807054329, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
@@ -919,6 +915,84 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 1668045740}
+--- !u!1001 &386501073
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1637318366}
+    m_Modifications:
+    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: laneNumber
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: racecourse
+      value: 
+      objectReference: {fileID: 1340364146}
+    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: hamsterProfile.hVariant
+      value: 
+      objectReference: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
+    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_Name
+      value: RacingHamster (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+--- !u!4 &414511250 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+  m_PrefabInstance: {fileID: 275829256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &434207432
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,16 +1247,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 512748278}
   m_CullTransparentMesh: 1
---- !u!4 &600618711 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-  m_PrefabInstance: {fileID: 2038263690}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &614616837 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-  m_PrefabInstance: {fileID: 155420005}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &886238684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,6 +1506,152 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0737f953f384b83409c90012973a0e3d, type: 3}
+--- !u!1001 &1040065702
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1637318366}
+    m_Modifications:
+    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: laneNumber
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: racecourse
+      value: 
+      objectReference: {fileID: 1340364146}
+    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: hamsterProfile.hVariant
+      value: 
+      objectReference: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
+    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_Name
+      value: RacingHamster (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+--- !u!1001 &1077862389
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1637318366}
+    m_Modifications:
+    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: laneNumber
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: racecourse
+      value: 
+      objectReference: {fileID: 1340364146}
+    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: hamsterProfile.hVariant
+      value: 
+      objectReference: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
+    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_Name
+      value: RacingHamster (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
 --- !u!1 &1095692685
 GameObject:
   m_ObjectHideFlags: 0
@@ -2003,6 +2213,11 @@ Transform:
   - {fileID: 1637318366}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1387966990 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+  m_PrefabInstance: {fileID: 1040065702}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1433102826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2052,6 +2267,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56726a65962c5743a958b8a45be3b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1635478322 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+  m_PrefabInstance: {fileID: 386501073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1637318365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2082,8 +2302,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1808442479}
-  - {fileID: 600618711}
-  - {fileID: 614616837}
+  - {fileID: 1635478322}
+  - {fileID: 414511250}
+  - {fileID: 1387966990}
+  - {fileID: 2065664281}
   m_Father: {fileID: 1340364147}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1662983068
@@ -2381,87 +2603,6 @@ Transform:
   - {fileID: 246489837}
   m_Father: {fileID: 1340364147}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2038263690
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1637318366}
-    m_Modifications:
-    - target: {fileID: 2125604826380073360, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 154dbf98e0fcbf34484d7e4d4350978a, type: 3}
-    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: laneNumber
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: racecourse
-      value: 
-      objectReference: {fileID: 1340364146}
-    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: orderInRace
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: hamsterProfile.hVariant
-      value: 
-      objectReference: {fileID: 11400000, guid: 1070d5fdddf78ec4a916b9c6e77da61f, type: 2}
-    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_Name
-      value: RacingHamster (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
 --- !u!1 &2049149355
 GameObject:
   m_ObjectHideFlags: 0
@@ -2527,6 +2668,11 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!4 &2065664281 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+  m_PrefabInstance: {fileID: 1077862389}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2067841327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2765,7 +2911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3897568332592999171, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.x

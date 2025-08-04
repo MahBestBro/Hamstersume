@@ -20,7 +20,7 @@ public class RacingEventData
         int numPlayerRacers = -1
     )
     {
-        float statMultiplier = 12.0f * (int)(raceIndex + 1);
+        float statMultiplier = 12.0f * Mathf.Pow(raceIndex + 1, 2);
 
         if (numPlayerRacers >= 0) this.numberPlayerParticipants = numPlayerRacers;
         this.npcParticipants = new List<HamsterProfile>(numOpponents);

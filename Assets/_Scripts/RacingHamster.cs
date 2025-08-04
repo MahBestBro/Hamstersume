@@ -44,11 +44,7 @@ public class RacingHamster : MonoBehaviour
     {
         get 
         {
-            float totalStraightDistance = 2.0f * racecourse.straightLength;
-            float curveRadius = racecourse.minCurveRadius; //+ racecourse.laneWidth * ((float)laneNumber - 1.0f); // already accounted for in lane starting pos
-            float totalCurveDistance = 2.0f * Mathf.PI * curveRadius;
-            float trackDistance = totalStraightDistance + totalCurveDistance;
-
+            float trackDistance = racecourse.CalcTrackDistance(1F);
             return distanceTravelled / trackDistance;
         }
     }
@@ -146,15 +142,6 @@ public class RacingHamster : MonoBehaviour
         {
             float deltaTime = Time.deltaTime;
             this.spriteRenderer.sprite = hamsterProfile.hVariant.hamsterRunning;
-            float distanceCovered = 0.0f;
-            transform.position = racecourse.NextPosOnRaceCourse(
-                transform.position,
-                this.velocity,
-                laneNumber,
-                deltaTime,
-                ref distanceCovered
-            );
-            distanceTravelled += distanceCovered;
         }
 
         spriteRenderer.flipX = racecourse.GetRaceFacing(transform.position) == Facing.Right;
@@ -180,6 +167,16 @@ public class RacingHamster : MonoBehaviour
         {
             float deltaTime = Time.fixedDeltaTime;
             this.TickSpeed(deltaTime);
+
+            float distanceCovered = 0.0f;
+            transform.position = racecourse.NextPosOnRaceCourse(
+                transform.position,
+                this.velocity,
+                laneNumber,
+                deltaTime,
+                ref distanceCovered
+            );
+            distanceTravelled += distanceCovered;
         }
     }
 

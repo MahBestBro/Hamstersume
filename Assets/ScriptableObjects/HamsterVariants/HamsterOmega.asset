@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65859c7594608ee44bbe006e6f000fac, type: 3}
   m_Name: HamsterOmega
   m_EditorClassIdentifier: 
-  hamsterIdle: {fileID: -3683875464103477584, guid: dbff87f1f7578004f843c6890da45cdc, type: 3}
-  hamsterRunning: {fileID: -3683875464103477584, guid: dbff87f1f7578004f843c6890da45cdc, type: 3}
-  hamsterSleeping: {fileID: -3683875464103477584, guid: dbff87f1f7578004f843c6890da45cdc, type: 3}
+  hamsterIdle: {fileID: -3683875464103477584, guid: 7723ee4b7651a0a418a7dfcb6632da8b, type: 3}
+  hamsterRunning: {fileID: -3683875464103477584, guid: 7723ee4b7651a0a418a7dfcb6632da8b, type: 3}
+  hamsterSleeping: {fileID: -3683875464103477584, guid: 7723ee4b7651a0a418a7dfcb6632da8b, type: 3}
   startingSpeedStatFrac: 1
   startingStaminaStatFrac: 1
   startingPowerStatFrac: 1
