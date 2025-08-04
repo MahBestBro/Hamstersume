@@ -283,7 +283,7 @@ public class Hamster : Grabbable
 
             case HamsterState.Exercising:
                 energyDisplay.OffsetPos(this.wheel.GetEnergybarOffset());
-                wheel.StartSpinning(-1, !this.spriteRenderer.flipX);
+                wheel.StartSpinning(-1, this.spriteRenderer.flipX);
                 newSprite = hamsterVariant.hamsterRunning;
                 this.isGrabbable = true;
                 transform.position = wheel.transform.position;

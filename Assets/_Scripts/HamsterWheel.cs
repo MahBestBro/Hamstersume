@@ -36,13 +36,14 @@ public class HamsterWheel : MonoBehaviour
         spinningSpeed = (Mathf.Abs(spinningSpeed) * ((clockwise) ? -1F : 1F));
         //this.spinAnimation.spinSpeed = spinningSpeed;
         //this.spinAnimation.spinning = true;
-        animator.SetFloat(anim_spinSpeed, -spinningSpeed);
+        animator.SetFloat(anim_spinSpeed, spinningSpeed);
         animator.speed = Mathf.Abs(spinningSpeed);
     }
 
     public void StopSpinning()
     {
         //this.spinAnimation.spinning = false;
+        animator.speed = 1F;
         animator.SetFloat(anim_spinSpeed, 0F);
     }
 }
