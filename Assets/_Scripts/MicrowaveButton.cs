@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.UI;
 
 
 public enum FoodKind
@@ -58,19 +59,19 @@ public class MicrowaveButton : MonoBehaviour
             }
 
             Transform foodInfo = infoDisplay.transform.Find("FoodInfo");
-            foodInfo.Find("Speed").GetComponentInChildren<TMP_Text>().text = $"+{foodStats.speedStatIncrease}";
-            foodInfo.Find("Stamina").GetComponentInChildren<TMP_Text>().text = $"+{foodStats.staminaStatIncrease}";
-            foodInfo.Find("Power").GetComponentInChildren<TMP_Text>().text = $"+{foodStats.powerStatIncrease}";
-            foodInfo.Find("Energy").GetComponentInChildren<TMP_Text>().text = $"+{foodStats.energyRestored}";
+            foodInfo.Find("Speed").GetComponentInChildren<Text>().text = $"+{foodStats.speedStatIncrease}";
+            foodInfo.Find("Stamina").GetComponentInChildren<Text>().text = $"+{foodStats.staminaStatIncrease}";
+            foodInfo.Find("Power").GetComponentInChildren<Text>().text = $"+{foodStats.powerStatIncrease}";
+            foodInfo.Find("Energy").GetComponentInChildren<Text>().text = $"+{foodStats.energyRestored}";
             
-            transform.Find("CostDisplay").GetComponentInChildren<TMP_Text>().text = $"{foodStats.electricityCost}";
+            transform.Find("CostDisplay").GetComponentInChildren<Text>().text = $"{foodStats.electricityCost}";
         }
         else
         {
             infoDisplay.transform.Find("HamsterIcon").gameObject.SetActive(true);
             infoDisplay.transform.Find("FoodInfo").gameObject.SetActive(false);
             
-            transform.Find("CostDisplay").GetComponentInChildren<TMP_Text>().text = $"{microwave.hamsterCost}";
+            transform.Find("CostDisplay").GetComponentInChildren<Text>().text = $"{microwave.hamsterCost}";
         }
 
 

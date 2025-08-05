@@ -122,9 +122,6 @@ MonoBehaviour:
       hEnergy:
         energy: 0
         maximumEnergy: 0
-        imgEnergyMeter: {fileID: 0}
-        imgSleepMeter: {fileID: 0}
-        imgEnergyIncreaseIndicator: {fileID: 0}
     hVariant: {fileID: 11400000, guid: d4353c4f37023dc45a21afd7fbc6e780, type: 2}
   hamsterIconImage: {fileID: 5689354299266005721}
 --- !u!114 &3018535550389341769
@@ -267,6 +264,10 @@ PrefabInstance:
     - target: {fileID: 2019045425667068993, guid: 12b5189b32959f749a056de173bb991d, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 1.1200027
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019045425667068993, guid: 12b5189b32959f749a056de173bb991d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.011001587
       objectReference: {fileID: 0}
     - target: {fileID: 2610777726993627367, guid: 12b5189b32959f749a056de173bb991d, type: 3}
       propertyPath: m_AnchorMax.x

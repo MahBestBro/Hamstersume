@@ -31,17 +31,17 @@ public class HamsterStatDisplay : MonoBehaviour
         Transform speedMeter = transform.Find("SpeedMeter");
         speedMeterImage = speedMeter.Find("Meter").GetComponent<Image>();
         speedIconImage =  speedMeter.Find("Icon").GetComponent<Image>();
-        speedLabel = speedMeter.Find("StatLabel").GetComponent<TMP_Text>();
+        speedLabel = speedMeter.Find("StatLabel (TMP)").GetComponent<TMP_Text>();
         
         Transform staminaMeter = transform.Find("StaminaMeter");
         staminaMeterImage = staminaMeter.Find("Meter").GetComponent<Image>();
         staminaIconImage = staminaMeter.Find("Icon").GetComponent<Image>();
-        staminaLabel = staminaMeter.Find("StatLabel").GetComponent<TMP_Text>();
+        staminaLabel = staminaMeter.Find("StatLabel (TMP)").GetComponent<TMP_Text>();
         
         Transform powerMeter = transform.Find("PowerMeter");
         powerMeterImage = powerMeter.Find("Meter").GetComponent<Image>();
         powerIconImage = powerMeter.Find("Icon").GetComponent<Image>();
-        powerLabel = powerMeter.Find("StatLabel").GetComponent<TMP_Text>();
+        powerLabel = powerMeter.Find("StatLabel (TMP)").GetComponent<TMP_Text>();
     }
 
     public void UpdateStatDisplay(HamsterStats stats)
