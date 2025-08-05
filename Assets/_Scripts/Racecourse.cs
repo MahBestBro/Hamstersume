@@ -38,6 +38,8 @@ public class Racecourse : MonoBehaviour
     }
 
     [SerializeField]
+    SpriteRenderer raceTrackSprite;
+    [SerializeField]
     ScreenTransition startTransition;
     [SerializeField]
     ScreenTransition endTransition;
@@ -107,8 +109,25 @@ public class Racecourse : MonoBehaviour
         return indexes;
     }
 
+    public void ResizeRacecourse(float sizeFactor)
+    {
+        float maxCurveRadius = this.minCurveRadius + ((numLanes + 1) * laneWidth);
+        float scaledStraightLength = this.straightLength * sizeFactor;
+        Vector2 racetrackSize = raceTrackSprite.size;
+        float trackspriteLength = racetrackSize.x;
+        float trackspriteStraightLength = (straightLength * trackspriteLength) / (straightLength + (2F * maxCurveRadius));
+        float trackspriteNonstraightLength = trackspriteLength - trackspriteStraightLength;
+        racetrackSize.x = trackspriteStraightLength * sizeFactor + trackspriteNonstraightLength;
+
+        this.straightLength = scaledStraightLength;
+        raceTrackSprite.size = racetrackSize;
+    }
+
     public void InitialiseRacecourse(RacingEventData raceData)
     {
+        float sizeFactor = (raceData != null) ? raceData.trackStraightsMultiplier : UnityEngine.Random.Range(1, 5);
+        this.ResizeRacecourse(sizeFactor);
+
         this.hamsters = (raceData!=null) ? this.SpawnRacingHamsters(raceData) : this.GetDummyHamsters();
         int[] orderedLanes = GenerateShuffledIndexes(this.hamsters.Length);
         for (int i = 0; i < hamsters.Length; i++)
