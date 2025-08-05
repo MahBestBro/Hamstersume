@@ -5,8 +5,11 @@ using UnityEngine.Events;
 
 public class RaceCameraMovement : MonoBehaviour
 {
+    public float cameraZoomScale = 1.5F;
     [Range(0.0f, 5.0f)]
-    public float transitionTimeSecs;
+    public float posTransitionTimeSecs;
+    [Range(0.0f, 5.0f)]
+    public float zoomTransitionTimeSecs;
     [Range(1.0f, 20.0f)]
     public float minCameraSize;
     [Range(1.0f, 20.0f)]
@@ -23,10 +26,12 @@ public class RaceCameraMovement : MonoBehaviour
     float initialCameraSize;
     float elapsedTime = 0.0f;
 
-    Vector2 velocity = Vector2.zero; 
+    Vector2 velocity = Vector2.zero;
+    float zoomVelocity;
     bool focusingOnWinner = false;
     bool triggerWinTransitionEnd = true;
-    
+
+
     void Start()
     {
         // Initialise Camera
@@ -65,50 +70,36 @@ public class RaceCameraMovement : MonoBehaviour
         float aspect = Camera.main.aspect;
         for (int i = 0; i < racecourse.hamsters.Length; i++)
         {
-            for (int j = i; j < racecourse.hamsters.Length; j++)
+            Vector2 posA = racecourse.hamsters[i].transform.position;
+            Vector2 posB = Camera.main.transform.position;
+            float horDist = Mathf.Abs(posA.x - posB.x);
+            float vertDist = Mathf.Abs(posA.y - posB.y);
+            float maxOrthoDist = Mathf.Max(horDist / aspect, vertDist);
+            if (maxOrthoDist > largestOrthographicDistance)
             {
-                Vector2 posA = racecourse.hamsters[i].transform.position;
-                Vector2 posB = racecourse.hamsters[j].transform.position;
-                float horDist = Mathf.Abs(posA.x - posB.x);
-                float vertDist = Mathf.Abs(posA.y - posB.y);
-                float maxOrthoDist = Mathf.Max(horDist/aspect, vertDist);
-                if (maxOrthoDist > largestOrthographicDistance)
-                {
-                    largestOrthographicDistance = maxOrthoDist;
-                    largestDistIsHorizontal = vertDist > horDist;
-                }
-
-                //float distanceSquared = distanceVector.sqrMagnitude;
-                //if (distanceSquared > largestDistance) { 
-                //    largestDistance = distanceSquared;
-                //    largestDistanceVector = distanceVector;
-                //}
+                largestOrthographicDistance = maxOrthoDist;
+                largestDistIsHorizontal = vertDist > horDist;
             }
         }
 
-        float newCameraSizeHeight = largestOrthographicDistance / 2F;
-        newCameraSizeHeight *= 1.5F;
+        float newCameraSizeHeight = largestOrthographicDistance * cameraZoomScale;
+        newCameraSizeHeight = Mathf.Clamp(newCameraSizeHeight, minCameraSize, maxCameraSize);
 
-        //largestDistance = Mathf.Sqrt(largestDistance);
-        //float newCameraSizeHeight = largestDistance;
-        //float largestHeightDist = Mathf.Abs(largestDistanceVector.y);
-        //float largestWidthDist = Mathf.Abs(largestDistanceVector.x);
-        //if (largestHeightDist > largestWidthDist)
-        //{
-        //    newCameraSizeHeight = largestHeightDist;
-        //} else
-        //{
-        //    newCameraSizeHeight = largestWidthDist * Camera.main.aspect;
-        //}
+        //float zoomDiff = newCameraSizeHeight - Camera.main.orthographicSize;
+        //zoomVelocity += zoomDiff / 10F;
+        //if (zoomVelocity > zoomDiff) { zoomVelocity = zoomDiff; }
+        //Camera.main.orthographicSize += zoomVelocity * Time.deltaTime;
 
+        Camera.main.orthographicSize = Mathf.SmoothDamp(Camera.main.orthographicSize, newCameraSizeHeight, ref zoomVelocity, zoomTransitionTimeSecs);
         //TODO: Adjust zoom dynamically
-        Camera.main.orthographicSize = newCameraSizeHeight; //Mathf.Clamp(largestDistance, minCameraSize, maxCameraSize);
+
+
 
         Vector2 newPosition = Vector2.SmoothDamp(
             (Vector2)transform.position,
             targetPos,
             ref velocity,
-            transitionTimeSecs
+            posTransitionTimeSecs
         );
 
         transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);

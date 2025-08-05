@@ -473,9 +473,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a90a4c62b0ea74681282ee4a54f8c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTimeSecs: 0.8
+  cameraZoomScale: 1.5
+  posTransitionTimeSecs: 0.3
+  zoomTransitionTimeSecs: 0.8
   minCameraSize: 4
-  maxCameraSize: 7
+  maxCameraSize: 14
   victoryCameraSize: 3
   victoryZoomDurationSecs: 3
   racecourse: {fileID: 1340364146}
@@ -1032,11 +1034,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 17.85
       objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 10.07
       objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2273,13 +2275,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   racingHamsterPrefab: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-  minCurveRadius: 2.1
+  minCurveRadius: 2.2
   straightLength: 14.3
   laneWidth: 1.27
   numLanes: 5
   countdownTimeSecs: 2
   hamsters: []
   playerHamstersOffset: 0
+  raceTrackSprite: {fileID: 246489838}
   startTransition: {fileID: 136505173}
   endTransition: {fileID: 1518786974}
 --- !u!4 &1340364147
@@ -2374,7 +2377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1637318366
 Transform:
   m_ObjectHideFlags: 0
@@ -3003,11 +3006,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 9.05
       objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 5.22
       objectReference: {fileID: 0}
     - target: {fileID: 4449162642194340024, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: m_LocalPosition.z
