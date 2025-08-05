@@ -29,9 +29,11 @@ public class RacingHamster : MonoBehaviour
 
     public Racecourse racecourse;
     [SerializeField]
-    SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     [SerializeField]
     public SpriteRenderer playerIndicator;
+    [SerializeField]
+    public Transform zoomAnchor;
     [SerializeField]
     float distanceTravelled;
     [SerializeField]

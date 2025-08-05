@@ -5,11 +5,12 @@ using UnityEngine.Events;
 
 public class RaceCameraMovement : MonoBehaviour
 {
+    public Vector2 cameraOffset;
     public float cameraZoomScale = 1.5F;
     [Range(0.0f, 5.0f)]
-    public float posTransitionTimeSecs;
+    public float posTransitionTimeSecs = 0.3F;
     [Range(0.0f, 5.0f)]
-    public float zoomTransitionTimeSecs;
+    public float zoomTransitionTimeSecs = 0.8F;
     [Range(1.0f, 20.0f)]
     public float minCameraSize;
     [Range(1.0f, 20.0f)]
@@ -65,6 +66,8 @@ public class RaceCameraMovement : MonoBehaviour
         }
         targetPos = totalWeightedHamsterPos / weights.Sum();
 
+
+        // Zoom
         float largestOrthographicDistance = -1.0f;
         bool largestDistIsHorizontal = false;
         float aspect = Camera.main.aspect;
@@ -85,19 +88,12 @@ public class RaceCameraMovement : MonoBehaviour
         float newCameraSizeHeight = largestOrthographicDistance * cameraZoomScale;
         newCameraSizeHeight = Mathf.Clamp(newCameraSizeHeight, minCameraSize, maxCameraSize);
 
-        //float zoomDiff = newCameraSizeHeight - Camera.main.orthographicSize;
-        //zoomVelocity += zoomDiff / 10F;
-        //if (zoomVelocity > zoomDiff) { zoomVelocity = zoomDiff; }
-        //Camera.main.orthographicSize += zoomVelocity * Time.deltaTime;
-
         Camera.main.orthographicSize = Mathf.SmoothDamp(Camera.main.orthographicSize, newCameraSizeHeight, ref zoomVelocity, zoomTransitionTimeSecs);
         //TODO: Adjust zoom dynamically
 
-
-
         Vector2 newPosition = Vector2.SmoothDamp(
             (Vector2)transform.position,
-            targetPos,
+            targetPos + cameraOffset,
             ref velocity,
             posTransitionTimeSecs
         );
@@ -117,7 +113,7 @@ public class RaceCameraMovement : MonoBehaviour
 
         float t = Mathf.Min(elapsedTime / victoryZoomDurationSecs, 1.0f);
 
-        Vector2 targetPos = racecourse.PlayerWinner.transform.position;
+        Vector2 targetPos = racecourse.PlayerWinner.zoomAnchor.position;
         Vector2 newPosition = Vector2.Lerp(initialCameraPosition, targetPos, t);
         transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
 
