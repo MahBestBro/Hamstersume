@@ -26,6 +26,10 @@ public class RacingHamster : MonoBehaviour
 
     [HideInInspector]
     public Collider2D collider2D_;
+    Animator animator;
+    int anim_isRunning;
+    [SerializeField]
+    float runAnimBaseSpeed = 5F;
 
     public Racecourse racecourse;
     [SerializeField]
@@ -57,6 +61,8 @@ public class RacingHamster : MonoBehaviour
     {
         collider2D_ = transform.GetComponent<Collider2D>();
         if (spriteRenderer == null) spriteRenderer = transform.Find("HamsterSprite").GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        anim_isRunning = Animator.StringToHash("isRunning");
     }
 
     public void InitialiseSelf(Racecourse _racecourse)
@@ -140,8 +146,13 @@ public class RacingHamster : MonoBehaviour
     {
         if (racecourse == null) return;
 
-        if ((bool)racecourse?.RaceIsUnderway())
+        bool isRunning = racecourse?.RaceIsUnderway() ?? false;
+        animator.SetBool(anim_isRunning, isRunning);
+
+        if (isRunning)
         {
+            animator.speed = this.velocity / runAnimBaseSpeed;
+
             float deltaTime = Time.deltaTime;
             this.spriteRenderer.sprite = hamsterProfile.hVariant.hamsterRunning;
 

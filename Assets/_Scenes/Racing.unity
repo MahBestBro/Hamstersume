@@ -2985,6 +2985,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1637318366}
     m_Modifications:
+    - target: {fileID: 2125604826380073360, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
       propertyPath: laneNumber
       value: 88
