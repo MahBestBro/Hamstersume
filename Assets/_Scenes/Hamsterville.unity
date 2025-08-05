@@ -3526,6 +3526,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Microwave
       objectReference: {fileID: 0}
+    - target: {fileID: 5698367646621369004, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5765501790253049329, guid: ba43ba6169ab99f42b6cb0ddf60e67fa, type: 3}
       propertyPath: isHamsterButton
       value: 1

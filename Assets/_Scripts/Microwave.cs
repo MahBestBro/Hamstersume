@@ -18,7 +18,7 @@ public class Microwave : MonoBehaviour
         }
     }
 
-    [Range(0, 100)]
+    [Range(0, 999)]
     public int electricity;
     [Range(0, 100)]
     public int hamsterCost;
@@ -28,6 +28,8 @@ public class Microwave : MonoBehaviour
 
     [SerializeField]
     Text electricityText;
+    [SerializeField]
+    SpriteRenderer cookDisplay;
 
     [SerializeField]
     GameObject sunflowerSeedPrefab;
@@ -82,17 +84,21 @@ public class Microwave : MonoBehaviour
             );
             
             GameObject obj;
+            Hamster newHamster = null;
             if (!isFood)
             {
                 int variantIndex = UnityEngine.Random.Range(0, variants.Length);
-                Hamster newHamster = hamsterManager.CreateHamster(variants[variantIndex]);
+                newHamster = hamsterManager.CreateHamster(variants[variantIndex]);
                 obj = newHamster.gameObject;
             }
             else
             {
                 obj = Instantiate(prefab, Vector3.zero, Quaternion.identity);
             }
-            obj.GetComponent<Grabbable>().DropAt(spawnX * Vector3.right + 5.0f * Vector3.up, null, floorHeight);
+
+            Grabbable grabbableObj = obj.GetComponent<Grabbable>();
+            grabbableObj.DropAt(spawnX * Vector3.right + 5.0f * Vector3.up, null, floorHeight);
+            if (grabbableObj) cookDisplay.sprite = newHamster?.hamsterVariant.hamsterIdle ?? grabbableObj.spriteRenderer.sprite;
         }
     }
 
