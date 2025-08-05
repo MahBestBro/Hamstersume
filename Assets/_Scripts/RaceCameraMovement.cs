@@ -50,29 +50,59 @@ public class RaceCameraMovement : MonoBehaviour
 
     void FollowAllHamsters()
     {
+        float numHamsters = racecourse.hamsters.Length;
         Vector2 targetPos = Vector2.zero;
         float[] weights = racecourse.RaceCompletions().Select(x => x + 1.0f).ToArray();
         Vector2 totalWeightedHamsterPos = Vector2.zero;
-        for (int i = 0; i < racecourse.hamsters.Length; i++)
+        for (int i = 0; i < numHamsters; i++)
         {
             totalWeightedHamsterPos += weights[i] * (Vector2)racecourse.hamsters[i].transform.position;
         }
         targetPos = totalWeightedHamsterPos / weights.Sum();
 
-        float largestDistance = -1.0f;
+        float largestOrthographicDistance = -1.0f;
+        bool largestDistIsHorizontal = false;
+        float aspect = Camera.main.aspect;
         for (int i = 0; i < racecourse.hamsters.Length; i++)
         {
             for (int j = i; j < racecourse.hamsters.Length; j++)
             {
                 Vector2 posA = racecourse.hamsters[i].transform.position;
                 Vector2 posB = racecourse.hamsters[j].transform.position;
+                float horDist = Mathf.Abs(posA.x - posB.x);
+                float vertDist = Mathf.Abs(posA.y - posB.y);
+                float maxOrthoDist = Mathf.Max(horDist/aspect, vertDist);
+                if (maxOrthoDist > largestOrthographicDistance)
+                {
+                    largestOrthographicDistance = maxOrthoDist;
+                    largestDistIsHorizontal = vertDist > horDist;
+                }
 
-                largestDistance = Mathf.Max(Vector2.Distance(posA, posB), largestDistance);
+                //float distanceSquared = distanceVector.sqrMagnitude;
+                //if (distanceSquared > largestDistance) { 
+                //    largestDistance = distanceSquared;
+                //    largestDistanceVector = distanceVector;
+                //}
             }
         }
 
+        float newCameraSizeHeight = largestOrthographicDistance / 2F;
+        newCameraSizeHeight *= 1.5F;
+
+        //largestDistance = Mathf.Sqrt(largestDistance);
+        //float newCameraSizeHeight = largestDistance;
+        //float largestHeightDist = Mathf.Abs(largestDistanceVector.y);
+        //float largestWidthDist = Mathf.Abs(largestDistanceVector.x);
+        //if (largestHeightDist > largestWidthDist)
+        //{
+        //    newCameraSizeHeight = largestHeightDist;
+        //} else
+        //{
+        //    newCameraSizeHeight = largestWidthDist * Camera.main.aspect;
+        //}
+
         //TODO: Adjust zoom dynamically
-        Camera.main.orthographicSize = Mathf.Clamp(largestDistance, minCameraSize, maxCameraSize);
+        Camera.main.orthographicSize = newCameraSizeHeight; //Mathf.Clamp(largestDistance, minCameraSize, maxCameraSize);
 
         Vector2 newPosition = Vector2.SmoothDamp(
             (Vector2)transform.position,
