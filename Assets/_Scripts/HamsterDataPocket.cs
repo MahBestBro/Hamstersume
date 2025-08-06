@@ -16,6 +16,8 @@ public class HamsterDataPocket : MonoBehaviour
     [SerializeField]
     public Microwave microwave;
     [SerializeField]
+    public Transform hamsterWheels;
+    [SerializeField]
     public RacingPreview racingPreview;
     [SerializeField]
     public HamsterSelectionBox hamsterBox;
@@ -56,6 +58,7 @@ public class HamsterDataPocket : MonoBehaviour
         this.trainingTimer = sceneInstance.trainingTimer;
         this.hamsterManager = sceneInstance.hamsterManager;
         this.microwave = sceneInstance.microwave;
+        this.hamsterWheels = sceneInstance.hamsterWheels;
         this.racingPreview = sceneInstance.racingPreview;
         this.hamsterBox = sceneInstance.hamsterBox;
         this.raceCourse = sceneInstance.raceCourse;
@@ -81,6 +84,13 @@ public class HamsterDataPocket : MonoBehaviour
         if (this.microwave)
         {
             this.microwave.electricity = electricityReward;
+        }
+        if (this.hamsterWheels)
+        {
+            for (int i = 0; i < this.hamsterWheels.childCount; i++)
+            {
+                this.hamsterWheels.GetChild(i).gameObject.SetActive((i * 3 <= this.raceCircuit.RacesCompleted));
+            }
         }
         if (this.racingPreview)
         {

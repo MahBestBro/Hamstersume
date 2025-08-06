@@ -7,6 +7,7 @@ public class RacingCircuit : MonoBehaviour
     public List<RacingEventData> races;
     [SerializeField]
     int currentRaceIndex = 0;
+    public int RacesCompleted { get { return currentRaceIndex; } }
 
     [SerializeField]
     GameObject hamsterPrefab;
@@ -24,7 +25,10 @@ public class RacingCircuit : MonoBehaviour
     public void InitialiseCircuit()
     {
         prefabProfile = hamsterPrefab.GetComponent<Hamster>().hamsterProfile;
-        this.AddRace(this.GenerateRace());
+        for (int i = 0; i <= currentRaceIndex; i++) // TEMP
+        {
+            this.AddRace(this.GenerateRace());
+        }
     }
 
     void AddRace(RacingEventData race)

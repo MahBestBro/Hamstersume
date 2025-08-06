@@ -174,8 +174,9 @@ public class Racecourse : MonoBehaviour
                 finishLineFilter.SetLayerMask(LayerMask.GetMask("FinishLine"));
                 List<Collider2D> _ = new List<Collider2D>();
                 bool intersectedFinishLine = hamster.collider2D_.Overlap(finishLineFilter, _) > 0;
-                
-                if (hamster.RaceCompletion >= 0.9f && intersectedFinishLine)
+
+                float raceCompletion = hamster.RaceCompletion;
+                if ((raceCompletion >= 0.9F && intersectedFinishLine) || raceCompletion > 2.0F)
                 {
                     playerWinner = hamster;
                     break;
