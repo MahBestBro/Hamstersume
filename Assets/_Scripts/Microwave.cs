@@ -82,7 +82,9 @@ public class Microwave : MonoBehaviour
                 hamsterManager.hamsterWalkArea.center.y, 
                 hamsterManager.hamsterWalkArea.max.y
             );
-            
+
+            Vector3 spawnPos = spawnX * Vector3.right + 5.0f * Vector3.up;
+
             GameObject obj;
             Hamster newHamster = null;
             if (!isFood)
@@ -96,8 +98,9 @@ public class Microwave : MonoBehaviour
                 obj = Instantiate(prefab, Vector3.zero, Quaternion.identity);
             }
 
+            obj.transform.position = spawnPos;
             Grabbable grabbableObj = obj.GetComponent<Grabbable>();
-            grabbableObj.DropAt(spawnX * Vector3.right + 5.0f * Vector3.up, null, floorHeight);
+            grabbableObj.DropAt(spawnPos, null, floorHeight);
             if (grabbableObj) cookDisplay.sprite = newHamster?.hamsterVariant.hamsterIdle ?? grabbableObj.spriteRenderer.sprite;
         }
     }
