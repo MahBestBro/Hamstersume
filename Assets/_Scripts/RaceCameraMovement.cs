@@ -58,7 +58,7 @@ public class RaceCameraMovement : MonoBehaviour
     {
         float numHamsters = racecourse.hamsters.Length;
         Vector2 targetPos = Vector2.zero;
-        float[] weights = racecourse.RaceCompletions().Select(x => x + 1.0f).ToArray();
+        float[] weights = racecourse.RaceCompletions().Select(x => (x<1.1F)?(x + 1.0F):0F).ToArray();
         Vector2 totalWeightedHamsterPos = Vector2.zero;
         for (int i = 0; i < numHamsters; i++)
         {
