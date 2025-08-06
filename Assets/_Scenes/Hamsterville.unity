@@ -3133,7 +3133,15 @@ MonoBehaviour:
   microwave: {fileID: 1915144412}
   racingPreview: {fileID: 1603956642}
   hamsterBox: {fileID: 0}
-  hamsters: []
+  hamsters:
+  - hStats:
+      statSpeed: 77
+      statStamina: 77
+      statPower: 77
+      hEnergy:
+        energy: 0
+        maximumEnergy: 0
+    hVariant: {fileID: 11400000, guid: 94bcec3602ab45c419188695b5b867c3, type: 2}
   electricityReward: 0
 --- !u!4 &2028063381
 Transform:
@@ -3777,6 +3785,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1320727357573083220, guid: 58db080cec941154f90e2b360a8a9198, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1792390699624223693, guid: 58db080cec941154f90e2b360a8a9198, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3815,11 +3827,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2354061662202462757, guid: 58db080cec941154f90e2b360a8a9198, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2354061662202462757, guid: 58db080cec941154f90e2b360a8a9198, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480698575127209185, guid: 58db080cec941154f90e2b360a8a9198, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480698575127209185, guid: 58db080cec941154f90e2b360a8a9198, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480698575127209185, guid: 58db080cec941154f90e2b360a8a9198, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480698575127209185, guid: 58db080cec941154f90e2b360a8a9198, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480698575127209185, guid: 58db080cec941154f90e2b360a8a9198, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -2.249115
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480698575127209185, guid: 58db080cec941154f90e2b360a8a9198, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.1244965
       objectReference: {fileID: 0}
     - target: {fileID: 4057307492683484253, guid: 58db080cec941154f90e2b360a8a9198, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3997,6 +4033,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RacePreviewButton
       objectReference: {fileID: 0}
+    - target: {fileID: 8494091250365648467, guid: 58db080cec941154f90e2b360a8a9198, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8525010947353590321, guid: 58db080cec941154f90e2b360a8a9198, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4019,7 +4059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9022772909556795256, guid: 58db080cec941154f90e2b360a8a9198, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

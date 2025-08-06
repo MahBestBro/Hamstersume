@@ -37,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00002207, y: -465}
-  m_SizeDelta: {x: 665.9584, y: 374.6017}
+  m_AnchoredPosition: {x: 0.00002207, y: -471}
+  m_SizeDelta: {x: 659.3, y: 374.6017}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &245334821431785226
 CanvasRenderer:
@@ -1194,6 +1194,7 @@ MonoBehaviour:
     straightLength: 14.3
     laneWidth: 1.27
     numLanes: 5
+  racetrackImage: {fileID: 8689035895772912107}
 --- !u!1 &8901743746648538577
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,7 +1489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7068855024603341579, guid: 20a07ac7ff7dc6f439a3b3e4e8ab35f4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1630,7 +1631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7068855024603341579, guid: 20a07ac7ff7dc6f439a3b3e4e8ab35f4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1772,7 +1773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7068855024603341579, guid: 20a07ac7ff7dc6f439a3b3e4e8ab35f4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

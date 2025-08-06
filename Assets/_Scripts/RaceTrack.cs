@@ -2,8 +2,9 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class RaceTrack // Maybe make this a monobehaviour prefab to share data; or a scriptableobject but will have to prevent modifying values on the scriptableobject asset
+public class RaceTrack
 {
+    // Maybe make this a monobehaviour prefab to share data; or a scriptableobject but will have to prevent modifying values on the scriptableobject asset
     [Range(0.0f, 50.0f)]
     public float minCurveRadius = 2.2F;
     [Range(0.0f, 100.0f)]
@@ -21,5 +22,20 @@ public class RaceTrack // Maybe make this a monobehaviour prefab to share data; 
         float trackDistance = totalStraightDistance + totalCurveDistance;
 
         return trackDistance;
+    }
+
+    public Vector2 ResizeRacecourse(float sizeFactor, Vector2 racetrackSize)
+    {
+        float maxCurveRadius = this.minCurveRadius + ((numLanes + 1) * laneWidth);
+        float scaledStraightLength = this.straightLength * sizeFactor;
+        //Vector2 racetrackSize = raceTrackSprite.size;
+        float trackspriteLength = racetrackSize.x;
+        float trackspriteStraightLength = (straightLength * trackspriteLength) / (straightLength + (2F * maxCurveRadius));
+        float trackspriteNonstraightLength = trackspriteLength - trackspriteStraightLength;
+        racetrackSize.x = trackspriteStraightLength * sizeFactor + trackspriteNonstraightLength;
+
+        this.straightLength = scaledStraightLength;
+        //raceTrackSprite.size = racetrackSize;
+        return racetrackSize;
     }
 }

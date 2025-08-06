@@ -219,6 +219,7 @@ MonoBehaviour:
   laneNumber: 0
   collider2D_: {fileID: 0}
   runAnimBaseSpeed: 5
+  runAnimSpeedScaleExponent: 0.5
   racecourse: {fileID: 0}
   spriteRenderer: {fileID: 2125604826380073360}
   statsDisplay: {fileID: 143941483512669481}

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -15,15 +16,26 @@ public class RacingPreview : MonoBehaviour
     public HamsterProfileDisplay racerProfileEntryPrefab;
 
     public RaceTrack _racetrack;
+    public Image racetrackImage;
 
     public void SetRacingPreview(RacingEventData raceData)
     {
-        _racetrack.straightLength *= raceData.trackStraightsMultiplier; // yucky
+        Vector2 imgDims = racetrackImage.rectTransform.sizeDelta;
+        Vector2 newImgDims = _racetrack.ResizeRacecourse(raceData.trackStraightsMultiplier, imgDims); // yucky
+        float imgScaleFac = Mathf.Max((newImgDims.x / imgDims.x), (newImgDims.y / imgDims.y));
+        racetrackImage.rectTransform.sizeDelta = newImgDims / imgScaleFac;
+        Image racetrackImageChild = racetrackImage.rectTransform.GetChild(0)?.GetComponent<Image>();
+        if (racetrackImageChild)
+        {
+            racetrackImageChild.pixelsPerUnitMultiplier *= imgScaleFac;
+        }
+
         const float roundingFactor = 100F;
         float raceDist = _racetrack.CalcTrackDistance(1);
         raceDist = Mathf.Round(raceDist * roundingFactor) / roundingFactor;
         trackLabel.text = raceDist + "cm " + raceData.trackType.ToUpper();
-        _racetrack.straightLength /= raceData.trackStraightsMultiplier;
+        _racetrack.straightLength /= raceData.trackStraightsMultiplier; // yucky
+
         this.PopulateRacerList(raceData.npcParticipants);
     }
 

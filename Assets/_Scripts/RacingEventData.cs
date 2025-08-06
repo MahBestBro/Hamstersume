@@ -11,7 +11,7 @@ public class RacingEventData
     public string trackType = "Standard";
     public float trackStraightsMultiplier = 1F;
 
-    public int TotalParticipants { get { return numberPlayerParticipants + npcParticipants.Count; } }
+    public int TotalParticipants { get { return playerParticipants.Count + npcParticipants.Count; } }
 
     public void GenerateRandomRace(
         int numOpponents,

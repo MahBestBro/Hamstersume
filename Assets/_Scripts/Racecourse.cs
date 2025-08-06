@@ -111,16 +111,7 @@ public class Racecourse : MonoBehaviour
 
     public void ResizeRacecourse(float sizeFactor)
     {
-        float maxCurveRadius = this.minCurveRadius + ((numLanes + 1) * laneWidth);
-        float scaledStraightLength = this.straightLength * sizeFactor;
-        Vector2 racetrackSize = raceTrackSprite.size;
-        float trackspriteLength = racetrackSize.x;
-        float trackspriteStraightLength = (straightLength * trackspriteLength) / (straightLength + (2F * maxCurveRadius));
-        float trackspriteNonstraightLength = trackspriteLength - trackspriteStraightLength;
-        racetrackSize.x = trackspriteStraightLength * sizeFactor + trackspriteNonstraightLength;
-
-        this.racetrack.straightLength = scaledStraightLength;
-        raceTrackSprite.size = racetrackSize;
+        raceTrackSprite.size = this.racetrack.ResizeRacecourse(sizeFactor, raceTrackSprite.size);
     }
 
     public void InitialiseRacecourse(RacingEventData raceData)

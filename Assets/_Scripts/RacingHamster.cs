@@ -30,6 +30,8 @@ public class RacingHamster : MonoBehaviour
     int anim_isRunning;
     [SerializeField]
     float runAnimBaseSpeed = 5F;
+    [SerializeField, Range(0F,1F)]
+    float runAnimSpeedScaleExponent = 0.5F;
 
     public Racecourse racecourse;
     [SerializeField]
@@ -158,7 +160,7 @@ public class RacingHamster : MonoBehaviour
 
         if (isRunning)
         {
-            animator.speed = this.velocity / runAnimBaseSpeed;
+            animator.speed = Mathf.Pow(this.velocity / runAnimBaseSpeed, runAnimSpeedScaleExponent);
 
             float deltaTime = Time.deltaTime;
             this.spriteRenderer.sprite = hamsterProfile.hVariant.hamsterRunning;
@@ -194,7 +196,7 @@ public class RacingHamster : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if ((bool)racecourse?.RaceIsUnderway())
+        if (racecourse?.RaceIsUnderway() ?? false)
         {
             float deltaTime = Time.fixedDeltaTime;
             this.TickSpeed(deltaTime);
