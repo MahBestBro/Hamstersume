@@ -35,6 +35,8 @@ public class RacingHamster : MonoBehaviour
     [SerializeField]
     public SpriteRenderer spriteRenderer;
     [SerializeField]
+    public HamsterStatDisplay statsDisplay;
+    [SerializeField]
     public SpriteRenderer playerIndicator;
     [SerializeField]
     public Transform zoomAnchor;
@@ -63,6 +65,11 @@ public class RacingHamster : MonoBehaviour
         if (spriteRenderer == null) spriteRenderer = transform.Find("HamsterSprite").GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         anim_isRunning = Animator.StringToHash("isRunning");
+
+        if(this.statsDisplay)
+        {
+            SetActiveStatsDisplay(false);
+        }
     }
 
     public void InitialiseSelf(Racecourse _racecourse)
@@ -197,5 +204,16 @@ public class RacingHamster : MonoBehaviour
     float CalcFatigueRate()
     {
         return -(1F - (this.endurance / this.maxEndurance));
+    }
+
+    public void SetActiveStatsDisplay(bool active)
+    {
+        if (this._raceCompletion > 1.0F) active = false;
+        if (active)
+        {
+            this.statsDisplay.UpdateStatDisplay(this.hamsterProfile.hStats);
+            this.statsDisplay.transform.localScale = Vector3.one * Mathf.Max((Camera.main.orthographicSize / 5F));
+        }
+        this.statsDisplay.gameObject.SetActive(active);
     }
 }

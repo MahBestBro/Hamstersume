@@ -2276,13 +2276,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   racingHamsterPrefab: {fileID: 3635562079468594509, guid: ce4ac3d096c55f548b3036e1427f5e99, type: 3}
-  minCurveRadius: 2.2
-  straightLength: 14.3
-  laneWidth: 1.27
-  numLanes: 5
+  racetrack:
+    minCurveRadius: 2.2
+    straightLength: 14.3
+    laneWidth: 1.27
+    numLanes: 5
   countdownTimeSecs: 2
   hamsters: []
-  playerHamstersOffset: 0
   raceTrackSprite: {fileID: 246489838}
   startTransition: {fileID: 136505173}
   endTransition: {fileID: 1518786974}
