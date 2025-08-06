@@ -50,7 +50,7 @@ public class RacingHamster : MonoBehaviour
     {
         get 
         {
-            float trackDistance = racecourse.CalcTrackDistance(1F);
+            float trackDistance = racecourse.CalcTrackDistance(1);
             return distanceTravelled / trackDistance;
         }
     }

@@ -84,7 +84,7 @@ public class HamsterDataPocket : MonoBehaviour
         }
         if (this.racingPreview)
         {
-            this.racingPreview.PopulateRacerList(this.raceCircuit.CurrentRace.npcParticipants);
+            this.racingPreview.SetRacingPreview(this.raceCircuit.CurrentRace);
         }
         if (this.hamsterBox)
         {

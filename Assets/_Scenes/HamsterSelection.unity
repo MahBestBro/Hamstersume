@@ -2175,7 +2175,7 @@ MonoBehaviour:
     m_Extent: {x: 3.5, y: 5.06, z: 0}
   hamsterPhysicsBounds:
     m_Center: {x: -5.18, y: 0.04, z: 0}
-    m_Extent: {x: 4.43, y: 10, z: 0}
+    m_Extent: {x: 3.73, y: 10, z: 0}
   hamsterPhysicsBoundsBuffer: 1
   maxHamsterEnergy: 100
   hamsterEnergyLossPerSec: 10

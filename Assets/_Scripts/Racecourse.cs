@@ -15,20 +15,17 @@ public enum Facing
 public class Racecourse : MonoBehaviour
 {
     public RacingHamster racingHamsterPrefab;
-
-    [Range(0.0f, 50.0f)]
-    public float minCurveRadius;
-    [Range(0.0f, 50.0f)]
-    public float straightLength;
-    [Range(0.0f, 50.0f)]
-    public float laneWidth;
-    [Range(1, 10)]
-    public int numLanes;
+    [SerializeField]
+    public RaceTrack racetrack;
+    public float minCurveRadius { get { return racetrack.minCurveRadius;  } }
+    public float straightLength { get { return racetrack.straightLength;  } }
+    public float laneWidth { get { return racetrack.laneWidth;  } }
+    public int numLanes { get { return racetrack.numLanes;  } }
     [Range(0.0f, 10.0f)]
     public float countdownTimeSecs;
     
     public RacingHamster[] hamsters;
-    public int playerHamstersOffset = 0;
+    bool playerHamsterParticipating = false;
     public RacingHamster PlayerWinner
     {
         get
@@ -66,14 +63,17 @@ public class Racecourse : MonoBehaviour
             idx++;
         }
 
-        playerHamstersOffset = idx;
-        foreach (HamsterProfile playerRacer in raceData.playerParticipants)
+        if (raceData.playerParticipants.Count > 0)
         {
-            GameObject spawnedHam = Instantiate(racingHamsterPrefab.gameObject);
-            spawnedHamsters[idx] = spawnedHam.GetComponent<RacingHamster>();
-            spawnedHamsters[idx].hamsterProfile = playerRacer;
-            spawnedHamsters[idx].playerIndicator?.gameObject.SetActive(true);
-            idx++;
+            playerHamsterParticipating = true;
+            foreach (HamsterProfile playerRacer in raceData.playerParticipants)
+            {
+                GameObject spawnedHam = Instantiate(racingHamsterPrefab.gameObject);
+                spawnedHamsters[idx] = spawnedHam.GetComponent<RacingHamster>();
+                spawnedHamsters[idx].hamsterProfile = playerRacer;
+                spawnedHamsters[idx].playerIndicator?.gameObject.SetActive(true);
+                idx++;
+            }
         }
         
         return spawnedHamsters;
@@ -119,7 +119,7 @@ public class Racecourse : MonoBehaviour
         float trackspriteNonstraightLength = trackspriteLength - trackspriteStraightLength;
         racetrackSize.x = trackspriteStraightLength * sizeFactor + trackspriteNonstraightLength;
 
-        this.straightLength = scaledStraightLength;
+        this.racetrack.straightLength = scaledStraightLength;
         raceTrackSprite.size = racetrackSize;
     }
 
@@ -170,25 +170,25 @@ public class Racecourse : MonoBehaviour
         }
         
         //Check who's the winner out of the player's hamsters
-        float[] raceCompletions = RaceCompletions();
-        for (int i = playerHamstersOffset; i < hamsters.Length && playerWinner == null; i++)
-        {
-            RacingHamster hamster = hamsters[i];
-
-            ContactFilter2D finishLineFilter = new ContactFilter2D();
-            finishLineFilter.useTriggers = true;
-            finishLineFilter.useLayerMask = true;
-            finishLineFilter.SetLayerMask(LayerMask.GetMask("FinishLine"));
-            List<Collider2D> _ = new List<Collider2D>();
-            bool intersectedFinishLine = hamster.collider2D_.Overlap(finishLineFilter, _) > 0;
-            
-            //TODO: This track completion boolean is dodgy. Ideally, track completions would properly
-            //track total distance but for some reason it does not. Either fix track completion or
-            //clean 
-            if (hamster.RaceCompletion >= 0.2f && intersectedFinishLine)
+        if (playerWinner == null) { 
+            float[] raceCompletions = RaceCompletions();
+            for (int i = 0; i < hamsters.Length; i++)
             {
-                playerWinner = hamster;
-                break;
+                RacingHamster hamster = hamsters[i];
+                if (playerHamsterParticipating && !hamster.playerIndicator.gameObject.activeInHierarchy) continue;
+
+                ContactFilter2D finishLineFilter = new ContactFilter2D();
+                finishLineFilter.useTriggers = true;
+                finishLineFilter.useLayerMask = true;
+                finishLineFilter.SetLayerMask(LayerMask.GetMask("FinishLine"));
+                List<Collider2D> _ = new List<Collider2D>();
+                bool intersectedFinishLine = hamster.collider2D_.Overlap(finishLineFilter, _) > 0;
+                
+                if (hamster.RaceCompletion >= 0.9f && intersectedFinishLine)
+                {
+                    playerWinner = hamster;
+                    break;
+                }
             }
         }
     }
@@ -358,21 +358,16 @@ public class Racecourse : MonoBehaviour
         SceneManager.LoadScene("Hamsterville");
     }
 
-    public float CalcTrackDistance(float laneNumber)
+    public float CalcTrackDistance(int laneNumber = 1)
     {
-        float totalStraightDistance = 2.0f * this.straightLength;
-        float curveRadius = this.minCurveRadius + this.laneWidth * ((float)laneNumber - 1.0f);
-        float totalCurveDistance = 2.0f * Mathf.PI * curveRadius;
-        float trackDistance = totalStraightDistance + totalCurveDistance;
-
-        return trackDistance;
+        return this.racetrack.CalcTrackDistance(laneNumber);
     }
 
     Vector2 StartingPosition(int laneNumber)
     {
         float laneRank = (float)laneNumber - 1.0f;
         float curveRadius = minCurveRadius + laneRank * laneWidth;   
-        float distanceAdjustment = this.CalcTrackDistance(laneNumber) - this.CalcTrackDistance(1F);
+        float distanceAdjustment = this.CalcTrackDistance(laneNumber) - this.CalcTrackDistance(1);
         
         Vector2 racetrackStartline = transform.position;
         racetrackStartline += (Vector2.down * curveRadius);
