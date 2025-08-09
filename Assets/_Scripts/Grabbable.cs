@@ -117,9 +117,11 @@ public class Grabbable : MonoBehaviour
             if (isFalling)
             {
                 if (this.spriteRenderer) this.spriteRenderer.sortingOrder += 100;
+                this.OnFalling();
             }
         }
     }
+    public virtual void OnFalling() { }
     public virtual void OnPhysicsReset() { }
     public virtual void OnHoverEnter()
     {

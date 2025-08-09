@@ -1,5 +1,3 @@
-using System.ComponentModel;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class RacingHamster : MonoBehaviour
@@ -186,7 +184,7 @@ public class RacingHamster : MonoBehaviour
             float overCompletion = Mathf.Pow(((_raceCompletion - 1F) / 0.2F), 2F);
             if (overCompletion < 1F)
             {
-                playerIndicator.color = playerIndicator.color.WithAlpha(1F - overCompletion);
+                playerIndicator.color = new Color(playerIndicator.color.r, playerIndicator.color.g, playerIndicator.color.b, (1F - overCompletion));
             } else
             {
                 playerIndicator.gameObject.SetActive(false);

@@ -182,6 +182,11 @@ public class Hamster : Grabbable
         //}
     }
 
+    public override void OnFalling()
+    {
+        this.walkDestination = transform.position;
+    }
+
     void HandleCurrentState(HamsterState state)
     {
         this.OverrideSprite();
