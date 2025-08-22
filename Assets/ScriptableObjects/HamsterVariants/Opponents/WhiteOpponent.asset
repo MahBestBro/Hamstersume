@@ -16,6 +16,6 @@ MonoBehaviour:
   hamsterRunning: {fileID: 21300000, guid: 749c68d7f950269498444f794433da66, type: 3}
   hamsterSleeping: {fileID: 21300000, guid: 149010d4be9b9554081afbca475feaae, type: 3}
   startingSpeedStatFrac: 0.8
-  startingStaminaStatFrac: 0.2
+  startingStaminaStatFrac: 0.15
   startingPowerStatFrac: 0.5
   startingMaxEnergy: 100

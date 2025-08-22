@@ -23,8 +23,15 @@ public class RacingEventData
     {
         float progressFactor = raceIndex + 1;
         float statMultiplier = 12.0f * Mathf.Pow(progressFactor, 2);
-
-        if (numPlayerRacers >= 0) this.numberPlayerParticipants = numPlayerRacers;
+        
+        if (numPlayerRacers >= 0)
+        {
+            this.numberPlayerParticipants = numPlayerRacers;
+        }
+        // else
+        //{
+        //    this.numberPlayerParticipants = (progressFactor == 2) ? 2 : Mathf.CeilToInt(progressFactor / 10F);
+        //}
         this.npcParticipants = new List<HamsterProfile>(numOpponents);
         this.playerParticipants = new List<HamsterProfile>(this.numberPlayerParticipants);
         
@@ -41,11 +48,12 @@ public class RacingEventData
             newHamProfile.hStats.statStamina = Mathf.Max((int)(variant.startingStaminaStatFrac * statMultiplier) + statVariance, 1);
             newHamProfile.hStats.statPower = Mathf.Max((int)(variant.startingPowerStatFrac * statMultiplier) + statVariance, 1);
 
-        Debug.Log(variant);
+            //Debug.Log(variant);
 
             this.npcParticipants.Add(newHamProfile);
         }
         this.trackType = "Standard";
-        this.trackStraightsMultiplier = UnityEngine.Random.Range((int)1, 3) * Mathf.Ceil(progressFactor/3F);
+        //this.trackStraightsMultiplier = UnityEngine.Random.Range((int)1, 3) * Mathf.Ceil(progressFactor/3F);
+        this.trackStraightsMultiplier = (progressFactor < 3) ? progressFactor : (UnityEngine.Random.Range((int)1, 3) + progressFactor);
     }
 }

@@ -14,7 +14,7 @@ public class RacingHamster : MonoBehaviour
     float maxSpeed;
     [SerializeField]
     float acceleration = 0;
-    float decelerationFactor = 1F;
+    float decelerationFactor = 3F;
     float burstAcceleration;
     bool isSprinting = false;
     [SerializeField]
@@ -80,7 +80,7 @@ public class RacingHamster : MonoBehaviour
 
         this.maxSpeed = this.minSpeed + this.hamsterProfile.hStats.statSpeed * 0.5F;
         this.velocity = this.maxSpeed;
-        this.burstAcceleration = Mathf.Max(this.hamsterProfile.hStats.statPower, 0F);
+        this.burstAcceleration = Mathf.Max(this.hamsterProfile.hStats.statPower, 0F) * 2.0F;
         this.maxEndurance = Mathf.Max(this.hamsterProfile.hStats.statStamina, 3F);
         this.endurance = this.maxEndurance;
         this.isTired = false;
@@ -102,13 +102,14 @@ public class RacingHamster : MonoBehaviour
         if (this.isSprinting)
         {
             this.acceleration = this.burstAcceleration * (this.endurance / this.maxEndurance) + (this.CalcFatigueRate() * decelerationFactor);
-            this.endurance = this.endurance - (deltaTime * 1.1F);
-            if (this.endurance <= 0F)
+            this.endurance = this.endurance - (deltaTime * (this.velocity / 3.0F) * 1.1F); // drain endurance faster while sprinting
+            if (this.endurance <= 0F) // stop sprinting if no endurance left
             {
                 this.endurance = 0F;
                 this.isTired = true;
+                this.isSprinting = false;
             }
-            if (raceCompletion > 1.1F)
+            if (raceCompletion > 1.1F) // stop sprinting if race over
             {
                 this.isSprinting = false;
             }
@@ -128,18 +129,15 @@ public class RacingHamster : MonoBehaviour
             }
             else
             {
-                this.endurance = this.endurance - deltaTime;
+                this.endurance = this.endurance - (deltaTime * (this.velocity/3.0F));
                 if (this.endurance <= 0F)
                 {
                     this.endurance = 0F;
                     this.isTired = true;
                 }
-                if (!this.isSprinting)
-                {
-                    this.acceleration = this.CalcFatigueRate() * decelerationFactor;
-                }
+                this.acceleration = this.CalcFatigueRate() * decelerationFactor;
             }
-            if (raceCompletion > (2F / 3F) && raceCompletion  < 1.1F)
+            if (raceCompletion > (2F / 3F) && raceCompletion  < 1.1F) // sprint at last third
             {
                 this.isSprinting = true;
             }

@@ -94,10 +94,11 @@ public class HamsterDataPocket : MonoBehaviour
         }
         if (this.racingPreview)
         {
-            this.racingPreview.SetRacingPreview(this.raceCircuit.CurrentRace);
+            this.racingPreview.SetRacingPreview(this.raceCircuit.RacesCompleted + 1, this.raceCircuit.CurrentRace);
         }
         if (this.hamsterBox)
         {
+            this.hamsterBox.selectionLimit = this.raceCircuit.CurrentRace.numberPlayerParticipants;
             this.hamsterBox.onSelectionConfirmed.AddListener(this.OnRacersSelected);
         }
         if (this.raceCourse)

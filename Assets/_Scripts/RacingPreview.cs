@@ -18,7 +18,7 @@ public class RacingPreview : MonoBehaviour
     public RaceTrack _racetrack;
     public Image racetrackImage;
 
-    public void SetRacingPreview(RacingEventData raceData)
+    public void SetRacingPreview(int raceDay, RacingEventData raceData)
     {
         Vector2 imgDims = racetrackImage.rectTransform.sizeDelta;
         Vector2 newImgDims = _racetrack.ResizeRacecourse(raceData.trackStraightsMultiplier, imgDims); // yucky
@@ -33,7 +33,7 @@ public class RacingPreview : MonoBehaviour
         const float roundingFactor = 100F;
         float raceDist = _racetrack.CalcTrackDistance(1);
         raceDist = Mathf.Round(raceDist * roundingFactor) / roundingFactor;
-        trackLabel.text = raceDist + "cm " + raceData.trackType.ToUpper();
+        trackLabel.text = "Race #" + raceDay + "\n" +raceDist + "cm " + raceData.trackType.ToUpper();
         _racetrack.straightLength /= raceData.trackStraightsMultiplier; // yucky
 
         this.PopulateRacerList(raceData.npcParticipants);

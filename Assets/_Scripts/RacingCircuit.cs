@@ -39,14 +39,15 @@ public class RacingCircuit : MonoBehaviour
     RacingEventData GenerateRace()
     {
         RacingEventData race = new RacingEventData();
-        race.GenerateRandomRace(4, opponentVariants, prefabProfile, currentRaceIndex);
+        int nPlayer = 1; // + (currentRaceIndex%2); // adding more hamsters introduces complications with rankings
+        race.GenerateRandomRace(5 - nPlayer, opponentVariants, prefabProfile, currentRaceIndex, nPlayer);
         return race;
     }
 
     public bool QueueNextRace()
     {
-        this.AddRace(this.GenerateRace());
         this.currentRaceIndex++;
+        this.AddRace(this.GenerateRace());
         return (this.currentRaceIndex < this.races.Count);
     }
 }

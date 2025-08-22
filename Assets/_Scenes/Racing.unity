@@ -539,11 +539,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3344033652531943310, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3344033652531943310, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3344033652531943310, guid: 31ec8c8201f5b3340bd2fc922744810c, type: 3}
       propertyPath: m_LocalScale.z
@@ -2140,6 +2140,7 @@ MonoBehaviour:
   trainingTimer: {fileID: 0}
   hamsterManager: {fileID: 0}
   microwave: {fileID: 0}
+  hamsterWheels: {fileID: 0}
   racingPreview: {fileID: 0}
   hamsterBox: {fileID: 0}
   hamsters:

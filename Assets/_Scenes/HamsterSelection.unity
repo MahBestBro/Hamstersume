@@ -1404,6 +1404,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4d73c09835f807e47bd93fbcd6a1ea17, type: 2}
   - {fileID: 11400000, guid: d5c5c0d7d3c27394fbc5011035bf8fa2, type: 2}
   - {fileID: 11400000, guid: 9974c1e270111bb48bab275f5e885cdb, type: 2}
+  - {fileID: 11400000, guid: 82a9de17627378d47b1b5c2b02a6f596, type: 2}
+  - {fileID: 11400000, guid: f620bd9456c26b24e8baaae4da7d61ac, type: 2}
+  - {fileID: 11400000, guid: fb2e78e8d487d474dbdb487eeff42417, type: 2}
+  - {fileID: 11400000, guid: 5d5b0b7b8f3dd6b41ae180c375444f66, type: 2}
+  - {fileID: 11400000, guid: 4f7c760f818be324d8550ed66a4bccd3, type: 2}
 --- !u!114 &1196608143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1421,6 +1426,7 @@ MonoBehaviour:
   trainingTimer: {fileID: 0}
   hamsterManager: {fileID: 2039469793}
   microwave: {fileID: 0}
+  hamsterWheels: {fileID: 0}
   racingPreview: {fileID: 544942217}
   hamsterBox: {fileID: 710183182}
   hamsters: []
