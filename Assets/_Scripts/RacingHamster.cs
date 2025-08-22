@@ -14,7 +14,7 @@ public class RacingHamster : MonoBehaviour
     float maxSpeed;
     [SerializeField]
     float acceleration = 0;
-    float decelerationFactor = 3F;
+    float decelerationFactor = 10F;
     float burstAcceleration;
     bool isSprinting = false;
     [SerializeField]
@@ -102,7 +102,7 @@ public class RacingHamster : MonoBehaviour
         if (this.isSprinting)
         {
             this.acceleration = this.burstAcceleration * (this.endurance / this.maxEndurance) + (this.CalcFatigueRate() * decelerationFactor);
-            this.endurance = this.endurance - (deltaTime * (this.velocity / 3.0F) * 1.1F); // drain endurance faster while sprinting
+            this.endurance = this.endurance - (deltaTime * (this.velocity / 3.0F) * 2.0F); // drain endurance faster while sprinting
             if (this.endurance <= 0F) // stop sprinting if no endurance left
             {
                 this.endurance = 0F;
@@ -137,7 +137,7 @@ public class RacingHamster : MonoBehaviour
                 }
                 this.acceleration = this.CalcFatigueRate() * decelerationFactor;
             }
-            if (raceCompletion > (2F / 3F) && raceCompletion  < 1.1F) // sprint at last third
+            if (this.endurance > 1.0 && raceCompletion > (2F / 3F) && raceCompletion  < 1.1F) // sprint at last third
             {
                 this.isSprinting = true;
             }
